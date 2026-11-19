@@ -33,7 +33,7 @@ export async function readArtifact(name: string): Promise<{ abi: Abi; bytecode: 
   return { abi: artifact.abi, bytecode, bytecodeSha256: createHash("sha256").update(Buffer.from(bytecode.slice(2), "hex")).digest("hex") };
 }
 
-function canonicalProofJson(value: unknown): string {
+export function canonicalProofJson(value: unknown): string {
   if (value === null) return "null";
   if (typeof value === "boolean") return value ? "true" : "false";
   if (typeof value === "number") {

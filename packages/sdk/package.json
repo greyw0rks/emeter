@@ -9,6 +9,6 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
-  "dependencies": { "@emeter/shared": "workspace:*" },
+  "dependencies": { "@emeter/shared": "workspace:*", "viem": "2.58.1" },
   "devDependencies": { "vitest": "5.1.1" }
 }

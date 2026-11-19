@@ -2,18 +2,18 @@
 
 Programmable payments for AI agents and APIs.
 
-emeter is being built for X Layer TapeOut Accelerate. The first milestone is complete: a published TapeOut NAND circuit authorizes or denies real DemoUSD settlements on X Layer mainnet. The developer dashboard and paid-service journey follow this protocol foundation.
+emeter is being built for X Layer TapeOut Accelerate. A published TapeOut NAND circuit authorizes or denies real DemoUSD settlements on X Layer mainnet. The payment engine adds registered services, immutable price versions, prepaid customer credit, and capped delegated signing sessions.
 
-The [verified proof and contract addresses](docs/verification.md) include an allowed payment, a reverted soft-limit charge, a signed override, and an unused-balance refund. Both independent RPCs agree on the recorded transactions and all 64 circuit inputs. The billing gateway and full product UI are the next milestones.
+The [original circuit proof](docs/verification.md) and [completed payment-engine proof](docs/payment-engine.md) include real payments, rejected overrides, and unused-balance refunds. Both independent RPCs agree on the recorded transactions. The paid HTTP gateway and full product UI are the next milestones.
 
 ## Workspace
 
-- `apps/web`: Next.js scaffold; full UI deferred until the protocol proof.
+- `apps/web`: Next.js scaffold for the upcoming product interface.
 - `apps/gateway`: Fastify gateway scaffold.
-- `packages/contracts`: Solidity adapter, isolated demo payment vault, and Foundry tests.
+- `packages/contracts`: Service registry, session vault, circuit adapter, original proof vault, and Foundry tests.
 - `packages/circuit`: TAP-02 NAND compiler, simulator, and exhaustive policy vectors.
 - `packages/shared`: Shared policy, receipt, and network types.
-- `packages/sdk`: TypeScript client scaffold.
+- `packages/sdk`: Live quote/session reads and bounded session/charge signing helpers.
 - `scripts/verify`: Live X Layer checks and local proof capture.
 - `scripts/deploy`: Deployment preparation and receipt verification.
 
@@ -32,11 +32,14 @@ pnpm verify:xlayer
 X_LAYER_RPC_URL=https://rpc.xlayer.tech pnpm test:fork
 pnpm proof:local
 pnpm verify:deployment
+X_LAYER_RPC_URL=https://rpc.xlayer.tech pnpm test:engine:fork
+pnpm proof:engine:local
+pnpm verify:engine
 ```
 
 Use `.env.example` for public configuration. Keep private keys out of this repository and out of chat. A dedicated wallet or encrypted Foundry account funded with OKB is needed for a mainnet broadcast; DemoUSD itself has no monetary value.
 
-The existing mainnet proof is recorded in `deployments/xlayer-196.json`. `pnpm verify:deployment` reads and verifies it without signing or spending funds. Deployment scripts refuse to silently replace an existing mainnet journal.
+The original mainnet proof is recorded in `deployments/xlayer-196.json`; the completed payment-engine journal is `deployments/xlayer-196-engine.json`. `pnpm verify:deployment` verifies the original historical proof without signing or spending funds. `pnpm verify:engine` checks the engine's transaction inputs, scoped sessions, versioned prices, denial, refunds, and token accounting against two independent RPCs. Deployment scripts refuse to silently replace an existing mainnet journal.
 
 ## Policy
 
@@ -46,4 +49,4 @@ The vault derives authorization, receipt, session, and limit inputs from verifie
 
 Only successful onchain receipts count as settled payments. Local tests, fork activity, and mainnet activity are documented separately.
 
-The proof uses one builder-controlled customer/provider pair and a local schema-validation operation. Service registration, delegated sessions, paid HTTP APIs, the AI utility, indexing, and the complete UI are still to be built. [Architecture](docs/architecture.md), [protocol review](docs/protocol-review.md), [threat model](docs/threat-model.md), and [roadmap](docs/roadmap.md) describe the boundaries.
+The proofs use builder-controlled wallets and actual local computations. Service registration and delegated session payments are implemented. Paid HTTP APIs, the AI utility, indexing, and the complete UI are still to be built. [Architecture](docs/architecture.md), [protocol review](docs/protocol-review.md), [threat model](docs/threat-model.md), and [roadmap](docs/roadmap.md) describe the boundaries.

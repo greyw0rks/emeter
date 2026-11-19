@@ -1,13 +1,15 @@
 {
   "kind": "mainnet-read-only-verification",
-  "checkedAt": "2026-11-19T21:37:51.195Z",
+  "checkedAt": "2026-11-19T23:04:48.615Z",
   "chainId": 196,
   "independentRpcAgreement": true,
   "rpcOperators": [
     "rpc.xlayer.tech",
     "xlayer.drpc.org"
   ],
-  "blockNumber": "76355213",
+  "blockNumber": "76354648",
+  "verificationHeadBlock": "76360432",
+  "historicalProof": true,
   "circuitId": "4",
   "truthTableInputs": 64,
   "creationInputsMatchCompiledArtifacts": true,

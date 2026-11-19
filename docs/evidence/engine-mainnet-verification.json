@@ -1,0 +1,141 @@
+{
+  "kind": "payment-engine-mainnet-verification",
+  "chainId": 196,
+  "checkedAt": "2026-11-19T23:04:46.387Z",
+  "independentRpcAgreement": true,
+  "rpcOperators": [
+    "rpc.xlayer.tech",
+    "xlayer.drpc.org"
+  ],
+  "proofBlock": "76360367",
+  "creationInputsMatchCompiledArtifacts": true,
+  "delegatedOverrideDenied": "PolicyDenied(15)",
+  "scopedServicesVerified": true,
+  "prices": {
+    "originalJson": "20000",
+    "newJson": "30000",
+    "wordCount": "50000"
+  },
+  "sessions": {
+    "firstSpent": "70000",
+    "secondSpent": "30000",
+    "firstRefund": "130000",
+    "secondRefund": "170000"
+  },
+  "totals": {
+    "paid": "100000",
+    "locked": "0",
+    "available": "0"
+  },
+  "nativeCostWei": "153605122000000",
+  "checked": [
+    {
+      "label": "deploy-registry",
+      "hash": "0xd5c95ebacef8aeaa1c7ebcba92081d7f804cf8183ed60f78ca6b402a6023abc1",
+      "status": "success",
+      "blockNumber": "76359939"
+    },
+    {
+      "label": "deploy-session-vault",
+      "hash": "0xc19292af3f677f36cdfa1878a61f43331287897de846547f5add27b794ceb760",
+      "status": "success",
+      "blockNumber": "76359946"
+    },
+    {
+      "label": "allow-provider",
+      "hash": "0x62fcfd6db7024e6f69f305a84acb754986260cbab67e55fc0f3cbbdf9b234203",
+      "status": "success",
+      "blockNumber": "76359954"
+    },
+    {
+      "label": "register-json-validator-v1",
+      "hash": "0x5a665a61b4d9ded990a1f84a031cf71e3c979fd32da4b24e756efc0a4fe46457",
+      "status": "success",
+      "blockNumber": "76359961"
+    },
+    {
+      "label": "register-word-count-v1",
+      "hash": "0x416dff678515767d46fca16515948bf59c66eeb8c1e33bb726c8c80ede580d64",
+      "status": "success",
+      "blockNumber": "76359968"
+    },
+    {
+      "label": "approve-prepaid-deposit",
+      "hash": "0x72d26eefe42002cb2dfc93d903f3533558c4a84a87eaa80c04f21b4d1f77a245",
+      "status": "success",
+      "blockNumber": "76359975"
+    },
+    {
+      "label": "deposit-customer-one",
+      "hash": "0x4c8267fd26942401942d2a0df2356b2c6f079aac1c180250862dd4ddae9d0c20",
+      "status": "success",
+      "blockNumber": "76359983"
+    },
+    {
+      "label": "sponsor-customer-two",
+      "hash": "0x27a5dbfa9f9182c646d123e0940ec4447894cb40cc0abb546aa658e150435d3f",
+      "status": "success",
+      "blockNumber": "76359989"
+    },
+    {
+      "label": "create-customer-one-session",
+      "hash": "0x97ce6d5e316c87af2a4df3d4fa6a6b114362bd59c16a1e6c558eb1c777c8a206",
+      "status": "success",
+      "blockNumber": "76360009"
+    },
+    {
+      "label": "create-customer-two-session",
+      "hash": "0x722d10ac7151f79d1c1539d269909d00cec0db0e46d53ec5910ddddab05cb93d",
+      "status": "success",
+      "blockNumber": "76360015"
+    },
+    {
+      "label": "publish-json-price-v2",
+      "hash": "0xb2020e857bb7f707792000d5494ae53130348f88ea993425933c510d012be156",
+      "status": "success",
+      "blockNumber": "76360024"
+    },
+    {
+      "label": "settle-pinned-version-one",
+      "hash": "0x962c09927702a75e84500f1bcc46a20d14d2204e8716378b2a279d7f466203f6",
+      "status": "success",
+      "blockNumber": "76360035"
+    },
+    {
+      "label": "deny-delegate-self-override",
+      "hash": "0x5d40152cfc93c9245c66c5560a26fbdbd5fe6aa19d4ec69e476af43c37a98082",
+      "status": "reverted",
+      "blockNumber": "76360051"
+    },
+    {
+      "label": "settle-customer-authorized-override",
+      "hash": "0x51ffe90a477b8894d89db6aec67616a72376aefab31ab6c7cafcfa92fe0e1e18",
+      "status": "success",
+      "blockNumber": "76360060"
+    },
+    {
+      "label": "settle-customer-two-version-two",
+      "hash": "0x7a86bcc97443d5146631a4e85aefda0a0abfc0bd8bb702d9f804138fcff02a65",
+      "status": "success",
+      "blockNumber": "76360075"
+    },
+    {
+      "label": "close-customer-one-session",
+      "hash": "0xced1b819ed555bef619b779e202a2ff8da7163d9d2df334964f386c71b2e5094",
+      "status": "success",
+      "blockNumber": "76360083"
+    },
+    {
+      "label": "refund-customer-one",
+      "hash": "0xe531f2c853e1e81201e86b9b3339f6d3f33e85120fb49545dbda1ca63c48dfdf",
+      "status": "success",
+      "blockNumber": "76360360"
+    },
+    {
+      "label": "refund-customer-two",
+      "hash": "0x19db4b4acad2feabf077cb7e454e479b77876038201433993e84a55dfd47a999",
+      "status": "success",
+      "blockNumber": "76360367"
+    }
+  ]
+}

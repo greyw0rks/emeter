@@ -1,0 +1,58 @@
+{
+  "kind": "payment-engine-checks",
+  "checkedAt": "2026-11-19T23:05:53.641618+00:00",
+  "unitFuzzAndInvariantTests": {
+    "circuit": 91,
+    "shared": 17,
+    "sdk": 9,
+    "gatewayScaffold": 2,
+    "foundry": 73,
+    "total": 192
+  },
+  "invariants": {
+    "obligations": 4,
+    "groupedFoundryTests": 1,
+    "runs": 128,
+    "depth": 32,
+    "handlerCalls": 4096,
+    "handlerReverts": 0
+  },
+  "realProcessorForkTests": 3,
+  "build": "passed",
+  "typecheck": "passed",
+  "anvilRehearsal": {
+    "completed": true,
+    "transactions": 18,
+    "mainnetBroadcastPerformed": false,
+    "artifactHashes": {
+      "registry": "99c4280b97bc32923bd1d7639c8e8c07c867e7cdf7bce5face278526e092519d",
+      "vault": "33235a7c31bcd4f3ae7f736786d1520ce14c72ce7660c1eb4acdd51578600e4d"
+    }
+  },
+  "mainnet": {
+    "completed": true,
+    "transactions": 18,
+    "successful": 17,
+    "intentionallyReverted": 1,
+    "proofBlock": "76360367",
+    "independentRpcAgreement": true,
+    "nativeSpendWei": "153605122000000",
+    "nativeSpendCapWei": "1500000000000000",
+    "historicalDelegatedOverrideDenied": "PolicyDenied(15)",
+    "availableBaseUnits": "0",
+    "lockedBaseUnits": "0",
+    "vaultBalanceBaseUnits": "0",
+    "paidBaseUnits": "100000",
+    "refundBaseUnits": "300000"
+  },
+  "originalProtocolProof": {
+    "historicalVerificationPassed": true,
+    "transactions": 12,
+    "circuitInputs": 64,
+    "independentRpcAgreement": true
+  },
+  "credentialScan": "passed: no external signer values in tracked or unignored repository files",
+  "participants": "builder-controlled wallets; not independent adoption",
+  "workload": "actual local JSON validation and word count; paid HTTP services not implemented",
+  "explorerSourcePublication": "pending"
+}

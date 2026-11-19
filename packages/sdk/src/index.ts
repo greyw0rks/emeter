@@ -1,6 +1,8 @@
 import { ProtocolStatusSchema } from "@emeter/shared";
 import type { ProtocolStatus } from "@emeter/shared";
 
+export * from "./session-client.js";
+
 /** Protocol-stage client. Paid execute() is added with the actual gateway. */
 export class EmeterClient {
   private readonly gatewayUrl: string;

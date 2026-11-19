@@ -4,13 +4,13 @@ emeter: programmable payments for AI agents and APIs. Meter every request. Contr
 
 The accepted MVP supports one network (X Layer), one zero-value demo token, prepaid per-request billing, one policy, and two functioning services. The initial milestone implements the user's first Codex task: publish the policy and prove circuit-gated settlement before the full UI.
 
-| Milestone | Result |
-| --- | --- |
-| Protocol proof | pnpm workspace, exact NAND policy, exhaustive vectors, live deployment verification, fail-closed adapter, isolated payment/refund proof. |
-| Payment engine | Service registry, customer sessions, EIP-712 delegated signing keys, price versions, spending caps, replay protection, refunds. |
-| Gateway and SDK | Developer authentication/API credentials, actual AI Text Analyzer and JSON Validator, signed responses, settlement worker, chain indexer, PostgreSQL/Prisma records, usable execute client. |
-| Product interface | Landing, registration/dashboard, playground, receipt inspector, policy explorer, wallet/network flow, circuit visualization driven by real lifecycle events. |
-| Submission | Verified addresses, public source/application links, external testing, concise commercial model, actual three-minute demo, event submission. |
+| Milestone | Status | Result |
+| --- | --- | --- |
+| Protocol proof | Complete | pnpm workspace, exact NAND policy, exhaustive vectors, two-RPC verification, fail-closed adapter, real isolated payment/refund proof. |
+| Payment engine | Complete | Service registry, customer sessions, EIP-712 delegated signing keys, immutable price versions, spending caps, replay protection, refunds, SDK signing helpers, and an independently verified eighteen-transaction mainnet proof. |
+| Gateway and SDK | Next | Developer authentication/API credentials, actual AI Text Analyzer and JSON Validator, signed responses, settlement worker, chain indexer, PostgreSQL/Prisma records, usable HTTP execute client. |
+| Product interface | Pending | Landing, registration/dashboard, playground, receipt inspector, policy explorer, wallet/network flow, circuit visualization driven by real lifecycle events. |
+| Submission | Pending | Verified addresses, public source/application links, external testing, concise commercial model, actual three-minute demo, event submission. |
 
 The approved visual direction remains Electric precision: Void/Graphite surfaces, Electric Mint actions, Signal Lime accents, Geist Sans/Mono, restrained Motion transitions, and React Three Fiber circuit scenes with reduced-motion/mobile fallbacks.
 

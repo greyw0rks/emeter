@@ -1,0 +1,705 @@
+{
+  "name": "emeter",
+  "phase": "payment-engine",
+  "kind": "anvil-fork",
+  "runId": "d2e49744-da74-4883-9d95-2e07d869273e",
+  "createdAt": "2026-11-19T22:47:05.922Z",
+  "chainId": 196,
+  "upstreamBlock": "76359367",
+  "completed": true,
+  "mainnetBroadcastPerformed": false,
+  "mainnetProofVerified": false,
+  "operator": "0xb9134A16A025042dD670814077Bf34EdBC0e4847",
+  "secondCustomer": "0xACFEe73893425A35fb12B605E9441D1E73FA6e0e",
+  "participantClassification": "builder-controlled wallets, not independent adoption",
+  "workloadClassification": "two actual local computations; paid HTTP gateway not implemented",
+  "token": "0x66D16469E07217E53618887B492b14eA732b5a11",
+  "adapter": "0x87DB7961f425dDb39c54a8582D21f91a57C637B5",
+  "container": "0xFDd96def422295595959F071669CABcB241cf6A7",
+  "tokenBalancesBefore": {
+    "operator": "500000",
+    "secondCustomer": "0"
+  },
+  "nativeBalanceBefore": "1000000000000000000",
+  "nativeSpendCap": "20000000000000000",
+  "artifactHashes": {
+    "registry": "99c4280b97bc32923bd1d7639c8e8c07c867e7cdf7bce5face278526e092519d",
+    "vault": "33235a7c31bcd4f3ae7f736786d1520ce14c72ce7660c1eb4acdd51578600e4d"
+  },
+  "steps": [
+    {
+      "label": "deploy-registry",
+      "hash": "0x5fab29ec6655cc7bf377d9376642512e4558540b2ad3e45990b039dad3abb66c",
+      "status": "success",
+      "blockNumber": "76359369",
+      "blockHash": "0xceafdd5a9e84401b2fb66ffe1fae10bac7ea1c06b9f7cf90e8ca9d8ae0106a36",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": null,
+      "dataHash": "0xf5535708c7756b6fee9c0b485463e9e1d12fffd17328e4b8b070fc7039227f03",
+      "gasUsed": "965484",
+      "effectiveGasPrice": "116873623",
+      "contractAddress": "0xe6d0488456084c751920247ffb947025c02055e0"
+    },
+    {
+      "label": "deploy-session-vault",
+      "hash": "0x376d96cba0df87b4496d6a1ae1b8536c77255a35d750a382d546e57ade1beeae",
+      "status": "success",
+      "blockNumber": "76359370",
+      "blockHash": "0x348898df0b267c253dc92096694b8637f1e878427fe16308e7350a7b87d33969",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": null,
+      "dataHash": "0x9a2841fcf8752a55d9a6cda7020858245d6aa51d46970922219d590d88b3467a",
+      "gasUsed": "3219996",
+      "effectiveGasPrice": "114783815",
+      "contractAddress": "0xbb9d363e52d77359650b827caa02ce499309db50"
+    },
+    {
+      "label": "allow-provider",
+      "hash": "0xafed9c003c1bb4d4440f181860787fe53a775ee4ad7bb62e111a877c92704a49",
+      "status": "success",
+      "blockNumber": "76359371",
+      "blockHash": "0xb6552b402e039bea5f9fcd8a36ca603c50ab661102fd161141d53fffa9effb70",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xe6d0488456084c751920247ffb947025c02055e0",
+      "dataHash": "0x6ed5949d2587f24e1b3e43c6e28acd61d266fabd8d500b6424815fc7a288b269",
+      "gasUsed": "47853",
+      "effectiveGasPrice": "112992510",
+      "contractAddress": null
+    },
+    {
+      "label": "register-json-validator-v1",
+      "hash": "0x010685084b0cb1afdec991572bcc69ea48bf30bc7a6affde8fe6e24662ee57c6",
+      "status": "success",
+      "blockNumber": "76359372",
+      "blockHash": "0xf3610ad0cec2a406443db19d27080ee9eb4617cdede96c864b9a974241b69720",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xe6d0488456084c751920247ffb947025c02055e0",
+      "dataHash": "0xd4e5ea2f48e370bade25422c8f55e109a7b5453d2fed34368e14647c43345432",
+      "gasUsed": "232529",
+      "effectiveGasPrice": "111369187",
+      "contractAddress": null
+    },
+    {
+      "label": "register-word-count-v1",
+      "hash": "0xd24c40f60443f13f11cbfcf872b984fd7b2466b21455455d53e360b58797fbed",
+      "status": "success",
+      "blockNumber": "76359373",
+      "blockHash": "0x877edf5d2acb636c7c0fd963aea2483fe6daf7e742b7056d3dcd81e654227c09",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xe6d0488456084c751920247ffb947025c02055e0",
+      "dataHash": "0x7afde82653c0b063a7e62a105f231a344411d141e9a8277a76c28e2bee0ea8a3",
+      "gasUsed": "215429",
+      "effectiveGasPrice": "109951186",
+      "contractAddress": null
+    },
+    {
+      "label": "approve-prepaid-deposit",
+      "hash": "0xafbbed5510efada7322741304893b164926b9b0ff402fba1e6aed3a367f61964",
+      "status": "success",
+      "blockNumber": "76359374",
+      "blockHash": "0x75d6241bcadd6de4d3f9a01dd278baa545fd6ac5b409bbf9745abd0cf8cd61a9",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0x66d16469e07217e53618887b492b14ea732b5a11",
+      "dataHash": "0xe27dc54da15167dbdb952edd08c980ad46b00b2fe6b61a176ca2d83d38a181c2",
+      "gasUsed": "46330",
+      "effectiveGasPrice": "108709840",
+      "contractAddress": null
+    },
+    {
+      "label": "deposit-customer-one",
+      "hash": "0x489390da9f9f0c523e38b647d117718e925da18962fc962d40d1c90b9492df18",
+      "status": "success",
+      "blockNumber": "76359375",
+      "blockHash": "0xa5087f52eb6941baa0136ca24c53db0308ca92e709cadfa79b679fc65fba385f",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0xdb8bd7db1f921a0967a7aa1c7c34684dd50ff54e1a408cd40ccc9790ef25baf0",
+      "gasUsed": "111031",
+      "effectiveGasPrice": "107621592",
+      "contractAddress": null
+    },
+    {
+      "label": "sponsor-customer-two",
+      "hash": "0x79807df529efbb3c576b73bfbe371e7c6c964b9a2760e57b3e4236d359771ba4",
+      "status": "success",
+      "blockNumber": "76359376",
+      "blockHash": "0x65fbcf4340ff89ef61d93e8d4ffb2ba7fa933d82938a9829dad3429dfd8005d3",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0xa7c1481fda39c4214953aba6da31046b622744fa110e1920f2da5ee316b2cd44",
+      "gasUsed": "72476",
+      "effectiveGasPrice": "106669900",
+      "contractAddress": null
+    },
+    {
+      "label": "create-customer-one-session",
+      "hash": "0x66b5c168c6de70cbb5315a51b3c9a5bfde257237d3d08edcf66d74df23f6c675",
+      "status": "success",
+      "blockNumber": "76359377",
+      "blockHash": "0xa042839741241d7bcf382fa14a5d48dcdf27d9bbd1cdc1704ef16b9ead1435e1",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0xfce22b0a6142ffc3b061d918712fa055dc5ade28067d4824f5d895e7c31d87a7",
+      "gasUsed": "337945",
+      "effectiveGasPrice": "105836738",
+      "contractAddress": null
+    },
+    {
+      "label": "create-customer-two-session",
+      "hash": "0xfd27893440ce8de152228e6622accb82a3aa089176798560e82126b9be49f62c",
+      "status": "success",
+      "blockNumber": "76359378",
+      "blockHash": "0x3db518293ef591883dc88ffe5e7842e8a0d2ced5fb3286a32669682faeabedd7",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0x95187f7ee1ff036ed51211fd808494856a2ba7efdd9ce0d39b27800a187de672",
+      "gasUsed": "287531",
+      "effectiveGasPrice": "105109494",
+      "contractAddress": null
+    },
+    {
+      "label": "publish-json-price-v2",
+      "hash": "0xf2dc58f865cbedbf5d75ab20c4ab37c454fdb7f7499eccccf83e66688430d6d6",
+      "status": "success",
+      "blockNumber": "76359379",
+      "blockHash": "0x54e98ba299dce19a4a38708b966564958d94fa482b28dce41f6600c5c37d0bc4",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xe6d0488456084c751920247ffb947025c02055e0",
+      "dataHash": "0x1f68034ab3b3865dfcb0b44dd78b485c4c7654025160546c37d0b23bba93ab5b",
+      "gasUsed": "168983",
+      "effectiveGasPrice": "104472557",
+      "contractAddress": null
+    },
+    {
+      "label": "settle-pinned-version-one",
+      "hash": "0xb0086dceac88d5c2e255e9ce682a491be41bbb8f216838d8c64c3018579cb1c4",
+      "status": "success",
+      "blockNumber": "76359380",
+      "blockHash": "0xd6421e77371e7e2726f0b043c3459742b8d8179202c5c0868b0cab4553844a12",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0xd6c8be3770cfb4df65aa06742bb188393d3ed3d30133a5f4689efd0b5c6533ba",
+      "gasUsed": "328627",
+      "effectiveGasPrice": "103914387",
+      "contractAddress": null
+    },
+    {
+      "label": "deny-delegate-self-override",
+      "hash": "0x751ba3da3560a4a5f43214bd0777b4e52034e2def1503c00a8920d9b5a5c523b",
+      "status": "reverted",
+      "blockNumber": "76359381",
+      "blockHash": "0x00a65ab2ce2285ab1e81e82a5710b489d7f9cd183c7c0b9913a8344b45267952",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0xef0a29bc1d410327d47ca4c0d5ec0976fde844ba78571717bef7207110d9e34e",
+      "gasUsed": "191092",
+      "effectiveGasPrice": "103426621",
+      "contractAddress": null
+    },
+    {
+      "label": "settle-customer-authorized-override",
+      "hash": "0x79683be2550d346ac58d5b06709b1183a79e659fde8cf649dcdb36f6ca96f15d",
+      "status": "success",
+      "blockNumber": "76359382",
+      "blockHash": "0x8af750932d2e8e5f7d8671031c6369ef06886cc8062349c0db7dd78372e15191",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0xa81913353b59ff5fe39c4ea9efa608d3f05d1cb17e5a25d45fbfc7f1a1ab5b0a",
+      "gasUsed": "287403",
+      "effectiveGasPrice": "102999073",
+      "contractAddress": null
+    },
+    {
+      "label": "settle-customer-two-version-two",
+      "hash": "0x4a156ee27b2987c332831f9eb56cc63a70556c6fca7fa29a2272e4896d33b2fd",
+      "status": "success",
+      "blockNumber": "76359383",
+      "blockHash": "0xb18b8bde9ff5f66c3174b055d705344052a24f634e0b62509104d6dea384c0db",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0xa4746af2403b63eeb6a5c4eca4e2368778faee8749dba47baf1cb9736f2c7859",
+      "gasUsed": "294423",
+      "effectiveGasPrice": "102625216",
+      "contractAddress": null
+    },
+    {
+      "label": "close-customer-one-session",
+      "hash": "0xa290e63bd56a95aab4246fca4ae3c728258ab87550d9184812cc985621f73c4b",
+      "status": "success",
+      "blockNumber": "76359384",
+      "blockHash": "0x67cd169cff8afc6dec10dfb8638b30a4eb9677ab2d102514811d677d64a924c5",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0x8c0415b7917d1a435d62a1fab2943195e4094a3cb0a9a41478f971ec3e76c137",
+      "gasUsed": "38947",
+      "effectiveGasPrice": "102297984",
+      "contractAddress": null
+    },
+    {
+      "label": "refund-customer-one",
+      "hash": "0x91977d9609305b2172ed65bec1cbb3a935787ca9aaa6fa059b5be7fc1d79ea0f",
+      "status": "success",
+      "blockNumber": "76359386",
+      "blockHash": "0x26ee74358e56dcfa6d57bebfbb5f20bbab7f59b1dabb198a75ee045a8aa12d2e",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0xdaadc525837d7bfd1e0fd906215555d575649a33d40db3a35cfefe04850e2b2b",
+      "gasUsed": "81312",
+      "effectiveGasPrice": "101759488",
+      "contractAddress": null
+    },
+    {
+      "label": "refund-customer-two",
+      "hash": "0x03936d466b1e439a04d1d24b4218e6d1a3b84f3a6b889cd0a696786868ae079f",
+      "status": "success",
+      "blockNumber": "76359387",
+      "blockHash": "0xd5e8cea0b9165acbc0cffe8d527152272740a941e86a56672222fb4e2131893b",
+      "from": "0xb9134a16a025042dd670814077bf34edbc0e4847",
+      "to": "0xbb9d363e52d77359650b827caa02ce499309db50",
+      "dataHash": "0x9f5375d0cd5141105834c03e0263a89a5da128ff5d26c4a4659d579dc1d7a740",
+      "gasUsed": "71712",
+      "effectiveGasPrice": "101539722",
+      "contractAddress": null
+    }
+  ],
+  "updatedAt": "2026-11-19T22:49:29.566Z",
+  "nativeSpendWei": "779064119769962",
+  "contracts": {
+    "registry": "0xe6d0488456084c751920247ffb947025c02055e0",
+    "vault": "0xbb9d363e52d77359650b827caa02ce499309db50"
+  },
+  "services": {
+    "serviceA": "0xe1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed",
+    "serviceB": "0xb2deebd8561bfd598e2f5007077beeafc0264e10f2d6bd3b1b86248ad6c24ece",
+    "metadataA": {
+      "name": "JSON Validator engine proof",
+      "method": "json_validate",
+      "execution": "local",
+      "priceBaseUnits": "20000"
+    },
+    "metadataB": {
+      "name": "Word Count engine proof",
+      "method": "word_count",
+      "execution": "local",
+      "priceBaseUnits": "50000"
+    },
+    "metadataANext": {
+      "name": "JSON Validator engine proof",
+      "method": "json_validate",
+      "execution": "local",
+      "priceBaseUnits": "30000"
+    },
+    "metadataHashA": "0xbb54e1c9d9ca65247a893557034d13313f6382dd698b940eecfe30a69b39ab6d",
+    "metadataHashB": "0xf262b66cc7c0238ed347e7b51a91e97465954e2fec0ab34d35aa277aa3bf1574",
+    "metadataHashANext": "0xeffd91bf9605d2118a669f55ab5b4979fd99c6d867874a1b6befd08f7f6b2aca"
+  },
+  "sessions": {
+    "first": {
+      "sessionId": "0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42",
+      "authorization": {
+        "customer": "0xb9134A16A025042dD670814077Bf34EdBC0e4847",
+        "signer": "0xd52738528C8de4D41F7A0498e713a1927f910997",
+        "budget": "200000",
+        "softLimit": "50000",
+        "maxCharge": "50000",
+        "expiresAt": "1795128708",
+        "settlementWindow": "120",
+        "serviceSetHash": "0xfcbb470bee2960a15c9bb30ceab936a7524c8deaaf2a0d0db5238c8251c95c90",
+        "nonce": "0"
+      },
+      "serviceIds": [
+        "0xb2deebd8561bfd598e2f5007077beeafc0264e10f2d6bd3b1b86248ad6c24ece",
+        "0xe1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed"
+      ],
+      "typedData": {
+        "domain": {
+          "name": "emeter Vault",
+          "version": "1",
+          "chainId": 196,
+          "verifyingContract": "0xbB9d363E52d77359650b827cAa02cE499309db50"
+        },
+        "types": {
+          "SessionAuthorization": [
+            {
+              "name": "customer",
+              "type": "address"
+            },
+            {
+              "name": "signer",
+              "type": "address"
+            },
+            {
+              "name": "budget",
+              "type": "uint256"
+            },
+            {
+              "name": "softLimit",
+              "type": "uint256"
+            },
+            {
+              "name": "maxCharge",
+              "type": "uint256"
+            },
+            {
+              "name": "expiresAt",
+              "type": "uint64"
+            },
+            {
+              "name": "settlementWindow",
+              "type": "uint64"
+            },
+            {
+              "name": "serviceSetHash",
+              "type": "bytes32"
+            },
+            {
+              "name": "nonce",
+              "type": "uint256"
+            }
+          ]
+        },
+        "primaryType": "SessionAuthorization",
+        "message": {
+          "customer": "0xb9134A16A025042dD670814077Bf34EdBC0e4847",
+          "signer": "0xd52738528C8de4D41F7A0498e713a1927f910997",
+          "budget": "200000",
+          "softLimit": "50000",
+          "maxCharge": "50000",
+          "expiresAt": "1795128708",
+          "settlementWindow": "120",
+          "serviceSetHash": "0xfcbb470bee2960a15c9bb30ceab936a7524c8deaaf2a0d0db5238c8251c95c90",
+          "nonce": "0"
+        }
+      },
+      "signature": "0x0ab4be37166a0e27b09594972ec67811704bb42ec99286e9b3435be554466456241aca39b5f712771aa06a17faf2ca64c9db38587d37493d398ea6f5c966c8761c",
+      "transaction": {
+        "to": "0xbB9d363E52d77359650b827cAa02cE499309db50",
+        "data": "0x0a795b03000000000000000000000000b9134a16a025042dd670814077bf34edbc0e4847000000000000000000000000d52738528c8de4d41f7a0498e713a1927f9109970000000000000000000000000000000000000000000000000000000000030d40000000000000000000000000000000000000000000000000000000000000c350000000000000000000000000000000000000000000000000000000000000c350000000000000000000000000000000000000000000000000000000006aff7d840000000000000000000000000000000000000000000000000000000000000078fcbb470bee2960a15c9bb30ceab936a7524c8deaaf2a0d0db5238c8251c95c900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016000000000000000000000000000000000000000000000000000000000000001c00000000000000000000000000000000000000000000000000000000000000002b2deebd8561bfd598e2f5007077beeafc0264e10f2d6bd3b1b86248ad6c24ecee1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed00000000000000000000000000000000000000000000000000000000000000410ab4be37166a0e27b09594972ec67811704bb42ec99286e9b3435be554466456241aca39b5f712771aa06a17faf2ca64c9db38587d37493d398ea6f5c966c8761c00000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "second": {
+      "sessionId": "0xe4febbd772775bebb854d27bd08b1d8b3620a1dc950259c3f6f61f8f5ef292f0",
+      "authorization": {
+        "customer": "0xACFEe73893425A35fb12B605E9441D1E73FA6e0e",
+        "signer": "0xC913a0Db8969C5C2ce2b6C801B3BE3577fe2e891",
+        "budget": "200000",
+        "softLimit": "50000",
+        "maxCharge": "50000",
+        "expiresAt": "1795128708",
+        "settlementWindow": "120",
+        "serviceSetHash": "0x2185fc5e88e70a22a61b2c96949dfa3c6765c7380bc11f57a20816f217556da4",
+        "nonce": "0"
+      },
+      "serviceIds": [
+        "0xe1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed"
+      ],
+      "typedData": {
+        "domain": {
+          "name": "emeter Vault",
+          "version": "1",
+          "chainId": 196,
+          "verifyingContract": "0xbB9d363E52d77359650b827cAa02cE499309db50"
+        },
+        "types": {
+          "SessionAuthorization": [
+            {
+              "name": "customer",
+              "type": "address"
+            },
+            {
+              "name": "signer",
+              "type": "address"
+            },
+            {
+              "name": "budget",
+              "type": "uint256"
+            },
+            {
+              "name": "softLimit",
+              "type": "uint256"
+            },
+            {
+              "name": "maxCharge",
+              "type": "uint256"
+            },
+            {
+              "name": "expiresAt",
+              "type": "uint64"
+            },
+            {
+              "name": "settlementWindow",
+              "type": "uint64"
+            },
+            {
+              "name": "serviceSetHash",
+              "type": "bytes32"
+            },
+            {
+              "name": "nonce",
+              "type": "uint256"
+            }
+          ]
+        },
+        "primaryType": "SessionAuthorization",
+        "message": {
+          "customer": "0xACFEe73893425A35fb12B605E9441D1E73FA6e0e",
+          "signer": "0xC913a0Db8969C5C2ce2b6C801B3BE3577fe2e891",
+          "budget": "200000",
+          "softLimit": "50000",
+          "maxCharge": "50000",
+          "expiresAt": "1795128708",
+          "settlementWindow": "120",
+          "serviceSetHash": "0x2185fc5e88e70a22a61b2c96949dfa3c6765c7380bc11f57a20816f217556da4",
+          "nonce": "0"
+        }
+      },
+      "signature": "0x74ffb8e8a4686c33e1b5ff27bf0dfed3e4dbc2877960ae3e8388b9d2fa5ad6ed0920c6e16ddeb89d45333c0fc7e52a3b83516fce037eda3db33b4e971af4f5c41c",
+      "transaction": {
+        "to": "0xbB9d363E52d77359650b827cAa02cE499309db50",
+        "data": "0x0a795b03000000000000000000000000acfee73893425a35fb12b605e9441d1e73fa6e0e000000000000000000000000c913a0db8969c5c2ce2b6c801b3be3577fe2e8910000000000000000000000000000000000000000000000000000000000030d40000000000000000000000000000000000000000000000000000000000000c350000000000000000000000000000000000000000000000000000000000000c350000000000000000000000000000000000000000000000000000000006aff7d8400000000000000000000000000000000000000000000000000000000000000782185fc5e88e70a22a61b2c96949dfa3c6765c7380bc11f57a20816f217556da40000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016000000000000000000000000000000000000000000000000000000000000001a00000000000000000000000000000000000000000000000000000000000000001e1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed000000000000000000000000000000000000000000000000000000000000004174ffb8e8a4686c33e1b5ff27bf0dfed3e4dbc2877960ae3e8388b9d2fa5ad6ed0920c6e16ddeb89d45333c0fc7e52a3b83516fce037eda3db33b4e971af4f5c41c00000000000000000000000000000000000000000000000000000000000000"
+      }
+    }
+  },
+  "oldPriceCharge": {
+    "quotedBeforePriceUpdate": "20000",
+    "request": {
+      "id": "engine-d2e49744-da74-4883-9d95-2e07d869273e-35befcfe-1",
+      "input": {
+        "kind": "engine-proof",
+        "sequence": 1,
+        "message": "An actual bounded service request"
+      },
+      "method": "json_validate",
+      "canonicalRequest": "{\"method\":\"json_validate\",\"params\":{\"input\":{\"kind\":\"engine-proof\",\"message\":\"An actual bounded service request\",\"sequence\":1},\"priceVersion\":1,\"serviceId\":\"0xe1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed\",\"sessionId\":\"0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42\"}}",
+      "requestId": "0xef1ef94bf21f70e99df047221e02761845505e2bc927e54405a5864a2504d9a6",
+      "requestHash": "0x1545855144ba6bfc305d73cfb0b5f2d91be88a010f5c5fa7af3d6762de57866e"
+    },
+    "result": {
+      "valid": true,
+      "fields": 3,
+      "parsed": {
+        "kind": "engine-proof",
+        "sequence": 1,
+        "message": "An actual bounded service request"
+      }
+    },
+    "settlement": {
+      "authorization": {
+        "sessionId": "0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42",
+        "requestId": "0xef1ef94bf21f70e99df047221e02761845505e2bc927e54405a5864a2504d9a6",
+        "requestHash": "0x1545855144ba6bfc305d73cfb0b5f2d91be88a010f5c5fa7af3d6762de57866e",
+        "serviceId": "0xe1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed",
+        "priceVersion": 1,
+        "maxAmount": "20000",
+        "nonce": "1",
+        "issuedAt": "1795128486",
+        "validUntil": "1795128708"
+      },
+      "chargeSignature": "0x7e070fc066e6c2b80e3872263a15167bf4737ab62a9f510da52f6ec33aa85c6719ef34d052c234c975654d3b78109b080567f2a4eeacb99bd277de6dc76ae1661b",
+      "receipt": {
+        "requestId": "0xef1ef94bf21f70e99df047221e02761845505e2bc927e54405a5864a2504d9a6",
+        "requestHash": "0x1545855144ba6bfc305d73cfb0b5f2d91be88a010f5c5fa7af3d6762de57866e",
+        "bodyHash": "0x6c293cde80f3f2fb37f91b083f732b9971fc751a55261b0ff4fce1ae67e9d0e8",
+        "timestamp": "1795128493",
+        "ok": true
+      },
+      "providerSignature": "0xa552932ba921ceb54e12e29168c4b795c5038fece8cacc60c1c1b6d721c2fe877fa4ea5d1690e951780f9f09467e342fee86139497abddebe3bba456f444885c1b",
+      "softLimitOverride": {
+        "sessionId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "chargeDigest": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "maxTotalSpend": "0",
+        "validUntil": "0"
+      },
+      "customerOverrideSignature": "0x"
+    }
+  },
+  "delegatedSelfOverrideAttempt": {
+    "request": {
+      "id": "engine-d2e49744-da74-4883-9d95-2e07d869273e-35befcfe-2",
+      "input": {
+        "text": "Meter every request and enforce every spending limit."
+      },
+      "method": "word_count",
+      "canonicalRequest": "{\"method\":\"word_count\",\"params\":{\"input\":{\"text\":\"Meter every request and enforce every spending limit.\"},\"priceVersion\":1,\"serviceId\":\"0xb2deebd8561bfd598e2f5007077beeafc0264e10f2d6bd3b1b86248ad6c24ece\",\"sessionId\":\"0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42\"}}",
+      "requestId": "0xbe1a1410ca3cca4227f656eb9ad5f319ad4e0410ceb5938642b0ffea7203ee2e",
+      "requestHash": "0x3459289ec16f48a22cd7d257993c9ec49ebd6e0e48a10fa7f6bf3ba420c05729"
+    },
+    "result": {
+      "words": 8,
+      "characters": 53
+    },
+    "settlement": {
+      "authorization": {
+        "sessionId": "0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42",
+        "requestId": "0xbe1a1410ca3cca4227f656eb9ad5f319ad4e0410ceb5938642b0ffea7203ee2e",
+        "requestHash": "0x3459289ec16f48a22cd7d257993c9ec49ebd6e0e48a10fa7f6bf3ba420c05729",
+        "serviceId": "0xb2deebd8561bfd598e2f5007077beeafc0264e10f2d6bd3b1b86248ad6c24ece",
+        "priceVersion": 1,
+        "maxAmount": "50000",
+        "nonce": "2",
+        "issuedAt": "1795128512",
+        "validUntil": "1795128708"
+      },
+      "chargeSignature": "0xfd9a4845167baa84e7ccc205c0c1ac03642b5f08df1c2ee49996bad2852f09ae4f85b4fb7c0c65b682b8dc91567abf3fa441ebd4a0590a226a4870c02dbbd3581b",
+      "receipt": {
+        "requestId": "0xbe1a1410ca3cca4227f656eb9ad5f319ad4e0410ceb5938642b0ffea7203ee2e",
+        "requestHash": "0x3459289ec16f48a22cd7d257993c9ec49ebd6e0e48a10fa7f6bf3ba420c05729",
+        "bodyHash": "0xd4225458b48007336882ccc7972d28e075d3dcafe54e901d8a7929a42838f19b",
+        "timestamp": "1795128512",
+        "ok": true
+      },
+      "providerSignature": "0x81d7613d42d2ea0e67b2e46c4281d29ed2635e1ae693cb37162a72bb46239be10d43335320c673634b960a00ab8c4fbcecf80322e962b6a04ce05faf91e238b01b",
+      "softLimitOverride": {
+        "sessionId": "0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42",
+        "chargeDigest": "0x5504f785f80cbb80fd9631f00a318b20b635c2596bc3f557037bae1bef8c20f8",
+        "maxTotalSpend": "70000",
+        "validUntil": "1795128828"
+      },
+      "customerOverrideSignature": "0x5241c9a1c9cb3ab4cc23aeab2ee528a611d186fc0788ec214ff654417affc292579b965b81bf04716392485b086aa3d8451eabef13166c726587b6910e961c9e1b"
+    }
+  },
+  "customerOverrideCharge": {
+    "request": {
+      "id": "engine-d2e49744-da74-4883-9d95-2e07d869273e-35befcfe-2",
+      "input": {
+        "text": "Meter every request and enforce every spending limit."
+      },
+      "method": "word_count",
+      "canonicalRequest": "{\"method\":\"word_count\",\"params\":{\"input\":{\"text\":\"Meter every request and enforce every spending limit.\"},\"priceVersion\":1,\"serviceId\":\"0xb2deebd8561bfd598e2f5007077beeafc0264e10f2d6bd3b1b86248ad6c24ece\",\"sessionId\":\"0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42\"}}",
+      "requestId": "0xbe1a1410ca3cca4227f656eb9ad5f319ad4e0410ceb5938642b0ffea7203ee2e",
+      "requestHash": "0x3459289ec16f48a22cd7d257993c9ec49ebd6e0e48a10fa7f6bf3ba420c05729"
+    },
+    "result": {
+      "words": 8,
+      "characters": 53
+    },
+    "settlement": {
+      "authorization": {
+        "sessionId": "0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42",
+        "requestId": "0xbe1a1410ca3cca4227f656eb9ad5f319ad4e0410ceb5938642b0ffea7203ee2e",
+        "requestHash": "0x3459289ec16f48a22cd7d257993c9ec49ebd6e0e48a10fa7f6bf3ba420c05729",
+        "serviceId": "0xb2deebd8561bfd598e2f5007077beeafc0264e10f2d6bd3b1b86248ad6c24ece",
+        "priceVersion": 1,
+        "maxAmount": "50000",
+        "nonce": "2",
+        "issuedAt": "1795128512",
+        "validUntil": "1795128708"
+      },
+      "chargeSignature": "0xfd9a4845167baa84e7ccc205c0c1ac03642b5f08df1c2ee49996bad2852f09ae4f85b4fb7c0c65b682b8dc91567abf3fa441ebd4a0590a226a4870c02dbbd3581b",
+      "receipt": {
+        "requestId": "0xbe1a1410ca3cca4227f656eb9ad5f319ad4e0410ceb5938642b0ffea7203ee2e",
+        "requestHash": "0x3459289ec16f48a22cd7d257993c9ec49ebd6e0e48a10fa7f6bf3ba420c05729",
+        "bodyHash": "0xd4225458b48007336882ccc7972d28e075d3dcafe54e901d8a7929a42838f19b",
+        "timestamp": "1795128512",
+        "ok": true
+      },
+      "providerSignature": "0x81d7613d42d2ea0e67b2e46c4281d29ed2635e1ae693cb37162a72bb46239be10d43335320c673634b960a00ab8c4fbcecf80322e962b6a04ce05faf91e238b01b",
+      "softLimitOverride": {
+        "sessionId": "0x35befcfe3eaa4f294c757f1dd89ea8b99e2c6187a253edb898e1b790cc2c9d42",
+        "chargeDigest": "0x5504f785f80cbb80fd9631f00a318b20b635c2596bc3f557037bae1bef8c20f8",
+        "maxTotalSpend": "70000",
+        "validUntil": "1795128828"
+      },
+      "customerOverrideSignature": "0x12f3896ea0bb9882b7297fc31c230c358056613ec916407cb9c84f3979afaa744fe63d7f9c1f60e0738c47a25c2ed66c52bbb89b0e8bd5457d6845f1bd8b96d31c"
+    }
+  },
+  "secondCustomerCharge": {
+    "request": {
+      "id": "engine-d2e49744-da74-4883-9d95-2e07d869273e-e4febbd7-1",
+      "input": {
+        "kind": "engine-proof",
+        "sequence": 1,
+        "message": "An actual bounded service request"
+      },
+      "method": "json_validate",
+      "canonicalRequest": "{\"method\":\"json_validate\",\"params\":{\"input\":{\"kind\":\"engine-proof\",\"message\":\"An actual bounded service request\",\"sequence\":1},\"priceVersion\":2,\"serviceId\":\"0xe1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed\",\"sessionId\":\"0xe4febbd772775bebb854d27bd08b1d8b3620a1dc950259c3f6f61f8f5ef292f0\"}}",
+      "requestId": "0x48a2ba65b1c80f7beb0e7162c95ff96308554d7ca3b5c590227e1580c17f24d0",
+      "requestHash": "0x35201615fc241e348036d30126a68b43912f6115657370486480ae53ae4202cf"
+    },
+    "result": {
+      "valid": true,
+      "fields": 3,
+      "parsed": {
+        "kind": "engine-proof",
+        "sequence": 1,
+        "message": "An actual bounded service request"
+      }
+    },
+    "settlement": {
+      "authorization": {
+        "sessionId": "0xe4febbd772775bebb854d27bd08b1d8b3620a1dc950259c3f6f61f8f5ef292f0",
+        "requestId": "0x48a2ba65b1c80f7beb0e7162c95ff96308554d7ca3b5c590227e1580c17f24d0",
+        "requestHash": "0x35201615fc241e348036d30126a68b43912f6115657370486480ae53ae4202cf",
+        "serviceId": "0xe1c3181233fc56c8fdb07ab42f1d1abe6c67a41a7d78235376e9e08feed310ed",
+        "priceVersion": 2,
+        "maxAmount": "30000",
+        "nonce": "1",
+        "issuedAt": "1795128524",
+        "validUntil": "1795128708"
+      },
+      "chargeSignature": "0x56a56fa8a290a171627dfee2cbff56c87c84b76ecc73224e550ac2325164004a3c7f20137921a1561dd042594e53adbc2bd4558c1a5c544c82bb52c1ca63bed31c",
+      "receipt": {
+        "requestId": "0x48a2ba65b1c80f7beb0e7162c95ff96308554d7ca3b5c590227e1580c17f24d0",
+        "requestHash": "0x35201615fc241e348036d30126a68b43912f6115657370486480ae53ae4202cf",
+        "bodyHash": "0x6c293cde80f3f2fb37f91b083f732b9971fc751a55261b0ff4fce1ae67e9d0e8",
+        "timestamp": "1795128524",
+        "ok": true
+      },
+      "providerSignature": "0xd3654304d95dbc12db0e6db891ea4d56620a382695a952d408bf3300d0b2f7b1449cc0106ef4aaa7518084d063d1b5a7cf88657d0deb8a801e0d7a19318f2dfc1c",
+      "softLimitOverride": {
+        "sessionId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "chargeDigest": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "maxTotalSpend": "0",
+        "validUntil": "0"
+      },
+      "customerOverrideSignature": "0x"
+    }
+  },
+  "finalSessions": {
+    "first": {
+      "customer": "0xb9134A16A025042dD670814077Bf34EdBC0e4847",
+      "signer": "0xd52738528C8de4D41F7A0498e713a1927f910997",
+      "budget": "200000",
+      "balance": "0",
+      "spent": "70000",
+      "refundedAmount": "130000",
+      "softLimit": "50000",
+      "maxCharge": "50000",
+      "createdAt": "1795128478",
+      "expiresAt": "1795128708",
+      "executionDeadline": "1795128535",
+      "refundAfter": "1795128828",
+      "settlementWindow": "120",
+      "status": 3,
+      "signerRevoked": false
+    },
+    "second": {
+      "customer": "0xACFEe73893425A35fb12B605E9441D1E73FA6e0e",
+      "signer": "0xC913a0Db8969C5C2ce2b6C801B3BE3577fe2e891",
+      "budget": "200000",
+      "balance": "0",
+      "spent": "30000",
+      "refundedAmount": "170000",
+      "softLimit": "50000",
+      "maxCharge": "50000",
+      "createdAt": "1795128486",
+      "expiresAt": "1795128708",
+      "executionDeadline": "1795128708",
+      "refundAfter": "1795128828",
+      "settlementWindow": "120",
+      "status": 3,
+      "signerRevoked": false
+    }
+  },
+  "tokenBalancesAfter": {
+    "operator": "230000",
+    "secondCustomer": "270000",
+    "vault": "0"
+  },
+  "totals": {
+    "available": "0",
+    "locked": "0",
+    "paid": "100000"
+  },
+  "nativeBalanceAfter": "999220935880230038"
+}

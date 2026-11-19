@@ -28,7 +28,13 @@ try {
     if (await client.getChainId() !== 196) throw new Error("Deployment verifier RPC has wrong network");
     return client.getBlockNumber();
   }));
-  const blockNumber = heads.reduce((a, b) => a < b ? a : b);
+  const verificationHeadBlock = heads.reduce((a, b) => a < b ? a : b);
+  const completedRefund = journal.steps.find(step => step.label === "refund-unused-demo-balance");
+  if (!completedRefund) throw new Error("Mainnet proof has no completed refund");
+  // This is a historical proof: later legitimate DEMO transfers must not
+  // invalidate its original final balances or recorded circuit ownership.
+  const blockNumber = BigInt(completedRefund.blockNumber);
+  if (blockNumber > verificationHeadBlock) throw new Error("Proof completion block is not available");
   const circuitId = BigInt(journal.circuitId);
   const tokenAbi = parseAbi(["function balanceOf(address owner) view returns (uint256)"]);
   const cpuEvents = parseAbi(["event TapedOut(uint256 indexed circuitId,address indexed author,uint32 gateCount,uint32 nState)"]);
@@ -112,7 +118,7 @@ try {
       }
       checkedSteps.push({ label: step.label, hash: step.hash, status: receipt.status, blockNumber: receipt.blockNumber.toString() });
     }
-    return { blockNumber: blockNumber.toString(), circuitId: circuitId.toString(), truthTableInputs, creationInputsMatchCompiledArtifacts: true, historicalDenialVerified: "PolicyDenied(15)", balances: { customer: customerBalance.toString(), provider: providerBalance.toString(), vault: vaultBalance.toString(), spent: spent.toString(), refunded }, checkedSteps };
+    return { blockNumber: blockNumber.toString(), verificationHeadBlock: verificationHeadBlock.toString(), historicalProof: true, circuitId: circuitId.toString(), truthTableInputs, creationInputsMatchCompiledArtifacts: true, historicalDenialVerified: "PolicyDenied(15)", balances: { customer: customerBalance.toString(), provider: providerBalance.toString(), vault: vaultBalance.toString(), spent: spent.toString(), refunded }, checkedSteps };
   }));
   if (JSON.stringify(verifications[0]) !== JSON.stringify(verifications[1])) throw new Error("Independent RPC deployment verification disagrees");
   const report = { kind: "mainnet-read-only-verification", checkedAt: new Date().toISOString(), chainId: 196, independentRpcAgreement: true, rpcOperators: [new URL(cfg.rpc).hostname, new URL(cfg.secondaryRpc).hostname], ...verifications[0] };

@@ -1,6 +1,6 @@
 # Verified protocol proof
 
-Completed on **19 November 2026** on **X Layer mainnet, chain ID 196**. This completes the first Codex implementation task. The complete billing product follows this foundation.
+Completed on **19 November 2026** on **X Layer mainnet, chain ID 196**. This completes the first Codex implementation task. The subsequent [payment-engine milestone](payment-engine.md) extends this foundation with service registration, price versions, and capped delegated sessions.
 
 ## Deployed contracts
 
@@ -32,11 +32,11 @@ Netlist hash: `0x41c201911784832fb02bbdaab166a9150148b4ab657ee8489658f0602d501fe
 
 All **12 broadcasts** are recorded in [the mainnet journal](../deployments/xlayer-196.json): 11 successful receipts and one intentional reverted denial. Views and simulations are not counted as transactions.
 
-Final token balances: customer **0.90 DEMO**, provider **0.10 DEMO**, vault **0**. Total paid: **0.10 DEMO**. The provider receives no payment from the denied transaction.
+Token balances at this proof's completion: customer **0.90 DEMO**, provider **0.10 DEMO**, vault **0**. Total paid: **0.10 DEMO**. The provider receives no payment from the denied transaction. These historical balances precede later payment-engine activity; verification pins this proof's completion block rather than assuming the wallets never transact again.
 
 Total actual OKB spent, including protocol charges and transaction gas: **0.002157970982 OKB**. The wallet balance decreased from **0.009910120668085113** to **0.007752149686085113 OKB**, matching the receipt-based calculation exactly. No BEM purchase or real-value customer payment token was used.
 
-## Actual checks
+## Protocol-milestone checks
 
 | Check | Result |
 | --- | --- |
@@ -72,4 +72,4 @@ Tests and Anvil forks use local test balances and generated process-memory signe
 
 ## Product boundary
 
-The signed workload was an actual local schema validation inside the runner. Both wallets belong to the builder. This is a circuit-enforced payment proof, not an independent user test or a hosted AI API demo. Full TAP-13/17 services, registry, delegated sessions, database/indexer, SDK execution, wallet UI, and the application screens are the next milestones.
+The signed workload was an actual local schema validation inside the runner. Both wallets belong to the builder. This is a circuit-enforced payment proof, not an independent user test or a hosted AI API demo. The subsequent payment engine implements the registry, delegated sessions, and SDK signing helpers. Hosted TAP-13/17 services, database/indexer, SDK HTTP execution, wallet UI, and the application screens remain to be built.
