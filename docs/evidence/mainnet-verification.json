@@ -1,0 +1,96 @@
+{
+  "kind": "mainnet-read-only-verification",
+  "checkedAt": "2026-11-19T21:37:51.195Z",
+  "chainId": 196,
+  "independentRpcAgreement": true,
+  "rpcOperators": [
+    "rpc.xlayer.tech",
+    "xlayer.drpc.org"
+  ],
+  "blockNumber": "76355213",
+  "circuitId": "4",
+  "truthTableInputs": 64,
+  "creationInputsMatchCompiledArtifacts": true,
+  "historicalDenialVerified": "PolicyDenied(15)",
+  "balances": {
+    "customer": "900000",
+    "provider": "100000",
+    "vault": "0",
+    "spent": "100000",
+    "refunded": true
+  },
+  "checkedSteps": [
+    {
+      "label": "mint-nand",
+      "hash": "0xbdf216231843baa57e558c57fb23141f6394ae6cd5df8acce6a26a613857396a",
+      "status": "success",
+      "blockNumber": "76354312"
+    },
+    {
+      "label": "publish-policy",
+      "hash": "0x86bcaffab3ea00881f4934cb48e537ac879049e145a9c102ea2fd02c27178448",
+      "status": "success",
+      "blockNumber": "76354319"
+    },
+    {
+      "label": "deploy-demo-token",
+      "hash": "0x33b1bf2224efd4ad55e327b6eb19ad96b0309e146e0d7af5b51d6b6c0ac06b3d",
+      "status": "success",
+      "blockNumber": "76354331"
+    },
+    {
+      "label": "deploy-adapter",
+      "hash": "0xd5d3759d76c2663aa69b118c65440da5742527f90b3974def3c0b68eec41b48a",
+      "status": "success",
+      "blockNumber": "76354339"
+    },
+    {
+      "label": "deploy-proof-vault",
+      "hash": "0x072d2a73f9f7ac700d4497eed6bf30e8827ca5c9a77f322480d1a6de1cafde45",
+      "status": "success",
+      "blockNumber": "76354345"
+    },
+    {
+      "label": "mint-demo-balance",
+      "hash": "0x4a2dc66eb488a949f82546e82d08ee1d1c309d0f285b2af02ad7411c749367c4",
+      "status": "success",
+      "blockNumber": "76354352"
+    },
+    {
+      "label": "approve-demo-vault",
+      "hash": "0x01428e7a7ca698e216e6ff5734581de13cdbdec0d3f0d24dee91d42450033f0c",
+      "status": "success",
+      "blockNumber": "76354357"
+    },
+    {
+      "label": "fund-demo-session",
+      "hash": "0x2c7b03866057c87a259452c940415f48edf5ade196bdf1324643852605727dc1",
+      "status": "success",
+      "blockNumber": "76354365"
+    },
+    {
+      "label": "settle-allowed-request",
+      "hash": "0x96fa8e32843b764fd069852346394b053be601adcf9c646d67eef674cf9c159c",
+      "status": "success",
+      "blockNumber": "76354373"
+    },
+    {
+      "label": "deny-soft-limit-request",
+      "hash": "0x7c7632144193bf86873d953257b523b73e46687b8e5be6704ab085227e0be5a9",
+      "status": "reverted",
+      "blockNumber": "76354383"
+    },
+    {
+      "label": "settle-signed-override",
+      "hash": "0x56f89d27f7241f4aa06664f32b8e9a4463fc40b996f36807fa277499441448c2",
+      "status": "success",
+      "blockNumber": "76354390"
+    },
+    {
+      "label": "refund-unused-demo-balance",
+      "hash": "0x292dcdf478c4a4bb08647afcd7ed00e3fa9cc64673753625b6e87af35f991e29",
+      "status": "success",
+      "blockNumber": "76354648"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "kind": "mainnet-read-only",
+  "checkedAt": "2026-11-19T21:07:34.448Z",
+  "chainId": 196,
+  "rpcOperators": [
+    "rpc.xlayer.tech",
+    "xlayer.drpc.org"
+  ],
+  "independentRpcAgreement": true,
+  "blockNumber": "76353408",
+  "blockHash": "0xd51b3b6ed078c2eb94b36e03bd5b3326ff49fd9650a4bde0131de6c7eefb14cd",
+  "timestamp": "1795122444",
+  "factory": {
+    "address": "0x1f09DAeFA827f02CBb40967cc91b259763760761",
+    "implementation": "0x336e9F0F4c3fEe7C8c803377e4DEA00293f4ae2a",
+    "implementationDiffersFromDraft": true,
+    "codeHash": "0x5cddc08137fc81eb8ba1d37902e77553152c2f639b6bf6f601ecb094e2cae5c8",
+    "cpuCount": "435",
+    "sealed": false,
+    "currentFeeToken": "0x60e62Efa9405d6873C5deaBD4E6CC91c25363952",
+    "currentFeeDecimals": 8,
+    "newProcessorFee": "10000000",
+    "newMintProtocolFee": "1000000"
+  },
+  "beacon": {
+    "address": "0xf70d1ed4f62CF3780157B0b421b7E2F45bD0991C",
+    "implementation": "0x977f217887E085D298Cb3819cDAD5A0ee35F29B2",
+    "implementationCodeHash": "0x7a15c353205e5245f40f5f5524542a982a4bb3b9a28476e4f10845163f941b30"
+  },
+  "processor": {
+    "address": "0x67be9042961344ccd387b04C24747B0c6C6D2212",
+    "codeHash": "0x57aa306fd0be97087da3534e03398f5ff4efd533b5be4e45a405ce86fa6717d5",
+    "factory": "0x1f09DAeFA827f02CBb40967cc91b259763760761",
+    "beacon": "0xf70d1ed4f62CF3780157B0b421b7E2F45bD0991C",
+    "transistors": "0xb438fE80490b0f27fe16D7f5d4A805aAa61EbD56",
+    "nextIdCounter": "3",
+    "remainingSupply": "998991",
+    "feeCurrency": "legacy-native-OKB",
+    "mintPrice": "10000000000000",
+    "mintProtocolFee": "660000000000000",
+    "tapeoutFee": "1300000000000000",
+    "heldNand": "0",
+    "neededNand": "11",
+    "mintCost": "770000000000000",
+    "nativeProtocolCost": "2070000000000000"
+  },
+  "deployer": {
+    "address": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+    "nativeBalanceWei": "0"
+  },
+  "sampleExistingCircuit": {
+    "circuitId": "1",
+    "info": [
+      2,
+      1,
+      0,
+      3
+    ],
+    "netlistHash": "0xc738359c3dde133a010e00bbc3dc1bd8685e3028a04e5df6e0f00cffa2ce2524",
+    "checkedInputs": 4,
+    "allInputsVerified": true
+  },
+  "emeterPolicy": {
+    "netlistHash": "0x41c201911784832fb02bbdaab166a9150148b4ab657ee8489658f0602d501fe5",
+    "nIn": 6,
+    "nOut": 1,
+    "nState": 0,
+    "gateCount": 11
+  },
+  "emeterMainnetCircuitId": null,
+  "mainnetBroadcastPerformed": false
+}

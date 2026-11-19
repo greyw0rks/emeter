@@ -1,0 +1,341 @@
+{
+  "name": "emeter-payment-policy-v1",
+  "specification": "TAP-02@527477ecb7cf68ee9e86d8292669d57fe1680572",
+  "expression": "A AND B AND C AND D AND (E OR F)",
+  "nIn": 6,
+  "nOut": 1,
+  "nState": 0,
+  "gateCount": 11,
+  "netlist": "0x000000060000060000000700000700000008000009000000020000030000000b00000b000000040000050000000d00000d0000000c00000e0000000f00000f0000001000000a00000011000011",
+  "netlistHash": "0x41c201911784832fb02bbdaab166a9150148b4ab657ee8489658f0602d501fe5",
+  "inputs": [
+    "serviceAuthorized",
+    "receiptVerified",
+    "chargeAuthorized",
+    "sessionActive",
+    "withinSoftLimit",
+    "explicitOverride"
+  ],
+  "truthTable": [
+    {
+      "mask": 0,
+      "inputs": "0x00",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 1,
+      "inputs": "0x01",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 2,
+      "inputs": "0x02",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 3,
+      "inputs": "0x03",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 4,
+      "inputs": "0x04",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 5,
+      "inputs": "0x05",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 6,
+      "inputs": "0x06",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 7,
+      "inputs": "0x07",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 8,
+      "inputs": "0x08",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 9,
+      "inputs": "0x09",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 10,
+      "inputs": "0x0a",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 11,
+      "inputs": "0x0b",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 12,
+      "inputs": "0x0c",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 13,
+      "inputs": "0x0d",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 14,
+      "inputs": "0x0e",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 15,
+      "inputs": "0x0f",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 16,
+      "inputs": "0x10",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 17,
+      "inputs": "0x11",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 18,
+      "inputs": "0x12",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 19,
+      "inputs": "0x13",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 20,
+      "inputs": "0x14",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 21,
+      "inputs": "0x15",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 22,
+      "inputs": "0x16",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 23,
+      "inputs": "0x17",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 24,
+      "inputs": "0x18",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 25,
+      "inputs": "0x19",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 26,
+      "inputs": "0x1a",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 27,
+      "inputs": "0x1b",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 28,
+      "inputs": "0x1c",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 29,
+      "inputs": "0x1d",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 30,
+      "inputs": "0x1e",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 31,
+      "inputs": "0x1f",
+      "outputs": "0x01"
+    },
+    {
+      "mask": 32,
+      "inputs": "0x20",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 33,
+      "inputs": "0x21",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 34,
+      "inputs": "0x22",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 35,
+      "inputs": "0x23",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 36,
+      "inputs": "0x24",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 37,
+      "inputs": "0x25",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 38,
+      "inputs": "0x26",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 39,
+      "inputs": "0x27",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 40,
+      "inputs": "0x28",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 41,
+      "inputs": "0x29",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 42,
+      "inputs": "0x2a",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 43,
+      "inputs": "0x2b",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 44,
+      "inputs": "0x2c",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 45,
+      "inputs": "0x2d",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 46,
+      "inputs": "0x2e",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 47,
+      "inputs": "0x2f",
+      "outputs": "0x01"
+    },
+    {
+      "mask": 48,
+      "inputs": "0x30",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 49,
+      "inputs": "0x31",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 50,
+      "inputs": "0x32",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 51,
+      "inputs": "0x33",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 52,
+      "inputs": "0x34",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 53,
+      "inputs": "0x35",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 54,
+      "inputs": "0x36",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 55,
+      "inputs": "0x37",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 56,
+      "inputs": "0x38",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 57,
+      "inputs": "0x39",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 58,
+      "inputs": "0x3a",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 59,
+      "inputs": "0x3b",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 60,
+      "inputs": "0x3c",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 61,
+      "inputs": "0x3d",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 62,
+      "inputs": "0x3e",
+      "outputs": "0x00"
+    },
+    {
+      "mask": 63,
+      "inputs": "0x3f",
+      "outputs": "0x01"
+    }
+  ]
+}

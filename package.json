@@ -1,0 +1,35 @@
+{
+  "name": "emeter",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@12.16.1",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "typecheck": "pnpm -r --if-present typecheck && tsc --noEmit",
+    "test": "pnpm -r --if-present test",
+    "circuit:generate": "pnpm --filter @emeter/circuit generate",
+    "contracts:install": "pnpm --filter @emeter/contracts install:libs",
+    "contracts:build": "pnpm --filter @emeter/contracts build",
+    "test:fork": "pnpm --filter @emeter/contracts test:fork",
+    "verify:xlayer": "tsx scripts/verify/xlayer.ts",
+    "verify:deployment": "tsx scripts/verify/deployment.ts",
+    "proof:local": "tsx scripts/verify/local-proof.ts",
+    "deploy:prepare": "tsx scripts/deploy/prepare.ts",
+    "deploy:mainnet": "tsx scripts/deploy/mainnet.ts",
+    "dev:web": "pnpm --filter @emeter/web dev",
+    "dev:gateway": "pnpm --filter @emeter/gateway dev"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
+    "@emeter/circuit": "workspace:*",
+    "@emeter/shared": "workspace:*",
+    "viem": "2.58.1",
+    "zod": "4.6.7"
+  }
+}

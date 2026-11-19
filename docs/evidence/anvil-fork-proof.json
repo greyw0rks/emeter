@@ -1,0 +1,364 @@
+{
+  "name": "emeter",
+  "milestone": "protocol-proof",
+  "kind": "anvil-fork",
+  "chainId": 196,
+  "runId": "2da15457-cc81-4d4c-aebe-4cca6a6eccf6",
+  "createdAt": "2026-11-19T21:18:54.358Z",
+  "upstreamBlock": "76354080",
+  "mainnetBroadcastPerformed": false,
+  "mainnetProofVerified": false,
+  "completed": true,
+  "customer": "0x19db12922B4F835615248dCf44Ce61d8F76F5fb9",
+  "providerSigner": "0xF4D6a747E0111e539Edeb947FF0f92A03E42342d",
+  "participantClassification": "builder-controlled proof wallets; not independent adoption",
+  "serviceClassification": "local schema validation inside the proof runner; paid HTTP gateway not implemented",
+  "zeroValueDemoToken": true,
+  "processor": "0x67be9042961344ccd387b04C24747B0c6C6D2212",
+  "factory": "0x1f09DAeFA827f02CBb40967cc91b259763760761",
+  "beacon": "0xf70d1ed4f62CF3780157B0b421b7E2F45bD0991C",
+  "netlistHash": "0x41c201911784832fb02bbdaab166a9150148b4ab657ee8489658f0602d501fe5",
+  "artifactHashes": {
+    "DemoUSD": "efa5dbb8aa42919934ca4936bd94c6fb471799d0fc4280fc62953feb93a5fdf9",
+    "EmeterPolicyAdapter": "49e48bbb88b66f86856e107cc20d73520a699113781e7e0eff9c6d4e00d26565",
+    "EmeterProofVault": "852ba08cc25e266b71277930fd466cd451013ef380fe2db2672e83b9ee53ea70"
+  },
+  "steps": [
+    {
+      "label": "mint-nand",
+      "hash": "0x5e0cf9210db4de901152aabbb4cb7c48c37a0159dbc2b46fd9bbe946b4ca3c1e",
+      "blockNumber": "76354081",
+      "blockHash": "0xb510005b4e077e68b8c73c3e9c557d7493994d3c1ccdd09c61175359a56bc59e",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0xb438fe80490b0f27fe16d7f5d4a805aaa61ebd56",
+      "valueWei": "770000000000000",
+      "gasUsed": "86399",
+      "effectiveGasPrice": "119346166",
+      "contractAddress": null,
+      "dataHash": "0x3b786d20aff4abccc7a4973f8b2c2df90d0f2dc2cc4bf87d199ed0acfa41ce97"
+    },
+    {
+      "label": "publish-policy",
+      "hash": "0xb404c8392d69911dfb5223f5d87f8719f88eddb9159af5d077facc4d78e0d618",
+      "blockNumber": "76354082",
+      "blockHash": "0x27c16a2547c7cc02ce019cc89a4033f06577af661f4f4e8fa11257c490f39981",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0x67be9042961344ccd387b04c24747b0c6c6d2212",
+      "valueWei": "1300000000000000",
+      "gasUsed": "250166",
+      "effectiveGasPrice": "116929885",
+      "contractAddress": null,
+      "dataHash": "0x06ed3788eafccdafde387b9f521befab8d6d2c3df77d977bd753b3b61a201a94"
+    },
+    {
+      "label": "deploy-demo-token",
+      "hash": "0x547b0792597dd434165da9d20132228a145a7ac2ec97f588a617f217f717c8f6",
+      "blockNumber": "76354083",
+      "blockHash": "0x2a3b0407b99b66d651dc0533cc59e992d351d193c3e3de3eab2f43d02b0c3aa5",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": null,
+      "valueWei": "0",
+      "gasUsed": "563760",
+      "effectiveGasPrice": "114818692",
+      "contractAddress": "0x03ed5155afb2e70d19f0824f67a439c8a28422ee",
+      "dataHash": "0x0fe98f886cacbdca429f049341fa90275fa10291dcf4aadbc593c111dbd86559"
+    },
+    {
+      "label": "deploy-adapter",
+      "hash": "0x3e9647c0beaed8a7a15463e3ed4edc134e065750c4ed39e22ee9b773daec2bb1",
+      "blockNumber": "76354084",
+      "blockHash": "0x611187c8c88952d056e080409966a16c6b001c62e146c9067a0ad0ddd7546112",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": null,
+      "valueWei": "0",
+      "gasUsed": "584218",
+      "effectiveGasPrice": "112976301",
+      "contractAddress": "0xe0db616b7b6684008927e3402edc42709977be40",
+      "dataHash": "0xc6741457600793aacf826c84523352c0a3184635eb26176e3eaf310f4a881a2b"
+    },
+    {
+      "label": "deploy-proof-vault",
+      "hash": "0x93e621751393e9fd09cee172988fb7c0d293cc8abd6e2d7fc1f0ed3fc92975f0",
+      "blockNumber": "76354085",
+      "blockHash": "0x6f84280a8df9e29e32950527cc80718d0767c0ee761a00d5c6475b8c58b252d9",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": null,
+      "valueWei": "0",
+      "gasUsed": "1694318",
+      "effectiveGasPrice": "111363289",
+      "contractAddress": "0x0e03536fc3cc57741c9824fb38906eb07473eca0",
+      "dataHash": "0xa6134ef04e0ed6d05010ff0ef8d19beae98189289f768dc8f78f397e03c6c508"
+    },
+    {
+      "label": "mint-demo-balance",
+      "hash": "0xaf12fd388483cb4f92c13fc307f858fa2a6cbd37a5d0b617e078c7aee62c74e2",
+      "blockNumber": "76354086",
+      "blockHash": "0x4a1126f6bcf9f9628d8bfadfd3e2e338ef89d1bde0824c189932642de18a83fb",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0x03ed5155afb2e70d19f0824f67a439c8a28422ee",
+      "valueWei": "0",
+      "gasUsed": "68642",
+      "effectiveGasPrice": "109965798",
+      "contractAddress": null,
+      "dataHash": "0x6c7e79a367c96d200100aeba80e4e4d3bdc1e1e016db5ee2823ec43f1fb223da"
+    },
+    {
+      "label": "approve-demo-vault",
+      "hash": "0xf3b533b5de85f61c461aee1381ce5c4759e64474e399f9b709d17808295a97c5",
+      "blockNumber": "76354087",
+      "blockHash": "0xcfe2ce3a87b7f8bc53a12438795d158027b198ca18422a139497276749cedd80",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0x03ed5155afb2e70d19f0824f67a439c8a28422ee",
+      "valueWei": "0",
+      "gasUsed": "46330",
+      "effectiveGasPrice": "108720889",
+      "contractAddress": null,
+      "dataHash": "0x27590c52f15750ce102687cddadc7dba395db1f0e7fbf9bbf8715d4faff07888"
+    },
+    {
+      "label": "fund-demo-session",
+      "hash": "0xc83fdbd526c0a05ec2bad1b33ecf6ca6bb5d41a749a684e2e1bbc77c5f3d6644",
+      "blockNumber": "76354088",
+      "blockHash": "0x57e5af4429210e0b43d72d6f4be019661a974cd6d79816b535d12515ebac3cab",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0x0e03536fc3cc57741c9824fb38906eb07473eca0",
+      "valueWei": "0",
+      "gasUsed": "86056",
+      "effectiveGasPrice": "107631259",
+      "contractAddress": null,
+      "dataHash": "0xdb8bd7db1f921a0967a7aa1c7c34684dd50ff54e1a408cd40ccc9790ef25baf0"
+    },
+    {
+      "label": "settle-allowed-request",
+      "hash": "0x98938192981613b8eeceb7141b4b5c5445483c22a91d951822dd8a7fcb202170",
+      "blockNumber": "76354089",
+      "blockHash": "0x2de4b6bac3db929615b6075c3ee5f2966e788a049cf9fe242c418cc5daef9efc",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0x0e03536fc3cc57741c9824fb38906eb07473eca0",
+      "valueWei": "0",
+      "gasUsed": "230978",
+      "effectiveGasPrice": "106678135",
+      "contractAddress": null,
+      "dataHash": "0x4b5e5946f2c26e91433afd9bb36f44a4b5e893c5c902995a03bd85ba5b21c286"
+    },
+    {
+      "label": "deny-soft-limit-request",
+      "hash": "0x1a07374ea6da90bcb0cff512d8474c760303039bf00be88a528d24da2c70c9f9",
+      "blockNumber": "76354090",
+      "blockHash": "0x6e7aef5e09ad21a7042917c3afff4ebf81cd1bd48b5e4b79c8f3f49c7bf2bd2c",
+      "status": "reverted",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0x0e03536fc3cc57741c9824fb38906eb07473eca0",
+      "valueWei": "0",
+      "gasUsed": "132413",
+      "effectiveGasPrice": "105845205",
+      "contractAddress": null,
+      "dataHash": "0x4e810a6cb24619e6b5b791f8c637f75138e743220374f32b3a5240b50a171760"
+    },
+    {
+      "label": "settle-signed-override",
+      "hash": "0xff1c7b29fcbfe10e384c61554e2e0f02811abbbd5f80916ae9ccbd8c0ef710df",
+      "blockNumber": "76354091",
+      "blockHash": "0xa5bdef17bb6be503486bcf9b7b55bc212432803a86f3b94dfe45b19efe7a6c1a",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0x0e03536fc3cc57741c9824fb38906eb07473eca0",
+      "valueWei": "0",
+      "gasUsed": "196826",
+      "effectiveGasPrice": "105115476",
+      "contractAddress": null,
+      "dataHash": "0x2f88c9755afcf8c3bec0c824054858079c18bd6b41808791dde49000f2946c9f"
+    },
+    {
+      "label": "refund-unused-demo-balance",
+      "hash": "0x8e185f670dad3523617a4ff90cc2d1a4f59ab1364a6eae8fa2da22159221d89a",
+      "blockNumber": "76354093",
+      "blockHash": "0xeccee615539fcc147acc1ca0bb952f53f9297af0f0db01c77a827165a9849bd0",
+      "status": "success",
+      "from": "0x19db12922b4f835615248dcf44ce61d8f76f5fb9",
+      "to": "0x0e03536fc3cc57741c9824fb38906eb07473eca0",
+      "valueWei": "0",
+      "gasUsed": "58647",
+      "effectiveGasPrice": "103917586",
+      "contractAddress": null,
+      "dataHash": "0xe40e39615ca7cdd7f873aff870c46bcf31c495927d308498f69191b9606e74b4"
+    }
+  ],
+  "updatedAt": "2026-11-19T21:20:35.023Z",
+  "nativeSpendWeiExcludingAdditionalL1Fees": "2516268193977787",
+  "circuitId": "4",
+  "circuitMetadata": [
+    6,
+    1,
+    0,
+    11
+  ],
+  "truthTablePassed": 64,
+  "contracts": {
+    "demoToken": "0x03ed5155afb2E70D19F0824f67A439C8a28422eE",
+    "adapter": "0xE0db616B7b6684008927e3402EdC42709977BE40",
+    "vault": "0x0E03536FC3Cc57741C9824FB38906Eb07473ecA0",
+    "serviceContainer": "0xFDd96def422295595959F071669CABcB241cf6A7"
+  },
+  "configuration": {
+    "customer": "0x19db12922B4F835615248dCf44Ce61d8F76F5fb9",
+    "provider": "0xF4D6a747E0111e539Edeb947FF0f92A03E42342d",
+    "providerSigner": "0xF4D6a747E0111e539Edeb947FF0f92A03E42342d",
+    "serviceContainer": "0xFDd96def422295595959F071669CABcB241cf6A7",
+    "serviceId": "0x31276823e07a608bb3c73f40e98eed7bacb33e6a69426963823bbd6fb7a4b61c",
+    "price": "50000",
+    "hardBudget": "200000",
+    "softLimit": "50000",
+    "expiresAt": "1795123343",
+    "settlementWindow": "120"
+  },
+  "allowedCharge": {
+    "id": "emeter-proof-2da15457-cc81-4d4c-aebe-4cca6a6eccf6-1",
+    "input": {
+      "customer": "0x19db12922B4F835615248dCf44Ce61d8F76F5fb9",
+      "nonce": "1",
+      "service": "schema-validation"
+    },
+    "result": {
+      "accepted": true,
+      "fieldCount": 3,
+      "parsed": {
+        "customer": "0x19db12922B4F835615248dCf44Ce61d8F76F5fb9",
+        "nonce": "1",
+        "service": "schema-validation"
+      }
+    },
+    "canonicalRequest": "{\"method\":\"validate_json\",\"params\":{\"customer\":\"0x19db12922B4F835615248dCf44Ce61d8F76F5fb9\",\"nonce\":\"1\",\"service\":\"schema-validation\"}}",
+    "canonicalBody": "{\"accepted\":true,\"fieldCount\":3,\"parsed\":{\"customer\":\"0x19db12922B4F835615248dCf44Ce61d8F76F5fb9\",\"nonce\":\"1\",\"service\":\"schema-validation\"}}",
+    "authorization": {
+      "requestId": "0x5bab30b0fa95b3d3acf70157a5a7ce757ae98fbec61025b8c43ff83ea14fc01b",
+      "requestHash": "0x0cebf3e851c2e9e43957d3822140a21c05e34af4682b247b69bb82e1b6e5ec34",
+      "serviceId": "0x31276823e07a608bb3c73f40e98eed7bacb33e6a69426963823bbd6fb7a4b61c",
+      "maxAmount": "50000",
+      "nonce": "1",
+      "validUntil": "1795123463",
+      "overrideSoftLimit": false
+    },
+    "customerSignature": "0x4ede3d530f01ce7480c30cd75434ac90595a859c092e5f9543b0cec6f3ad0c005376cada3c09472bb9a93ae5d741cf202f5430f55403139ef2829b4dcfd2c1ce1c",
+    "receipt": {
+      "requestId": "0x5bab30b0fa95b3d3acf70157a5a7ce757ae98fbec61025b8c43ff83ea14fc01b",
+      "requestHash": "0x0cebf3e851c2e9e43957d3822140a21c05e34af4682b247b69bb82e1b6e5ec34",
+      "bodyHash": "0x944a560fcfc1eddf1a64245c71eed0c6c1928d27f977ce85dc31f3ab33933597",
+      "timestamp": "1795123188",
+      "ok": true
+    },
+    "providerSignature": "0x6cc9efa56880dcfa7777cbc62992c025d7509fbde3a61a4ac749ac00a42549005c9a5750eaac4912cbc969ff0a7de39af99eae7c26a9eb439c232f70f558e6401c"
+  },
+  "afterAllowed": {
+    "customer": "800000",
+    "provider": "50000",
+    "vaultTokens": "150000",
+    "tracked": "150000",
+    "spent": "50000"
+  },
+  "deniedCharge": {
+    "id": "emeter-proof-2da15457-cc81-4d4c-aebe-4cca6a6eccf6-2",
+    "input": {
+      "customer": "0x19db12922B4F835615248dCf44Ce61d8F76F5fb9",
+      "nonce": "2",
+      "service": "schema-validation"
+    },
+    "result": {
+      "accepted": true,
+      "fieldCount": 3,
+      "parsed": {
+        "customer": "0x19db12922B4F835615248dCf44Ce61d8F76F5fb9",
+        "nonce": "2",
+        "service": "schema-validation"
+      }
+    },
+    "canonicalRequest": "{\"method\":\"validate_json\",\"params\":{\"customer\":\"0x19db12922B4F835615248dCf44Ce61d8F76F5fb9\",\"nonce\":\"2\",\"service\":\"schema-validation\"}}",
+    "canonicalBody": "{\"accepted\":true,\"fieldCount\":3,\"parsed\":{\"customer\":\"0x19db12922B4F835615248dCf44Ce61d8F76F5fb9\",\"nonce\":\"2\",\"service\":\"schema-validation\"}}",
+    "authorization": {
+      "requestId": "0x76c810aec3e0b482a1d2f7197a2b102ff146ed0f53bf5dc691749821c245705e",
+      "requestHash": "0x11594437ff4089d13fbcebaba455bef62ed25958bccc5605c1d80ed5c67d269a",
+      "serviceId": "0x31276823e07a608bb3c73f40e98eed7bacb33e6a69426963823bbd6fb7a4b61c",
+      "maxAmount": "50000",
+      "nonce": "2",
+      "validUntil": "1795123463",
+      "overrideSoftLimit": false
+    },
+    "customerSignature": "0x82036e876bdeb7cf39bafed4741a493eaee3e911cb0af74e56c79a4befdf53913f8f915f17bcbebcffd53bf5c9189ab10461fe0bd358a867491eebead6f6ac691b",
+    "receipt": {
+      "requestId": "0x76c810aec3e0b482a1d2f7197a2b102ff146ed0f53bf5dc691749821c245705e",
+      "requestHash": "0x11594437ff4089d13fbcebaba455bef62ed25958bccc5605c1d80ed5c67d269a",
+      "bodyHash": "0x42cafbed21fd7396408ea3777004cc16031c21348e1fa9c76d6d23d53c38ef33",
+      "timestamp": "1795123197",
+      "ok": true
+    },
+    "providerSignature": "0x8682cd9c5d9a0cbfa0e009d4dca0297b4ed7044272514d14d1b859cf230b8d5e645a72d4a386ce2b0afcd123f2d2ccd8ff83020e1338a7b05a8da69c931c577b1c"
+  },
+  "denial": {
+    "policyInputs": "0x0f",
+    "circuitOutput": "0x00",
+    "simulatedError": "PolicyDenied(15)",
+    "actualTransactionReverted": true,
+    "balancesUnchanged": true
+  },
+  "overrideCharge": {
+    "id": "emeter-proof-2da15457-cc81-4d4c-aebe-4cca6a6eccf6-2",
+    "input": {
+      "customer": "0x19db12922B4F835615248dCf44Ce61d8F76F5fb9",
+      "nonce": "2",
+      "service": "schema-validation"
+    },
+    "result": {
+      "accepted": true,
+      "fieldCount": 3,
+      "parsed": {
+        "customer": "0x19db12922B4F835615248dCf44Ce61d8F76F5fb9",
+        "nonce": "2",
+        "service": "schema-validation"
+      }
+    },
+    "canonicalRequest": "{\"method\":\"validate_json\",\"params\":{\"customer\":\"0x19db12922B4F835615248dCf44Ce61d8F76F5fb9\",\"nonce\":\"2\",\"service\":\"schema-validation\"}}",
+    "canonicalBody": "{\"accepted\":true,\"fieldCount\":3,\"parsed\":{\"customer\":\"0x19db12922B4F835615248dCf44Ce61d8F76F5fb9\",\"nonce\":\"2\",\"service\":\"schema-validation\"}}",
+    "authorization": {
+      "requestId": "0x76c810aec3e0b482a1d2f7197a2b102ff146ed0f53bf5dc691749821c245705e",
+      "requestHash": "0x11594437ff4089d13fbcebaba455bef62ed25958bccc5605c1d80ed5c67d269a",
+      "serviceId": "0x31276823e07a608bb3c73f40e98eed7bacb33e6a69426963823bbd6fb7a4b61c",
+      "maxAmount": "50000",
+      "nonce": "2",
+      "validUntil": "1795123463",
+      "overrideSoftLimit": true
+    },
+    "customerSignature": "0xfced7102f231ad78b018a7555109c0ab3bdea249a16b91ce7c7e88b33e907ea5193cf4eb71b05e020d1fff2d2a5c647606fa05eb13f74f8d48eb9388d453e2731c",
+    "receipt": {
+      "requestId": "0x76c810aec3e0b482a1d2f7197a2b102ff146ed0f53bf5dc691749821c245705e",
+      "requestHash": "0x11594437ff4089d13fbcebaba455bef62ed25958bccc5605c1d80ed5c67d269a",
+      "bodyHash": "0x42cafbed21fd7396408ea3777004cc16031c21348e1fa9c76d6d23d53c38ef33",
+      "timestamp": "1795123197",
+      "ok": true
+    },
+    "providerSignature": "0x8682cd9c5d9a0cbfa0e009d4dca0297b4ed7044272514d14d1b859cf230b8d5e645a72d4a386ce2b0afcd123f2d2ccd8ff83020e1338a7b05a8da69c931c577b1c"
+  },
+  "afterOverride": {
+    "customer": "800000",
+    "provider": "100000",
+    "vaultTokens": "100000",
+    "tracked": "100000",
+    "spent": "100000"
+  },
+  "finalBalances": {
+    "customer": "900000",
+    "provider": "100000",
+    "vaultTokens": "0",
+    "tracked": "0",
+    "spent": "100000"
+  },
+  "confirmationLevel": "mined receipts, one confirmation; not an L1-finality assertion"
+}

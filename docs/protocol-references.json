@@ -1,0 +1,26 @@
+{
+  "repository": "https://github.com/TapeOutProtocol/TAPs",
+  "commit": "527477ecb7cf68ee9e86d8292669d57fe1680572",
+  "specifications": [
+    {
+      "path": "TAPs/TAP-02.md",
+      "sha256": "8db03f6298c58aae5a9adeaa3774c30ecdf9db1f276c3efd0079648444d8850f"
+    },
+    {
+      "path": "TAPs/TAP-10.md",
+      "sha256": "7c5e87c32d915f443131bb9f2a0df565432bdddc6437896684c78dcff6b159d4"
+    },
+    {
+      "path": "TAPs/TAP-13.md",
+      "sha256": "d510af408713658da9a7db3c8a4cabc6f50c2dc55733c4219b9780d20c3c9d50"
+    },
+    {
+      "path": "TAPs/TAP-17.md",
+      "sha256": "d3f96c59656ce740fafe7bd49cc3b9a2d87130099f3a3992a6c3dd65c2f9bf8a"
+    },
+    {
+      "path": "TAPs/TAP-11.md",
+      "sha256": "35b1f07729102a37849e5fb58538d5e016c9d342e0133a36ed07c7628b282b8a"
+    }
+  ]
+}

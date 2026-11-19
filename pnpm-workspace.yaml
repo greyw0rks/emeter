@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+
+minimumReleaseAgeExclude:
+  - viem@2.58.1
+
+allowBuilds:
+  esbuild: true
+  sharp: true

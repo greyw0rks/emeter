@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-11-19T21:37:51.195Z",
+  "unitTests": 140,
+  "deployedCodeForkTests": 3,
+  "pythonReferenceVectors": 64,
+  "mainnetTransactions": 12,
+  "mainnetSuccessful": 11,
+  "mainnetReverted": 1,
+  "mainnetProofCompleted": true,
+  "independentRpcAgreement": true,
+  "historicalDenialVerified": "PolicyDenied(15)",
+  "gatewaySmoke": {
+    "mainnetProofVerified": true,
+    "paidExecutionReady": false,
+    "unimplementedExecutionHttpStatus": 503
+  },
+  "build": "passed",
+  "typecheck": "passed",
+  "credentialScan": "no authorized wallet key found in repository files"
+}
