@@ -15,7 +15,7 @@ The second emeter milestone adds registered services, immutable price versions, 
 
 ## Validation
 
-The current workspace passes **192 tests**: 91 circuit/compiler tests, 17 shared receipt/payment-schema tests, 9 SDK tests, 2 gateway scaffold tests, and 73 Foundry unit/fuzz/invariant tests. Foundry counts the four invariant obligations as one grouped test; their randomized handler ran 128 sequences of 32 operations, totaling 4,096 calls. The invariants compare vault balances, isolated session budgets, provider transfers, and total token conservation against independent accounting.
+The payment-engine checkpoint passed **192 tests**: 91 circuit/compiler tests, 17 shared receipt/payment-schema tests, 9 SDK tests, 2 gateway scaffold tests, and 73 Foundry unit/fuzz/invariant tests. Foundry counts the four invariant obligations as one grouped test; their randomized handler ran 128 sequences of 32 operations, totaling 4,096 calls. The invariants compare vault balances, isolated session budgets, provider transfers, and total token conservation against independent accounting.
 
 Three additional Foundry tests pass against the real X Layer processor on a local fork: scoped delegated requests and customer-only overrides, preserved signed price versions, and outstanding settlement followed by refunds. Fork changes stay local. Workspace typechecks and the Next.js/Solidity production build pass.
 

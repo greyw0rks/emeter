@@ -1,0 +1,187 @@
+generator client {
+  provider = "prisma-client"
+  output = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  wallet String @id
+  createdAt DateTime @default(now())
+}
+
+model AuthChallenge {
+  id String @id
+  wallet String
+  message String
+  expiresAt DateTime
+  consumedAt DateTime?
+}
+
+model AuthSession {
+  tokenHash String @id
+  wallet String
+  expiresAt DateTime
+  revokedAt DateTime?
+}
+
+model Service {
+  id String @id
+  provider String
+  name String
+  description String
+  method String
+  endpoint String
+  manifest Json
+  verifiedAt DateTime?
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+}
+
+model PriceVersion {
+  serviceId String
+  version Int
+  price Decimal @db.Decimal(78, 0)
+  payout String
+  signer String
+  container String
+  metadataHash String
+  active Boolean
+  endpoint String
+  method String
+  manifest Json
+  @@id([serviceId, version])
+}
+
+model SpendingSession {
+  id String @id
+  customer String
+  signer String
+  budget Decimal @db.Decimal(78, 0)
+  softLimit Decimal @db.Decimal(78, 0)
+  maxCharge Decimal @db.Decimal(78, 0)
+  expiresAt BigInt
+  refundAfter BigInt
+  status Int
+  indexedBlock BigInt
+}
+
+model APIRequest {
+  id String @id
+  clientId String
+  sessionId String
+  customer String
+  serviceId String
+  priceVersion Int
+  nonce Decimal @db.Decimal(78, 0)
+  requestHash String
+  payloadHash String
+  wireRequest Json
+  authorization Json
+  chargeSignature String
+  customerOverride Json?
+  amount Decimal @db.Decimal(78, 0)
+  reservationActive Boolean @default(true)
+  requestStatus String @default("authorized")
+  paymentStatus String @default("unsubmitted")
+  chargeAuthorized Boolean @default(false)
+  policyInputs Int?
+  result Json?
+  errorCode String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([sessionId, nonce])
+  @@index([customer, createdAt])
+  @@index([sessionId, reservationActive])
+}
+
+model UsageReceipt {
+  requestId String @id
+  envelope Json
+  digest String
+  bodyHash String
+  signer String
+  reportedUsage Json?
+  aiReceipt Json?
+  providerVerified Boolean
+  delivery String @default("reported")
+  customerAcceptance String @default("not_requested")
+  createdAt DateTime @default(now())
+}
+
+model ProviderExecution {
+  id String @id
+  requestHash String
+  status String
+  envelope Json?
+  aiReceipt Json?
+  upstreamResponse Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SettlementAttempt {
+  id String @id @default(uuid())
+  requestId String
+  transactionHash String? @unique
+  rawTransaction String?
+  nonce BigInt?
+  maximumGasCost Decimal? @db.Decimal(78, 0)
+  actualGasCost Decimal? @db.Decimal(78, 0)
+  evidence Json
+  status String
+  errorCode String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([requestId])
+}
+
+model Settlement {
+  requestId String @id
+  transactionHash String
+  amount Decimal @db.Decimal(78, 0)
+  blockNumber BigInt
+  blockHash String
+  policyInputs Int
+  confirmationStatus String
+}
+
+model ChainEvent {
+  chainId Int
+  transactionHash String
+  logIndex Int
+  blockNumber BigInt
+  blockHash String
+  contract String
+  eventName String
+  arguments Json
+  @@id([chainId, transactionHash, logIndex])
+  @@index([blockNumber])
+}
+
+model IndexerCursor {
+  id String @id
+  blockNumber BigInt
+  blockHash String
+  state String @default("ready")
+  updatedAt DateTime @updatedAt
+}
+
+model APIKey {
+  id String @id @default(uuid())
+  keyHash String @unique
+  wallet String
+  serviceId String?
+  sessionId String?
+  scopes String[]
+  expiresAt DateTime?
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+model WorkerHeartbeat {
+  id String @id
+  updatedAt DateTime @updatedAt
+}

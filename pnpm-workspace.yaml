@@ -4,7 +4,11 @@ packages:
 
 minimumReleaseAgeExclude:
   - viem@2.58.1
+  - '@anthropic-ai/sdk@1.11.0'
 
 allowBuilds:
+  '@prisma/engines': true
+  prisma: true
+  msgpackr-extract: false
   esbuild: true
   sharp: true

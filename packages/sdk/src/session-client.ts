@@ -1,4 +1,4 @@
-import { createPublicClient, encodeFunctionData, getAddress, http } from "viem";
+import { createPublicClient, decodeEventLog, decodeFunctionData, encodeFunctionData, getAddress, http } from "viem";
 import type { Address, Hex } from "viem";
 import type { PrivateKeyAccount } from "viem/accounts";
 import {
@@ -108,5 +108,51 @@ export class EmeterSessionClient {
     const authorization = { sessionId: charge.sessionId, chargeDigest: sessionChargeDigest(this.vault, charge), maxTotalSpend, validUntil };
     const typedData = overrideSigningPayload(this.vault, authorization);
     return { authorization, typedData, signature: await customerSigner.signTypedData(typedData) };
+  }
+
+  async verifyCharge(charge: SessionChargeAuthorization, signature: Hex) {
+    const session = await this.getSession(charge.sessionId);
+    return this.client.verifyTypedData({ ...chargeSigningPayload(this.vault, charge), address: session.signer, signature });
+  }
+
+  async verifySettlement(input: { transactionHash: Hex; authorization: SessionChargeAuthorization;
+    chargeSignature: Hex; providerSignature: Hex; bodyHash: Hex; timestamp: bigint; receiptDigest: Hex;
+    amount: bigint; policyInputs: number; confirmations: number }) {
+    await this.network();
+    const [receipt, transaction, head, quote] = await Promise.all([
+      this.client.getTransactionReceipt({ hash: input.transactionHash }),
+      this.client.getTransaction({ hash: input.transactionHash }), this.client.getBlockNumber({ cacheTime: 0 }),
+      this.getQuote(input.authorization.serviceId, input.authorization.priceVersion)
+    ]);
+    if (receipt.status !== "success" || receipt.blockNumber + BigInt(input.confirmations) > head
+      || transaction.to?.toLowerCase() !== this.vault.toLowerCase()) throw new Error("Settlement is not confirmed on the configured chain");
+    const block = await this.client.getBlock({ blockNumber: receipt.blockNumber });
+    if (block.hash !== receipt.blockHash || transaction.blockHash !== receipt.blockHash)
+      throw new Error("Settlement is not in the canonical block");
+    const decoded = decodeFunctionData({ abi: emeterVaultAbi, data: transaction.input });
+    if (decoded.functionName !== "settle") throw new Error("Transaction is not an emeter settlement");
+    const evidence = decoded.args[0];
+    if (sessionChargeDigest(this.vault, evidence.authorization) !== sessionChargeDigest(this.vault, input.authorization)
+      || evidence.chargeSignature.toLowerCase() !== input.chargeSignature.toLowerCase()
+      || evidence.providerSignature.toLowerCase() !== input.providerSignature.toLowerCase()
+      || evidence.receipt.bodyHash.toLowerCase() !== input.bodyHash.toLowerCase()
+      || evidence.receipt.timestamp !== input.timestamp || !evidence.receipt.ok)
+      throw new Error("Settlement transaction does not match the retained signed request");
+    const matched = receipt.logs.some(log => {
+      if (log.address.toLowerCase() !== this.vault.toLowerCase()) return false;
+      try {
+        const event = decodeEventLog({ abi: emeterVaultAbi, data: log.data, topics: log.topics });
+        return event.eventName === "ChargeSettled"
+          && event.args.requestId.toLowerCase() === input.authorization.requestId.toLowerCase()
+          && event.args.sessionId.toLowerCase() === input.authorization.sessionId.toLowerCase()
+          && event.args.serviceId.toLowerCase() === input.authorization.serviceId.toLowerCase()
+          && event.args.priceVersion === input.authorization.priceVersion
+          && event.args.amount === input.amount && event.args.policyInputs === input.policyInputs
+          && event.args.receiptDigest.toLowerCase() === input.receiptDigest.toLowerCase()
+          && event.args.provider.toLowerCase() === quote.payout.toLowerCase();
+      } catch { return false; }
+    });
+    if (!matched) throw new Error("No matching confirmed ChargeSettled event");
+    return { transactionHash: receipt.transactionHash, blockNumber: receipt.blockNumber, blockHash: receipt.blockHash };
   }
 }

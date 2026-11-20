@@ -1,0 +1,112 @@
+{
+  "ok": true,
+  "startedAt": "2026-11-20T18:20:27.947Z",
+  "completedAt": "2026-11-20T18:25:41.890Z",
+  "kind": "anvil-fork",
+  "chainId": 196,
+  "forkBlock": "76429792",
+  "reusedContracts": {
+    "vault": "0x12412460847a865b29406fd8cd37df91dd881b50",
+    "registry": "0xec4839b1bdfac9450feeb211cf59a7cf075110f3",
+    "token": "0x66D16469E07217E53618887B492b14eA732b5a11",
+    "adapter": "0x87DB7961f425dDb39c54a8582D21f91a57C637B5"
+  },
+  "mainnetBroadcastPerformed": false,
+  "contractRedeploymentPerformed": false,
+  "demoTokenHasMonetaryValue": false,
+  "independentAdoption": false,
+  "checks": [
+    "existing engine and real TapeOut circuit on an isolated X Layer fork",
+    "verified service registration and immutable metadata",
+    "execution, settlement, and indexer workers become ready",
+    "wallet authentication consumes one challenge under concurrent replay",
+    "scoped API keys are stored as hashes and cannot mint new keys",
+    "SDK executes JSON validation and independently confirms settlement",
+    "duplicate SDK execute recovers the original nonce and payment",
+    "SDK refuses gateway data that disagrees with the signed provider result",
+    "SDK refuses a fabricated settlement hash with a valid signed result",
+    "strict outer JSON and origin checks reject calls before reservation",
+    "session credentials cannot read or execute another customer's session",
+    "service credentials expose scoped analytics and cannot execute",
+    "API key expiry and revocation are enforced",
+    "successful negative JSON validation is billed, unsupported schema errors are not",
+    "delegated signatures cannot escape their service scope",
+    "PostgreSQL session locks prevent concurrent budget oversubscription",
+    "invalid request signatures and a reserved nonce are rejected before service execution",
+    "provider request-id caching survives a provider process restart",
+    "paid fixture AI results include verified raw-byte and usage receipts",
+    "in-flight gateway requests preserve their signed price version after a price change",
+    "historical SDK recovery verifies the old version without signing another charge",
+    "actual circuit denial after external spend preserves output without reporting a payment",
+    "a delegated key cannot authorize its own soft-limit override",
+    "a separate customer override authorizes the same retained charge",
+    "an interrupted provider completion remains indeterminate with its budget reserved",
+    "recovery retrieves the persisted provider result using the original request and nonce",
+    "a post-execution persistence failure retains the reservation as an unknown completion",
+    "indexer detects a reorg and stops billing readiness",
+    "indexer rebuild retains signed evidence and reuses the original settlement hash",
+    "one real Otari AI request verifies bytes, usage, useful output, and local settlement",
+    "expired indeterminate reservations are released only after settlement becomes impossible",
+    "unused balances refund to customers with exact token conservation"
+  ],
+  "checkCount": 32,
+  "aiExecutions": {
+    "fixtureAi": 2,
+    "liveAi": 1
+  },
+  "liveAi": {
+    "model": "mistralai/mistral-small-3.2-24b",
+    "priceTable": {
+      "currency": "USD",
+      "unit": "1M tokens",
+      "input": "0.075",
+      "output": "0.2"
+    },
+    "analysis": {
+      "topics": [
+        "tool launch",
+        "JSON validation",
+        "spending limits",
+        "user feedback",
+        "setup improvement"
+      ],
+      "summary": "Team launched a JSON validation tool with spending limits. Users like receipts, but setup needs work.",
+      "sentiment": "neutral"
+    },
+    "reportedUsage": {
+      "total_tokens": 150,
+      "prompt_tokens": 84,
+      "completion_tokens": 66
+    },
+    "reportedCost": [
+      {
+        "amount": "0.00001950",
+        "currency": "USD"
+      }
+    ],
+    "requestSha256": "a28c148fbd60a468df09c0dfb8734e00925bb93860a60dbbfa918f2e9f82bea3",
+    "responseSha256": "092707a625e8c12ff904af99bb5cd626a9685cb9b7143560464ac23ce94eff51",
+    "requestId": "0xc792bb52b2116f70b758bfeeddd28d62cd19a120c73343a63a17abc1f52fefea",
+    "transactionHash": "0x9c840aeba2d0d26a1b020a6308bc98624c65d68174740402254ef5d51612aa92",
+    "localSettlementOnly": true
+  },
+  "requests": 14,
+  "settledRequests": 11,
+  "retainedUnknownRequests": 0,
+  "sourceSha256": {
+    "apps/gateway/src/app.ts": "21ef97138b6b737884494d8640deb2eb09881db80532b518ae79372e22708ca9",
+    "apps/gateway/src/auth.ts": "6abf2ea5edadbf6212d84aa5862437a3dc600a07e8096c26574210dc588bf0df",
+    "apps/gateway/src/requests.ts": "49cbb60b881dd66885bf61ad26dbcd06b21ce91ffce1179c0654e0ff4540edc7",
+    "apps/gateway/src/execution.ts": "25686c2b3d1e036a65f97cecc6a09aa2bf2bdb2e15e8a3bf99a69c03f4143e92",
+    "apps/gateway/src/providers.ts": "622318ae72de529c9c772435c59b4e6e3f73e9dcd9ddba1b342ddff1d896e787",
+    "apps/gateway/src/ai.ts": "8833145272130f60520c06207b58ec0fd232bee46a5313b5ddd8eb86405e38d2",
+    "apps/gateway/src/settlement.ts": "7e7561de81572cd1d9c7065d862d37223ed48378ad42986fe2d72033e584df14",
+    "apps/gateway/src/indexer.ts": "b1b8fda620173225a13f7b65a4147038501b7c79c35ca8453f336a8f1517624f",
+    "apps/gateway/src/worker.ts": "224d7a84221808dedf7e427ea5b8456d9bbafe7845a367a4dcf1ea918f349fa5",
+    "packages/shared/src/gateway.ts": "6d4ee16183103b450d3bb7bf2e01a5fa872983735eefa4b2876affd7c523f15d",
+    "packages/shared/src/ai-receipt.ts": "3235d7c6aa5473e2d4dbcf3f029ecf8afb8dc2945ed65526108d97db08e5b653",
+    "packages/sdk/src/client.ts": "9e0eda8db973af0d689b780ade4ba377f4317d572abdcaffcef95f1ecee26246",
+    "packages/sdk/src/session-client.ts": "4170d15c0b832002d22ae2d4acffc833dca2f2f33c6d43c105662c55df927bb7",
+    "packages/database/prisma/schema.prisma": "c013d5f3eb2ce0f7ef62444000f7998083dd00213a023089827fc343dfac7c91"
+  }
+}

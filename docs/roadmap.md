@@ -8,9 +8,9 @@ The accepted MVP supports one network (X Layer), one zero-value demo token, prep
 | --- | --- | --- |
 | Protocol proof | Complete | pnpm workspace, exact NAND policy, exhaustive vectors, two-RPC verification, fail-closed adapter, real isolated payment/refund proof. |
 | Payment engine | Complete | Service registry, customer sessions, EIP-712 delegated signing keys, immutable price versions, spending caps, replay protection, refunds, SDK signing helpers, and an independently verified eighteen-transaction mainnet proof. |
-| Gateway and SDK | Next | Developer authentication/API credentials, actual AI Text Analyzer and JSON Validator, signed responses, settlement worker, chain indexer, PostgreSQL/Prisma records, usable HTTP execute client. |
+| Gateway and SDK | Implemented and verified on a local fork | Wallet authentication, scoped API credentials, actual Otari AI Text Analyzer and JSON Validator, signed response and usage receipts, durable reservations, settlement worker, chain indexer/reconciliation, PostgreSQL/Prisma records, independently verifying HTTP SDK; 245 workspace tests and 32 integration checks. |
 | Product interface | Pending | Landing, registration/dashboard, playground, receipt inspector, policy explorer, wallet/network flow, circuit visualization driven by real lifecycle events. |
-| Submission | Pending | Verified addresses, public source/application links, external testing, concise commercial model, actual three-minute demo, event submission. |
+| Submission | Pending | Mainnet gateway activation, verified addresses, public source/application links, external testing, concise commercial model, actual three-minute demo, event submission. |
 
 The approved visual direction remains Electric precision: Void/Graphite surfaces, Electric Mint actions, Signal Lime accents, Geist Sans/Mono, restrained Motion transitions, and React Three Fiber circuit scenes with reduced-motion/mobile fallbacks.
 

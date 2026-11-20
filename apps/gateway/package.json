@@ -6,14 +6,25 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "tsx src/index.ts",
+    "worker": "tsx src/worker-main.ts",
+    "providers": "tsx src/provider-main.ts",
     "build": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "1.11.0",
+    "@emeter/database": "workspace:*",
+    "@emeter/sdk": "workspace:*",
     "@emeter/shared": "workspace:*",
+    "ajv": "8.20.0",
+    "bullmq": "6.7.8",
     "fastify": "5.12.8",
+    "ioredis": "^6.0.0",
+    "viem": "2.58.1",
     "zod": "4.6.7"
   },
-  "devDependencies": { "vitest": "5.1.1" }
+  "devDependencies": {
+    "vitest": "5.1.1"
+  }
 }

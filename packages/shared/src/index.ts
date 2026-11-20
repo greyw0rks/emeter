@@ -1,9 +1,12 @@
-import { z } from "zod";
 import { concatHex, keccak256, recoverMessageAddress, toHex } from "viem";
 import type { Address, Hex } from "viem";
 
 export * from "./payments.js";
 export * from "./generated/engine-abi.js";
+export * from "./json.js";
+export * from "./gateway.js";
+export * from "./ai-receipt.js";
+export * from "./lifecycle.js";
 
 export const X_LAYER = {
   chainId: 196,
@@ -14,21 +17,6 @@ export const X_LAYER = {
   beacon: "0xf70d1ed4f62CF3780157B0b421b7E2F45bD0991C",
   explorerUrl: "https://www.oklink.com/xlayer"
 } as const;
-
-export const PaymentStatusSchema = z.enum(["unsubmitted", "pending", "settled", "denied", "failed"]);
-export const RequestStatusSchema = z.enum(["authorized", "processing", "completed", "failed"]);
-export const BaseUnitsSchema = z.string().regex(/^(0|[1-9][0-9]*)$/);
-export type PaymentStatus = z.infer<typeof PaymentStatusSchema>;
-export type RequestStatus = z.infer<typeof RequestStatusSchema>;
-
-export const ProtocolStatusSchema = z.object({
-  name: z.literal("emeter"),
-  phase: z.literal("protocol-validation"),
-  chainId: z.literal(196),
-  paidExecutionReady: z.boolean(),
-  mainnetProofVerified: z.boolean()
-});
-export type ProtocolStatus = z.infer<typeof ProtocolStatusSchema>;
 
 /** TAP-13 §5 exact wire digest. Hashes must come from the client's own request
  * and TAP-11 canonical JSON; this utility does not resolve service identity.

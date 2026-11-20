@@ -18,3 +18,5 @@ packages/contracts/lib/
 *.tsbuildinfo
 __pycache__/
 deployments/private/
+packages/database/src/generated/
+.data/
