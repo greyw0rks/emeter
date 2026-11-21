@@ -11,11 +11,14 @@ import type { JsonValue, ProtocolStatus, ServiceCall, ServiceManifest } from "@e
 import { EmeterSessionClient } from "./session-client.js";
 import type { TypedDataSigner } from "./session-client.js";
 
-const networkSchema = ProtocolStatusSchema.extend({
+export const GatewayNetworkSchema = ProtocolStatusSchema.extend({
   vault: AddressSchema, registry: AddressSchema, token: AddressSchema, decimals: z.literal(6),
   rpcUrl: z.string().url(), confirmations: z.number().int().min(1).max(128),
-  networkMode: z.enum(["mainnet", "local-fork"])
+  networkMode: z.enum(["mainnet", "local-fork"]),
+  anchor: z.object({ blockNumber: z.string().regex(/^[0-9]+$/), blockHash: HashSchema, timestamp: z.string().regex(/^[0-9]+$/) }).optional()
 });
+const networkSchema = GatewayNetworkSchema;
+export type GatewayNetwork = z.infer<typeof GatewayNetworkSchema>;
 const serviceSchema = z.object({
   id: HashSchema, name: z.string(), method: z.string(), endpoint: z.string().url(), manifest: ServiceManifestSchema,
   priceVersion: z.number().int().positive(), priceBaseUnits: z.string(),
@@ -56,7 +59,7 @@ export class EmeterClient {
     if (url.protocol === "http:" && !["127.0.0.1", "localhost", "[::1]"].includes(url.hostname))
       throw new Error("Public gateways require HTTPS");
     this.gatewayUrl = url.href.replace(/\/$/, "");
-    this.fetcher = config.fetch ?? fetch;
+    this.fetcher = (config.fetch ?? globalThis.fetch).bind(globalThis);
     this.config = config;
     if (config.token) this.token = config.token;
   }
@@ -81,6 +84,18 @@ export class EmeterClient {
   }
 
   async getProtocolStatus(): Promise<ProtocolStatus> { return ProtocolStatusSchema.parse(await this.http("/api/protocol")); }
+  async getNetwork(): Promise<GatewayNetwork> { return GatewayNetworkSchema.parse(await this.http("/api/protocol")); }
+  async getAccount() { return this.http("/api/account"); }
+  async getSession(sessionId: Hex) { return this.http("/api/sessions/" + HashSchema.parse(sessionId)); }
+  async verifyRequest<T = unknown>(requestId: Hex): Promise<EmeterResult<T>> {
+    const result = await this.getRequest<T>(requestId), network = await this.getNetwork();
+    if ((this.config.vault && this.config.vault.toLowerCase() !== network.vault.toLowerCase())
+      || (this.config.registry && this.config.registry.toLowerCase() !== network.registry.toLowerCase()))
+      throw new Error("Gateway deployment does not match configured contracts");
+    if (network.networkMode === "local-fork" && !this.config.rpcUrl) throw new Error("Configure the local fork RPC explicitly");
+    return this.verifyResult(result, new EmeterSessionClient({ rpcUrl: this.config.rpcUrl ?? X_LAYER.rpcUrl,
+      vault: network.vault, registry: network.registry }), network.confirmations);
+  }
   async authenticate(identity: WalletIdentity) {
     const challenge = z.object({ id: z.string().uuid(), message: z.string(), expiresAt: z.string() }).parse(
       await this.http("/api/auth/challenge", { wallet: identity.address }));
@@ -98,6 +113,10 @@ export class EmeterClient {
     return { wallet: result.wallet, expiresAt: result.expiresAt };
   }
   async logout() { const result = await this.http("/api/auth/logout", {}); this.token = undefined; return result; }
+  setCredential(token: string) {
+    if (!token || /\s/.test(token)) throw new Error("Invalid credential");
+    this.token = token;
+  }
   async createApiKey(input: { serviceId?: Hex; sessionId?: Hex; scopes: ("execute" | "usage:read" | "request:read")[] }) {
     return z.object({ id: z.string().uuid(), key: z.string(), serviceId: HashSchema.nullable(), sessionId: HashSchema.nullable(),
       scopes: z.array(z.string()), expiresAt: z.string().nullable(), displayOnce: z.literal(true)

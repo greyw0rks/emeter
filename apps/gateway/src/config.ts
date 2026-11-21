@@ -13,6 +13,7 @@ export type GatewayConfig = {
   allowedProviderOrigins: string[]; dispatchSecret: string; confirmations: number;
   queuePrefix: string; settlementGasBudget: bigint; executionTimeoutMs: number;
   networkMode: "mainnet" | "local-fork";
+  browserOrigins?: string[];
 };
 
 export async function loadRuntimeEnvironment() {
@@ -66,6 +67,7 @@ export async function loadGatewayConfig(): Promise<GatewayConfig> {
     container: getAddress(original.contracts.serviceContainer),
     deploymentBlock: BigInt(process.env.EMETER_INDEXER_START_BLOCK ?? engine.steps[0].blockNumber),
     gatewayOrigin, providerOrigin,
+    browserOrigins: (process.env.EMETER_BROWSER_ORIGINS ?? "http://127.0.0.1:3100,http://localhost:3100").split(",").map(value => origin(value.trim())),
     allowedProviderOrigins: (process.env.EMETER_PROVIDER_ORIGINS ?? providerOrigin).split(",").map(v => origin(v.trim())),
     dispatchSecret, confirmations: integer("EMETER_CONFIRMATIONS", 3, 1, 128),
     queuePrefix: process.env.EMETER_QUEUE_PREFIX ?? "emeter-" + engine.contracts.vault.toLowerCase().slice(2),

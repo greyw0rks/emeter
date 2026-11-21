@@ -20,3 +20,4 @@ __pycache__/
 deployments/private/
 packages/database/src/generated/
 .data/
+.impeccable/review/browser-failure.png

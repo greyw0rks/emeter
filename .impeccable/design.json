@@ -1,0 +1,505 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-21T14:27:38Z",
+  "title": "Design System: emeter",
+  "extensions": {
+    "colorMeta": {
+      "void": {
+        "role": "neutral",
+        "displayName": "Void",
+        "canonical": "#080c0d",
+        "tonalRamp": [
+          "oklch(15% 0.0026 214.03)",
+          "oklch(25% 0.0044 214.03)",
+          "oklch(36% 0.0064 214.03)",
+          "oklch(48% 0.0071 214.03)",
+          "oklch(60% 0.0071 214.03)",
+          "oklch(72% 0.0066 214.03)",
+          "oklch(84% 0.0038 214.03)",
+          "oklch(95% 0.0012 214.03)"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#111719",
+        "tonalRamp": [
+          "oklch(15% 0.0037 220.03)",
+          "oklch(25% 0.0062 220.03)",
+          "oklch(36% 0.0089 220.03)",
+          "oklch(48% 0.0099 220.03)",
+          "oklch(60% 0.0099 220.03)",
+          "oklch(72% 0.0093 220.03)",
+          "oklch(84% 0.0053 220.03)",
+          "oklch(95% 0.0017 220.03)"
+        ]
+      },
+      "raised": {
+        "role": "neutral",
+        "displayName": "Raised Graphite",
+        "canonical": "#192225",
+        "tonalRamp": [
+          "oklch(15% 0.0053 220.15)",
+          "oklch(25% 0.0088 220.15)",
+          "oklch(36% 0.0127 220.15)",
+          "oklch(48% 0.0141 220.15)",
+          "oklch(60% 0.0141 220.15)",
+          "oklch(72% 0.0131 220.15)",
+          "oklch(84% 0.0075 220.15)",
+          "oklch(95% 0.0023 220.15)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Quiet Line",
+        "canonical": "#2c393d",
+        "tonalRamp": [
+          "oklch(15% 0.0070 218.49)",
+          "oklch(25% 0.0116 218.49)",
+          "oklch(36% 0.0167 218.49)",
+          "oklch(48% 0.0186 218.49)",
+          "oklch(60% 0.0186 218.49)",
+          "oklch(72% 0.0173 218.49)",
+          "oklch(84% 0.0099 218.49)",
+          "oklch(95% 0.0031 218.49)"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Strong Line",
+        "canonical": "#4c6268",
+        "tonalRamp": [
+          "oklch(15% 0.0106 216.23)",
+          "oklch(25% 0.0176 216.23)",
+          "oklch(36% 0.0253 216.23)",
+          "oklch(48% 0.0281 216.23)",
+          "oklch(60% 0.0281 216.23)",
+          "oklch(72% 0.0263 216.23)",
+          "oklch(84% 0.0150 216.23)",
+          "oklch(95% 0.0047 216.23)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Bright Ink",
+        "canonical": "#f1f6f3",
+        "tonalRamp": [
+          "oklch(15% 0.0025 160.08)",
+          "oklch(25% 0.0041 160.08)",
+          "oklch(36% 0.0059 160.08)",
+          "oklch(48% 0.0066 160.08)",
+          "oklch(60% 0.0066 160.08)",
+          "oklch(72% 0.0062 160.08)",
+          "oklch(84% 0.0035 160.08)",
+          "oklch(95% 0.0011 160.08)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#afbfbe",
+        "tonalRamp": [
+          "oklch(15% 0.0066 192.26)",
+          "oklch(25% 0.0110 192.26)",
+          "oklch(36% 0.0159 192.26)",
+          "oklch(48% 0.0177 192.26)",
+          "oklch(60% 0.0177 192.26)",
+          "oklch(72% 0.0165 192.26)",
+          "oklch(84% 0.0094 192.26)",
+          "oklch(95% 0.0029 192.26)"
+        ]
+      },
+      "dim": {
+        "role": "neutral",
+        "displayName": "Auxiliary Ink",
+        "canonical": "#8faaa8",
+        "tonalRamp": [
+          "oklch(15% 0.0112 191.00)",
+          "oklch(25% 0.0187 191.00)",
+          "oklch(36% 0.0270 191.00)",
+          "oklch(48% 0.0300 191.00)",
+          "oklch(60% 0.0300 191.00)",
+          "oklch(72% 0.0280 191.00)",
+          "oklch(84% 0.0160 191.00)",
+          "oklch(95% 0.0050 191.00)"
+        ]
+      },
+      "mint": {
+        "role": "primary",
+        "displayName": "Electric Mint",
+        "canonical": "#63efb7",
+        "tonalRamp": [
+          "oklch(15% 0.0548 163.84)",
+          "oklch(25% 0.0914 163.84)",
+          "oklch(36% 0.1316 163.84)",
+          "oklch(48% 0.1462 163.84)",
+          "oklch(60% 0.1462 163.84)",
+          "oklch(72% 0.1365 163.84)",
+          "oklch(84% 0.0780 163.84)",
+          "oklch(95% 0.0244 163.84)"
+        ]
+      },
+      "lime": {
+        "role": "secondary",
+        "displayName": "Signal Lime",
+        "canonical": "#d5f879",
+        "tonalRamp": [
+          "oklch(15% 0.0594 122.29)",
+          "oklch(25% 0.0990 122.29)",
+          "oklch(36% 0.1426 122.29)",
+          "oklch(48% 0.1585 122.29)",
+          "oklch(60% 0.1585 122.29)",
+          "oklch(72% 0.1479 122.29)",
+          "oklch(84% 0.0845 122.29)",
+          "oklch(95% 0.0264 122.29)"
+        ]
+      },
+      "red": {
+        "role": "tertiary",
+        "displayName": "Soft Red",
+        "canonical": "#ffaaa0",
+        "tonalRamp": [
+          "oklch(15% 0.0383 26.88)",
+          "oklch(25% 0.0638 26.88)",
+          "oklch(36% 0.0918 26.88)",
+          "oklch(48% 0.1020 26.88)",
+          "oklch(60% 0.1020 26.88)",
+          "oklch(72% 0.0952 26.88)",
+          "oklch(84% 0.0544 26.88)",
+          "oklch(95% 0.0170 26.88)"
+        ]
+      },
+      "mint-surface": {
+        "role": "primary",
+        "displayName": "Mint Signal Surface",
+        "canonical": "#142e24",
+        "tonalRamp": [
+          "oklch(15% 0.0141 166.59)",
+          "oklch(25% 0.0234 166.59)",
+          "oklch(36% 0.0338 166.59)",
+          "oklch(48% 0.0375 166.59)",
+          "oklch(60% 0.0375 166.59)",
+          "oklch(72% 0.0350 166.59)",
+          "oklch(84% 0.0200 166.59)",
+          "oklch(95% 0.0063 166.59)"
+        ]
+      },
+      "lime-surface": {
+        "role": "secondary",
+        "displayName": "Lime Exception Surface",
+        "canonical": "#292e1a",
+        "tonalRamp": [
+          "oklch(15% 0.0130 120.04)",
+          "oklch(25% 0.0217 120.04)",
+          "oklch(36% 0.0313 120.04)",
+          "oklch(48% 0.0348 120.04)",
+          "oklch(60% 0.0348 120.04)",
+          "oklch(72% 0.0325 120.04)",
+          "oklch(84% 0.0185 120.04)",
+          "oklch(95% 0.0058 120.04)"
+        ]
+      },
+      "red-surface": {
+        "role": "tertiary",
+        "displayName": "Red Error Surface",
+        "canonical": "#34201f",
+        "tonalRamp": [
+          "oklch(15% 0.0118 22.53)",
+          "oklch(25% 0.0196 22.53)",
+          "oklch(36% 0.0282 22.53)",
+          "oklch(48% 0.0314 22.53)",
+          "oklch(60% 0.0314 22.53)",
+          "oklch(72% 0.0293 22.53)",
+          "oklch(84% 0.0167 22.53)",
+          "oklch(95% 0.0052 22.53)"
+        ]
+      },
+      "mint-hover": {
+        "role": "primary",
+        "displayName": "Mint Hover",
+        "canonical": "#8af7cb",
+        "tonalRamp": [
+          "oklch(15% 0.0447 165.70)",
+          "oklch(25% 0.0746 165.70)",
+          "oklch(36% 0.1074 165.70)",
+          "oklch(48% 0.1193 165.70)",
+          "oklch(60% 0.1193 165.70)",
+          "oklch(72% 0.1114 165.70)",
+          "oklch(84% 0.0636 165.70)",
+          "oklch(95% 0.0199 165.70)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Landing hero headlines."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Workspace page titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings."
+      },
+      "subtitle": {
+        "displayName": "Subtitle",
+        "purpose": "Subsections and task detail."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Ordinary instructions and descriptions."
+      },
+      "hero-body": {
+        "displayName": "Hero Body",
+        "purpose": "The landing introduction."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form labels."
+      },
+      "support": {
+        "displayName": "Support",
+        "purpose": "Hints and metadata."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Shared button labels."
+      },
+      "navigation": {
+        "displayName": "Navigation",
+        "purpose": "Workspace page links."
+      },
+      "badge": {
+        "displayName": "Badge",
+        "purpose": "Compact semantic state labels."
+      },
+      "data": {
+        "displayName": "Data",
+        "purpose": "Table values and compact evidence rows."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "JSON and code blocks."
+      },
+      "metric": {
+        "displayName": "Metric",
+        "purpose": "Prominent exact token amounts."
+      }
+    },
+    "shadows": [
+      {
+        "name": "wallet-overlay",
+        "value": "0 12px 32px #0006",
+        "purpose": "Temporary account popover."
+      },
+      {
+        "name": "modal-overlay",
+        "value": "0 20px 64px #0008",
+        "purpose": "Native dialog content above the dimmed page."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(.22, 1, .36, 1)",
+        "purpose": "Shared input/button state easing and payment-output transition."
+      },
+      {
+        "name": "control-transition",
+        "value": "160ms",
+        "purpose": "Input borders and button fill/border states."
+      },
+      {
+        "name": "payment-output",
+        "value": "220ms",
+        "purpose": "Motion color tween for Payment allowed/Payment denied."
+      },
+      {
+        "name": "progress-spinner",
+        "value": "1s linear infinite",
+        "purpose": "Work-in-progress indication, with status text."
+      },
+      {
+        "name": "reduced-css-duration",
+        "value": "0.01ms",
+        "purpose": "CSS transition/animation reduction under prefers-reduced-motion; the circuit chooses SVG."
+      },
+      {
+        "name": "circuit-tilt-damping",
+        "value": "9",
+        "purpose": "THREE.MathUtils.damp response after a policy state change, rendered on demand."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "520px"
+      },
+      {
+        "name": "stacked",
+        "value": "800px"
+      },
+      {
+        "name": "compact-desktop",
+        "value": "1100px"
+      },
+      {
+        "name": "wide-desktop",
+        "value": "1600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main enabled action, using Mint with dark text.",
+      "html": "<button class=\"ds-button-primary\" type=\"button\">Open workspace<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,5px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--mint, #63efb7);color:var(--void, #080c0d);border-color:var(--mint, #63efb7);}.ds-button-primary:hover:enabled{background:var(--mint-hover, #8af7cb);border-color:var(--mint-hover, #8af7cb);}.ds-button-primary:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-button-primary:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition-duration:.01ms;}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A lower-emphasis action with a visible neutral stroke.",
+      "html": "<button class=\"ds-button-secondary\" type=\"button\">New session</button>",
+      "css": ".ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,5px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--graphite, #111719);color:var(--ink, #f1f6f3);border-color:var(--line-strong, #4c6268);}.ds-button-secondary:hover:enabled{background:var(--raised, #192225);border-color:var(--muted, #afbfbe);}.ds-button-secondary:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-button-secondary:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition-duration:.01ms;}}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "A subordinate action without a resting surface.",
+      "html": "<button class=\"ds-button-quiet\" type=\"button\">Revoke signer</button>",
+      "css": ".ds-button-quiet{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,5px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:transparent;color:var(--muted, #afbfbe);padding:7px 9px;}.ds-button-quiet:hover:enabled{color:var(--ink, #f1f6f3);background:var(--raised, #192225);}.ds-button-quiet:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-button-quiet:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-quiet{transition-duration:.01ms;}}"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "A labeled destructive session action.",
+      "html": "<button class=\"ds-button-danger\" type=\"button\">Close this session</button>",
+      "css": ".ds-button-danger{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,5px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--red-surface, #34201f);color:var(--red, #ffaaa0);border-color:#744e49;}.ds-button-danger:hover:enabled{background:#462b29;}.ds-button-danger:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-button-danger:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-danger{transition-duration:.01ms;}}"
+    },
+    {
+      "name": "Amount Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A labeled exact-amount input with an associated hint.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-credit-amount\">Amount (DEMO)</label><input class=\"ds-input\" id=\"ds-credit-amount\" inputmode=\"decimal\" value=\"0.5\" aria-describedby=\"ds-credit-hint\"/><span class=\"ds-field-hint\" id=\"ds-credit-hint\">Available credit: 0.5 DEMO</span></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:8px;font-family:var(--font-geist-sans, sans-serif), sans-serif;max-width:340px;}.ds-field-label{font-size:12px;font-weight:550;line-height:1.6;color:var(--ink, #f1f6f3);}.ds-input{width:100%;min-width:0;color:var(--ink, #f1f6f3);background:var(--void, #080c0d);border:1px solid var(--line-strong, #4c6268);border-radius:var(--radius-sm,5px);padding:10px 12px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:14px;line-height:1.6;caret-color:var(--mint, #63efb7);transition:border-color 160ms var(--ease-out,cubic-bezier(.22,1,.36,1));}.ds-input::placeholder{color:var(--dim, #8faaa8);opacity:1;}.ds-input:hover{border-color:var(--muted, #afbfbe);}.ds-input:focus,.ds-input:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:2px;border-color:transparent;}.ds-input:disabled{cursor:not-allowed;}.ds-field-hint{font-size:11px;line-height:1.6;color:var(--dim, #8faaa8);}@media(prefers-reduced-motion:reduce){.ds-input{transition-duration:.01ms;}}"
+    },
+    {
+      "name": "Workspace Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Labeled page navigation with a Mint active state and mobile wrap.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Workspace\"><a class=\"ds-nav-link\" href=\"/dashboard\" aria-current=\"page\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"9\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\" rx=\"1\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\" rx=\"1\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\" rx=\"1\"/></svg>Overview</a><a class=\"ds-nav-link\" href=\"/services\">Services</a><a class=\"ds-nav-link\" href=\"/receipts\">Receipts</a></nav>",
+      "css": ".ds-nav{display:grid;gap:6px;max-width:224px;}.ds-nav-link{display:flex;align-items:center;gap:12px;padding:11px 13px;color:var(--muted, #afbfbe);border:1px solid transparent;border-radius:5px;text-decoration:none;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;line-height:1.6;}.ds-nav-link[aria-current=page]{color:var(--mint, #63efb7);border-color:#2b493e;background:var(--mint-surface, #142e24);}.ds-nav-link:hover{color:var(--ink, #f1f6f3);background:var(--graphite, #111719);}.ds-nav-link:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}@media(max-width:800px){.ds-nav{display:flex;flex-wrap:wrap;gap:2px 8px;max-width:none;}.ds-nav-link{padding:8px 10px;font-size:12px;gap:7px;}}"
+    },
+    {
+      "name": "Status Badges",
+      "kind": "chip",
+      "refersTo": "badge-neutral",
+      "description": "Read-only semantic labels; result and payment retain separate words.",
+      "html": "<div class=\"ds-badges\"><span class=\"ds-badge ds-badge-neutral\">Pending</span><span class=\"ds-badge ds-badge-mint\">Confirmed</span><span class=\"ds-badge ds-badge-lime\">Local fork</span><span class=\"ds-badge ds-badge-red\">Denied</span></div>",
+      "css": ".ds-badges{display:flex;flex-wrap:wrap;gap:12px;}.ds-badge{display:inline-flex;align-items:center;min-height:24px;padding:2px 8px;border:1px solid var(--line-strong, #4c6268);border-radius:4px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:10px;font-weight:500;line-height:1.5;white-space:nowrap;}.ds-badge-neutral{color:var(--muted, #afbfbe);background:var(--graphite, #111719);}.ds-badge-mint{color:var(--mint, #63efb7);background:var(--mint-surface, #142e24);border-color:#2b493e;}.ds-badge-lime{color:var(--lime, #d5f879);background:var(--lime-surface, #292e1a);border-color:#596335;}.ds-badge-red{color:var(--red, #ffaaa0);background:var(--red-surface, #34201f);border-color:#744e49;}"
+    },
+    {
+      "name": "Graphite Container",
+      "kind": "card",
+      "refersTo": "surface",
+      "description": "A quiet padded surface using a tonal layer and a fine border.",
+      "html": "<section class=\"ds-surface\"><div class=\"ds-empty\"><h3>No requests yet</h3><p>Your requests and their payment confirmations will appear here.</p></div></section>",
+      "css": ".ds-surface{border:1px solid var(--line, #2c393d);border-radius:var(--radius,8px);background:var(--graphite, #111719);color:var(--ink, #f1f6f3);padding:24px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:14px;line-height:1.6;}.ds-empty{padding:28px 0;text-align:center;}.ds-empty h3{margin:0;font-size:20px;font-weight:560;line-height:1.4;}.ds-empty p{margin:12px auto 0;max-width:55ch;color:var(--muted, #afbfbe);}"
+    },
+    {
+      "name": "Request Activity",
+      "kind": "custom",
+      "refersTo": "activity-table",
+      "description": "A horizontally scrollable table with distinct execution and payment evidence.",
+      "html": "<div class=\"ds-table-scroll\" tabindex=\"0\" aria-label=\"Request activity\"><table class=\"ds-table\"><thead><tr><th scope=\"col\">Request / service</th><th scope=\"col\">Execution</th><th scope=\"col\">Payment</th><th scope=\"col\">DEMO</th><th scope=\"col\">Created</th></tr></thead><tbody><tr><td><a class=\"ds-table-link\" href=\"/receipts\">JSON Validator<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a></td><td><span class=\"ds-badge ds-badge-mint\">Result ready</span></td><td><span class=\"ds-badge ds-badge-mint\">Confirmed</span></td><td class=\"ds-table-amount\">0.02</td><td class=\"ds-table-time\">Nov 21, 02:36 PM</td></tr></tbody></table></div>",
+      "css": ".ds-table-scroll{overflow-x:auto;border:1px solid var(--line, #2c393d);border-radius:var(--radius,8px);background:var(--void, #080c0d);}.ds-table-scroll:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-table{width:100%;border-collapse:collapse;text-align:left;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:12px;line-height:1.6;color:var(--ink, #f1f6f3);}.ds-table th{color:var(--dim, #8faaa8);font-weight:500;padding:12px 20px;background:var(--graphite, #111719);border-bottom:1px solid var(--line, #2c393d);white-space:nowrap;}.ds-table td{padding:17px 20px;border-bottom:1px solid var(--line, #2c393d);}.ds-table tr:last-child td{border-bottom:0;}.ds-table tbody tr:hover{background:var(--graphite, #111719);}.ds-table-link{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink, #f1f6f3);font-weight:550;}.ds-table-link:hover{color:var(--mint, #63efb7);}.ds-table-link:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-table-amount{text-align:right;font-family:var(--font-geist-mono, monospace), monospace;font-variant-numeric:tabular-nums;}.ds-badges{display:flex;flex-wrap:wrap;gap:12px;}.ds-badge{display:inline-flex;align-items:center;min-height:24px;padding:2px 8px;border:1px solid var(--line-strong, #4c6268);border-radius:4px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:10px;font-weight:500;line-height:1.5;white-space:nowrap;}.ds-badge-neutral{color:var(--muted, #afbfbe);background:var(--graphite, #111719);}.ds-badge-mint{color:var(--mint, #63efb7);background:var(--mint-surface, #142e24);border-color:#2b493e;}.ds-badge-lime{color:var(--lime, #d5f879);background:var(--lime-surface, #292e1a);border-color:#596335;}.ds-badge-red{color:var(--red, #ffaaa0);background:var(--red-surface, #34201f);border-color:#744e49;} .ds-table-time{white-space:nowrap;color:var(--muted, #afbfbe);}"
+    },
+    {
+      "name": "Payment Circuit SVG",
+      "kind": "custom",
+      "refersTo": "circuit",
+      "description": "A static preview of the actual eleven-NAND graph at mask 0x1f; the application drives this same topology with state.",
+      "html": "<figure class=\"ds-circuit\" aria-label=\"Payment policy circuit. Input mask 011111. Allows payment. Preview, no transaction.\"><div class=\"ds-circuit-stage\"><svg class=\"ds-circuit-flat\" viewBox=\"0 0 730 360\" aria-hidden=\"true\" focusable=\"false\"><defs><pattern id=\"ds-circuit-grid\" width=\"24\" height=\"24\" patternUnits=\"userSpaceOnUse\"><circle cx=\"1\" cy=\"1\" r=\".7\" fill=\"var(--line, #2c393d)\"/></pattern></defs><rect x=\"10\" y=\"0\" width=\"710\" height=\"350\" fill=\"url(#ds-circuit-grid)\"/><path d=\"M83 261.4H109.8V261.4H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 316.3H109.8V316.3H136.6\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M180.6 261.4H225.7V288.85H270.8\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M180.6 316.3H225.7V288.85H270.8\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 29.6H109.8V57.05H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 84.5H109.8V57.05H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180.6 57.05H207.4V57.05H234.2\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M83 145.5H109.8V172.95H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 200.4H109.8V172.95H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180.6 172.95H207.4V172.95H234.2\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M278.2 57.05H308.05V111.95H337.9\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M278.2 172.95H308.05V111.95H337.9\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M381.9 111.95H407.175V111.95H432.45\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M476.45 111.95H503.25V172.95H530.05\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M314.8 288.85H422.425V172.95H530.05\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M574.05 172.95H599.325V172.95H624.6\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><g><rect x=\"39\" y=\"13.6\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"33.6\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">A</text></g><g><rect x=\"39\" y=\"68.5\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"88.5\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">B</text></g><g><rect x=\"39\" y=\"129.5\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"149.5\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">C</text></g><g><rect x=\"39\" y=\"184.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"204.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">D</text></g><g><rect x=\"39\" y=\"245.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"265.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">E</text></g><g><rect x=\"39\" y=\"300.3\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"61\" y=\"320.3\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">F</text></g><g><rect x=\"136.6\" y=\"245.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"158.6\" y=\"265.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N1</text></g><g><rect x=\"136.6\" y=\"300.3\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"158.6\" y=\"320.3\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N2</text></g><g><rect x=\"270.8\" y=\"272.85\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"292.8\" y=\"292.85\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N3</text></g><g><rect x=\"136.6\" y=\"41.05\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"158.6\" y=\"61.05\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N4</text></g><g><rect x=\"234.2\" y=\"41.05\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"256.2\" y=\"61.05\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N5</text></g><g><rect x=\"136.6\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"158.6\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N6</text></g><g><rect x=\"234.2\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"256.2\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N7</text></g><g><rect x=\"337.9\" y=\"95.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"359.9\" y=\"115.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N8</text></g><g><rect x=\"432.45\" y=\"95.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"454.45\" y=\"115.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N9</text></g><g><rect x=\"530.05\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"552.05\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N10</text></g><g><rect x=\"610.6\" y=\"156.95\" width=\"72\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"646.6\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">ALLOW</text></g><text x=\"40\" y=\"341\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"10\" fill=\"var(--dim, #8faaa8)\">A · B · C · D · (E + F)</text><text x=\"690\" y=\"341\" text-anchor=\"end\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"10\" fill=\"var(--dim, #8faaa8)\">11 NAND GATES</text></svg></div><figcaption class=\"ds-circuit-caption\"><span>Preview · no transaction</span><span>Mask <code>0x1f</code> · <code>011111</code></span><span>TapeOut · 6 inputs / 1 output</span></figcaption><div class=\"ds-circuit-output\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m16 9-5.5 5.5L8 12\"/></svg><div><strong>Payment allowed</strong><p>All required conditions are satisfied.</p></div></div></figure>",
+      "css": ".ds-circuit{margin:0;min-width:0;background:var(--void, #080c0d);font-family:var(--font-geist-sans, sans-serif), sans-serif;color:var(--ink, #f1f6f3);}.ds-circuit-stage{height:360px;width:100%;}.ds-circuit-flat{height:100%;width:100%;}.ds-circuit-caption{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 0;border-top:1px solid var(--line, #2c393d);font-size:11px;line-height:1.6;color:var(--dim, #8faaa8);}.ds-circuit-caption code{font-family:var(--font-geist-mono, monospace), monospace;font-size:11px;font-variant-numeric:tabular-nums;}.ds-circuit-output{margin-top:24px;padding:20px 0;display:flex;gap:14px;align-items:center;color:var(--mint, #63efb7);}.ds-circuit-output strong{font-size:26px;letter-spacing:-.025em;font-weight:550;}.ds-circuit-output p{margin:0;color:var(--muted, #afbfbe);font-size:12px;line-height:1.6;}@media(max-width:800px){.ds-circuit-stage{height:300px;}}@media(max-width:520px){.ds-circuit-stage{height:235px;}.ds-circuit-caption{justify-content:flex-start;gap:8px 20px;}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Electric precision",
+    "overview": "A dark instrument for a bounded decision. Void grounds the interface, Graphite gives controls a quiet working surface, and bright Geist text keeps permissions and evidence readable. Electric Mint identifies the next action and the active signal; Signal Lime makes exceptions visible. The authored circuit mark, orthogonal wires, and actual eleven-NAND graph connect the identity to the mechanism the product exposes.\n\nThe landing brief gives the policy a broad stage and a large, tightly tracked headline. The workspace brief gives tasks more room than decoration: credit totals, bounded sessions, editors, and evidence form a measured reading order. These are two expressions of the same world; their compositions remain in the surface briefs. Motion is brief and driven by state, while phones, reduced-motion preferences, and graphics failures retain the authored SVG circuit.\n\nThis system records the current frontend source and sampled desktop/phone captures. Electric precision is the accepted visual-world pin; both layouts are builder-authored within the accepted frontend scope. The finish review reports SHIP after opening all nineteen required captures, using a generic fresh agent with the packaged review contract. No approved comp, QUALITY BAR card, catalog seed, or successful detector/context/seed launcher is claimed. The shipped mark and circuit use SVG and geometry; there are no browser-shipping raster plates. Implementation values below come from `apps/web/app/globals.css`, `apps/web/app/styles/landing.css`, `apps/web/app/layout.tsx`, and the shared components.",
+    "keyCharacteristics": [
+      "Dark neutral layers with readable, slightly cool text.",
+      "Mint actions and active signals; Lime exceptions; Red denials and destructive intent.",
+      "Self-hosted Geist Sans for instructions and Geist Mono for measurable evidence.",
+      "Compact controls, fine borders, and shallow corners.",
+      "An actual circuit graph with explicit source, mask, and payment output.",
+      "Responsive task layouts and a usable SVG fallback."
+    ],
+    "rules": [
+      {
+        "name": "The Decision Color Rule",
+        "body": "Use the signal color with its text label. Mint can mean an active signal or a checked result; the label must say which. Lime marks an exception or special context, and Red states a denial, error, or destructive action.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Neutral Rule",
+        "body": "Keep task titles and values in Ink, explanations in Muted, and auxiliary labels in Dim. The reviewed secondary-text samples reached at least (7.31:1); this is sampled evidence, not a claim about every possible color pairing.",
+        "section": "colors"
+      },
+      {
+        "name": "The Measured Data Rule",
+        "body": "Use Geist Mono with tabular numerals for code, masks, identifiers, and token amounts. Keep prose and control labels in Geist Sans. Preserve exact displayed amounts rather than converting them to approximate floating-point summaries.",
+        "section": "typography"
+      },
+      {
+        "name": "The Task Adjacency Rule",
+        "body": "Keep actions next to the record or limit they change: session controls beside session balances, run controls after budget context, and receipt links beside the request. Reflow that relationship when columns stack.",
+        "section": "layout"
+      },
+      {
+        "name": "The Tonal Surface Rule",
+        "body": "Use a tonal layer and a fine boundary for resting content. Reserve the observed soft shadows for temporary overlays.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Diagram Form Rule",
+        "body": "Gate shapes and wires must come from the actual netlist. They explain a decision; their geometry is not a generic card decoration.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Evidence Label Rule",
+        "body": "A ready result, a checked provider signature, and a canonical payment remain separate visible statements. Gateway-recorded circuit inputs stay labeled unconfirmed until their settlement is independently verified. Local-fork transactions and controlled offline AI output keep their explicit context labels.",
+        "section": "components"
+      },
+      {
+        "name": "The State Motion Rule",
+        "body": "Motion follows the policy state. Keep the diagram, captions, condition labels, and explicit output usable when the graphics layer is absent.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do preserve the shared palette, font roles, shallow corners, and exact control states when extending a surface.",
+      "Do keep amounts and identifiers measurable with Mono, tabular numerals, full-value access, and explicit units.",
+      "Do pair semantic colors with readable state labels and keep result, signature, and payment evidence separate.",
+      "Do preserve the actual circuit topology, source caption, input mask, explicit decision text, and SVG fallback.",
+      "Do follow the existing responsive reflow and let activity tables scroll within their own focusable region.",
+      "Do preserve labels, visible Mint focus, associated hints, native dialog behavior, and recoverable empty or offline states."
+    ],
+    "donts": [
+      "Don't reuse a confirmed-payment label for a result, a provider claim, a pending transaction, or preview inputs.",
+      "Don't turn the landing composition into a required workspace layout or the workspace rail into a global page template.",
+      "Don't replace the authored circuit with an unrelated decorative graph or use tiny internal gate labels as the general UI type size.",
+      "Don't make an unlabeled color or a WebGL layer the only way to understand the payment decision.",
+      "Don't add resting card shadows to the recorded tonal surface system."
+    ]
+  }
+}

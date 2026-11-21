@@ -1,18 +1,36 @@
 {
   "name": "@emeter/web",
   "private": true,
+  "type": "module",
   "version": "0.1.0",
   "scripts": {
-    "dev": "next dev --port 3100",
-    "build": "next build",
+    "dev": "next dev --webpack --port 3100",
+    "build": "next build --webpack",
     "start": "next start --port 3100",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:browser": "tsx test/browser.ts"
   },
   "dependencies": {
+    "@emeter/circuit": "workspace:*",
+    "@emeter/sdk": "workspace:*",
     "@emeter/shared": "workspace:*",
+    "@react-three/fiber": "^9.8.2",
+    "geist": "^1.9.2",
+    "lucide-react": "^1.76.0",
+    "motion": "^14.14.0",
     "next": "16.4.6",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "three": "^0.187.0",
+    "viem": "2.58.1",
+    "zod": "4.6.7"
   },
-  "devDependencies": { "@types/react": "19.3.0", "@types/react-dom": "19.2.3" }
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "^0.187.0",
+    "vitest": "^5.1.1"
+  }
 }

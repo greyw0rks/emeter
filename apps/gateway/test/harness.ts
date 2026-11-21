@@ -32,7 +32,7 @@ async function freePort() {
   return bound.port;
 }
 
-export async function createGatewayHarness() {
+export async function createGatewayHarness(options: { browserOrigins?: string[]; registerServices?: boolean } = {}) {
   let stage = "fork source";
   const original = JSON.parse(await readFile(join(root, "deployments/xlayer-196.json"), "utf8"));
   const engine = JSON.parse(await readFile(join(root, "deployments/xlayer-196-engine.json"), "utf8"));
@@ -84,7 +84,8 @@ export async function createGatewayHarness() {
       deploymentBlock: forkBlock + 1n, gatewayOrigin: "http://127.0.0.1:" + gatewayPort,
       providerOrigin: "http://127.0.0.1:" + providerPort, allowedProviderOrigins: ["http://127.0.0.1:" + providerPort],
       dispatchSecret: randomBytes(32).toString("hex"), confirmations: 1, queuePrefix: "emeter-test-" + randomBytes(8).toString("hex"),
-      settlementGasBudget: 10_000_000_000_000_000n, executionTimeoutMs: 28_000, networkMode: "local-fork"
+      settlementGasBudget: 10_000_000_000_000_000n, executionTimeoutMs: 28_000, networkMode: "local-fork",
+      browserOrigins: options.browserOrigins ?? []
     };
     const ctx = createContext(cfg);
     cleanup.push(ctx.close);
@@ -136,7 +137,7 @@ export async function createGatewayHarness() {
     const providerClient = new EmeterClient({ gatewayUrl: cfg.gatewayOrigin, rpcUrl: rpc, vault: cfg.vault, registry: cfg.registry });
     await providerClient.authenticate(providerAccount);
     const manifests = builtInServices(ctx);
-    for (const manifest of Object.values(manifests)) {
+    for (const manifest of options.registerServices === false ? [] : Object.values(manifests)) {
       stage = "endpoint probe: " + manifest.method;
       const prepared = await providerClient.registerService(manifest) as { status: string; transaction?: { to: Address; data: Hex } };
       if (prepared.status !== "awaiting_chain_registration" || !prepared.transaction) throw new Error("Provider registration preparation failed");

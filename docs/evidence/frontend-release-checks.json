@@ -1,0 +1,68 @@
+{
+  "milestone": "frontend",
+  "baseCommit": "b8f1530525935a11eb3e819bff3b1e92a06a71f0",
+  "recordedAt": "2026-11-21T14:40:47.730962Z",
+  "typecheck": {
+    "passed": true,
+    "command": "rtk pnpm typecheck"
+  },
+  "localTests": {
+    "passed": true,
+    "command": "rtk pnpm test",
+    "total": 273,
+    "packages": {
+      "packages/circuit": 91,
+      "packages/shared": 54,
+      "packages/sdk": 19,
+      "apps/web": 24,
+      "apps/gateway": 12,
+      "packages/contracts": 73
+    }
+  },
+  "productionFrontendBuild": {
+    "passed": true,
+    "framework": "Next.js 16.4.6",
+    "bundler": "webpack"
+  },
+  "browser": {
+    "passed": true,
+    "checks": 18,
+    "captures": 19,
+    "viewportWidths": [
+      390,
+      1440
+    ],
+    "evidence": "frontend-fork-checks.json"
+  },
+  "forkExecution": {
+    "settledRequests": 4,
+    "jsonRequests": 3,
+    "aiFixtureRequests": 1,
+    "newPaidAiCalls": 0,
+    "mainnetBroadcastPerformed": false
+  },
+  "finishReview": {
+    "disposition": "ship",
+    "materialFixes": 0,
+    "evidence": "../../.impeccable/review/finish-review.md"
+  },
+  "deploymentJournals": [
+    {
+      "path": "deployments/xlayer-196.json",
+      "unchanged": true,
+      "sha256": "04ac5376235996f3b3c2ae5275827664c166f9b3328677ea999a6b2a74a5030f"
+    },
+    {
+      "path": "deployments/xlayer-196-engine.json",
+      "unchanged": true,
+      "sha256": "e2f4614ba0294617158080cd52ca3e8b49d95195b65489bddb294ab5555119df"
+    }
+  ],
+  "designDocumentationValidation": {
+    "syntaxAndReferencesPassed": true,
+    "standaloneSnippets": 10,
+    "snippetStaticChecksPassed": true,
+    "standaloneBrowserRenderingVerified": false,
+    "limitation": "The isolated Chromium preview could not start because Crashpad setsockopt was blocked by the sandbox."
+  }
+}
