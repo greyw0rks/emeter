@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { formatUnits } from "viem";
-import { ArrowRight, Plus, RefreshCw } from "lucide-react";
+import { ArrowRight, Braces, Brain, Plus, RefreshCw } from "lucide-react";
 import { useGateway } from "../../../components/gateway-provider";
 import { CreditDialog, SessionDialog } from "../../../components/session-forms";
 import { ActionLink, ActivityTable, Badge, Button, CopyValue, Dialog, PageHeader, WalletGate } from "../../../components/ui";
@@ -16,6 +16,12 @@ export default function Dashboard() {
   const [manage, setManage] = useState<{ session: SpendingSession; action: "closeSession" | "revokeSessionSigner" | "refund" } | null>(null);
   const account = gateway.account;
   const unavailable = Boolean(gateway.busy || gateway.pending);
+  const serviceCatalog = gateway.services.length > 0 && <section className="section overview-services"><div className="section-heading"><div><h2>Ready for your next request</h2><p>Verified services with a price you can inspect before signing.</p></div><Link className="text-link" href="/services">All services<ArrowRight size={15} aria-hidden="true" /></Link></div>
+    <div className="quick-services">{gateway.services.map(service => <article key={service.id} className={`quick-service quick-service-${service.method}`}><div className="quick-service-heading">
+      <span className="service-icon">{service.method === "json_validate" ? <Braces size={22} aria-hidden="true" /> : <Brain size={22} aria-hidden="true" />}</span><Badge tone="mint">Verified terms</Badge></div>
+      <h3>{service.name}</h3><p>{service.manifest.description}</p><div className="quick-service-bottom"><strong>{demo(service.priceBaseUnits)} <small>DEMO per request</small></strong>
+        <Link className="button button-secondary" href={`/playground?service=${service.id}`}>Try service<ArrowRight size={15} aria-hidden="true" /></Link></div></article>)}</div>
+  </section>;
   return <><PageHeader title="Overview" description="Your credit, spending permissions, and the requests they fund." actions={<>
     <Button variant="quiet" aria-label="Refresh account" onClick={() => { void gateway.refresh(); }} disabled={Boolean(gateway.busy)}><RefreshCw size={16} /></Button>
     <Button disabled={!gateway.signedIn || unavailable} onClick={() => { gateway.clearError(); setCreditAction("deposit"); }}><Plus size={16} aria-hidden="true" />Deposit credit</Button></>} />
@@ -29,7 +35,7 @@ export default function Dashboard() {
         <div><h3>Set a bounded session</h3><p>Choose a budget, service scope, and expiry. Approve the limits with your wallet.</p>
           <Button variant="secondary" disabled={unavailable || !gateway.services.length} onClick={() => { gateway.clearError(); setSessionOpen(true); }}>Authorize a session</Button></div>
         <div><h3>Execute and inspect</h3><p>The playground connects your signed session to an actual verified service.</p><ActionLink href="/playground" secondary>Open playground</ActionLink></div></div>}
-      <section className="section"><div className="section-heading"><div><h2>Spending sessions</h2><p>{account.sessions.length ? `${account.sessions.length} recent sessions · keys belong to the tab that created them` : "Authorize a session to reserve credit and run requests."}</p></div>
+      <div className="dashboard-session-grid"><section className="section"><div className="section-heading"><div><h2>Spending sessions</h2><p>{account.sessions.length ? `${account.sessions.length} recent sessions · keys belong to the tab that created them` : "Authorize a session to reserve credit and run requests."}</p></div>
         <Button variant="secondary" disabled={unavailable || !gateway.services.length} onClick={() => { gateway.clearError(); setSessionOpen(true); }}><Plus size={15} aria-hidden="true" />New session</Button></div>
         <div className="session-list">{account.sessions.map(session => {
           const state = sessionState(session, gateway.network?.anchor?.timestamp), hasKey = gateway.hasSessionKey(session.sessionId);
@@ -43,12 +49,13 @@ export default function Dashboard() {
               {session.status !== 3 && <Button variant="secondary" disabled={unavailable || !refundable} onClick={() => { gateway.clearError(); setManage({ session, action: "refund" }); }}>Refund</Button>}</div>
           </div>;
         })}</div>
-      </section>
+      </section>{serviceCatalog}</div>
       <section className="section"><div className="section-heading"><div><h2>Recent requests</h2><p>{account.stats.totalRequests ? `Latest ${account.requests.length} of ${account.stats.totalRequests} requests. Execution and payment are tracked separately.` : "Signed results and confirmed payments appear separately."}</p></div>
         <Link className="text-link" href="/receipts">Inspect a receipt<ArrowRight size={15} aria-hidden="true" /></Link></div><ActivityTable requests={account.requests} /></section>
       <section className="section"><div className="section-heading"><div><h2>Wallet and credit</h2><p>{demo(account.demoBalanceBaseUnits)} DEMO in wallet · gas balance is {formatUnits(BigInt(account.nativeBalanceWei), 18)} OKB</p></div>
         <Button variant="secondary" disabled={unavailable || BigInt(account.availableBaseUnits) === 0n} onClick={() => { gateway.clearError(); setCreditAction("withdraw"); }}>Withdraw available credit</Button></div></section>
     </> : <p className="loading-copy">Reading your account from the gateway and chain…</p>}</WalletGate>
+    {!gateway.signedIn && serviceCatalog}
     <details className="network-details"><summary>Gateway and network details</summary><p>Gateway: <code>{gateway.config?.gatewayUrl ?? "Not configured"}</code></p>
       <p>Browser RPC: <code>{gateway.config?.rpcUrl ?? "X Layer mainnet RPC (default)"}</code></p>
       <p>{gateway.network?.networkMode === "local-fork" ? "Set your wallet to this exact local fork RPC. Chain ID 196 alone does not distinguish it from mainnet." : "The wallet’s block hash is checked against the gateway before every signature and transaction."}</p></details>

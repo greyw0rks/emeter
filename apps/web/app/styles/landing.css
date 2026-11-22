@@ -1,4 +1,4 @@
-.landing { max-width: 1520px; margin: 0 auto; padding: 0 56px; }
+.landing { max-width: 1400px; width: calc(100% - 48px); margin: 24px auto; padding: 0 56px; background: var(--void); border: 1px solid #ffffffb3; border-radius: 18px; box-shadow: 0 12px 36px #596fbd20; }
 .landing-header { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 32px 0; }
 .landing-nav { display: flex; align-items: center; gap: 32px; font-size: 13px; }
 .landing-nav > a { text-decoration: none; color: var(--muted); }
@@ -43,7 +43,7 @@
   .landing-proof { gap: 48px; }
 }
 @media (max-width: 800px) {
-  .landing { padding: 0 24px; }
+  .landing { padding: 0 24px; width: calc(100% - 32px); margin: 16px auto; }
   .landing-header { padding: 24px 0; }
   .landing-nav { gap: 20px; }
   .landing-nav .landing-hide-mobile { display: none; }
@@ -58,7 +58,7 @@
   .landing-proof h2 { font-size: 32px; }
 }
 @media (max-width: 520px) {
-  .landing { padding: 0 20px; }
+  .landing { padding: 0 20px; width: calc(100% - 20px); margin: 10px auto; border-radius: 14px; }
   .landing-nav { gap: 14px; }
   .landing-nav > a { display: none; }
   .landing-header .button { padding: 10px 12px; font-size: 12px; }

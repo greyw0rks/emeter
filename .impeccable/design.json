@@ -1,232 +1,322 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-22T07:48:38Z",
+  "generatedAt": "2026-11-22T21:56:13.618537Z",
   "title": "Design System: emeter",
   "extensions": {
     "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Periwinkle Surround",
+        "canonical": "#a8baff",
+        "tonalRamp": [
+          "oklch(15% 0.0301 272.71)",
+          "oklch(25% 0.0501 272.71)",
+          "oklch(36% 0.0721 272.71)",
+          "oklch(48% 0.0801 272.71)",
+          "oklch(60% 0.0801 272.71)",
+          "oklch(72% 0.0751 272.71)",
+          "oklch(84% 0.0421 272.71)",
+          "oklch(95% 0.0120 272.71)"
+        ]
+      },
       "void": {
         "role": "neutral",
-        "displayName": "Void",
-        "canonical": "#080c0d",
+        "displayName": "Cool Working Ground",
+        "canonical": "#f6f6fb",
         "tonalRamp": [
-          "oklch(15% 0.0026 214.03)",
-          "oklch(25% 0.0044 214.03)",
-          "oklch(36% 0.0064 214.03)",
-          "oklch(48% 0.0071 214.03)",
-          "oklch(60% 0.0071 214.03)",
-          "oklch(72% 0.0066 214.03)",
-          "oklch(84% 0.0038 214.03)",
-          "oklch(95% 0.0012 214.03)"
+          "oklch(15% 0.0020 286.28)",
+          "oklch(25% 0.0033 286.28)",
+          "oklch(36% 0.0048 286.28)",
+          "oklch(48% 0.0053 286.28)",
+          "oklch(60% 0.0053 286.28)",
+          "oklch(72% 0.0050 286.28)",
+          "oklch(84% 0.0028 286.28)",
+          "oklch(95% 0.0008 286.28)"
         ]
       },
       "graphite": {
         "role": "neutral",
-        "displayName": "Graphite",
-        "canonical": "#111719",
+        "displayName": "Frame White",
+        "canonical": "#ffffff",
         "tonalRamp": [
-          "oklch(15% 0.0037 220.03)",
-          "oklch(25% 0.0062 220.03)",
-          "oklch(36% 0.0089 220.03)",
-          "oklch(48% 0.0099 220.03)",
-          "oklch(60% 0.0099 220.03)",
-          "oklch(72% 0.0093 220.03)",
-          "oklch(84% 0.0053 220.03)",
-          "oklch(95% 0.0017 220.03)"
+          "oklch(15% 0.0000 0.00)",
+          "oklch(25% 0.0000 0.00)",
+          "oklch(36% 0.0000 0.00)",
+          "oklch(48% 0.0000 0.00)",
+          "oklch(60% 0.0000 0.00)",
+          "oklch(72% 0.0000 0.00)",
+          "oklch(84% 0.0000 0.00)",
+          "oklch(95% 0.0000 0.00)"
         ]
       },
       "raised": {
         "role": "neutral",
-        "displayName": "Raised Graphite",
-        "canonical": "#192225",
+        "displayName": "Pale Raised Lavender",
+        "canonical": "#f0edfb",
         "tonalRamp": [
-          "oklch(15% 0.0053 220.15)",
-          "oklch(25% 0.0088 220.15)",
-          "oklch(36% 0.0127 220.15)",
-          "oklch(48% 0.0141 220.15)",
-          "oklch(60% 0.0141 220.15)",
-          "oklch(72% 0.0131 220.15)",
-          "oklch(84% 0.0075 220.15)",
-          "oklch(95% 0.0023 220.15)"
+          "oklch(15% 0.0057 295.86)",
+          "oklch(25% 0.0095 295.86)",
+          "oklch(36% 0.0136 295.86)",
+          "oklch(48% 0.0151 295.86)",
+          "oklch(60% 0.0151 295.86)",
+          "oklch(72% 0.0142 295.86)",
+          "oklch(84% 0.0079 295.86)",
+          "oklch(95% 0.0023 295.86)"
         ]
       },
       "line": {
         "role": "neutral",
-        "displayName": "Quiet Line",
-        "canonical": "#2c393d",
+        "displayName": "Quiet Lavender Line",
+        "canonical": "#e8e5f0",
         "tonalRamp": [
-          "oklch(15% 0.0070 218.49)",
-          "oklch(25% 0.0116 218.49)",
-          "oklch(36% 0.0167 218.49)",
-          "oklch(48% 0.0186 218.49)",
-          "oklch(60% 0.0186 218.49)",
-          "oklch(72% 0.0173 218.49)",
-          "oklch(84% 0.0099 218.49)",
-          "oklch(95% 0.0031 218.49)"
+          "oklch(15% 0.0045 298.55)",
+          "oklch(25% 0.0075 298.55)",
+          "oklch(36% 0.0109 298.55)",
+          "oklch(48% 0.0121 298.55)",
+          "oklch(60% 0.0121 298.55)",
+          "oklch(72% 0.0113 298.55)",
+          "oklch(84% 0.0063 298.55)",
+          "oklch(95% 0.0018 298.55)"
         ]
       },
       "line-strong": {
         "role": "neutral",
-        "displayName": "Strong Line",
-        "canonical": "#4c6268",
+        "displayName": "Strong Lavender Line",
+        "canonical": "#c9c1dd",
         "tonalRamp": [
-          "oklch(15% 0.0106 216.23)",
-          "oklch(25% 0.0176 216.23)",
-          "oklch(36% 0.0253 216.23)",
-          "oklch(48% 0.0281 216.23)",
-          "oklch(60% 0.0281 216.23)",
-          "oklch(72% 0.0263 216.23)",
-          "oklch(84% 0.0150 216.23)",
-          "oklch(95% 0.0047 216.23)"
+          "oklch(15% 0.0119 298.58)",
+          "oklch(25% 0.0198 298.58)",
+          "oklch(36% 0.0286 298.58)",
+          "oklch(48% 0.0317 298.58)",
+          "oklch(60% 0.0317 298.58)",
+          "oklch(72% 0.0297 298.58)",
+          "oklch(84% 0.0167 298.58)",
+          "oklch(95% 0.0048 298.58)"
         ]
       },
       "ink": {
         "role": "neutral",
-        "displayName": "Bright Ink",
-        "canonical": "#f1f6f3",
+        "displayName": "Charcoal Ink",
+        "canonical": "#292636",
         "tonalRamp": [
-          "oklch(15% 0.0025 160.08)",
-          "oklch(25% 0.0041 160.08)",
-          "oklch(36% 0.0059 160.08)",
-          "oklch(48% 0.0066 160.08)",
-          "oklch(60% 0.0066 160.08)",
-          "oklch(72% 0.0062 160.08)",
-          "oklch(84% 0.0035 160.08)",
-          "oklch(95% 0.0011 160.08)"
+          "oklch(15% 0.0088 292.99)",
+          "oklch(25% 0.0147 292.99)",
+          "oklch(36% 0.0212 292.99)",
+          "oklch(48% 0.0235 292.99)",
+          "oklch(60% 0.0235 292.99)",
+          "oklch(72% 0.0220 292.99)",
+          "oklch(84% 0.0123 292.99)",
+          "oklch(95% 0.0035 292.99)"
         ]
       },
       "muted": {
         "role": "neutral",
-        "displayName": "Muted Ink",
-        "canonical": "#afbfbe",
+        "displayName": "Muted Plum",
+        "canonical": "#695f77",
         "tonalRamp": [
-          "oklch(15% 0.0066 192.26)",
-          "oklch(25% 0.0110 192.26)",
-          "oklch(36% 0.0159 192.26)",
-          "oklch(48% 0.0177 192.26)",
-          "oklch(60% 0.0177 192.26)",
-          "oklch(72% 0.0165 192.26)",
-          "oklch(84% 0.0094 192.26)",
-          "oklch(95% 0.0029 192.26)"
+          "oklch(15% 0.0118 303.96)",
+          "oklch(25% 0.0197 303.96)",
+          "oklch(36% 0.0283 303.96)",
+          "oklch(48% 0.0315 303.96)",
+          "oklch(60% 0.0315 303.96)",
+          "oklch(72% 0.0295 303.96)",
+          "oklch(84% 0.0165 303.96)",
+          "oklch(95% 0.0047 303.96)"
         ]
       },
       "dim": {
         "role": "neutral",
-        "displayName": "Auxiliary Ink",
-        "canonical": "#8faaa8",
+        "displayName": "Support Plum",
+        "canonical": "#6e607b",
         "tonalRamp": [
-          "oklch(15% 0.0112 191.00)",
-          "oklch(25% 0.0187 191.00)",
-          "oklch(36% 0.0270 191.00)",
-          "oklch(48% 0.0300 191.00)",
-          "oklch(60% 0.0300 191.00)",
-          "oklch(72% 0.0280 191.00)",
-          "oklch(84% 0.0160 191.00)",
-          "oklch(95% 0.0050 191.00)"
+          "oklch(15% 0.0135 308.28)",
+          "oklch(25% 0.0226 308.28)",
+          "oklch(36% 0.0325 308.28)",
+          "oklch(48% 0.0361 308.28)",
+          "oklch(60% 0.0361 308.28)",
+          "oklch(72% 0.0339 308.28)",
+          "oklch(84% 0.0190 308.28)",
+          "oklch(95% 0.0054 308.28)"
         ]
       },
       "mint": {
         "role": "primary",
-        "displayName": "Electric Mint",
-        "canonical": "#63efb7",
+        "displayName": "Action Violet",
+        "canonical": "#6554d9",
         "tonalRamp": [
-          "oklch(15% 0.0548 163.84)",
-          "oklch(25% 0.0914 163.84)",
-          "oklch(36% 0.1316 163.84)",
-          "oklch(48% 0.1462 163.84)",
-          "oklch(60% 0.1462 163.84)",
-          "oklch(72% 0.1365 163.84)",
-          "oklch(84% 0.0780 163.84)",
-          "oklch(95% 0.0244 163.84)"
-        ]
-      },
-      "lime": {
-        "role": "secondary",
-        "displayName": "Signal Lime",
-        "canonical": "#d5f879",
-        "tonalRamp": [
-          "oklch(15% 0.0594 122.29)",
-          "oklch(25% 0.0990 122.29)",
-          "oklch(36% 0.1426 122.29)",
-          "oklch(48% 0.1585 122.29)",
-          "oklch(60% 0.1585 122.29)",
-          "oklch(72% 0.1479 122.29)",
-          "oklch(84% 0.0845 122.29)",
-          "oklch(95% 0.0264 122.29)"
-        ]
-      },
-      "red": {
-        "role": "tertiary",
-        "displayName": "Soft Red",
-        "canonical": "#ffaaa0",
-        "tonalRamp": [
-          "oklch(15% 0.0383 26.88)",
-          "oklch(25% 0.0638 26.88)",
-          "oklch(36% 0.0918 26.88)",
-          "oklch(48% 0.1020 26.88)",
-          "oklch(60% 0.1020 26.88)",
-          "oklch(72% 0.0952 26.88)",
-          "oklch(84% 0.0544 26.88)",
-          "oklch(95% 0.0170 26.88)"
-        ]
-      },
-      "mint-surface": {
-        "role": "primary",
-        "displayName": "Mint Signal Surface",
-        "canonical": "#142e24",
-        "tonalRamp": [
-          "oklch(15% 0.0141 166.59)",
-          "oklch(25% 0.0234 166.59)",
-          "oklch(36% 0.0338 166.59)",
-          "oklch(48% 0.0375 166.59)",
-          "oklch(60% 0.0375 166.59)",
-          "oklch(72% 0.0350 166.59)",
-          "oklch(84% 0.0200 166.59)",
-          "oklch(95% 0.0063 166.59)"
-        ]
-      },
-      "lime-surface": {
-        "role": "secondary",
-        "displayName": "Lime Exception Surface",
-        "canonical": "#292e1a",
-        "tonalRamp": [
-          "oklch(15% 0.0130 120.04)",
-          "oklch(25% 0.0217 120.04)",
-          "oklch(36% 0.0313 120.04)",
-          "oklch(48% 0.0348 120.04)",
-          "oklch(60% 0.0348 120.04)",
-          "oklch(72% 0.0325 120.04)",
-          "oklch(84% 0.0185 120.04)",
-          "oklch(95% 0.0058 120.04)"
-        ]
-      },
-      "red-surface": {
-        "role": "tertiary",
-        "displayName": "Red Error Surface",
-        "canonical": "#34201f",
-        "tonalRamp": [
-          "oklch(15% 0.0118 22.53)",
-          "oklch(25% 0.0196 22.53)",
-          "oklch(36% 0.0282 22.53)",
-          "oklch(48% 0.0314 22.53)",
-          "oklch(60% 0.0314 22.53)",
-          "oklch(72% 0.0293 22.53)",
-          "oklch(84% 0.0167 22.53)",
-          "oklch(95% 0.0052 22.53)"
+          "oklch(15% 0.0586 283.48)",
+          "oklch(25% 0.0976 283.48)",
+          "oklch(36% 0.1406 283.48)",
+          "oklch(48% 0.1562 283.48)",
+          "oklch(60% 0.1562 283.48)",
+          "oklch(72% 0.1464 283.48)",
+          "oklch(84% 0.0820 283.48)",
+          "oklch(95% 0.0234 283.48)"
         ]
       },
       "mint-hover": {
         "role": "primary",
-        "displayName": "Mint Hover",
-        "canonical": "#8af7cb",
+        "displayName": "Deeper Violet",
+        "canonical": "#5542c8",
         "tonalRamp": [
-          "oklch(15% 0.0447 165.70)",
-          "oklch(25% 0.0746 165.70)",
-          "oklch(36% 0.1074 165.70)",
-          "oklch(48% 0.1193 165.70)",
-          "oklch(60% 0.1193 165.70)",
-          "oklch(72% 0.1114 165.70)",
-          "oklch(84% 0.0636 165.70)",
-          "oklch(95% 0.0199 165.70)"
+          "oklch(15% 0.0594 282.52)",
+          "oklch(25% 0.0990 282.52)",
+          "oklch(36% 0.1425 282.52)",
+          "oklch(48% 0.1583 282.52)",
+          "oklch(60% 0.1583 282.52)",
+          "oklch(72% 0.1484 282.52)",
+          "oklch(84% 0.0831 282.52)",
+          "oklch(95% 0.0238 282.52)"
+        ]
+      },
+      "mint-surface": {
+        "role": "primary",
+        "displayName": "Selected Violet Surface",
+        "canonical": "#eee8ff",
+        "tonalRamp": [
+          "oklch(15% 0.0094 297.72)",
+          "oklch(25% 0.0157 297.72)",
+          "oklch(36% 0.0226 297.72)",
+          "oklch(48% 0.0251 297.72)",
+          "oklch(60% 0.0251 297.72)",
+          "oklch(72% 0.0235 297.72)",
+          "oklch(84% 0.0132 297.72)",
+          "oklch(95% 0.0038 297.72)"
+        ]
+      },
+      "lavender": {
+        "role": "primary",
+        "displayName": "Session Lavender",
+        "canonical": "#e8e2ff",
+        "tonalRamp": [
+          "oklch(15% 0.0119 295.10)",
+          "oklch(25% 0.0198 295.10)",
+          "oklch(36% 0.0285 295.10)",
+          "oklch(48% 0.0316 295.10)",
+          "oklch(60% 0.0316 295.10)",
+          "oklch(72% 0.0296 295.10)",
+          "oklch(84% 0.0166 295.10)",
+          "oklch(95% 0.0047 295.10)"
+        ]
+      },
+      "soft-mint": {
+        "role": "secondary",
+        "displayName": "Service Mint",
+        "canonical": "#d6f3e4",
+        "tonalRamp": [
+          "oklch(15% 0.0109 163.22)",
+          "oklch(25% 0.0182 163.22)",
+          "oklch(36% 0.0262 163.22)",
+          "oklch(48% 0.0291 163.22)",
+          "oklch(60% 0.0291 163.22)",
+          "oklch(72% 0.0273 163.22)",
+          "oklch(84% 0.0153 163.22)",
+          "oklch(95% 0.0044 163.22)"
+        ]
+      },
+      "success": {
+        "role": "secondary",
+        "displayName": "Success Green",
+        "canonical": "#356d51",
+        "tonalRamp": [
+          "oklch(15% 0.0226 160.00)",
+          "oklch(25% 0.0376 160.00)",
+          "oklch(36% 0.0542 160.00)",
+          "oklch(48% 0.0602 160.00)",
+          "oklch(60% 0.0602 160.00)",
+          "oklch(72% 0.0565 160.00)",
+          "oklch(84% 0.0316 160.00)",
+          "oklch(95% 0.0090 160.00)"
+        ]
+      },
+      "success-surface": {
+        "role": "secondary",
+        "displayName": "Success Mint Surface",
+        "canonical": "#def3e5",
+        "tonalRamp": [
+          "oklch(15% 0.0087 156.63)",
+          "oklch(25% 0.0145 156.63)",
+          "oklch(36% 0.0208 156.63)",
+          "oklch(48% 0.0231 156.63)",
+          "oklch(60% 0.0231 156.63)",
+          "oklch(72% 0.0217 156.63)",
+          "oklch(84% 0.0121 156.63)",
+          "oklch(95% 0.0035 156.63)"
+        ]
+      },
+      "butter": {
+        "role": "secondary",
+        "displayName": "Service Yellow",
+        "canonical": "#fff5bb",
+        "tonalRamp": [
+          "oklch(15% 0.0224 99.43)",
+          "oklch(25% 0.0374 99.43)",
+          "oklch(36% 0.0538 99.43)",
+          "oklch(48% 0.0598 99.43)",
+          "oklch(60% 0.0598 99.43)",
+          "oklch(72% 0.0561 99.43)",
+          "oklch(84% 0.0314 99.43)",
+          "oklch(95% 0.0090 99.43)"
+        ]
+      },
+      "lime": {
+        "role": "secondary",
+        "displayName": "Exception Ochre",
+        "canonical": "#82682d",
+        "tonalRamp": [
+          "oklch(15% 0.0251 85.31)",
+          "oklch(25% 0.0419 85.31)",
+          "oklch(36% 0.0603 85.31)",
+          "oklch(48% 0.0670 85.31)",
+          "oklch(60% 0.0670 85.31)",
+          "oklch(72% 0.0628 85.31)",
+          "oklch(84% 0.0352 85.31)",
+          "oklch(95% 0.0101 85.31)"
+        ]
+      },
+      "lime-surface": {
+        "role": "secondary",
+        "displayName": "Exception Yellow Surface",
+        "canonical": "#fff5c9",
+        "tonalRamp": [
+          "oklch(15% 0.0173 96.67)",
+          "oklch(25% 0.0289 96.67)",
+          "oklch(36% 0.0416 96.67)",
+          "oklch(48% 0.0462 96.67)",
+          "oklch(60% 0.0462 96.67)",
+          "oklch(72% 0.0433 96.67)",
+          "oklch(84% 0.0243 96.67)",
+          "oklch(95% 0.0069 96.67)"
+        ]
+      },
+      "red": {
+        "role": "tertiary",
+        "displayName": "Denial Rose",
+        "canonical": "#9d4765",
+        "tonalRamp": [
+          "oklch(15% 0.0356 0.14)",
+          "oklch(25% 0.0594 0.14)",
+          "oklch(36% 0.0855 0.14)",
+          "oklch(48% 0.0950 0.14)",
+          "oklch(60% 0.0950 0.14)",
+          "oklch(72% 0.0891 0.14)",
+          "oklch(84% 0.0499 0.14)",
+          "oklch(95% 0.0143 0.14)"
+        ]
+      },
+      "red-surface": {
+        "role": "tertiary",
+        "displayName": "Rose Surface",
+        "canonical": "#fbe3eb",
+        "tonalRamp": [
+          "oklch(15% 0.0085 355.44)",
+          "oklch(25% 0.0141 355.44)",
+          "oklch(36% 0.0203 355.44)",
+          "oklch(48% 0.0226 355.44)",
+          "oklch(60% 0.0226 355.44)",
+          "oklch(72% 0.0212 355.44)",
+          "oklch(84% 0.0119 355.44)",
+          "oklch(95% 0.0034 355.44)"
         ]
       }
     },
@@ -290,13 +380,18 @@
     },
     "shadows": [
       {
+        "name": "application-frame",
+        "value": "0 12px 36px #596fbd20",
+        "purpose": "Workspace and landing frame over the periwinkle surround."
+      },
+      {
         "name": "wallet-overlay",
-        "value": "0 12px 32px #0006",
+        "value": "0 12px 32px #51456d26",
         "purpose": "Temporary account popover."
       },
       {
         "name": "modal-overlay",
-        "value": "0 20px 64px #0008",
+        "value": "0 20px 64px #51456d26",
         "purpose": "Native dialog content above the dimmed page."
       }
     ],
@@ -334,11 +429,11 @@
     ],
     "breakpoints": [
       {
-        "name": "phone",
+        "name": "phone-rail",
         "value": "520px"
       },
       {
-        "name": "stacked",
+        "name": "icon-rail",
         "value": "800px"
       },
       {
@@ -356,9 +451,9 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "The main enabled action, using Mint with dark text.",
+      "description": "The main enabled action: Violet fill with light text and deeper Violet hover.",
       "html": "<button class=\"ds-button-primary\" type=\"button\">Open workspace<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
-      "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,5px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--mint, #63efb7);color:var(--void, #080c0d);border-color:var(--mint, #63efb7);}.ds-button-primary:hover:enabled{background:var(--mint-hover, #8af7cb);border-color:var(--mint-hover, #8af7cb);}.ds-button-primary:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-button-primary:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition-duration:.01ms;}}"
+      "css": ".ds-button-primary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,7px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--mint, #6554d9);color:var(--void, #f6f6fb);border-color:var(--mint, #6554d9);}.ds-button-primary:hover:enabled{background:var(--mint-hover, #5542c8);border-color:var(--mint-hover, #5542c8);}.ds-button-primary:focus-visible{outline:2px solid var(--mint, #6554d9);outline-offset:4px;}.ds-button-primary:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-primary{transition-duration:.01ms;}}"
     },
     {
       "name": "Secondary Button",
@@ -366,7 +461,7 @@
       "refersTo": "button-secondary",
       "description": "A lower-emphasis action with a visible neutral stroke.",
       "html": "<button class=\"ds-button-secondary\" type=\"button\">New session</button>",
-      "css": ".ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,5px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--graphite, #111719);color:var(--ink, #f1f6f3);border-color:var(--line-strong, #4c6268);}.ds-button-secondary:hover:enabled{background:var(--raised, #192225);border-color:var(--muted, #afbfbe);}.ds-button-secondary:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-button-secondary:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition-duration:.01ms;}}"
+      "css": ".ds-button-secondary{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,7px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--graphite, #ffffff);color:var(--ink, #292636);border-color:var(--line-strong, #c9c1dd);}.ds-button-secondary:hover:enabled{background:var(--raised, #f0edfb);border-color:var(--muted, #695f77);}.ds-button-secondary:focus-visible{outline:2px solid var(--mint, #6554d9);outline-offset:4px;}.ds-button-secondary:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-secondary{transition-duration:.01ms;}}"
     },
     {
       "name": "Quiet Button",
@@ -374,7 +469,7 @@
       "refersTo": "button-quiet",
       "description": "A subordinate action without a resting surface.",
       "html": "<button class=\"ds-button-quiet\" type=\"button\">Revoke signer</button>",
-      "css": ".ds-button-quiet{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,5px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:transparent;color:var(--muted, #afbfbe);padding:7px 9px;}.ds-button-quiet:hover:enabled{color:var(--ink, #f1f6f3);background:var(--raised, #192225);}.ds-button-quiet:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-button-quiet:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-quiet{transition-duration:.01ms;}}"
+      "css": ".ds-button-quiet{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,7px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:transparent;color:var(--muted, #695f77);padding:7px 9px;}.ds-button-quiet:hover:enabled{color:var(--ink, #292636);background:var(--raised, #f0edfb);}.ds-button-quiet:focus-visible{outline:2px solid var(--mint, #6554d9);outline-offset:4px;}.ds-button-quiet:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-quiet{transition-duration:.01ms;}}"
     },
     {
       "name": "Danger Button",
@@ -382,23 +477,23 @@
       "refersTo": "button-danger",
       "description": "A labeled destructive session action.",
       "html": "<button class=\"ds-button-danger\" type=\"button\">Close this session</button>",
-      "css": ".ds-button-danger{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,5px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--red-surface, #34201f);color:var(--red, #ffaaa0);border-color:#744e49;}.ds-button-danger:hover:enabled{background:#462b29;}.ds-button-danger:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-button-danger:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-danger{transition-duration:.01ms;}}"
+      "css": ".ds-button-danger{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 16px;border:1px solid transparent;border-radius:var(--radius-sm,7px);font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;font-weight:560;line-height:1.4;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1)),border-color 160ms var(--ease-out, cubic-bezier(.22,1,.36,1));background:var(--red-surface, #fbe3eb);color:var(--red, #9d4765);border-color:#dbb5c5;}.ds-button-danger:hover:enabled{background:#f5d3e0;}.ds-button-danger:focus-visible{outline:2px solid var(--mint, #6554d9);outline-offset:4px;}.ds-button-danger:disabled{opacity:.55;cursor:not-allowed;}@media(prefers-reduced-motion:reduce){.ds-button-danger{transition-duration:.01ms;}}"
     },
     {
       "name": "Amount Field",
       "kind": "input",
       "refersTo": "input",
       "description": "A labeled exact-amount input with an associated hint.",
-      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-credit-amount\">Amount (DEMO)</label><input class=\"ds-input\" id=\"ds-credit-amount\" inputmode=\"decimal\" value=\"0.5\" aria-describedby=\"ds-credit-hint\"/><span class=\"ds-field-hint\" id=\"ds-credit-hint\">Available credit: 0.5 DEMO</span></div>",
-      "css": ".ds-field{display:flex;flex-direction:column;gap:8px;font-family:var(--font-geist-sans, sans-serif), sans-serif;max-width:340px;}.ds-field-label{font-size:12px;font-weight:550;line-height:1.6;color:var(--ink, #f1f6f3);}.ds-input{width:100%;min-width:0;color:var(--ink, #f1f6f3);background:var(--void, #080c0d);border:1px solid var(--line-strong, #4c6268);border-radius:var(--radius-sm,5px);padding:10px 12px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:14px;line-height:1.6;caret-color:var(--mint, #63efb7);transition:border-color 160ms var(--ease-out,cubic-bezier(.22,1,.36,1));}.ds-input::placeholder{color:var(--dim, #8faaa8);opacity:1;}.ds-input:hover{border-color:var(--muted, #afbfbe);}.ds-input:focus,.ds-input:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:2px;border-color:transparent;}.ds-input:disabled{cursor:not-allowed;}.ds-field-hint{font-size:11px;line-height:1.6;color:var(--dim, #8faaa8);}@media(prefers-reduced-motion:reduce){.ds-input{transition-duration:.01ms;}}"
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-credit-amount\">Amount (DEMO)</label><input class=\"ds-input\" id=\"ds-credit-amount\" inputmode=\"decimal\" value=\"0.5\" aria-describedby=\"ds-credit-hint\"/><span class=\"ds-field-hint\" id=\"ds-credit-hint\">Enter an exact amount in DEMO.</span></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:8px;font-family:var(--font-geist-sans, sans-serif), sans-serif;max-width:340px;}.ds-field-label{font-size:12px;font-weight:550;line-height:1.6;color:var(--ink, #292636);}.ds-input{width:100%;min-width:0;color:var(--ink, #292636);background:var(--void, #f6f6fb);border:1px solid var(--line-strong, #c9c1dd);border-radius:var(--radius-sm,7px);padding:10px 12px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:14px;line-height:1.6;caret-color:var(--mint, #6554d9);transition:border-color 160ms var(--ease-out,cubic-bezier(.22,1,.36,1));}.ds-input::placeholder{color:var(--dim, #6e607b);opacity:1;}.ds-input:hover{border-color:var(--muted, #695f77);}.ds-input:focus,.ds-input:focus-visible{outline:2px solid var(--mint, #6554d9);outline-offset:2px;border-color:transparent;}.ds-input:disabled{cursor:not-allowed;}.ds-field-hint{font-size:11px;line-height:1.6;color:var(--dim, #6e607b);}@media(prefers-reduced-motion:reduce){.ds-input{transition-duration:.01ms;}}"
     },
     {
       "name": "Workspace Navigation",
       "kind": "nav",
       "refersTo": "navigation",
-      "description": "A horizontal navigation-band preview with 44px links, a Mint active state, and scrolling on narrow screens.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Workspace\"><a class=\"ds-nav-link\" href=\"/dashboard\" aria-current=\"page\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"9\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\" rx=\"1\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\" rx=\"1\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\" rx=\"1\"/></svg>Overview</a><a class=\"ds-nav-link\" href=\"/services\">Services</a><a class=\"ds-nav-link\" href=\"/receipts\">Receipts</a></nav>",
-      "css": ".ds-nav{display:flex;gap:8px;padding:0 40px 12px;overflow-x:auto;}.ds-nav-link{display:flex;align-items:center;gap:12px;min-height:44px;flex-shrink:0;padding:11px 13px;color:var(--muted, #afbfbe);border:1px solid transparent;border-radius:5px;text-decoration:none;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:13px;line-height:1.6;white-space:nowrap;}.ds-nav-link[aria-current=page]{color:var(--mint, #63efb7);border-color:#2b493e;background:var(--mint-surface, #142e24);}.ds-nav-link:hover{color:var(--ink, #f1f6f3);background:var(--graphite, #111719);}.ds-nav-link:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}@media(max-width:1100px){.ds-nav{padding-left:24px;padding-right:24px;}}@media(max-width:800px){.ds-nav{padding:0 20px 12px;gap:4px;}.ds-nav-link{padding:8px 10px;font-size:12px;gap:7px;}.ds-nav-link svg{width:15px;}}"
+      "description": "The implemented vertical sidebar with five named destinations, Violet active state, and 44px phone icon-rail targets.",
+      "html": "<aside class=\"ds-sidebar\" aria-label=\"Workspace navigation\"><p class=\"ds-sidebar-heading\">Workspace</p><nav class=\"ds-nav\" aria-label=\"Workspace\"><a class=\"ds-nav-link\" href=\"/dashboard\" title=\"Overview\" aria-label=\"Overview\" aria-current=\"page\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"7\" height=\"9\" x=\"3\" y=\"3\" rx=\"1\"></rect><rect width=\"7\" height=\"5\" x=\"14\" y=\"3\" rx=\"1\"></rect><rect width=\"7\" height=\"9\" x=\"14\" y=\"12\" rx=\"1\"></rect><rect width=\"7\" height=\"5\" x=\"3\" y=\"16\" rx=\"1\"></rect></svg><span class=\"ds-nav-label\">Overview</span></a><a class=\"ds-nav-link\" href=\"/services\" title=\"Services\" aria-label=\"Services\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2.97 12.92A2 2 0 0 0 2 14.63v3.24a2 2 0 0 0 .97 1.71l3 1.8a2 2 0 0 0 2.06 0L12 19v-5.5l-5-3-4.03 2.42Z\"></path><path d=\"m7 16.5-4.74-2.85\"></path><path d=\"m7 16.5 5-3\"></path><path d=\"M7 16.5v5.17\"></path><path d=\"M12 13.5V19l3.97 2.38a2 2 0 0 0 2.06 0l3-1.8a2 2 0 0 0 .97-1.71v-3.24a2 2 0 0 0-.97-1.71L17 10.5l-5 3Z\"></path><path d=\"m17 16.5-5-3\"></path><path d=\"m17 16.5 4.74-2.85\"></path><path d=\"M17 16.5v5.17\"></path><path d=\"M7.97 4.42A2 2 0 0 0 7 6.13v4.37l5 3 5-3V6.13a2 2 0 0 0-.97-1.71l-3-1.8a2 2 0 0 0-2.06 0l-3 1.8Z\"></path><path d=\"M12 8 7.26 5.15\"></path><path d=\"m12 8 4.74-2.85\"></path><path d=\"M12 13.5V8\"></path></svg><span class=\"ds-nav-label\">Services</span></a><a class=\"ds-nav-link\" href=\"/playground\" title=\"Playground\" aria-label=\"Playground\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2\"></path><path d=\"M6.453 15h11.094\"></path><path d=\"M8.5 2h7\"></path></svg><span class=\"ds-nav-label\">Playground</span></a><a class=\"ds-nav-link\" href=\"/receipts\" title=\"Receipts\" aria-label=\"Receipts\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M13 16H8\"></path><path d=\"M14 8H8\"></path><path d=\"M16 12H8\"></path><path d=\"M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z\"></path></svg><span class=\"ds-nav-label\">Receipts</span></a><a class=\"ds-nav-link\" href=\"/policy\" title=\"Policy explorer\" aria-label=\"Policy explorer\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\"></rect><path d=\"M11 9h4a2 2 0 0 0 2-2V3\"></path><circle cx=\"9\" cy=\"9\" r=\"2\"></circle><path d=\"M7 21v-4a2 2 0 0 1 2-2h4\"></path><circle cx=\"15\" cy=\"15\" r=\"2\"></circle></svg><span class=\"ds-nav-label\">Policy explorer</span></a></nav></aside>",
+      "css": ".ds-sidebar{box-sizing:border-box;width:208px;padding:26px 18px;background:var(--graphite,#ffffff);border-right:1px solid var(--line,#e8e5f0);font-family:var(--font-geist-sans,sans-serif),sans-serif;line-height:1.6;}.ds-sidebar-heading{margin:0 12px 18px;color:var(--ink,#292636);font-size:14px;font-weight:550;}.ds-nav{display:flex;flex-direction:column;gap:7px;}.ds-nav-link{box-sizing:border-box;position:relative;display:flex;align-items:center;gap:11px;min-height:44px;flex-shrink:0;padding:11px 12px;color:var(--muted,#695f77);border:1px solid transparent;border-radius:7px;text-decoration:none;font-size:13px;white-space:nowrap;}.ds-nav-link:hover{color:var(--ink,#292636);background:var(--graphite,#ffffff);}.ds-nav-link[aria-current=page],.ds-nav-link[aria-current=page]:hover{color:var(--mint,#6554d9);background:var(--mint-surface,#eee8ff);font-weight:550;}.ds-nav-link:focus-visible{outline:2px solid var(--mint,#6554d9);outline-offset:4px;}@media(max-width:1100px){.ds-sidebar{width:180px;}}@media(max-width:800px){.ds-sidebar{width:62px;padding:18px 8px;}.ds-sidebar-heading{display:none;}.ds-nav-link{padding:12px;justify-content:center;min-width:44px;}.ds-nav-link svg{width:18px;flex-shrink:0;}.ds-nav-label{position:absolute;width:1px;height:1px;left:0;top:0;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}}@media(max-width:520px){.ds-sidebar{width:56px;padding:18px 5px;}.ds-nav-link{padding:11px;}}"
     },
     {
       "name": "Status Badges",
@@ -406,100 +501,61 @@
       "refersTo": "badge-neutral",
       "description": "Read-only semantic labels; result and payment retain separate words.",
       "html": "<div class=\"ds-badges\"><span class=\"ds-badge ds-badge-neutral\">Pending</span><span class=\"ds-badge ds-badge-mint\">Confirmed</span><span class=\"ds-badge ds-badge-lime\">Local fork</span><span class=\"ds-badge ds-badge-red\">Denied</span></div>",
-      "css": ".ds-badges{display:flex;flex-wrap:wrap;gap:12px;}.ds-badge{display:inline-flex;align-items:center;min-height:24px;padding:2px 8px;border:1px solid var(--line-strong, #4c6268);border-radius:4px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:10px;font-weight:500;line-height:1.5;white-space:nowrap;}.ds-badge-neutral{color:var(--muted, #afbfbe);background:var(--graphite, #111719);}.ds-badge-mint{color:var(--mint, #63efb7);background:var(--mint-surface, #142e24);border-color:#2b493e;}.ds-badge-lime{color:var(--lime, #d5f879);background:var(--lime-surface, #292e1a);border-color:#596335;}.ds-badge-red{color:var(--red, #ffaaa0);background:var(--red-surface, #34201f);border-color:#744e49;}"
+      "css": ".ds-badges{display:flex;flex-wrap:wrap;gap:12px;}.ds-badge{display:inline-flex;align-items:center;min-height:24px;padding:2px 8px;border:1px solid var(--line-strong, #c9c1dd);border-radius:4px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:10px;font-weight:500;line-height:1.5;white-space:nowrap;}.ds-badge-neutral{color:var(--muted, #695f77);background:var(--graphite, #ffffff);}.ds-badge-mint{color:var(--success, #356d51);background:var(--success-surface, #def3e5);border-color:#b5d8c2;}.ds-badge-lime{color:var(--lime, #82682d);background:var(--lime-surface, #fff5c9);border-color:#ded19f;}.ds-badge-red{color:var(--red, #9d4765);background:var(--red-surface, #fbe3eb);border-color:#dbb5c5;}"
     },
     {
-      "name": "Graphite Container",
+      "name": "White and Pastel Task Containers",
       "kind": "card",
       "refersTo": "surface",
-      "description": "A quiet padded surface using a tonal layer and a fine border.",
-      "html": "<section class=\"ds-surface\"><div class=\"ds-empty\"><h3>No requests yet</h3><p>Your requests and their payment confirmations will appear here.</p></div></section>",
-      "css": ".ds-surface{border:1px solid var(--line, #2c393d);border-radius:var(--radius,8px);background:var(--graphite, #111719);color:var(--ink, #f1f6f3);padding:24px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:14px;line-height:1.6;}.ds-empty{padding:28px 0;text-align:center;}.ds-empty h3{margin:0;font-size:20px;font-weight:560;line-height:1.4;}.ds-empty p{margin:12px auto 0;max-width:55ch;color:var(--muted, #afbfbe);}"
+      "description": "White bordered surface and the implemented lavender session, mint JSON, and yellow AI grouping; specimen text has no live account data.",
+      "html": "<div class=\"ds-task-containers\"><section class=\"ds-surface\"><h2 class=\"ds-task-title\">Request evidence</h2><p class=\"ds-task-copy\">Execution and payment remain separate.</p></section><section class=\"ds-task ds-task-session\"><h2 class=\"ds-task-title\">Spending sessions</h2><p class=\"ds-task-copy\">Budget, service scope, and expiry.</p></section><article class=\"ds-task ds-task-json\"><h2 class=\"ds-task-title\">JSON Validator</h2><p class=\"ds-task-copy\">Document and schema checks.</p></article><article class=\"ds-task ds-task-ai\"><h2 class=\"ds-task-title\">AI Text Analyzer</h2><p class=\"ds-task-copy\">Model, runtime, and usage evidence.</p></article></div>",
+      "css": ".ds-task-containers{display:grid;gap:16px;font-family:var(--font-geist-sans,sans-serif),sans-serif;font-size:14px;line-height:1.6;color:var(--ink,#292636);}.ds-surface{border:1px solid var(--line,#e8e5f0);border-radius:var(--radius,12px);background:var(--graphite,#ffffff);padding:24px;}.ds-task{padding:24px;border-radius:var(--radius,12px);}.ds-task-title{margin:0;font-size:20px;line-height:1.3;font-weight:560;letter-spacing:-.02em;}.ds-task-copy{margin:8px 0 0;font-size:13px;color:var(--muted,#695f77);}.ds-task-session{background:var(--lavender,#e8e2ff);}.ds-task-session .ds-task-copy{font-size:11px;}.ds-task-json{background:var(--soft-mint,#d6f3e4);}.ds-task-json .ds-task-copy{color:#426e56;}.ds-task-ai{background:var(--butter,#fff5bb);}.ds-task-ai .ds-task-copy{color:#75633b;}@media(max-width:520px){.ds-task{padding:18px;}}"
     },
     {
       "name": "Request Activity",
       "kind": "custom",
       "refersTo": "activity-table",
-      "description": "A horizontally scrollable table with distinct execution and payment evidence.",
+      "description": "Static table specimen with illustrative amount/time; execution and payment retain distinct words, and overflow is contained.",
       "html": "<div class=\"ds-table-scroll\" tabindex=\"0\" aria-label=\"Request activity\"><table class=\"ds-table\"><thead><tr><th scope=\"col\">Request / service</th><th scope=\"col\">Execution</th><th scope=\"col\">Payment</th><th scope=\"col\">DEMO</th><th scope=\"col\">Created</th></tr></thead><tbody><tr><td><a class=\"ds-table-link\" href=\"/receipts\">JSON Validator<svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a></td><td><span class=\"ds-badge ds-badge-mint\">Result ready</span></td><td><span class=\"ds-badge ds-badge-mint\">Confirmed</span></td><td class=\"ds-table-amount\">0.02</td><td class=\"ds-table-time\">Nov 21, 02:36 PM</td></tr></tbody></table></div>",
-      "css": ".ds-table-scroll{overflow-x:auto;border:1px solid var(--line, #2c393d);border-radius:var(--radius,8px);background:var(--void, #080c0d);}.ds-table-scroll:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-table{width:100%;border-collapse:collapse;text-align:left;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:12px;line-height:1.6;color:var(--ink, #f1f6f3);}.ds-table th{color:var(--dim, #8faaa8);font-weight:500;padding:12px 20px;background:var(--graphite, #111719);border-bottom:1px solid var(--line, #2c393d);white-space:nowrap;}.ds-table td{padding:17px 20px;border-bottom:1px solid var(--line, #2c393d);}.ds-table tr:last-child td{border-bottom:0;}.ds-table tbody tr:hover{background:var(--graphite, #111719);}.ds-table-link{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink, #f1f6f3);font-weight:550;}.ds-table-link:hover{color:var(--mint, #63efb7);}.ds-table-link:focus-visible{outline:2px solid var(--mint, #63efb7);outline-offset:4px;}.ds-table-amount{text-align:right;font-family:var(--font-geist-mono, monospace), monospace;font-variant-numeric:tabular-nums;}.ds-badges{display:flex;flex-wrap:wrap;gap:12px;}.ds-badge{display:inline-flex;align-items:center;min-height:24px;padding:2px 8px;border:1px solid var(--line-strong, #4c6268);border-radius:4px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:10px;font-weight:500;line-height:1.5;white-space:nowrap;}.ds-badge-neutral{color:var(--muted, #afbfbe);background:var(--graphite, #111719);}.ds-badge-mint{color:var(--mint, #63efb7);background:var(--mint-surface, #142e24);border-color:#2b493e;}.ds-badge-lime{color:var(--lime, #d5f879);background:var(--lime-surface, #292e1a);border-color:#596335;}.ds-badge-red{color:var(--red, #ffaaa0);background:var(--red-surface, #34201f);border-color:#744e49;} .ds-table-time{white-space:nowrap;color:var(--muted, #afbfbe);}"
+      "css": ".ds-table-scroll{overflow-x:auto;border:1px solid var(--line, #e8e5f0);border-radius:var(--radius,12px);background:var(--graphite, #ffffff);}.ds-table-scroll:focus-visible{outline:2px solid var(--mint, #6554d9);outline-offset:4px;}.ds-table{width:100%;border-collapse:collapse;text-align:left;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:12px;line-height:1.6;color:var(--ink, #292636);}.ds-table th{color:var(--dim, #6e607b);font-weight:500;padding:12px 20px;background:var(--graphite, #ffffff);border-bottom:1px solid var(--line, #e8e5f0);white-space:nowrap;}.ds-table td{padding:17px 20px;border-bottom:1px solid var(--line, #e8e5f0);}.ds-table tr:last-child td{border-bottom:0;}.ds-table tbody tr:hover{background:var(--graphite, #ffffff);}.ds-table-link{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink, #292636);font-weight:550;}.ds-table-link:hover{color:var(--mint, #6554d9);}.ds-table-link:focus-visible{outline:2px solid var(--mint, #6554d9);outline-offset:4px;}.ds-table-amount{text-align:right;font-family:var(--font-geist-mono, monospace), monospace;font-variant-numeric:tabular-nums;}.ds-badges{display:flex;flex-wrap:wrap;gap:12px;}.ds-badge{display:inline-flex;align-items:center;min-height:24px;padding:2px 8px;border:1px solid var(--line-strong, #c9c1dd);border-radius:4px;font-family:var(--font-geist-sans, sans-serif), sans-serif;font-size:10px;font-weight:500;line-height:1.5;white-space:nowrap;}.ds-badge-neutral{color:var(--muted, #695f77);background:var(--graphite, #ffffff);}.ds-badge-mint{color:var(--success, #356d51);background:var(--success-surface, #def3e5);border-color:#b5d8c2;}.ds-badge-lime{color:var(--lime, #82682d);background:var(--lime-surface, #fff5c9);border-color:#ded19f;}.ds-badge-red{color:var(--red, #9d4765);background:var(--red-surface, #fbe3eb);border-color:#dbb5c5;} .ds-table-time{white-space:nowrap;color:var(--muted, #695f77);}"
     },
     {
       "name": "Payment Circuit SVG",
       "kind": "custom",
       "refersTo": "circuit",
       "description": "A static SVG preview of the actual eleven-NAND graph at mask 0x1f; the application drives the same topology in a fitted 3D scene or this fallback.",
-      "html": "<figure class=\"ds-circuit\" aria-label=\"Payment policy circuit. Input mask 011111. Allows payment. Preview, no transaction.\"><div class=\"ds-circuit-stage\"><svg class=\"ds-circuit-flat\" viewBox=\"0 0 730 360\" aria-hidden=\"true\" focusable=\"false\"><defs><pattern id=\"ds-circuit-grid\" width=\"24\" height=\"24\" patternUnits=\"userSpaceOnUse\"><circle cx=\"1\" cy=\"1\" r=\".7\" fill=\"var(--line, #2c393d)\"/></pattern></defs><rect x=\"10\" y=\"0\" width=\"710\" height=\"350\" fill=\"url(#ds-circuit-grid)\"/><path d=\"M83 261.4H109.8V261.4H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 316.3H109.8V316.3H136.6\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M180.6 261.4H225.7V288.85H270.8\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M180.6 316.3H225.7V288.85H270.8\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 29.6H109.8V57.05H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 84.5H109.8V57.05H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180.6 57.05H207.4V57.05H234.2\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M83 145.5H109.8V172.95H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 200.4H109.8V172.95H136.6\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180.6 172.95H207.4V172.95H234.2\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M278.2 57.05H308.05V111.95H337.9\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M278.2 172.95H308.05V111.95H337.9\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M381.9 111.95H407.175V111.95H432.45\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M476.45 111.95H503.25V172.95H530.05\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M314.8 288.85H422.425V172.95H530.05\" fill=\"none\" stroke=\"var(--mint, #63efb7)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M574.05 172.95H599.325V172.95H624.6\" fill=\"none\" stroke=\"var(--line-strong, #4c6268)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><g><rect x=\"39\" y=\"13.6\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"33.6\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">A</text></g><g><rect x=\"39\" y=\"68.5\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"88.5\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">B</text></g><g><rect x=\"39\" y=\"129.5\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"149.5\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">C</text></g><g><rect x=\"39\" y=\"184.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"204.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">D</text></g><g><rect x=\"39\" y=\"245.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"61\" y=\"265.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">E</text></g><g><rect x=\"39\" y=\"300.3\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"61\" y=\"320.3\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">F</text></g><g><rect x=\"136.6\" y=\"245.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"158.6\" y=\"265.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N1</text></g><g><rect x=\"136.6\" y=\"300.3\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"158.6\" y=\"320.3\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N2</text></g><g><rect x=\"270.8\" y=\"272.85\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"292.8\" y=\"292.85\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N3</text></g><g><rect x=\"136.6\" y=\"41.05\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"158.6\" y=\"61.05\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N4</text></g><g><rect x=\"234.2\" y=\"41.05\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"256.2\" y=\"61.05\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N5</text></g><g><rect x=\"136.6\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"158.6\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N6</text></g><g><rect x=\"234.2\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"256.2\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N7</text></g><g><rect x=\"337.9\" y=\"95.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"359.9\" y=\"115.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N8</text></g><g><rect x=\"432.45\" y=\"95.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"454.45\" y=\"115.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">N9</text></g><g><rect x=\"530.05\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--raised, #192225)\" stroke=\"var(--line-strong, #4c6268)\"/><text x=\"552.05\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--muted, #afbfbe)\">N10</text></g><g><rect x=\"610.6\" y=\"156.95\" width=\"72\" height=\"32\" rx=\"4\" fill=\"var(--mint, #63efb7)\" stroke=\"var(--mint, #63efb7)\"/><text x=\"646.6\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--void, #080c0d)\">ALLOW</text></g><text x=\"40\" y=\"341\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"10\" fill=\"var(--dim, #8faaa8)\">A · B · C · D · (E + F)</text><text x=\"690\" y=\"341\" text-anchor=\"end\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"10\" fill=\"var(--dim, #8faaa8)\">11 NAND GATES</text></svg></div><figcaption class=\"ds-circuit-caption\"><span>Preview · no transaction</span><span>Mask <code>0x1f</code> · <code>011111</code></span><span>TapeOut · 6 inputs / 1 output</span></figcaption><div class=\"ds-circuit-output\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m16 9-5.5 5.5L8 12\"/></svg><div><strong>Payment allowed</strong><p>All required conditions are satisfied.</p></div></div></figure>",
-      "css": ".ds-circuit{margin:0;min-width:0;background:var(--void, #080c0d);font-family:var(--font-geist-sans, sans-serif), sans-serif;color:var(--ink, #f1f6f3);}.ds-circuit-stage{height:360px;width:100%;}.ds-circuit-flat{height:100%;width:100%;}.ds-circuit-caption{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 0;border-top:1px solid var(--line, #2c393d);font-size:11px;line-height:1.6;color:var(--dim, #8faaa8);}.ds-circuit-caption code{font-family:var(--font-geist-mono, monospace), monospace;font-size:11px;font-variant-numeric:tabular-nums;}.ds-circuit-output{margin-top:24px;padding:20px 0;display:flex;gap:14px;align-items:center;color:var(--mint, #63efb7);}.ds-circuit-output strong{font-size:26px;letter-spacing:-.025em;font-weight:550;}.ds-circuit-output p{margin:0;color:var(--muted, #afbfbe);font-size:12px;line-height:1.6;}@media(max-width:800px){.ds-circuit-stage{height:300px;}}@media(max-width:520px){.ds-circuit-stage{height:235px;}.ds-circuit-caption{justify-content:flex-start;gap:8px 20px;}}"
+      "html": "<figure class=\"ds-circuit\" aria-label=\"Payment policy circuit. Input mask 011111. Allows payment. Preview, no transaction.\"><div class=\"ds-circuit-stage\"><svg class=\"ds-circuit-flat\" viewBox=\"0 0 730 360\" aria-hidden=\"true\" focusable=\"false\"><defs><pattern id=\"ds-circuit-grid\" width=\"24\" height=\"24\" patternUnits=\"userSpaceOnUse\"><circle cx=\"1\" cy=\"1\" r=\".7\" fill=\"var(--line-strong, #c9c1dd)\"/></pattern></defs><rect x=\"10\" y=\"0\" width=\"710\" height=\"350\" fill=\"url(#ds-circuit-grid)\"/><path d=\"M83 261.4H109.8V261.4H136.6\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 316.3H109.8V316.3H136.6\" fill=\"none\" stroke=\"var(--line-strong, #c9c1dd)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M180.6 261.4H225.7V288.85H270.8\" fill=\"none\" stroke=\"var(--line-strong, #c9c1dd)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M180.6 316.3H225.7V288.85H270.8\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 29.6H109.8V57.05H136.6\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 84.5H109.8V57.05H136.6\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180.6 57.05H207.4V57.05H234.2\" fill=\"none\" stroke=\"var(--line-strong, #c9c1dd)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M83 145.5H109.8V172.95H136.6\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M83 200.4H109.8V172.95H136.6\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180.6 172.95H207.4V172.95H234.2\" fill=\"none\" stroke=\"var(--line-strong, #c9c1dd)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M278.2 57.05H308.05V111.95H337.9\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M278.2 172.95H308.05V111.95H337.9\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M381.9 111.95H407.175V111.95H432.45\" fill=\"none\" stroke=\"var(--line-strong, #c9c1dd)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><path d=\"M476.45 111.95H503.25V172.95H530.05\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M314.8 288.85H422.425V172.95H530.05\" fill=\"none\" stroke=\"var(--mint, #6554d9)\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M574.05 172.95H599.325V172.95H624.6\" fill=\"none\" stroke=\"var(--line-strong, #c9c1dd)\" stroke-width=\"1.2\" stroke-linejoin=\"round\"/><g><rect x=\"39\" y=\"13.6\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"61\" y=\"33.6\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">A</text></g><g><rect x=\"39\" y=\"68.5\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"61\" y=\"88.5\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">B</text></g><g><rect x=\"39\" y=\"129.5\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"61\" y=\"149.5\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">C</text></g><g><rect x=\"39\" y=\"184.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"61\" y=\"204.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">D</text></g><g><rect x=\"39\" y=\"245.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"61\" y=\"265.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">E</text></g><g><rect x=\"39\" y=\"300.3\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--lavender, #e8e2ff)\" stroke=\"var(--line-strong, #c9c1dd)\"/><text x=\"61\" y=\"320.3\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--ink, #292636)\">F</text></g><g><rect x=\"136.6\" y=\"245.4\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--lavender, #e8e2ff)\" stroke=\"var(--line-strong, #c9c1dd)\"/><text x=\"158.6\" y=\"265.4\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--ink, #292636)\">N1</text></g><g><rect x=\"136.6\" y=\"300.3\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"158.6\" y=\"320.3\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">N2</text></g><g><rect x=\"270.8\" y=\"272.85\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"292.8\" y=\"292.85\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">N3</text></g><g><rect x=\"136.6\" y=\"41.05\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--lavender, #e8e2ff)\" stroke=\"var(--line-strong, #c9c1dd)\"/><text x=\"158.6\" y=\"61.05\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--ink, #292636)\">N4</text></g><g><rect x=\"234.2\" y=\"41.05\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"256.2\" y=\"61.05\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">N5</text></g><g><rect x=\"136.6\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--lavender, #e8e2ff)\" stroke=\"var(--line-strong, #c9c1dd)\"/><text x=\"158.6\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--ink, #292636)\">N6</text></g><g><rect x=\"234.2\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"256.2\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">N7</text></g><g><rect x=\"337.9\" y=\"95.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--lavender, #e8e2ff)\" stroke=\"var(--line-strong, #c9c1dd)\"/><text x=\"359.9\" y=\"115.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--ink, #292636)\">N8</text></g><g><rect x=\"432.45\" y=\"95.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"454.45\" y=\"115.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">N9</text></g><g><rect x=\"530.05\" y=\"156.95\" width=\"44\" height=\"32\" rx=\"4\" fill=\"var(--lavender, #e8e2ff)\" stroke=\"var(--line-strong, #c9c1dd)\"/><text x=\"552.05\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--ink, #292636)\">N10</text></g><g><rect x=\"610.6\" y=\"156.95\" width=\"72\" height=\"32\" rx=\"4\" fill=\"var(--mint, #6554d9)\" stroke=\"var(--mint, #6554d9)\"/><text x=\"646.6\" y=\"176.95\" text-anchor=\"middle\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"11\" font-weight=\"500\" fill=\"var(--graphite, #ffffff)\">ALLOW</text></g><text x=\"40\" y=\"341\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"10\" fill=\"var(--dim, #6e607b)\">A · B · C · D · (E + F)</text><text x=\"690\" y=\"341\" text-anchor=\"end\" font-family=\"var(--font-geist-mono, monospace), monospace\" font-size=\"10\" fill=\"var(--dim, #6e607b)\">11 NAND GATES</text></svg></div><figcaption class=\"ds-circuit-caption\"><span>Preview · no transaction</span><span>Mask <code>0x1f</code> · <code>011111</code></span><span>TapeOut · 6 inputs / 1 output</span></figcaption><div class=\"ds-circuit-output\"><svg width=\"30\" height=\"30\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m16 9-5.5 5.5L8 12\"/></svg><div><strong>Payment allowed</strong><p>All required conditions are satisfied.</p></div></div></figure>",
+      "css": ".ds-circuit{margin:0;min-width:0;background:var(--void, #f6f6fb);font-family:var(--font-geist-sans, sans-serif), sans-serif;color:var(--ink, #292636);}.ds-circuit-stage{height:360px;width:100%;}.ds-circuit-flat{height:100%;width:100%;}.ds-circuit-caption{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 0;border-top:1px solid var(--line, #e8e5f0);font-size:11px;line-height:1.6;color:var(--dim, #6e607b);}.ds-circuit-caption code{font-family:var(--font-geist-mono, monospace), monospace;font-size:11px;font-variant-numeric:tabular-nums;}.ds-circuit-output{margin-top:24px;padding:20px 0;display:flex;gap:14px;align-items:center;color:var(--success, #356d51);}.ds-circuit-output strong{font-size:26px;letter-spacing:-.025em;font-weight:550;}.ds-circuit-output p{margin:0;color:var(--muted, #695f77);font-size:12px;line-height:1.6;}@media(max-width:800px){.ds-circuit-stage{height:300px;}}@media(max-width:520px){.ds-circuit-stage{height:235px;}.ds-circuit-caption{justify-content:flex-start;gap:8px 20px;}}"
     }
   ],
   "narrative": {
-    "northStar": "Electric precision",
-    "overview": "A dark instrument for a bounded decision. Void grounds the interface, Graphite gives controls a quiet working surface, and bright Geist text keeps permissions and evidence readable. Electric Mint identifies the next action and the active signal; Signal Lime makes exceptions visible. The authored circuit mark, orthogonal wires, and actual eleven-NAND graph connect the identity to the mechanism the product exposes.\n\nThe landing brief gives the policy a broad stage and a large, tightly tracked headline. The workspace brief gives tasks more room than decoration: credit totals, bounded sessions, editors, and evidence form a measured reading order. These are two expressions of the same world; their compositions remain in the surface briefs. Motion is brief and driven by state, while phones, reduced-motion preferences, and graphics failures retain the authored SVG circuit.\n\nThis system records the current frontend source and sampled desktop/phone captures. Electric precision is the accepted visual-world pin; both layouts are builder-authored within the accepted frontend scope. The launch finish review records the validation state for the horizontal-header refresh and uses a fresh generic agent with the packaged review contract. No approved comp, QUALITY BAR card, catalog seed, or successful detector/context/seed launcher is claimed. The shipped mark and circuit use SVG and geometry; there are no browser-shipping raster plates. Implementation values below come from `apps/web/app/globals.css`, `apps/web/app/styles/landing.css`, `apps/web/app/layout.tsx`, and the shared components.",
+    "northStar": "The bounded workspace",
+    "overview": "A light, framed instrument for a bounded decision. Periwinkle surrounds a rounded white application frame; the cool working ground gives lavender sessions and mint/yellow service surfaces room to read. Violet identifies actions and active signals. Green confirms successful states, yellow carries exceptional context, and rose makes denials visible. Dark Geist text keeps permissions, limits, and evidence readable.\n\nThe workspace combines persistent navigation with adjacent task context: credit totals, bounded sessions, editors, and receipts form a measured reading order. The landing gives the same palette a broader headline and policy stage. The authored circuit mark, orthogonal wires, and actual eleven-NAND graph connect the identity to the mechanism. Motion follows state; phones, reduced-motion preferences, and graphics failures retain the usable SVG circuit.\n\nThis refresh records the implemented light sidebar direction selected by the user on 22 November 2026, replacing the earlier dark Electric precision/no-sidebar direction. Source values come from `apps/web/app/globals.css`, `apps/web/app/styles/landing.css`, `apps/web/app/layout.tsx`, and shared components. The fresh finish review inspected all 19 sidebar captures and found only the documentation drift repaired here; its application findings require no visual change. The matching fork evidence reports 18 passing browser checks. These are supplied application checks, not isolated rendering validation for the sidecar snippets. No approved image comp, QUALITY BAR card, catalog seed, or successful context/detector launcher is claimed. SVG and geometry supply the mark and circuit; no browser-shipping raster artwork was added.",
     "keyCharacteristics": [
-      "Dark neutral layers with readable, slightly cool text.",
-      "Mint actions and active signals; Lime exceptions; Red denials and destructive intent.",
+      "A periwinkle surround, rounded white frame, and cool working ground.",
+      "Violet controls and active signals; green success, yellow exceptions, and rose denials.",
+      "Lavender sessions and mint/yellow service surfaces that group real task records.",
       "Self-hosted Geist Sans for instructions and Geist Mono for measurable evidence.",
-      "Compact controls, fine borders, and shallow corners.",
-      "An actual circuit graph with explicit source, mask, and payment output.",
-      "Responsive task layouts and a usable SVG fallback."
+      "Persistent desktop sidebar and an accessible phone icon rail.",
+      "An actual circuit graph with explicit source, mask, decision, and SVG fallback."
     ],
-    "rules": [
-      {
-        "name": "The Decision Color Rule",
-        "body": "Use the signal color with its text label. Mint can mean an active signal or a checked result; the label must say which. Lime marks an exception or special context, and Red states a denial, error, or destructive action.",
-        "section": "colors"
-      },
-      {
-        "name": "The Readable Neutral Rule",
-        "body": "Keep task titles and values in Ink, explanations in Muted, and auxiliary labels in Dim. The reviewed secondary-text samples reached at least (7.31:1); this is sampled evidence, not a claim about every possible color pairing.",
-        "section": "colors"
-      },
-      {
-        "name": "The Measured Data Rule",
-        "body": "Use Geist Mono with tabular numerals for code, masks, identifiers, and token amounts. Keep prose and control labels in Geist Sans. Preserve exact displayed amounts rather than converting them to approximate floating-point summaries.",
-        "section": "typography"
-      },
-      {
-        "name": "The Task Adjacency Rule",
-        "body": "Keep actions next to the record or limit they change: session controls beside session balances, run controls after budget context, and receipt links beside the request. Reflow that relationship when columns stack.",
-        "section": "layout"
-      },
-      {
-        "name": "The Tonal Surface Rule",
-        "body": "Use a tonal layer and a fine boundary for resting content. Reserve the observed soft shadows for temporary overlays.",
-        "section": "elevation"
-      },
-      {
-        "name": "The Diagram Form Rule",
-        "body": "Gate shapes and wires must come from the actual netlist. They explain a decision; their geometry is not a generic card decoration.",
-        "section": "shapes"
-      },
-      {
-        "name": "The Evidence Label Rule",
-        "body": "A ready result, a checked provider signature, and a canonical payment remain separate visible statements. Gateway-recorded circuit inputs stay labeled unconfirmed until their settlement is independently verified. Local-fork transactions and controlled offline AI output keep their explicit context labels.",
-        "section": "components"
-      },
-      {
-        "name": "The State Motion Rule",
-        "body": "Motion follows the policy state. Keep the diagram, captions, condition labels, and explicit output usable when the graphics layer is absent.",
-        "section": "components"
-      }
-    ],
+    "rules": [],
     "dos": [
-      "Do preserve the shared palette, font roles, shallow corners, and exact control states when extending a surface.",
+      "Do preserve the light palette, rounded frame, pastel task surfaces, font roles, and exact control states when extending a surface.",
       "Do keep amounts and identifiers measurable with Mono, tabular numerals, full-value access, and explicit units.",
       "Do pair semantic colors with readable state labels and keep result, signature, and payment evidence separate.",
       "Do preserve the actual circuit topology, source caption, input mask, explicit decision text, and SVG fallback.",
-      "Do follow the existing responsive reflow, keep the active workspace link visible within its horizontal band, and let activity tables scroll within their own focusable region.",
-      "Do preserve labels, visible Mint focus, associated hints, native dialog behavior, and recoverable empty or offline states."
+      "Do follow the sidebar-to-icon-rail reflow, preserve accessible destination names and navigation targets of at least (44px), and keep tables inside their focusable scroll region.",
+      "Do preserve labels, visible Violet focus, associated hints, native dialog behavior, and recoverable empty or offline states."
     ],
     "donts": [
-      "Don't reuse a confirmed-payment label for a result, a provider claim, a pending transaction, or preview inputs.",
+      "Don't reuse a confirmed-payment label for a result, provider claim, pending transaction, or preview inputs.",
+      "Don't replace real account or service records with the concept preview's example balances or activity.",
+      "Don't infer green success from the legacy `mint` control token or use its Violet value for successful badges.",
       "Don't turn the landing composition into a required workspace layout.",
       "Don't replace the authored circuit with an unrelated decorative graph or apply internal gate-label dimensions to general UI text.",
-      "Don't make an unlabeled color or a WebGL layer the only way to understand the payment decision.",
-      "Don't add resting card shadows to the recorded tonal surface system."
+      "Don't make an unlabeled color or WebGL layer the only way to understand a payment decision.",
+      "Don't add resting card shadows to the recorded tonal task surfaces."
     ]
   }
 }

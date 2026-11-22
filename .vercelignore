@@ -14,3 +14,4 @@ node_modules/
 packages/contracts/lib/
 packages/contracts/cache/
 packages/contracts/out/
+apps/web/public/design-preview/

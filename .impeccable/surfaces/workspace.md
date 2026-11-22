@@ -9,13 +9,13 @@ The accepted MVP and `PRODUCT.md` settle users, tasks, proof boundaries, and bra
 
 THESIS: A developer can see what ran, what was authorized, and what actually paid without conflating those states. Precision belongs in the task and its evidence.
 
-OWN-WORLD: The accepted Electric precision palette uses dark neutral layers, Mint for actions and verified states, Lime for policy overrides, Geist for UI, and Mono for code, amounts, and identifiers. Controls share one restrained grammar.
+OWN-WORLD: The selected light workspace uses a periwinkle surround, a white rounded app frame, pale lavender working surfaces, violet actions, mint successful states, yellow exceptions, and rose denials. Geist remains the UI face, with Mono reserved for exact amounts, code, and identifiers.
 
 STORY: Connect a wallet, fund credit, authorize a bounded session, run a service, and inspect the signed result and canonical payment. Providers register services and manage scoped keys.
 
-FIRST VIEWPORT: A full-width header groups the wordmark, network status, and wallet controls above horizontal navigation. The activity workspace uses the available width without a sidebar. Credit/session context sits above a readable request table. The new-session action stays adjacent to its budget context. On phones navigation scrolls within its own horizontal band, account controls wrap, and evidence panels stack.
+FIRST VIEWPORT: A white header groups the violet wordmark, workspace identity, network, and wallet controls. A 208px sidebar carries all five destinations, while the softly tinted working region shows real credit/session context and the adjacent action. Public overview presents wallet login and the verified live service catalog. On phones the sidebar becomes a narrow icon rail with accessible destination names; account controls wrap and evidence panels stack.
 
-FORM: seed: none (unavailable). The context and seed launcher could not execute. The confirmed visual-world pin is "Void/Graphite surfaces, Electric Mint actions, Signal Lime accents, Geist Sans/Mono, restrained Motion transitions, and React Three Fiber circuit scenes with reduced-motion/mobile fallbacks." The user's explicit layout constraint is "no side barssss". The horizontal header and task composition are builder-authored within that constraint and the accepted dashboard, registration, playground, receipt, policy, and wallet/network scope.
+FORM: seed: none (pinned). After requesting both light previews, the user selected "side bar" on 22 November 2026. The selected code-led sidebar preview replaces the earlier no-sidebar direction. Its screenshot at docs/design-previews/light/sidebar-desktop.png is a composition reference; real gateway records replace preview example data. Existing wallet/network guards and actual R3F/SVG policy remain required.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 

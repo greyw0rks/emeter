@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "layouts": 2,
+  "viewportWidths": [
+    1440,
+    390
+  ],
+  "captures": [
+    "top-desktop.png",
+    "top-mobile.png",
+    "sidebar-desktop.png",
+    "sidebar-mobile.png"
+  ],
+  "runtimeErrors": [],
+  "externalRequests": [],
+  "dataClassification": "Clearly labeled example data; no backend, wallet, or paid API calls",
+  "checkedAt": "2026-11-22T21:11:04.531Z"
+}

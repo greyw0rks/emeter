@@ -2,7 +2,7 @@
 
 The production app is [emeter-peach.vercel.app](https://emeter-peach.vercel.app), with [emeter-greyw0rks-projects.vercel.app](https://emeter-greyw0rks-projects.vercel.app) as its team alias. The production gateway is [first-eel-292.convex.site](https://first-eel-292.convex.site/api/protocol). Both use the existing X Layer chain-196 deployments and zero-value DEMO token.
 
-The public source is [greyw0rks/emeter](https://github.com/greyw0rks/emeter). Production deployment `dpl_57uTGSzYrUzHsxmwubf16zpsGMRE`, created on 22 November 2026, includes the active phone-tab reveal and enlarged desktop circuit labels. Vercel reports it Ready and assigns both established production aliases.
+The public source is [greyw0rks/emeter](https://github.com/greyw0rks/emeter). The selected light sidebar build is deployment `dpl_GHyphgAqU1NqKsY9GEPkoJfFkbc4`, created on 22 November 2026. The prior horizontal-navigation launch remains recorded in `docs/evidence/launch-release-checks.json`; its deployment was `dpl_57uTGSzYrUzHsxmwubf16zpsGMRE`.
 
 ## Convex
 

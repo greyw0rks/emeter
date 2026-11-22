@@ -26,7 +26,7 @@ export default function Services() {
     <div className="tabs" aria-label="Service views"><button type="button" aria-pressed={tab === "browse"} onClick={() => setTab("browse")}>Service catalog</button>
       <button type="button" aria-pressed={tab === "manage"} onClick={() => setTab("manage")}>Provider & credentials</button></div>
     {tab === "browse" ? <>
-      {gateway.services.length ? <div className="service-list">{gateway.services.map(service => <article className="service-row" key={service.id}>
+      {gateway.services.length ? <div className="service-list">{gateway.services.map(service => <article className={`service-row service-row-${service.method}`} key={service.id}>
         <div className="service-icon">{service.method === "json_validate" ? <Braces size={22} aria-hidden="true" /> : <Brain size={22} aria-hidden="true" />}</div>
         <div><h2>{service.name}<Badge tone="mint">Verified terms</Badge></h2><p>{service.manifest.description}</p><div className="service-meta"><code>{service.method}</code>
           <span>Price v{service.priceVersion}</span><span>Signer <code title={service.signer}>{short(service.signer)}</code></span></div>

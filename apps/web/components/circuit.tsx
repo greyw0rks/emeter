@@ -19,21 +19,21 @@ function FlatCircuit({ mask }: { mask: number }) {
   const values = circuitSignals(mask);
   const at = (id: number) => { const [x, y] = signalPositions[id]!; return [x * 61 + 366, -y * 61 + 176] as const; };
   return <svg className="circuit-flat" viewBox="0 0 730 360" aria-hidden="true" focusable="false">
-    <defs><pattern id="circuit-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#2c393d" /></pattern></defs>
+    <defs><pattern id="circuit-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="var(--line-strong)" /></pattern></defs>
     <rect x="10" y="0" width="710" height="350" fill="url(#circuit-grid)" />
     {circuitWires.map(({ source, target }) => {
       const [x1, y1] = at(source), [x2, y2] = at(target), middle = (x1 + x2) / 2;
       return <path key={`${source}-${target}`} d={`M ${x1 + 22} ${y1} H ${middle} V ${y2} H ${x2 - 22}`} fill="none"
-        stroke={values[source] ? "#63efb7" : "#4c6268"} strokeWidth={values[source] ? 2 : 1.2} strokeLinejoin="round" />;
+        stroke={values[source] ? "var(--mint)" : "var(--line-strong)"} strokeWidth={values[source] ? 2 : 1.2} strokeLinejoin="round" />;
     })}
     {Object.keys(signalPositions).map(key => {
       const id = Number(key), [x, y] = at(id), active = values[id]!, width = id === 18 ? 72 : 44;
-      return <g key={id}><rect x={x - width / 2} y={y - 16} width={width} height="32" rx="4" fill={active ? "#63efb7" : "#192225"} stroke={active ? "#63efb7" : "#4c6268"} />
-        <text x={x} y={y + 4} textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="11" fontWeight="500" fill={active ? "#080c0d" : "#afbfbe"}>
+      return <g key={id}><rect x={x - width / 2} y={y - 16} width={width} height="32" rx="4" fill={active ? "var(--mint)" : "var(--lavender)"} stroke={active ? "var(--mint)" : "var(--line-strong)"} />
+        <text x={x} y={y + 4} textAnchor="middle" fontFamily="var(--font-geist-mono), monospace" fontSize="11" fontWeight="500" fill={active ? "var(--graphite)" : "var(--ink)"}>
           {id < 8 ? String.fromCharCode(65 + id - 2) : id === 18 ? active ? "ALLOW" : "DENY" : "N" + (id - 7)}</text></g>;
     })}
-    <text x="40" y="341" fontFamily="var(--font-geist-mono), monospace" fontSize="10" fill="#8faaa8">A · B · C · D · (E + F)</text>
-    <text x="690" y="341" textAnchor="end" fontFamily="var(--font-geist-mono), monospace" fontSize="10" fill="#8faaa8">11 NAND GATES</text>
+    <text x="40" y="341" fontFamily="var(--font-geist-mono), monospace" fontSize="10" fill="var(--dim)">A · B · C · D · (E + F)</text>
+    <text x="690" y="341" textAnchor="end" fontFamily="var(--font-geist-mono), monospace" fontSize="10" fill="var(--dim)">11 NAND GATES</text>
   </svg>;
 }
 export function Circuit({ mask, source = "Preview · no transaction" }: { mask: number; source?: string }) {
@@ -61,7 +61,7 @@ export function Circuit({ mask, source = "Preview · no transaction" }: { mask: 
 export function PolicyOutput({ mask }: { mask: number }) {
   const allowed = policyDecision(flagsFromMask(mask));
   const Icon = allowed ? CircleCheck : CircleX;
-  return <motion.div className="policy-output" animate={{ color: allowed ? "#63efb7" : "#ffaaa0" }} transition={{ duration: .22, ease: [.22, 1, .36, 1] }}>
+  return <motion.div className="policy-output" animate={{ color: allowed ? "#356d51" : "#9d4765" }} transition={{ duration: .22, ease: [.22, 1, .36, 1] }}>
     <Icon size={30} aria-hidden="true" /><div><strong>{allowed ? "Payment allowed" : "Payment denied"}</strong><p>{allowed ? "All required conditions are satisfied." : "A required condition is missing."}</p></div>
   </motion.div>;
 }

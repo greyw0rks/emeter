@@ -1,0 +1,87 @@
+{
+  "milestone": "light-sidebar-redesign",
+  "recordedAt": "2026-11-22T22:13:12.119818+00:00",
+  "userSelection": "side bar",
+  "application": "https://emeter-peach.vercel.app/dashboard",
+  "source": "https://github.com/greyw0rks/emeter",
+  "baseCommit": "d640d0ed43c3b61eaa4b351ceaa71579198880c2",
+  "productionDeployment": {
+    "id": "dpl_GHyphgAqU1NqKsY9GEPkoJfFkbc4",
+    "url": "https://emeter-v5dldvmg2-greyw0rks-projects.vercel.app",
+    "status": "READY",
+    "aliases": [
+      "https://emeter-peach.vercel.app",
+      "https://emeter-greyw0rks-projects.vercel.app"
+    ]
+  },
+  "build": {
+    "passed": true,
+    "bundler": "webpack"
+  },
+  "typecheck": {
+    "passed": true,
+    "scope": "workspace, root scripts and Convex"
+  },
+  "tests": {
+    "passed": true,
+    "total": 290
+  },
+  "browser": {
+    "passed": true,
+    "checks": 18,
+    "captures": 19,
+    "evidence": "frontend-sidebar-fork-checks.json",
+    "networkMode": "local-fork",
+    "mainnetBroadcastPerformed": false,
+    "realAiRequests": 0,
+    "evidenceRegeneratedAfterCaptureFolderSeparation": true
+  },
+  "publicBrowser": {
+    "passed": true,
+    "checks": 6,
+    "captures": 6,
+    "evidence": "frontend-sidebar-public-checks.json",
+    "walletSignatures": 0,
+    "walletTransactions": 0,
+    "realAiRequests": 0
+  },
+  "review": {
+    "original": "../../.impeccable/review/sidebar/finish-review.md",
+    "originalVisualRepairs": 0,
+    "verdict": "../../.impeccable/review/sidebar/verdict.md",
+    "disposition": "ship",
+    "scoredFinding": "design documentation persistence",
+    "findingResolved": true,
+    "reviewer": "fresh generic agent using Impeccable finish contract",
+    "automatedDetectorAvailable": false
+  },
+  "documentation": {
+    "files": [
+      "DESIGN.md",
+      ".impeccable/design.json"
+    ],
+    "sourceColors": 21,
+    "scopedPrimitivePreviews": 10,
+    "syntaxAndReferencesPassed": true,
+    "isolatedPreviewRenderingVerified": false
+  },
+  "deploymentJournals": [
+    {
+      "path": "deployments/xlayer-196.json",
+      "sha256": "04ac5376235996f3b3c2ae5275827664c166f9b3328677ea999a6b2a74a5030f"
+    },
+    {
+      "path": "deployments/xlayer-196-engine.json",
+      "sha256": "e2f4614ba0294617158080cd52ca3e8b49d95195b65489bddb294ab5555119df"
+    },
+    {
+      "path": "deployments/xlayer-196-gateway.json",
+      "sha256": "a659c1368aa00709aa79c61381598f600ef62f78b18c4b7a7f4807ea9263bab6"
+    }
+  ],
+  "previewClassification": "Original comparison HTML uses example data; production uses real gateway/account records and excludes the comparison directory from deployment",
+  "captureFolders": {
+    "fork": ".impeccable/review/sidebar",
+    "public": ".impeccable/review/sidebar-public"
+  }
+}

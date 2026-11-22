@@ -13,7 +13,7 @@ The accepted MVP supports one network (X Layer), one zero-value demo token, prep
 | Public launch | Implemented | Production gateway and frontend links, verified deployment records, public source, anonymous access/CORS/route verification, responsive navigation, and published mainnet evidence. |
 | Submission | Draft prepared | [Project/commercial description and access guide](submission.md), [three-minute recording outline](demo-script.md); independent external testing, actual recorded video, and authorized event submission remain. |
 
-The approved visual direction remains Electric precision: Void/Graphite surfaces, Electric Mint actions, Signal Lime accents, Geist Sans/Mono, restrained Motion transitions, and React Three Fiber circuit scenes with reduced-motion/mobile fallbacks.
+On 22 November 2026 the user selected the light sidebar concept: periwinkle surround, white rounded frame, violet actions, pastel functional surfaces, and a left sidebar that becomes an accessible icon rail on phones. This replaces the earlier dark/no-sidebar direction. Geist Sans/Mono, state-driven Motion, and the actual R3F/SVG policy circuit remain.
 
 The pricing hypothesis is a 1–2% fee on successfully settled API payments, with provider analytics plans later. No platform fee, subscription, commercial revenue, paid AI endpoint, or independent user adoption is claimed by the protocol proof. High-frequency batching/channels, recurring subscriptions, fiat, cross-chain billing, and disputes remain after the MVP.
 

@@ -11,7 +11,7 @@ function Wire({ source, target, active }: { source: number; target: number; acti
     const midpoint = (x1 + x2) / 2;
     const points = [[x1 + .36, y1, -.1], [midpoint, y1, -.1], [midpoint, y2, -.1], [x2 - .36, y2, -.1]];
     return new THREE.Line(new THREE.BufferGeometry().setFromPoints(points.map(point => new THREE.Vector3(...point as [number, number, number]))),
-      new THREE.LineBasicMaterial({ color: active ? "#63efb7" : "#3b5159" }));
+      new THREE.LineBasicMaterial({ color: active ? "#6554d9" : "#b4a7ca" }));
   }, [source, target, active]);
   useEffect(() => () => { line.geometry.dispose(); (line.material as THREE.Material).dispose(); }, [line]);
   return <primitive object={line} />;
@@ -22,17 +22,17 @@ function Node({ id, active }: { id: number; active: boolean }) {
   const texture = useMemo(() => {
     const canvas = document.createElement("canvas"); canvas.width = id === 18 ? 320 : 192; canvas.height = 128;
     const context = canvas.getContext("2d")!;
-    context.clearRect(0, 0, canvas.width, canvas.height); context.fillStyle = active ? "#080c0d" : "#c5d7d0";
+    context.clearRect(0, 0, canvas.width, canvas.height); context.fillStyle = active ? "#ffffff" : "#45335f";
     context.font = "500 104px " + (getComputedStyle(document.body).getPropertyValue("--font-geist-mono").trim() || "monospace");
     context.textAlign = "center"; context.textBaseline = "middle"; context.fillText(text, canvas.width / 2, 64);
     const result = new THREE.CanvasTexture(canvas); result.colorSpace = THREE.SRGBColorSpace; return result;
   }, [text, active]);
   useEffect(() => () => texture.dispose(), [texture]);
   return <group position={[x, y, 0]}><mesh><boxGeometry args={[id === 18 ? 1.2 : .72, .48, .22]} />
-    <meshStandardMaterial color={active ? "#63efb7" : "#243238"} roughness={.6} metalness={.1} /></mesh>
+    <meshStandardMaterial color={active ? "#6554d9" : "#e8e2ff"} roughness={.6} metalness={.1} /></mesh>
     <mesh position={[0, 0, .12]}><planeGeometry args={[id === 18 ? 1.125 : .675, .45]} /><meshBasicMaterial map={texture} transparent depthWrite={false} /></mesh>
-    <mesh position={[-.4, 0, -.02]}><boxGeometry args={[.11, .13, .09]} /><meshBasicMaterial color={active ? "#63efb7" : "#58737d"} /></mesh>
-    <mesh position={[id === 18 ? .56 : .4, 0, -.02]}><boxGeometry args={[.11, .13, .09]} /><meshBasicMaterial color={active ? "#63efb7" : "#58737d"} /></mesh>
+    <mesh position={[-.4, 0, -.02]}><boxGeometry args={[.11, .13, .09]} /><meshBasicMaterial color={active ? "#6554d9" : "#a595ba"} /></mesh>
+    <mesh position={[id === 18 ? .56 : .4, 0, -.02]}><boxGeometry args={[.11, .13, .09]} /><meshBasicMaterial color={active ? "#6554d9" : "#a595ba"} /></mesh>
   </group>;
 }
 function Graph({ mask }: { mask: number }) {

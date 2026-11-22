@@ -130,7 +130,8 @@ async function main() {
     const capture = async (target: Page, name: string) => {
       await target.evaluate(() => window.scrollTo(0, 0)); await target.evaluate(() => document.fonts.ready); await pause(400);
       if (await target.locator(".workspace").count()) {
-        assert.equal(await target.locator(".sidebar, .workspace aside").count(), 0, "Workspace has no sidebar");
+        assert.equal(await target.locator(".workspace-sidebar").count(), 1, "Workspace uses the selected sidebar");
+        await ensure(target.locator('.workspace-nav a')).toHaveCount(5);
         await ensure(target.locator(".workspace-nav")).toBeVisible();
         await ensure(target.locator('.workspace-nav [aria-current="page"]')).toBeInViewport({ ratio: 1 });
       }

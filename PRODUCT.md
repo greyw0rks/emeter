@@ -20,7 +20,7 @@ The onchain policy enforces `A ∧ B ∧ C ∧ D ∧ (E ∨ F)`. A separate cust
 
 ## Operating Context
 
-One X Layer network (chain 196), one zero-value six-decimal DemoUSD token, prepaid credit, and two implemented services: JSON Validator and AI Text Analyzer through Otari. Next.js 16 / React 19 runs on Vercel; the hosted gateway uses Convex HTTP/Node actions, durable records, and scheduled jobs while reusing the Fastify protocol handlers. PostgreSQL/Prisma and BullMQ remain the local reference runtime. Browser wallets sign customer grants and transactions; delegated signing keys stay client-side. The workspace uses horizontal top navigation on desktop and phones, with no sidebar.
+One X Layer network (chain 196), one zero-value six-decimal DemoUSD token, prepaid credit, and two implemented services: JSON Validator and AI Text Analyzer through Otari. Next.js 16 / React 19 runs on Vercel; the hosted gateway uses Convex HTTP/Node actions, durable records, and scheduled jobs while reusing the Fastify protocol handlers. PostgreSQL/Prisma and BullMQ remain the local reference runtime. Browser wallets sign customer grants and transactions; delegated signing keys stay client-side. The selected workspace uses a persistent left sidebar, reduced to an accessible icon rail on phones.
 
 ## Capabilities and Constraints
 
@@ -30,7 +30,7 @@ Mainnet circuit, payment-engine, and hosted HTTP gateway proofs are complete. Tw
 
 ## Brand Commitments
 
-The accepted name is emeter. The accepted direction is Electric precision: Void/Graphite surfaces, Electric Mint actions, Signal Lime accents, Geist Sans/Mono, restrained Motion transitions, and React Three Fiber circuit scenes with reduced-motion and mobile fallbacks. Preserve these commitments from `docs/roadmap.md`.
+The accepted name is emeter. On 22 November 2026 the user selected the light sidebar preview from two working concepts. This replaces the earlier dark Electric precision/no-sidebar direction: periwinkle surround, rounded white app frame, violet actions, lavender sessions, mint service/success surfaces, yellow service/exception surfaces, and rose denials. Geist Sans/Mono, restrained state-driven Motion, and the actual React Three Fiber/SVG circuit remain. Preview example records are never substituted for real account data.
 
 ## Evidence on Hand
 

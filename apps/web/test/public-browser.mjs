@@ -12,7 +12,9 @@ const gatewayUrl = "https://first-eel-292.convex.site", rpcUrl = "https://rpc.xl
 const checks = [], screenshots = [];
 const ensure = expect.configure({ timeout: 45_000 });
 const check = name => { checks.push({ name, passed: true }); process.stdout.write("PASS " + name + "\n"); };
-const directory = join(root, ".impeccable/review/public");
+const artifactLabel = process.env.EMETER_PUBLIC_BROWSER_ARTIFACT_LABEL;
+assert(!artifactLabel || /^[a-z0-9-]+$/.test(artifactLabel));
+const directory = join(root, ".impeccable/review", artifactLabel ? artifactLabel + "-public" : "public");
 let browser;
 try {
   const config = await (await fetch(origin + "/api/config", { signal: AbortSignal.timeout(30_000) })).json();
@@ -39,7 +41,7 @@ try {
     const capture = async label => {
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.evaluate(() => document.fonts.ready);
-      assert.equal(await page.locator(".sidebar, .workspace aside").count(), 0);
+      if (await page.locator(".workspace").count()) assert.equal(await page.locator(".workspace-sidebar").count(), 1);
       if (await page.locator(".workspace").count())
         await ensure(page.locator('.workspace-nav [aria-current="page"]')).toBeInViewport({ ratio: 1 });
       assert(!await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1));
@@ -70,7 +72,7 @@ try {
       await ensure(page.getByRole("heading", { name: title, exact: true, level: 1 })).toBeVisible();
       await ensure(page.getByText("Ready", { exact: true }).first()).toBeVisible();
       await ensure(page.locator('.workspace-nav [aria-current="page"]')).toBeInViewport({ ratio: 1 });
-      assert.equal(await page.locator(".sidebar, .workspace aside").count(), 0);
+      assert.equal(await page.locator(".workspace-sidebar").count(), 1);
       if (route === "services") await ensure(page.getByText("Verified terms", { exact: true })).toHaveCount(2);
       if (["dashboard", "services"].includes(route)) await capture(route);
     }
@@ -83,7 +85,7 @@ try {
   const report = { kind: "anonymous-public-frontend-smoke", origin, gatewayUrl, rpcUrl,
     networkMode: "mainnet", walletMessageSignatures: 0, walletTransactions: 0, realAiRequests: 0,
     checks, screenshots, checkedAt: new Date().toISOString() };
-  await writeFile(join(root, "docs/evidence/frontend-public-checks.json"), JSON.stringify(report, null, 2) + "\n");
+  await writeFile(join(root, "docs/evidence", artifactLabel ? `frontend-${artifactLabel}-public-checks.json` : "frontend-public-checks.json"), JSON.stringify(report, null, 2) + "\n");
   await writeFile(process.env.EMETER_BROWSER_RESULT_PATH, JSON.stringify({ passed: true, checks: checks.length }) + "\n");
 } catch (error) {
   await writeFile(process.env.EMETER_BROWSER_RESULT_PATH, JSON.stringify({ passed: false, error: error.message }) + "\n");

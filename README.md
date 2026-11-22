@@ -2,7 +2,7 @@
 
 Programmable payments for AI agents and APIs.
 
-Open the [public workspace](https://emeter-peach.vercel.app), inspect the [gateway status](https://first-eel-292.convex.site/api/protocol), or browse the [source](https://github.com/greyw0rks/emeter). The app uses horizontal top navigation on desktop and phones.
+Open the [public workspace](https://emeter-peach.vercel.app), inspect the [gateway status](https://first-eel-292.convex.site/api/protocol), or browse the [source](https://github.com/greyw0rks/emeter). The selected light workspace uses a sidebar on desktop and an accessible icon rail on phones.
 
 emeter is being built for X Layer TapeOut Accelerate. A published TapeOut NAND circuit authorizes or denies DemoUSD settlements on X Layer mainnet. Registered services, immutable price versions, prepaid customer credit, and capped signing sessions govern actual AI analysis and JSON validation. Vercel hosts the interface; Convex hosts the gateway, durable records, and execution/settlement jobs.
 

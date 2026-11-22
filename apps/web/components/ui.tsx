@@ -91,9 +91,9 @@ export function NetworkBadge() {
 export function WalletGate({ children }: { children: ReactNode }) {
   const { signedIn, loading } = useGateway();
   if (signedIn) return children;
-  return <EmptyState title={loading ? "Checking the gateway" : "Connect to see your workspace"} action={!loading && <WalletButton />}>
+  return <div className="wallet-gate"><EmptyState title={loading ? "Checking the gateway" : "Connect to see your workspace"} action={!loading && <WalletButton />}>
     {loading ? "Reading the configured gateway and deployed contracts." : "Sign a wallet login to see your credit, sessions, and request history. Spending requires a separate authorization."}
-  </EmptyState>;
+  </EmptyState></div>;
 }
 export function GlobalFeedback() {
   const gateway = useGateway();
