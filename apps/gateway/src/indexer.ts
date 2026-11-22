@@ -23,8 +23,10 @@ export async function indexChain(ctx: GatewayContext) {
     throw new Error("CHAIN_REORG_RECONCILIATION_REQUIRED");
   }
   if (cursor.state === "reorg_detected") throw new Error("CHAIN_REORG_RECONCILIATION_REQUIRED");
-  while (cursor.blockNumber < confirmed) {
-    const end = cursor.blockNumber + 5000n < confirmed ? cursor.blockNumber + 5000n : confirmed;
+  let batches = 0;
+  const batchSize = BigInt(ctx.config.indexerBatchBlocks ?? 100);
+  while (cursor.blockNumber < confirmed && batches < (ctx.config.indexerMaxBatches ?? Infinity)) {
+    const end = cursor.blockNumber + batchSize < confirmed ? cursor.blockNumber + batchSize : confirmed;
     const logs = await ctx.client.getLogs({ address: [ctx.config.vault, ctx.config.registry],
       fromBlock: cursor.blockNumber + 1n, toBlock: end });
     const finalBlock = await ctx.client.getBlock({ blockNumber: end });
@@ -89,6 +91,7 @@ export async function indexChain(ctx: GatewayContext) {
       } });
     }, { timeout: 20_000 });
     cursor = await ctx.db.indexerCursor.findUniqueOrThrow({ where: { id: key } });
+    batches++;
   }
   if (cursor.blockNumber >= confirmed)
     await ctx.db.indexerCursor.update({ where: { id: key }, data: { state: "ready", updatedAt: new Date() } });

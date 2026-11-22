@@ -84,17 +84,14 @@ legend { margin-bottom: 12px; font-weight: 560; }
 .wordmark { display: inline-flex; align-items: center; gap: 9px; font-size: 27px; font-weight: 650; letter-spacing: -.04em; text-decoration: none; line-height: 1; }
 .wordmark svg { color: var(--mint); }
 .wordmark-stop { color: var(--mint); margin-left: -8px; }
-.workspace { min-height: 100vh; display: grid; grid-template-columns: 224px minmax(0, 1fr); }
-.sidebar { border-right: 1px solid var(--line); padding: 35px 18px 24px; display: flex; flex-direction: column; gap: 48px; position: sticky; top: 0; height: 100dvh; }
-.sidebar .wordmark { margin-left: 10px; }
-.sidebar nav { display: grid; gap: 6px; }
-.nav-link { display: flex; align-items: center; gap: 12px; padding: 11px 13px; color: var(--muted); border: 1px solid transparent; border-radius: 5px; text-decoration: none; font-size: 13px; }
+.workspace { min-height: 100vh; display: flex; flex-direction: column; min-width: 0; }
+.workspace-header { border-bottom: 1px solid var(--line); }
+.workspace-nav { display: flex; gap: 8px; padding: 0 40px 12px; overflow-x: auto; }
+.nav-link { display: flex; align-items: center; gap: 12px; min-height: 44px; flex-shrink: 0; padding: 11px 13px; color: var(--muted); border: 1px solid transparent; border-radius: 5px; text-decoration: none; font-size: 13px; white-space: nowrap; }
 .nav-link:hover { color: var(--ink); background: var(--graphite); }
 .nav-active { color: var(--mint); border-color: #2b493e; background: var(--mint-surface); }
-.sidebar-bottom { margin-top: auto; padding: 0 10px; font-size: 12px; }
-.sidebar-bottom .text-link { margin-top: 16px; font-size: 11px; }
-.workspace-body { min-width: 0; display: flex; flex-direction: column; }
-.workspace-topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 84px; border-bottom: 1px solid var(--line); padding: 18px 40px; }
+.workspace-topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; min-height: 84px; padding: 18px 40px; }
+.workspace-account { display: flex; align-items: center; justify-content: flex-end; gap: 16px; flex-wrap: wrap; }
 .workspace-main { padding: 40px; width: 100%; max-width: 1500px; margin: 0 auto; flex: 1; }
 .workspace-footer { padding: 20px 40px; border-top: 1px solid var(--line); font-size: 11px; color: var(--dim); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .network-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
@@ -241,10 +238,8 @@ legend { margin-bottom: 12px; font-weight: 560; }
 
 @media (min-width: 1600px) { .workspace-main { padding: 48px 56px; } }
 @media (max-width: 1100px) {
-  .workspace { grid-template-columns: 190px minmax(0,1fr); }
   .workspace-main { padding: 32px 24px; }
-  .workspace-topbar, .workspace-footer { padding-left: 24px; padding-right: 24px; }
-  .sidebar { padding-left: 12px; padding-right: 12px; }
+  .workspace-topbar, .workspace-nav, .workspace-footer { padding-left: 24px; padding-right: 24px; }
   .session-row { grid-template-columns: minmax(160px,1.5fr) 1fr 1fr; }
   .session-row > .actions { grid-column: 1 / -1; }
   .page-header { flex-wrap: wrap; }
@@ -252,14 +247,11 @@ legend { margin-bottom: 12px; font-weight: 560; }
   .summary-item { padding: 0 16px; }
 }
 @media (max-width: 800px) {
-  .workspace { display: block; }
-  .sidebar { height: auto; position: relative; padding: 24px 20px 0; border-right: 0; border-bottom: 1px solid var(--line); gap: 24px; }
-  .sidebar .wordmark { margin: 0; }
-  .sidebar nav { display: flex; flex-wrap: wrap; gap: 2px 8px; padding-bottom: 12px; }
+  .workspace-nav { padding: 0 20px 12px; gap: 4px; }
   .nav-link { padding: 8px 10px; font-size: 12px; gap: 7px; }
   .nav-link svg { width: 15px; }
-  .sidebar-bottom { display: none; }
   .workspace-topbar { min-height: 72px; padding: 14px 20px; }
+  .workspace-account { justify-content: space-between; }
   .workspace-main { padding: 30px 20px; }
   .workspace-footer { padding: 20px; }
   .split-layout { grid-template-columns: 1fr; gap: 32px; }
@@ -294,7 +286,8 @@ legend { margin-bottom: 12px; font-weight: 560; }
   .policy-formula { font-size: 15px; }
   .evidence-list > div { grid-template-columns: 1fr; gap: 7px; }
   .feedback { padding: 10px 12px; font-size: 12px; }
-  .network-readiness { display: none; }
+  .workspace-account { width: 100%; }
+  .network-badge { flex-wrap: wrap; }
   .service-row { gap: 14px; }
   .service-price { gap: 16px; flex-wrap: wrap; }
 }

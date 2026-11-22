@@ -10,10 +10,19 @@ export class HttpError extends Error {
   constructor(public statusCode: number, public code: string) { super(code); }
 }
 export type Principal = { wallet: string; scopes: string[]; serviceId?: string; sessionId?: string };
-export async function authenticate(ctx: GatewayContext, request: FastifyRequest, scope?: string): Promise<Principal> {
+function credentialDigest(ctx: GatewayContext, request: FastifyRequest) {
+  if (ctx.credentialHash) return ctx.credentialHash;
   const token = request.headers.authorization?.replace(/^Bearer /, "");
   if (!token || token === request.headers.authorization) throw new HttpError(401, "AUTHENTICATION_REQUIRED");
-  const hash = secretHash(token);
+  return secretHash(token);
+}
+function issueCredential(ctx: GatewayContext, prefix = "") {
+  if (ctx.issuedCredentialHash) return { value: "", hash: ctx.issuedCredentialHash };
+  const value = prefix + randomBytes(32).toString("base64url");
+  return { value, hash: secretHash(value) };
+}
+export async function authenticate(ctx: GatewayContext, request: FastifyRequest, scope?: string): Promise<Principal> {
+  const hash = credentialDigest(ctx, request);
   const [session, key] = await Promise.all([
     ctx.db.authSession.findUnique({ where: { tokenHash: hash } }),
     ctx.db.aPIKey.findUnique({ where: { keyHash: hash } })
@@ -41,20 +50,20 @@ export function authRoutes(app: FastifyInstance, ctx: GatewayContext) {
     if (!challenge || challenge.consumedAt || challenge.expiresAt <= new Date()) throw new HttpError(401, "CHALLENGE_EXPIRED_OR_CONSUMED");
     if (!await ctx.client.verifyMessage({ address: getAddress(challenge.wallet), message: challenge.message, signature: body.signature }))
       throw new HttpError(401, "INVALID_WALLET_SIGNATURE");
-    const token = randomBytes(32).toString("base64url");
+    const token = issueCredential(ctx);
     const expiresAt = new Date(Date.now() + 60 * 60_000);
     await ctx.db.$transaction(async tx => {
       const used = await tx.authChallenge.updateMany({ where: { id: challenge.id, consumedAt: null, expiresAt: { gt: new Date() } },
         data: { consumedAt: new Date() } });
       if (used.count !== 1) throw new HttpError(401, "CHALLENGE_EXPIRED_OR_CONSUMED");
       await tx.user.upsert({ where: { wallet: challenge.wallet }, create: { wallet: challenge.wallet }, update: {} });
-      await tx.authSession.create({ data: { tokenHash: secretHash(token), wallet: challenge.wallet, expiresAt } });
+      await tx.authSession.create({ data: { tokenHash: token.hash, wallet: challenge.wallet, expiresAt } });
     });
-    return { token, wallet: challenge.wallet, expiresAt: expiresAt.toISOString() };
+    return { token: token.value, wallet: challenge.wallet, expiresAt: expiresAt.toISOString() };
   });
   app.post("/api/auth/logout", async request => {
     await authenticate(ctx, request);
-    const hash = secretHash(request.headers.authorization!.slice(7));
+    const hash = credentialDigest(ctx, request);
     await ctx.db.authSession.updateMany({ where: { tokenHash: hash }, data: { revokedAt: new Date() } });
     await ctx.db.aPIKey.updateMany({ where: { keyHash: hash }, data: { revokedAt: new Date() } });
     return { revoked: true };
@@ -78,11 +87,11 @@ export function authRoutes(app: FastifyInstance, ctx: GatewayContext) {
       if (!service || service.provider !== auth.wallet) throw new HttpError(403, "NOT_SERVICE_OWNER");
       if (body.scopes.includes("execute")) throw new HttpError(400, "INVALID_PROVIDER_KEY_SCOPE");
     }
-    const key = "emeter_" + randomBytes(32).toString("base64url");
+    const key = issueCredential(ctx, "emeter_");
     const record = await ctx.db.aPIKey.create({ data: { wallet: auth.wallet,
       ...(body.serviceId ? { serviceId: body.serviceId } : {}), ...(body.sessionId ? { sessionId: body.sessionId } : {}),
-      scopes: body.scopes, keyHash: secretHash(key), ...(expiresAt ? { expiresAt } : {}) } });
-    return { id: record.id, key, serviceId: body.serviceId ?? null, sessionId: body.sessionId ?? null,
+      scopes: body.scopes, keyHash: key.hash, ...(expiresAt ? { expiresAt } : {}) } });
+    return { id: record.id, key: key.value, serviceId: body.serviceId ?? null, sessionId: body.sessionId ?? null,
       scopes: body.scopes, expiresAt: expiresAt?.toISOString() ?? null, displayOnce: true };
   });
   app.delete("/api/keys/:id", async request => {

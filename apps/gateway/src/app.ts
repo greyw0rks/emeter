@@ -4,7 +4,7 @@ import { parseStrictJson } from "@emeter/shared";
 import { z } from "zod";
 import { authRoutes, HttpError } from "./auth.js";
 import type { GatewayContext } from "./context.js";
-import { readiness } from "./context.js";
+import { readiness } from "./readiness.js";
 import { serviceRoutes } from "./services.js";
 import { sessionRoutes } from "./sessions.js";
 import { requestRoutes } from "./requests.js";

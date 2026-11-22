@@ -1,0 +1,188 @@
+{
+  "kind": "paid-gateway-mainnet-verification",
+  "chainId": 196,
+  "independentRpcAgreement": true,
+  "requestEvidenceSource": "retained-public-signed-records",
+  "newAiCallsDuringVerification": 0,
+  "rpcOperators": [
+    "rpc.xlayer.tech",
+    "xlayer.drpc.org"
+  ],
+  "gatewayUrl": "https://first-eel-292.convex.site",
+  "participantClassification": "builder-controlled operator signs the bounded grant and charges locally",
+  "independentAdoption": false,
+  "realAiRequests": 1,
+  "fixtureAiRequests": 0,
+  "aiModel": {
+    "id": "mistralai/mistral-small-3.2-24b",
+    "runtime": "otari-api"
+  },
+  "reportedUsage": {
+    "completion_tokens": 58,
+    "prompt_tokens": 88,
+    "total_tokens": 146
+  },
+  "recomputedReportedUsdCost": "0.00001820",
+  "aiSpendCeilingUsd": "0.01",
+  "paidBaseUnits": "90000",
+  "refundedBaseUnits": "10000",
+  "proofBlock": "76525073",
+  "proofBlockHash": "0x6eb0a59e2e614f975eed1099cb14e150f69afb21ee0ea80e59227ff58b59dd37",
+  "before": {
+    "customer": "630000",
+    "provider": "0",
+    "vault": "0",
+    "available": "0",
+    "locked": "0",
+    "totalAvailable": "0",
+    "totalPaid": "100000",
+    "nativeCustomer": "7598544564085113",
+    "nativeRelayer": "0"
+  },
+  "after": {
+    "customer": "540000",
+    "provider": "90000",
+    "vault": "0",
+    "available": "0",
+    "locked": "0",
+    "totalAvailable": "0",
+    "totalPaid": "190000",
+    "nativeCustomer": "6574746812085113",
+    "nativeRelayer": "980697882000000"
+  },
+  "session": {
+    "customer": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+    "signer": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+    "budget": "100000",
+    "balance": "0",
+    "spent": "90000",
+    "refundedAmount": "10000",
+    "softLimit": "80000",
+    "maxCharge": "50000",
+    "createdAt": "1795293902",
+    "expiresAt": "1795294043",
+    "executionDeadline": "1795294028",
+    "refundAfter": "1795294103",
+    "settlementWindow": "60",
+    "status": 3,
+    "signerRevoked": true
+  },
+  "wallet": [
+    {
+      "name": "register-text_analyze",
+      "hash": "0x4719a6064260049b3245af2273fc2aec35383651c03d1ced839433bde9d7750d",
+      "blockNumber": "76523408",
+      "blockHash": "0xf64ebda5e543b6f832d48a023428ef1d584a36e0c99873d11d0e2c6444656903",
+      "inputHash": "0x52ea4376f7bb1a6d888932124fb8b3e85a94e2a1af711ddf741af3d275a0f842",
+      "nonce": 30,
+      "costWei": "4739438000000"
+    },
+    {
+      "name": "register-json_validate",
+      "hash": "0x30cb28126761ad3daa84d56d0d0aa40f469f78530c8432a1a419d452f34cf5cd",
+      "blockNumber": "76523418",
+      "blockHash": "0x7e790966f13c2fff80a4e146aa1b3438e29d77a6026def8759f8d1145578aeb3",
+      "inputHash": "0x7703ba19bc12327bc88b5aef9e92bdd96b2378e00a8e9c5309eba3bf9f441901",
+      "nonce": 31,
+      "costWei": "4739438000000"
+    },
+    {
+      "name": "fund-relayer",
+      "hash": "0xf87bb97016ac9ce933a104154d55a06c4fa77c3afaea01a7527c3806d0e22d51",
+      "blockNumber": "76523429",
+      "blockHash": "0xcf25250cf6a8bdd06b8325012456ae7f8cd5b3dac078b3c8ec3dcd4303f27dd6",
+      "inputHash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+      "nonce": 32,
+      "costWei": "1000462000000000"
+    },
+    {
+      "name": "approve-demo",
+      "hash": "0x4042c9c34d7875d1836886bcb072ddc783276db588386ecf5a1bd48c432120f3",
+      "blockNumber": "76524848",
+      "blockHash": "0x7c92de7558862d46158846ab8378788bd995f1b091dd82d122390a07fb2e4adb",
+      "inputHash": "0xdaf4562826fdc9312b53bf9902f3e6fcd8cdb2a74030ac0a17dddb687d727d1b",
+      "nonce": 33,
+      "costWei": "1019260000000"
+    },
+    {
+      "name": "deposit-demo",
+      "hash": "0x7c0c51cc8e0270816947da46b81fa47be2277e2ea8df0ea02ea2576299ef8764",
+      "blockNumber": "76524854",
+      "blockHash": "0x0850c883401cbd8d909c104cbbfd39709a7c43b737bcddd9895686f116e42576",
+      "inputHash": "0x201573c83696ddab0637438bd3467477d40f7a55b963bb12a0879dc319db63b2",
+      "nonce": 34,
+      "costWei": "2337082000000"
+    },
+    {
+      "name": "create-session",
+      "hash": "0x89823bb2c1f587c900272bb1f8c576d7f09005fa2128b6cfdc7ac208165b9095",
+      "blockNumber": "76524866",
+      "blockHash": "0x4ed510a60d78b5c332d25a050610e024724e0397c5c6490bc0317ee88ddd3939",
+      "inputHash": "0x0934af5a2ff64fef200351cc5138eafa870bed03b7d053f567217f50f1c46bf4",
+      "nonce": 35,
+      "costWei": "7337902000000"
+    },
+    {
+      "name": "close-session",
+      "hash": "0x9eb2e2ddb6588ed40d3abc6c1b13a533b9113edd98f12403b4272574ca222682",
+      "blockNumber": "76524992",
+      "blockHash": "0x30841455ba08a0a6325a894100896f51128e29ece0ecf85a91f43c8c8e40c2ca",
+      "inputHash": "0x858e45dcfce90f78309cbe1cec4cb84549417f3e08558a5518516af927ea6fa1",
+      "nonce": 36,
+      "costWei": "856834000000"
+    },
+    {
+      "name": "revoke-signer",
+      "hash": "0x06babd362085c8710f3597ca8e87d0c1eeb42021f30804585ad46b12b6101e56",
+      "blockNumber": "76524999",
+      "blockHash": "0x7541a58692a261e118e1c90565dd5e70c0ac360aab4706ed910fd1e52654d272",
+      "inputHash": "0xb9102d4b1c2feca27e71e6a3047f6bd9d655022c9750649a9ff25db7a96e07d6",
+      "nonce": 37,
+      "costWei": "728134000000"
+    },
+    {
+      "name": "refund-session",
+      "hash": "0xc24e35a3aa11c65b8053ddb0098523724d578171c82e11d95af2e12b56bc0ccf",
+      "blockNumber": "76525073",
+      "blockHash": "0x6eb0a59e2e614f975eed1099cb14e150f69afb21ee0ea80e59227ff58b59dd37",
+      "inputHash": "0x27de76e9fe9a9cd92dbef312e6ff60d2b991ba8b3df123af6ab73d3b13cc416d",
+      "nonce": 38,
+      "costWei": "1577664000000"
+    }
+  ],
+  "settlements": [
+    {
+      "requestId": "0xd9cf7cb1c55fcead40ee9742528b2ab39bbfdca0ec119687a07a6ddb479ab656",
+      "hash": "0x596015f75d4d75f5efa6e38385999e2cef77c614bdf1c933d1ab8d5f6f0278b5",
+      "blockNumber": "76524908",
+      "blockHash": "0xbf819a99f7f9b511a683df6fc3707d55fa55e11d806bc2235bb21181ab1929ac",
+      "inputHash": "0x2dd783594e234c49c97b09674ba9575b0bd0e6ee7a553417fb27468722383f9d",
+      "costWei": "6861778000000",
+      "policyInputs": 31,
+      "priceBaseUnits": "20000"
+    },
+    {
+      "requestId": "0x4c02f029c5a12d7bfde9f690f1b9006db436ee7251ab2fe81e816ab46fa5b2b4",
+      "hash": "0x649f87e224a294d01583a3278cb84a2ffb8286092e1227e2f97c2203ae67f9da",
+      "blockNumber": "76524941",
+      "blockHash": "0x90f6295bb419a668d4ff9f2fd045b101ca3bb4be33548ea0ea1aa1217cb757e3",
+      "inputHash": "0xd9b5a766d34c0f0194245c86571ca891cdcb8f89a1fe9330454321df562ab203",
+      "costWei": "6108586000000",
+      "policyInputs": 31,
+      "priceBaseUnits": "50000"
+    },
+    {
+      "requestId": "0xe7c4c6bfd0623984c7783c97197ebbb215c67755f8c379857a2676e4c710bd06",
+      "hash": "0x991a1ea4a2cf5e1accbe5a96676dc8dd70f34d8c86775d8ac5326e2e4c5e7492",
+      "blockNumber": "76524970",
+      "blockHash": "0xfb1728472c4ab8ea5097eb7bf23f1eede91a8dd0ae6d3185a9daf0ac6af7095a",
+      "inputHash": "0x746880aa92dc03a9440008f06232fa38a44592e9df44bdefcad0dc4e4ebaa2d7",
+      "costWei": "6331754000000",
+      "policyInputs": 47,
+      "priceBaseUnits": "20000"
+    }
+  ],
+  "operatorCostWei": "1023797752000000",
+  "relayerCostWei": "19302118000000",
+  "checkedAt": "2026-11-22T20:41:43.545Z"
+}

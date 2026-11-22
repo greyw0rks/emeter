@@ -4,11 +4,14 @@
   "version": "0.1.0",
   "type": "module",
   "packageManager": "pnpm@12.16.1",
-  "engines": { "node": ">=22.12.0" },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "build": "pnpm -r --if-present build",
-    "typecheck": "pnpm -r --if-present typecheck && tsc --noEmit",
-    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck && tsc --noEmit && tsc --noEmit -p convex/tsconfig.json",
+    "test": "pnpm -r --if-present test && pnpm test:convex",
+    "test:convex": "vitest run --config tests/convex/vitest.config.ts",
     "circuit:generate": "pnpm --filter @emeter/circuit generate",
     "contracts:install": "pnpm --filter @emeter/contracts install:libs",
     "contracts:build": "pnpm --filter @emeter/contracts build",
@@ -19,6 +22,7 @@
     "verify:xlayer": "tsx scripts/verify/xlayer.ts",
     "verify:deployment": "tsx scripts/verify/deployment.ts",
     "verify:engine": "tsx scripts/verify/engine-deployment.ts",
+    "verify:gateway": "tsx scripts/verify/gateway-mainnet.ts",
     "proof:local": "tsx scripts/verify/local-proof.ts",
     "proof:engine:local": "tsx scripts/verify/engine-local.ts",
     "proof:gateway": "tsx scripts/verify/gateway.ts",
@@ -30,13 +34,16 @@
   },
   "devDependencies": {
     "@types/node": "22.19.1",
+    "convex-test": "^0.0.73",
     "tsx": "4.23.15",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "5.1.1"
   },
   "dependencies": {
     "@emeter/circuit": "workspace:*",
-    "@emeter/shared": "workspace:*",
     "@emeter/sdk": "workspace:*",
+    "@emeter/shared": "workspace:*",
+    "convex": "^1.51.0",
     "viem": "2.58.1",
     "zod": "4.6.7"
   }

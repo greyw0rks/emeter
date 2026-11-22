@@ -2,14 +2,19 @@
 
 Programmable payments for AI agents and APIs.
 
-emeter is being built for X Layer TapeOut Accelerate. A published TapeOut NAND circuit authorizes or denies real DemoUSD settlements on X Layer mainnet. The payment engine adds registered services, immutable price versions, prepaid customer credit, and capped delegated signing sessions. The paid gateway connects these controls to AI text analysis and JSON validation through a verified HTTP SDK.
+Open the [public workspace](https://emeter-peach.vercel.app), inspect the [gateway status](https://first-eel-292.convex.site/api/protocol), or browse the [source](https://github.com/greyw0rks/emeter). The app uses horizontal top navigation on desktop and phones.
 
-The [original circuit proof](docs/verification.md) and [completed payment-engine proof](docs/payment-engine.md) include real payments, rejected overrides, and unused-balance refunds. Both independent RPCs agree on the recorded transactions. The [gateway checkpoint](docs/gateway.md) adds a real Otari response and thirty-two checks of authenticated execution, settlement, and recovery on a local X Layer fork. The [frontend workspace](docs/frontend.md) connects wallet credit, scoped sessions, provider registration, execution, receipt inspection, and the live policy circuit; eighteen browser checks exercise the complete customer/provider flow on a disposable fork.
+emeter is being built for X Layer TapeOut Accelerate. A published TapeOut NAND circuit authorizes or denies DemoUSD settlements on X Layer mainnet. Registered services, immutable price versions, prepaid customer credit, and capped signing sessions govern actual AI analysis and JSON validation. Vercel hosts the interface; Convex hosts the gateway, durable records, and execution/settlement jobs.
+
+The [original circuit proof](docs/verification.md) and [payment-engine proof](docs/payment-engine.md) include real payments, rejected overrides, and refunds. The [hosted gateway proof](docs/evidence/gateway-mainnet-verification.json) verifies three mainnet requests, **0.09 DEMO paid**, and **0.01 DEMO refunded directly to the customer**, with agreement from two independent RPCs. One actual Otari response reported 88 input / 58 output tokens; its reported cost recomputes to **$0.00001820**. The public AI runtime retains a **$0.01 total estimated/reported cost cap**. DEMO is a zero-value test token; builder-controlled proofs do not establish independent adoption.
+
+The [frontend workspace](docs/frontend.md) connects wallet credit, bounded sessions, provider credentials, execution, independent receipts, and the live policy circuit. Eighteen browser checks exercise the complete customer/provider flow on a disposable historical fork. Earlier fork/AI artifacts remain separately labeled in [gateway.md](docs/gateway.md).
 
 ## Workspace
 
 - `apps/web`: Next.js/React workspace, wallet flows, playground, receipts, provider credentials, and R3F/SVG policy visualization.
 - `apps/gateway`: Authenticated Fastify gateway, signed providers, execution/settlement workers, and chain indexer.
+- `convex`: Hosted HTTP/Node actions, atomic record adapter, fenced leases, durable scheduler jobs, and AI spending ledger.
 - `packages/database`: PostgreSQL/Prisma records and additive migrations.
 - `packages/contracts`: Service registry, session vault, circuit adapter, original proof vault, and Foundry tests.
 - `packages/circuit`: TAP-02 NAND compiler, simulator, and exhaustive policy vectors.
@@ -37,6 +42,7 @@ pnpm verify:deployment
 X_LAYER_RPC_URL=https://rpc.xlayer.tech pnpm test:engine:fork
 pnpm proof:engine:local
 pnpm verify:engine
+pnpm verify:gateway
 pnpm proof:gateway
 ```
 
@@ -44,7 +50,9 @@ Use `.env.example` for public configuration. Keep private keys out of this repos
 
 For the web workspace, configure `apps/web/.env.local` from `.env.web.example`, matching the running gateway and exact fork RPC. Start it with `rtk pnpm dev:web`. [Frontend setup and verification](docs/frontend.md) explains browser origins, wallet block-hash checks, tab-only keys, and transaction/request recovery.
 
-The original mainnet proof is recorded in `deployments/xlayer-196.json`; the completed payment-engine journal is `deployments/xlayer-196-engine.json`. `pnpm verify:deployment` verifies the original historical proof without signing or spending funds. `pnpm verify:engine` checks the engine's transaction inputs, scoped sessions, versioned prices, denial, refunds, and token accounting against two independent RPCs. Deployment scripts refuse to silently replace an existing mainnet journal.
+The original mainnet proof is recorded in `deployments/xlayer-196.json`; the payment-engine journal is `deployments/xlayer-196-engine.json`; hosted activation is `deployments/xlayer-196-gateway.json`. `pnpm verify:deployment`, `pnpm verify:engine`, and `pnpm verify:gateway` verify those historical proofs against live RPCs without signing transactions or spending funds. Gateway verification uses the published signed request records by default; `--refresh` additionally requires the authorized external operator signer to authenticate and reload its owned records. Neither mode calls AI. Deployment scripts preserve existing journals and exact signed transaction bytes.
+
+[Hosted setup](docs/hosting.md) covers Convex configuration, Vercel production settings, exact browser origins, and readiness. PostgreSQL/Prisma and Redis/BullMQ remain the local reference runtime and support reproducible fork checks.
 
 ## Policy
 
@@ -54,4 +62,4 @@ The vault derives authorization, receipt, session, and limit inputs from verifie
 
 Only successful onchain receipts count as settled payments. Local tests, fork activity, and mainnet activity are documented separately.
 
-The proofs use builder-controlled wallets. The gateway checkpoint combines functioning JSON validation, one actual AI response, authenticated HTTP requests, durable indexing, and verified local-fork payments. The frontend proof uses actual JSON/schema validation and a labeled offline AI fixture, with no new paid AI call or mainnet broadcast. Public mainnet gateway activation, public access/source, independent testing, and submission remain next. [Architecture](docs/architecture.md), [protocol review](docs/protocol-review.md), [threat model](docs/threat-model.md), and [roadmap](docs/roadmap.md) describe the boundaries.
+The proofs use builder-controlled wallets. Mainnet gateway activation is complete. Frontend fork checks use actual JSON/schema validation and a labeled offline AI fixture; public browser smoke checks make no wallet signatures, transactions, or paid AI calls. Independent testing, a recorded app demo, and event submission remain next; the [submission draft](docs/submission.md) and [recording outline](docs/demo-script.md) are prepared. [Architecture](docs/architecture.md), [protocol review](docs/protocol-review.md), [threat model](docs/threat-model.md), and [roadmap](docs/roadmap.md) describe the boundaries.

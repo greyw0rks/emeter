@@ -14,6 +14,11 @@ export type GatewayConfig = {
   queuePrefix: string; settlementGasBudget: bigint; executionTimeoutMs: number;
   networkMode: "mainnet" | "local-fork";
   browserOrigins?: string[];
+  executionEnabled?: boolean;
+  indexerBatchBlocks?: number;
+  indexerMaxBatches?: number;
+  cursorFreshnessMs?: number;
+  workerFreshnessMs?: number;
 };
 
 export async function loadRuntimeEnvironment() {

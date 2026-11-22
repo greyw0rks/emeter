@@ -31,7 +31,7 @@ export default function Home() {
         <Link className="text-link" href="/policy">See every condition<ArrowUpRight size={15} aria-hidden="true" /></Link></div>
         <div className="proof-rows"><div><strong>Deployed on X Layer</strong><p>The circuit and payment engine have recorded mainnet proof.</p>
           <a href={`https://www.oklink.com/xlayer/tx/${DEPLOYMENT.proofTransaction}`} target="_blank" rel="noreferrer" className="text-link">Inspect the proof transaction<ArrowUpRight size={14} aria-hidden="true" /></a></div>
-          <div><strong>Gateway verified on a local fork</strong><p>The gateway checkpoint includes an actual Otari response and a local-fork payment. Public mainnet service activation is pending.</p></div>
+          <div><strong>Gateway active on X Layer</strong><p>AI analysis and JSON validation return signed results and settle bounded DEMO payments. DEMO is a zero-value test token.</p></div>
           <div><strong>Your wallet sets the rules</strong><p>Delegated keys stay in this tab. Close sessions, revoke signers, and recover unused credit with the owning wallet.</p></div></div>
       </section></main>
     <footer className="landing-footer"><span>emeter. Meter every request. Control every payment.</span><div><NetworkBadge /><Link href="/dashboard">Workspace</Link></div></footer>

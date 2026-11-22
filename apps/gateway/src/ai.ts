@@ -11,7 +11,7 @@ export type Analyzer = { model: string; runtime: "otari-api" | "anthropic-api" |
 export function aiFailureCode(error: unknown) {
   if (error instanceof Anthropic.APIConnectionError) return "AI_UPSTREAM_CONNECTION_FAILED";
   if (error instanceof Anthropic.APIError) return "AI_UPSTREAM_HTTP_" + String(error.status ?? "ERROR");
-  if (error instanceof Error && ["INCOMPLETE_AI_RESPONSE", "AI_OUTPUT_INVALID"].includes(error.message)) return error.message;
+  if (error instanceof Error && ["INCOMPLETE_AI_RESPONSE", "AI_OUTPUT_INVALID", "AI_BUDGET_EXHAUSTED", "AI_PRICE_NOT_VERIFIED"].includes(error.message)) return error.message;
   return "AI_EXECUTION_FAILED";
 }
 type SignMessage = (message: { message: { raw: Hex } }) => Promise<Hex>;

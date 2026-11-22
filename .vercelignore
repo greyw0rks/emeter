@@ -1,0 +1,16 @@
+.env
+.env.*
+**/.env
+**/.env.*
+.atlas/
+.impeccable/
+docs/
+tests/
+**/test/
+scripts/
+node_modules/
+**/node_modules/
+**/*.tsbuildinfo
+packages/contracts/lib/
+packages/contracts/cache/
+packages/contracts/out/

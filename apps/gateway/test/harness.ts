@@ -39,7 +39,16 @@ export async function createGatewayHarness(options: { browserOrigins?: string[];
   const upstreamRpc = process.env.EMETER_TEST_FORK_RPC ?? "https://xlayer.drpc.org";
   const upstream = createPublicClient({ transport: http(upstreamRpc, { timeout: 20_000, retryCount: 1 }) });
   if (await upstream.getChainId() !== 196) throw new Error("Fork source must be X Layer");
-  const forkBlock = await upstream.getBlockNumber();
+  // Built-in IDs are now registered in production with dedicated signers.
+  // Reproduce fixtures from the completed engine proof, before those terms
+  // exist, so a temporary provider can register its own immutable manifests.
+  const baseline = engine.steps.at(-1);
+  const requestedBlock = process.env.EMETER_TEST_FORK_BLOCK;
+  if (requestedBlock && !/^[1-9][0-9]{0,17}$/.test(requestedBlock)) throw new Error("Invalid test fork block");
+  const forkBlock = BigInt(requestedBlock ?? baseline.blockNumber);
+  const sourceBlock = await upstream.getBlock({ blockNumber: forkBlock });
+  if (!requestedBlock && sourceBlock.hash.toLowerCase() !== baseline.blockHash.toLowerCase())
+    throw new Error("Fork source differs from the recorded engine proof block");
   const [forkPort, gatewayPort, providerPort] = await Promise.all([freePort(), freePort(), freePort()]);
   const rpc = "http://127.0.0.1:" + forkPort;
   const child = spawn(process.env.EMETER_ANVIL_BINARY ?? join(homedir(), ".foundry/bin/anvil"), [
@@ -93,6 +102,13 @@ export async function createGatewayHarness(options: { browserOrigins?: string[];
     const chain = ctx.chain;
     const client = createPublicClient({ chain, pollingInterval: 100, transport: http(rpc) });
     const test = createTestClient({ chain, mode: "anvil", transport: http(rpc) });
+    // Historical state must use the provider's current receipt clock for new
+    // fixture activity. The recorded source block itself remains unchanged.
+    const wallClock = BigInt(Math.floor(Date.now() / 1000));
+    if ((await client.getBlock()).timestamp < wallClock - 5n) {
+      await test.setNextBlockTimestamp({ timestamp: wallClock + 1n });
+      await test.mine({ blocks: 1 });
+    }
     stage = "local provider allowlist transaction";
     for (const address of [relayer.address, providerAccount.address, original.customer])
       await test.setBalance({ address, value: 10_000_000_000_000_000_000n });
@@ -199,7 +215,7 @@ export async function createGatewayHarness(options: { browserOrigins?: string[];
     };
     return { ctx, client, test, send, relayer, providerAccount, providerClient, manifests, gateway, get provider() { return provider; },
       makeSession, sessions, counters, useLiveAi, start, stop, close, forkBlock,
-      restartProvider,
+      restartProvider, forkBlockHash: sourceBlock.hash,
       deposited: () => sessions.reduce((sum, row) => sum + row.budget, 0n) };
   } catch (error) { await close(); throw new Error("Gateway harness failed at " + stage, { cause: error }); }
 }

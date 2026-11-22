@@ -1,0 +1,190 @@
+{
+  "milestone": "frontend",
+  "chainId": 196,
+  "networkMode": "local-fork",
+  "participantClassification": "temporary builder-controlled browser wallets",
+  "workloadClassification": "actual JSON/schema validation and signed offline AI fixture; no new paid AI call",
+  "mainnetBroadcastPerformed": false,
+  "forkBlock": "76360367",
+  "forkBlockHash": "0xb1e4fdcff31f6fe116386ff0f5328953c46e4534c558360096a66bdca8d82721",
+  "checks": [
+    {
+      "name": "Interactive preview grants no wallet permission",
+      "passed": true
+    },
+    {
+      "name": "Provider endpoint probes and browser registration transactions",
+      "passed": true
+    },
+    {
+      "name": "Provider credential scope, account refusal, and revocation",
+      "passed": true
+    },
+    {
+      "name": "Wallet login and exact approval/deposit into live credit",
+      "passed": true
+    },
+    {
+      "name": "Customer-signed bounded session with tab-only delegated key",
+      "passed": true
+    },
+    {
+      "name": "JSON document/schema execution, signed output, and canonical payment",
+      "passed": true
+    },
+    {
+      "name": "Independent browser receipt, price version, signature, and settlement inspection",
+      "passed": true
+    },
+    {
+      "name": "Circuit visualization driven by verified receipt inputs",
+      "passed": true
+    },
+    {
+      "name": "Explicit cumulative customer override and second canonical payment",
+      "passed": true
+    },
+    {
+      "name": "AI fixture runtime, usage evidence, and canonical settlement",
+      "passed": true
+    },
+    {
+      "name": "Status outage recovery refreshes a revoked key and retains one request, nonce, and signed authorization",
+      "passed": true
+    },
+    {
+      "name": "Session read credential is shown once and revoked from the UI",
+      "passed": true
+    },
+    {
+      "name": "Desktop/mobile layout, page overflow, and reduced-motion fallback",
+      "passed": true
+    },
+    {
+      "name": "Native dialog keyboard focus, escape, and focus restoration",
+      "passed": true
+    },
+    {
+      "name": "Same-chain-ID fork mismatch refuses wallet writes",
+      "passed": true
+    },
+    {
+      "name": "Lost-key close, signer revocation, original refund timing, and refund",
+      "passed": true
+    },
+    {
+      "name": "Pending hash retention, canonical recheck, and no replacement withdrawal",
+      "passed": true
+    },
+    {
+      "name": "No browser runtime errors or persisted signing credentials",
+      "passed": true
+    }
+  ],
+  "requests": [
+    {
+      "requestId": "0x77207dc4ba1c56570987313100c16aa762c58a7a61a9be6140a6dd8c9fddff12",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 31
+    },
+    {
+      "requestId": "0xe1202d3143154e907ad09d633af18cb6a473047cafd4d0a5b537ddd7a5299bad",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 47
+    },
+    {
+      "requestId": "0x2159907dc696fdc55860e3dbb8b16cc5b5445641e74d74ad060552111cf55e40",
+      "serviceId": "0xdbb71923c13eda870a85b0f17b0903bf84fbd37581505c43a259e9a0a6ddf65c",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "50000",
+      "policyInputs": 47
+    },
+    {
+      "requestId": "0x00638a0fcaf63d4174f1e0b55e3a3cfa0dfbe5b0ccfbae7bde8c56099e1d70ad",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 47
+    }
+  ],
+  "walletTransactions": [
+    {
+      "hash": "0x800136ac3b1850ca4950161e422690fefe0bdc267e6dffcfbdcc6d94de544b70",
+      "to": "0xec4839b1bdfac9450feeb211cf59a7cf075110f3",
+      "action": "registerService"
+    },
+    {
+      "hash": "0x884a885de2bc0c660f2a007a04323f8ddc0fb31e79a8e980800b96974ded9b6c",
+      "to": "0xec4839b1bdfac9450feeb211cf59a7cf075110f3",
+      "action": "registerService"
+    },
+    {
+      "hash": "0xfa800d07b544007b5c76e2bd40a2f55d42af4b3ff6ac4f894fcd0da6833f90c0",
+      "to": "0x66D16469E07217E53618887B492b14eA732b5a11",
+      "action": "approve",
+      "amount": "1000000"
+    },
+    {
+      "hash": "0x96e9e1e0f2f6c02f03c64c3e871811d460f389986f542d9afcfae10df4b3d7e8",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "deposit"
+    },
+    {
+      "hash": "0x1044c9820d6397f7e38dcc5ebb3e5e6ec52f1c6d898386ee857619c4b92fa302",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "createSession"
+    },
+    {
+      "hash": "0xf1c2ab0b8b87e57d4031724d735bc4c150e2a32b0b060cf96306c50cf8312ff0",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "closeSession"
+    },
+    {
+      "hash": "0xfa4d869d46d0c1b39776f2516dad8a58a1e91756cd6b68b95ccc175366184b8a",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "revokeSessionSigner"
+    },
+    {
+      "hash": "0xa168d1c072d5edb878a95657d33b634aff11ccc8bbe59fbaacac3d08edd06e41",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "refund"
+    },
+    {
+      "hash": "0x45afa17189f80e554f3b0df805ea4a3130b5147a761357ecbd83f9b23144fbb4",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "withdrawAvailable"
+    }
+  ],
+  "messageSignatures": 3,
+  "typedSignatures": 4,
+  "screenshots": [
+    ".impeccable/review/launch/desktop.png",
+    ".impeccable/review/launch/dashboard-empty-desktop.png",
+    ".impeccable/review/launch/provider-desktop.png",
+    ".impeccable/review/launch/dashboard-session-desktop.png",
+    ".impeccable/review/launch/playground-desktop.png",
+    ".impeccable/review/launch/receipt-desktop.png",
+    ".impeccable/review/launch/policy-receipt-desktop.png",
+    ".impeccable/review/launch/dashboard-desktop.png",
+    ".impeccable/review/launch/services-desktop.png",
+    ".impeccable/review/launch/receipts-desktop.png",
+    ".impeccable/review/launch/policy-reduced-motion-desktop.png",
+    ".impeccable/review/launch/policy-mobile.png",
+    ".impeccable/review/launch/dashboard-mobile.png",
+    ".impeccable/review/launch/services-mobile.png",
+    ".impeccable/review/launch/playground-mobile.png",
+    ".impeccable/review/launch/receipt-mobile.png",
+    ".impeccable/review/launch/receipts-mobile.png",
+    ".impeccable/review/launch/mobile.png",
+    ".impeccable/review/launch/network-mismatch-desktop.png"
+  ],
+  "completedAt": "2026-11-22T07:56:53.532Z"
+}

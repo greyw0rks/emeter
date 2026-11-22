@@ -149,6 +149,7 @@ components:
     typography: "{typography.navigation}"
     rounded: "{rounded.radius-sm}"
     padding: "11px 13px"
+    height: "44px"
   navigation-active:
     backgroundColor: "{colors.mint-surface}"
     textColor: "{colors.mint}"
@@ -208,7 +209,7 @@ A dark instrument for a bounded decision. Void grounds the interface, Graphite g
 
 The landing brief gives the policy a broad stage and a large, tightly tracked headline. The workspace brief gives tasks more room than decoration: credit totals, bounded sessions, editors, and evidence form a measured reading order. These are two expressions of the same world; their compositions remain in the surface briefs. Motion is brief and driven by state, while phones, reduced-motion preferences, and graphics failures retain the authored SVG circuit.
 
-This system records the current frontend source and sampled desktop/phone captures. Electric precision is the accepted visual-world pin; both layouts are builder-authored within the accepted frontend scope. The finish review reports SHIP after opening all nineteen required captures, using a generic fresh agent with the packaged review contract. No approved comp, QUALITY BAR card, catalog seed, or successful detector/context/seed launcher is claimed. The shipped mark and circuit use SVG and geometry; there are no browser-shipping raster plates. Implementation values below come from `apps/web/app/globals.css`, `apps/web/app/styles/landing.css`, `apps/web/app/layout.tsx`, and the shared components.
+This system records the current frontend source and sampled desktop/phone captures. Electric precision is the accepted visual-world pin; both layouts are builder-authored within the accepted frontend scope. The launch finish review records the validation state for the horizontal-header refresh and uses a fresh generic agent with the packaged review contract. No approved comp, QUALITY BAR card, catalog seed, or successful detector/context/seed launcher is claimed. The shipped mark and circuit use SVG and geometry; there are no browser-shipping raster plates. Implementation values below come from `apps/web/app/globals.css`, `apps/web/app/styles/landing.css`, `apps/web/app/layout.tsx`, and the shared components.
 
 **Key Characteristics:**
 
@@ -280,7 +281,9 @@ The declared spacing rhythm runs from `space-1` through `space-8` in the frontma
 
 The landing container is centered with a maximum width (1520px) and side insets (56px). A two-column headline/circuit composition becomes one column below (800px); the three-step sequence and proof columns stack below (520px). Side insets reduce through (36px), (24px), and (20px). These dimensions describe the current landing expression, not every future page.
 
-The workspace has a sticky navigation rail (224px), an account header with a minimum height (84px), and a content area capped at (1500px) with insets (40px). Below (1100px) the rail narrows to (190px) and content insets become (32px 24px). Below (800px) navigation becomes a wrapping horizontal menu, content insets become (30px 20px), and split editors and policy evidence stack. Below (520px), summary totals use two columns, fields stack, and evidence labels sit above their values. Wide viewports above (1600px) increase workspace content insets to (48px 56px).
+The workspace has a full-width two-band header. The first band groups the wordmark, network status, and wallet controls with a minimum height (84px) and insets (18px 40px); the second holds horizontal navigation with insets (0 40px 12px) and a link gap (8px). The centered content area is capped at (1500px) with insets (40px), while the footer uses insets (20px 40px). At widths of (1100px) or less, header and footer side insets become (24px), and content insets become (32px 24px).
+
+At widths of (800px) or less, the top band has a minimum height (72px) and insets (14px 20px), navigation insets become (0 20px 12px) with a gap (4px), content insets become (30px 20px), and the footer uses insets (20px). Account controls wrap as space requires; navigation stays in one row and scrolls within its own band. Split editors and policy evidence stack. At (520px) or less, the account group occupies its own full-width row, summary totals use two columns, fields stack, and evidence labels sit above their values. Wide viewports of (1600px) or more increase workspace content insets to (48px 56px).
 
 Activity tables retain their columns inside a keyboard-focusable horizontal scroll region. Long hashes wrap or have a copy affordance; the independent receipt inspector keeps full identifiers available. Dialogs are capped at (600px) wide and (90dvh) high, with internal scrolling.
 
@@ -327,7 +330,7 @@ JSON editors use the same container edge, a Graphite toolbar, and a Mono textare
 
 ### Navigation
 
-The workspace uses labeled SVG icons and compact links. Default text is Muted; hover uses Ink on Graphite. The active page at rest uses Mint on the Mint Signal Surface with a tinted border and `aria-current`. The existing hover treatment also applies to active links. On smaller screens the rail becomes a wrapping menu. Service and policy view switches use transparent text buttons with a Mint underline for the pressed state.
+Workspace navigation sits in the second full-width header band and uses labeled SVG icons with compact links. Links have a minimum height (44px), retain their full label, and stay in one horizontally scrollable row. Default text is Muted; hover uses Ink on Graphite. The active page at rest uses Mint on the Mint Signal Surface with a tinted border and `aria-current`. The existing hover treatment also applies to active links. On direct entry, route changes, and navigation-band width changes, an obscured active link is brought fully into the band's viewport without scrolling the document. At widths of (800px) or less, link padding becomes (8px 10px), type becomes (12px), icon width becomes (15px), and the icon/label gap becomes (7px); the minimum link height remains. Service and policy view switches use transparent text buttons with a Mint underline for the pressed state.
 
 ### Dialogs and Feedback
 
@@ -343,6 +346,8 @@ Compact tables align amounts with tabular Mono numerals and keep execution, paym
 
 The signature figure renders the six inputs and eleven NAND gates from the shared circuit graph. The flat SVG and React Three Fiber view share node positions, wire topology, and computed signals. A source caption, hexadecimal/binary mask, readable condition descriptions on the policy page, and explicit Payment allowed/Payment denied text preserve comprehension.
 
+The desktop scene renders Geist Mono lettering in high-resolution textures (192 × 128px for input/NAND labels; 320 × 128px for ALLOW/DENY) with a raster font size (104px), mapped across nearly the full gate face. These are circuit drawing dimensions, not UI typography tokens. The orthographic camera refits to stage width and height on resize, capped at zoom (52), so the actual graph fits the available composition. The SVG retains its diagram-specific text and the surrounding captions and condition descriptions.
+
 Desktop graphics require a width of at least (801px), no reduced-motion preference, and a working WebGL2 context. The scene renders on demand and makes a short damped tilt after a decision change; it does not run an idle orbit. The payment output color transition lasts (220ms). Phones, reduced motion, errors, and lost graphics contexts show the SVG. CSS transitions and animations reduce to (0.01ms) under the preference. The stage is (360px) on desktop, with smaller observed stages (300px), (235px), and a landing tablet stage (330px).
 
 **The State Motion Rule.** Motion follows the policy state. Keep the diagram, captions, condition labels, and explicit output usable when the graphics layer is absent.
@@ -355,13 +360,13 @@ Desktop graphics require a width of at least (801px), no reduced-motion preferen
 - **Do** keep amounts and identifiers measurable with Mono, tabular numerals, full-value access, and explicit units.
 - **Do** pair semantic colors with readable state labels and keep result, signature, and payment evidence separate.
 - **Do** preserve the actual circuit topology, source caption, input mask, explicit decision text, and SVG fallback.
-- **Do** follow the existing responsive reflow and let activity tables scroll within their own focusable region.
+- **Do** follow the existing responsive reflow, keep the active workspace link visible within its horizontal band, and let activity tables scroll within their own focusable region.
 - **Do** preserve labels, visible Mint focus, associated hints, native dialog behavior, and recoverable empty or offline states.
 
 ### Don't:
 
 - **Don't** reuse a confirmed-payment label for a result, a provider claim, a pending transaction, or preview inputs.
-- **Don't** turn the landing composition into a required workspace layout or the workspace rail into a global page template.
-- **Don't** replace the authored circuit with an unrelated decorative graph or use tiny internal gate labels as the general UI type size.
+- **Don't** turn the landing composition into a required workspace layout.
+- **Don't** replace the authored circuit with an unrelated decorative graph or apply internal gate-label dimensions to general UI text.
 - **Don't** make an unlabeled color or a WebGL layer the only way to understand the payment decision.
 - **Don't** add resting card shadows to the recorded tonal surface system.

@@ -1,0 +1,36 @@
+{
+  "kind": "convex-hosted-read-only-smoke",
+  "target": "development",
+  "url": "https://kindhearted-leopard-863.convex.site",
+  "chainId": 196,
+  "checks": [
+    {
+      "name": "Hosted protocol pins the existing deployment and matching block hash",
+      "passed": true
+    },
+    {
+      "name": "Anonymous account reads are refused",
+      "passed": true
+    },
+    {
+      "name": "Hosted origin-bound wallet challenge and account lookup work",
+      "passed": true
+    },
+    {
+      "name": "Unknown receipts do not expose another wallet's records",
+      "passed": true
+    },
+    {
+      "name": "Hosted CORS preflight is scoped to configured origins",
+      "passed": true
+    },
+    {
+      "name": "Hosted credential revocation is enforced",
+      "passed": true
+    }
+  ],
+  "signingClassification": "temporary builder-controlled wallet challenge only",
+  "mainnetBroadcastPerformed": false,
+  "upstreamAiCalls": 0,
+  "completedAt": "2026-11-21T20:02:52.131Z"
+}

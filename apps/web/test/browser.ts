@@ -17,6 +17,10 @@ import { DEPLOYMENT } from "../lib/wallet";
 import { short } from "../lib/models";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
+const artifactLabel = process.env.EMETER_BROWSER_ARTIFACT_LABEL;
+if (artifactLabel && !/^[a-z0-9-]{1,24}$/.test(artifactLabel)) throw new Error("Invalid browser artifact label");
+const reviewDirectory = join(root, ".impeccable/review", artifactLabel ?? "");
+const evidencePath = join(root, "docs/evidence", artifactLabel ? "frontend-" + artifactLabel + "-fork-checks.json" : "frontend-fork-checks.json");
 const ensure = expect.configure({ timeout: 45_000 });
 const checks: { name: string; passed: true }[] = [];
 const check = (name: string) => { checks.push({ name, passed: true }); process.stdout.write("PASS " + name + "\n"); };
@@ -122,10 +126,15 @@ async function main() {
     page.on("pageerror", failure => { runtimeErrors.push(failure.message); process.stderr.write("Browser runtime: " + failure.message.slice(0, 600) + "\n"); });
     page.on("requestfailed", request => { if (request.url().startsWith(cfg.gatewayOrigin) || request.url().startsWith(cfg.rpcUrl))
       process.stderr.write("Browser request failed: " + new URL(request.url()).pathname + " " + request.failure()?.errorText + "\n"); });
-    await mkdir(join(root, ".impeccable/review"), { recursive: true });
+    await mkdir(reviewDirectory, { recursive: true });
     const capture = async (target: Page, name: string) => {
       await target.evaluate(() => window.scrollTo(0, 0)); await target.evaluate(() => document.fonts.ready); await pause(400);
-      const path = join(root, ".impeccable/review", name + ".png"); await target.screenshot({ path, fullPage: true, animations: "disabled" }); captures.push(path);
+      if (await target.locator(".workspace").count()) {
+        assert.equal(await target.locator(".sidebar, .workspace aside").count(), 0, "Workspace has no sidebar");
+        await ensure(target.locator(".workspace-nav")).toBeVisible();
+        await ensure(target.locator('.workspace-nav [aria-current="page"]')).toBeInViewport({ ratio: 1 });
+      }
+      const path = join(reviewDirectory, name + ".png"); await target.screenshot({ path, fullPage: true, animations: "disabled" }); captures.push(path);
       const overflow = await target.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
       assert(!overflow, "No page overflow: " + name);
     };
@@ -187,6 +196,7 @@ async function main() {
     check("JSON document/schema execution, signed output, and canonical payment");
     await capture(page, "playground-desktop");
     await page.getByRole("link", { name: "Inspect receipt", exact: true }).click();
+    await ensure(page.getByRole("heading", { name: "Receipt inspector", exact: true })).toBeVisible();
     await ensure(page.getByText("Canonical payment verified", { exact: true })).toBeVisible();
     await ensure(page.getByText("Canonical settlement inputs", { exact: true })).toBeVisible();
     await capture(page, "receipt-desktop"); check("Independent browser receipt, price version, signature, and settlement inspection");
@@ -255,12 +265,16 @@ async function main() {
     await navigate("Overview"); await capture(page, "dashboard-mobile");
     await navigate("Services"); await page.getByRole("button", { name: "Service catalog", exact: true }).click(); await capture(page, "services-mobile");
     await navigate("Playground"); await capture(page, "playground-mobile");
-    await page.getByRole("link", { name: "Inspect receipt", exact: true }).click(); await ensure(page.getByText("Canonical payment verified", { exact: true })).toBeVisible(); await capture(page, "receipt-mobile");
+    await page.getByRole("link", { name: "Inspect receipt", exact: true }).click();
+    await ensure(page.getByRole("heading", { name: "Receipt inspector", exact: true })).toBeVisible();
+    await ensure(page.getByText("Canonical payment verified", { exact: true })).toBeVisible(); await capture(page, "receipt-mobile");
     await navigate("Receipts"); await capture(page, "receipts-mobile");
     check("Desktop/mobile layout, page overflow, and reduced-motion fallback");
     const anonymous = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
     await anonymous.grantPermissions(["local-network-access"], { origin });
-    const phone = await anonymous.newPage(); await phone.goto(origin, { waitUntil: "domcontentloaded" }); await capture(phone, "mobile"); await anonymous.close();
+    const phone = await anonymous.newPage(); await phone.goto(origin, { waitUntil: "domcontentloaded" });
+    await ensure(phone.getByRole("button", { name: "Connect wallet", exact: true }).first()).toBeEnabled();
+    await capture(phone, "mobile"); await anonymous.close();
     await page.setViewportSize({ width: 1440, height: 960 }); await navigate("Overview");
     await page.getByRole("button", { name: "New session", exact: true }).click();
     await ensure(page.getByRole("dialog").getByLabel("Hard budget (DEMO)")).toBeFocused();
@@ -317,10 +331,10 @@ async function main() {
     assert(runtimeErrors.length === 0, "No browser runtime errors: " + runtimeErrors.join("; "));
     check("No browser runtime errors or persisted signing credentials");
     const records = await harness.ctx.db.aPIRequest.findMany({ where: { customer: customer.address.toLowerCase() }, orderBy: { createdAt: "asc" } });
-    await writeFile(join(root, "docs/evidence/frontend-fork-checks.json"), JSON.stringify({ milestone: "frontend", chainId: 196,
+    await writeFile(evidencePath, JSON.stringify({ milestone: "frontend", chainId: 196,
       networkMode: "local-fork", participantClassification: "temporary builder-controlled browser wallets",
       workloadClassification: "actual JSON/schema validation and signed offline AI fixture; no new paid AI call",
-      mainnetBroadcastPerformed: false, forkBlock: harness.forkBlock.toString(), checks,
+      mainnetBroadcastPerformed: false, forkBlock: harness.forkBlock.toString(), forkBlockHash: harness.forkBlockHash, checks,
       requests: records.map(row => ({ requestId: row.id, serviceId: row.serviceId, requestStatus: row.requestStatus,
         paymentStatus: row.paymentStatus, priceBaseUnits: row.amount.toFixed(0), policyInputs: row.policyInputs })),
       walletTransactions, messageSignatures, typedSignatures, screenshots: captures.map(path => path.slice(root.length)),
@@ -333,7 +347,7 @@ async function main() {
         const feedback = await debugPage.locator(".feedback-error, .inline-error, .feedback-progress").allTextContents();
         process.stderr.write("Page feedback: " + JSON.stringify(feedback) + "\n");
         await debugPage.locator(".key-once").evaluateAll(nodes => nodes.forEach(node => (node as HTMLElement).style.visibility = "hidden"));
-        await debugPage.screenshot({ path: join(root, ".impeccable/review/browser-failure.png"), fullPage: true, animations: "disabled" });
+        await debugPage.screenshot({ path: join(reviewDirectory, "browser-failure.png"), fullPage: true, animations: "disabled" });
       } catch { /* Never lose test cleanup to diagnostics. */ }
     }
     throw failure;

@@ -9,7 +9,7 @@ import type { JsonValue, ServiceCall } from "@emeter/shared";
 import type { Prisma } from "@emeter/database";
 import { authenticate, HttpError } from "./auth.js";
 import type { GatewayContext } from "./context.js";
-import { readiness } from "./context.js";
+import { readiness } from "./readiness.js";
 
 export const WireOverrideSchema = z.object({
   sessionId: HashSchema, chargeDigest: HashSchema,

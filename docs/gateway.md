@@ -2,6 +2,20 @@
 
 The third emeter milestone connects the existing X Layer registry and vault to authenticated HTTP requests, functioning JSON validation and AI text analysis, durable reservations, signed receipts, settlement jobs, and chain indexing. The complete gateway lifecycle passes thirty-two checks against a local fork of the real deployed engine and TapeOut processor. The existing mainnet contract journals remain the deployment authority.
 
+The production HTTP gateway is **https://first-eel-292.convex.site**. Its AI Text Analyzer and JSON Validator are registered on X Layer mainnet. The **21 November 2026** activation completed three requests, paid **0.09 DEMO**, closed/revoked the bounded session, and refunded **0.01 DEMO directly to the customer wallet**. The actual Otari response reported **88 input / 58 output tokens**, with independently recomputed reported model cost **$0.00001820**. Both RPCs agree on the signed request bindings, all transactions, original refund timing, and token/gas accounting. See [gateway-mainnet-verification.json](evidence/gateway-mainnet-verification.json), [original signed request evidence](evidence/gateway-mainnet-requests.json), and [activation record](../deployments/xlayer-196-gateway.json). These are builder-controlled proofs, with no independent adoption claimed.
+
+## Hosted Convex runtime
+
+Convex hosts HTTP/Node actions, durable records, and scheduled execution/settlement jobs while reusing the existing Fastify handlers and SDK. The local PostgreSQL/Prisma/BullMQ implementation below remains the reference runtime. The hosted adapter commits buffered changes atomically, checks table epochs across paginated reads, and fences leases across external RPC reads and signing. Scheduled jobs retain deduplication, concurrency limits, retries, stale-job recovery, and original transaction evidence.
+
+Credentials are hashed before crossing into Node action arguments. Newly issued credentials are generated at the HTTP boundary and returned once. Dedicated provider/relayer keys and the Otari credential are stored as Convex environment secrets; the existing operator signer is never uploaded. Exact browser/provider origins are allowlisted.
+
+The public AI ledger caps total estimated/reported upstream spending at **$0.01**, protects request IDs against replay, and retains unknown costs. This is independent of each customer's DEMO budget and the **0.001 OKB** configured relayer gas ceiling. The activation's operator outflow was **0.001023797752 OKB**, including **0.001 OKB** relayer funding; relayer settlement gas was **0.000019302118 OKB**.
+
+Both public RPCs limit log queries to 100 blocks. Hosted maintenance processes at most four such batches per invocation, runs every 60 seconds when idle, and runs sooner for pending activity. Fresh cursor/heartbeat checks use a 75-second window. Paid request dispatch and relayer broadcasts also require the cursor's exact block hash to remain canonical. Internal rebuild pauses execution and refuses to run while workers are active.
+
+Public deployment references and operational instructions are in [hosting.md](hosting.md). Deployment preparation is read-only; activation is a separately authorized, capped operation whose external journal saves exact signed transactions before any broadcast. Its resume path reuses confirmed steps and signed request payloads.
+
 ## Request lifecycle
 
 Customers authenticate by signing a five-minute, single-use challenge bound to the gateway origin, wallet, and chain 196. Wallet login can issue a credential scoped to an owned spending session. The credential expires at that session's refund deadline; the delegated signing key separately authorizes each request. Provider credentials grant usage and receipt access for one registered service. Credential values are returned once and stored only as hashes.
@@ -96,4 +110,4 @@ The run covers authentication replay, credential scope and revocation, actual JS
 
 The **20 November 2026** checkpoint passes **245 workspace tests**, typechecking, the production build, and **32 integration checks**. Its one real Otari request used `mistralai/mistral-small-3.2-24b`, returned a useful summary, neutral sentiment, and five topics, and reported **84 input / 66 output tokens**. The independently recomputed model cost was **$0.00001950**; its **0.05 DEMO** payment settled only on the local fork. Fourteen gateway requests included eleven confirmed payments; expired unknown completions ended with no remaining unknown reservations. Customer refunds and exact token conservation passed. All recorded runtime source hashes match this checkpoint.
 
-Mainnet gateway activation, public hosting, the full Electric precision interface, and independent tester adoption remain later work.
+The hosted gateway and Electric precision interface are implemented, and mainnet activation is complete. Independent tester adoption and event submission remain later work. The earlier local-fork checkpoint remains historical evidence; it does not substitute for the new mainnet verification.

@@ -1,0 +1,45 @@
+{
+  "kind": "anonymous-public-frontend-smoke",
+  "origin": "https://emeter-peach.vercel.app",
+  "gatewayUrl": "https://first-eel-292.convex.site",
+  "rpcUrl": "https://rpc.xlayer.tech",
+  "networkMode": "mainnet",
+  "walletMessageSignatures": 0,
+  "walletTransactions": 0,
+  "realAiRequests": 0,
+  "checks": [
+    {
+      "name": "Public production configuration selects the hosted gateway and X Layer RPC",
+      "passed": true
+    },
+    {
+      "name": "Public CORS, readiness, canonical RPC anchor, and account protection at desktop width",
+      "passed": true
+    },
+    {
+      "name": "All five public workspace routes, service terms, and active navigation at desktop width",
+      "passed": true
+    },
+    {
+      "name": "Public CORS, readiness, canonical RPC anchor, and account protection at mobile width",
+      "passed": true
+    },
+    {
+      "name": "All five public workspace routes, service terms, and active navigation at mobile width",
+      "passed": true
+    },
+    {
+      "name": "No browser runtime errors or paid execution requests",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    ".impeccable/review/public/landing-desktop.png",
+    ".impeccable/review/public/dashboard-desktop.png",
+    ".impeccable/review/public/services-desktop.png",
+    ".impeccable/review/public/landing-mobile.png",
+    ".impeccable/review/public/dashboard-mobile.png",
+    ".impeccable/review/public/services-mobile.png"
+  ],
+  "checkedAt": "2026-11-22T20:48:33.423Z"
+}

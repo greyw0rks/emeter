@@ -21,3 +21,6 @@ deployments/private/
 packages/database/src/generated/
 .data/
 .impeccable/review/browser-failure.png
+.impeccable/review/**/browser-failure.png
+.vercel
+.env*

@@ -1,0 +1,7 @@
+{
+  "team": "greyw0rks",
+  "project": "emeter",
+  "region": "us",
+  "production": { "reference": "production", "name": "first-eel-292", "url": "https://first-eel-292.convex.cloud", "httpUrl": "https://first-eel-292.convex.site" },
+  "development": { "reference": "dev/validation", "name": "kindhearted-leopard-863", "url": "https://kindhearted-leopard-863.convex.cloud", "httpUrl": "https://kindhearted-leopard-863.convex.site" }
+}

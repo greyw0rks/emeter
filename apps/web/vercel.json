@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "env": {
+    "EMETER_PUBLIC_GATEWAY_URL": "https://first-eel-292.convex.site",
+    "EMETER_PUBLIC_RPC_URL": "https://rpc.xlayer.tech"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "mainnet-gateway-activation-plan",
+  "chainId": 196,
+  "backend": "https://first-eel-292.convex.site",
+  "operator": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "provider": "0x4Cd842BdB634a6FBF859616a99aCB6a872011F66",
+  "relayer": "0x253C5d97950Bf285d93693140a44F39f05F72C43",
+  "anchor": {
+    "blockNumber": "76522019",
+    "blockHash": "0xe1417059f0ddc93b04107ae3a451507fcedfb03b5ce3e0fb176abfa1d711d666",
+    "independentRpcAgreement": true
+  },
+  "operatorBalanceWei": "7598544564085113",
+  "existingCreditBaseUnits": "0",
+  "operatorDemoBaseUnits": "630000",
+  "gasPriceWei": "20000001",
+  "providerAllowlisted": true,
+  "relayerFundingWei": "1000000000000000",
+  "operatorNativeSpendCeilingWei": "10000000000000000",
+  "aiReportedCostCeilingUsd": "0.01",
+  "proofSessionBudgetBaseUnits": "100000",
+  "proofMaximumChargeBaseUnits": "50000",
+  "credentials": "Dedicated runtime keys are stored externally; the operator key is not included.",
+  "broadcastPerformed": false
+}

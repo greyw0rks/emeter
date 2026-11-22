@@ -1,0 +1,119 @@
+{
+  "kind": "convex-mainnet-gateway-activation",
+  "chainId": 196,
+  "gatewayUrl": "https://first-eel-292.convex.site",
+  "operator": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "provider": "0x4Cd842BdB634a6FBF859616a99aCB6a872011F66",
+  "relayer": "0x253C5d97950Bf285d93693140a44F39f05F72C43",
+  "participantClassification": "builder-controlled operator signs the bounded grant and charges locally",
+  "sessionId": "0xaa16b2d67b3e632725a5e4eb38647c62499ab57e3fe06fdf7b2be19761be9ca7",
+  "budgetBaseUnits": "100000",
+  "unusedRefundedBaseUnits": "10000",
+  "refundDestination": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "requests": [
+    {
+      "requestId": "0xd9cf7cb1c55fcead40ee9742528b2ab39bbfdca0ec119687a07a6ddb479ab656",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "policyInputs": 31,
+      "priceBaseUnits": "20000",
+      "receiptVerified": true,
+      "settlementVerified": true
+    },
+    {
+      "requestId": "0x4c02f029c5a12d7bfde9f690f1b9006db436ee7251ab2fe81e816ab46fa5b2b4",
+      "serviceId": "0xdbb71923c13eda870a85b0f17b0903bf84fbd37581505c43a259e9a0a6ddf65c",
+      "policyInputs": 31,
+      "priceBaseUnits": "50000",
+      "receiptVerified": true,
+      "settlementVerified": true
+    },
+    {
+      "requestId": "0xe7c4c6bfd0623984c7783c97197ebbb215c67755f8c379857a2676e4c710bd06",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "policyInputs": 47,
+      "priceBaseUnits": "20000",
+      "receiptVerified": true,
+      "settlementVerified": true
+    }
+  ],
+  "walletTransactions": [
+    {
+      "name": "register-text_analyze",
+      "to": "0xEC4839B1BDfAC9450feEb211Cf59A7cF075110f3",
+      "hash": "0x4719a6064260049b3245af2273fc2aec35383651c03d1ced839433bde9d7750d",
+      "valueWei": "0",
+      "actualCostWei": "4739438000000",
+      "blockNumber": "76523408"
+    },
+    {
+      "name": "register-json_validate",
+      "to": "0xEC4839B1BDfAC9450feEb211Cf59A7cF075110f3",
+      "hash": "0x30cb28126761ad3daa84d56d0d0aa40f469f78530c8432a1a419d452f34cf5cd",
+      "valueWei": "0",
+      "actualCostWei": "4739438000000",
+      "blockNumber": "76523418"
+    },
+    {
+      "name": "fund-relayer",
+      "to": "0x253C5d97950Bf285d93693140a44F39f05F72C43",
+      "hash": "0xf87bb97016ac9ce933a104154d55a06c4fa77c3afaea01a7527c3806d0e22d51",
+      "valueWei": "1000000000000000",
+      "actualCostWei": "1000462000000000",
+      "blockNumber": "76523429"
+    },
+    {
+      "name": "approve-demo",
+      "to": "0x66D16469E07217E53618887B492b14eA732b5a11",
+      "hash": "0x4042c9c34d7875d1836886bcb072ddc783276db588386ecf5a1bd48c432120f3",
+      "valueWei": "0",
+      "actualCostWei": "1019260000000",
+      "blockNumber": "76524848"
+    },
+    {
+      "name": "deposit-demo",
+      "to": "0x12412460847A865B29406fd8cd37dF91dd881B50",
+      "hash": "0x7c0c51cc8e0270816947da46b81fa47be2277e2ea8df0ea02ea2576299ef8764",
+      "valueWei": "0",
+      "actualCostWei": "2337082000000",
+      "blockNumber": "76524854"
+    },
+    {
+      "name": "create-session",
+      "to": "0x12412460847A865B29406fd8cd37dF91dd881B50",
+      "hash": "0x89823bb2c1f587c900272bb1f8c576d7f09005fa2128b6cfdc7ac208165b9095",
+      "valueWei": "0",
+      "actualCostWei": "7337902000000",
+      "blockNumber": "76524866"
+    },
+    {
+      "name": "close-session",
+      "to": "0x12412460847A865B29406fd8cd37dF91dd881B50",
+      "hash": "0x9eb2e2ddb6588ed40d3abc6c1b13a533b9113edd98f12403b4272574ca222682",
+      "valueWei": "0",
+      "actualCostWei": "856834000000",
+      "blockNumber": "76524992"
+    },
+    {
+      "name": "revoke-signer",
+      "to": "0x12412460847A865B29406fd8cd37dF91dd881B50",
+      "hash": "0x06babd362085c8710f3597ca8e87d0c1eeb42021f30804585ad46b12b6101e56",
+      "valueWei": "0",
+      "actualCostWei": "728134000000",
+      "blockNumber": "76524999"
+    },
+    {
+      "name": "refund-session",
+      "to": "0x12412460847A865B29406fd8cd37dF91dd881B50",
+      "hash": "0xc24e35a3aa11c65b8053ddb0098523724d578171c82e11d95af2e12b56bc0ccf",
+      "valueWei": "0",
+      "actualCostWei": "1577664000000",
+      "blockNumber": "76525073"
+    }
+  ],
+  "operatorNativeSpendWei": "1023797752000000",
+  "nativeSpendCeilingWei": "10000000000000000",
+  "realAiRequests": 1,
+  "fixtureAiRequests": 0,
+  "independentAdoption": false,
+  "completedAt": "2026-11-21T20:53:50.722Z"
+}

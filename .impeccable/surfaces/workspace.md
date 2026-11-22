@@ -13,9 +13,9 @@ OWN-WORLD: The accepted Electric precision palette uses dark neutral layers, Min
 
 STORY: Connect a wallet, fund credit, authorize a bounded session, run a service, and inspect the signed result and canonical payment. Providers register services and manage scoped keys.
 
-FIRST VIEWPORT: A 224px navigation rail and compact account header frame a wide activity workspace. Credit/session context sits above a readable request table. The new-session action stays adjacent to its budget context. On phones the rail becomes a horizontal menu, and evidence panels stack.
+FIRST VIEWPORT: A full-width header groups the wordmark, network status, and wallet controls above horizontal navigation. The activity workspace uses the available width without a sidebar. Credit/session context sits above a readable request table. The new-session action stays adjacent to its budget context. On phones navigation scrolls within its own horizontal band, account controls wrap, and evidence panels stack.
 
-FORM: seed: none (unavailable). The context and seed launcher could not execute. The confirmed visual-world pin is "Void/Graphite surfaces, Electric Mint actions, Signal Lime accents, Geist Sans/Mono, restrained Motion transitions, and React Three Fiber circuit scenes with reduced-motion/mobile fallbacks." The rail and task composition are builder-authored within the accepted dashboard, registration, playground, receipt, policy, and wallet/network scope; no separate quoted experience or layout pin is claimed.
+FORM: seed: none (unavailable). The context and seed launcher could not execute. The confirmed visual-world pin is "Void/Graphite surfaces, Electric Mint actions, Signal Lime accents, Geist Sans/Mono, restrained Motion transitions, and React Three Fiber circuit scenes with reduced-motion/mobile fallbacks." The user's explicit layout constraint is "no side barssss". The horizontal header and task composition are builder-authored within that constraint and the accepted dashboard, registration, playground, receipt, policy, and wallet/network scope.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 
