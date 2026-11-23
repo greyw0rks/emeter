@@ -14,7 +14,7 @@ import type { JsonValue, ServiceManifest } from "@emeter/shared";
 import { emeterRegistryAbi, emeterVaultAbi } from "@emeter/shared";
 import { AccountSchema, KeysSchema, UsageSchema } from "../lib/models";
 import type { AccountSummary, ApiCredential, SpendingSession } from "../lib/models";
-import { assertDeployment, assertRpcAnchor, assertWalletAnchor, DEPLOYMENT, exactDemo, paymentChain, publicUrl, randomNonce } from "../lib/wallet";
+import { assertDeployment, assertRpcAnchor, assertWalletAnchor, DEPLOYMENT, ensureWalletChain, exactDemo, injectedWallets, paymentChain, publicUrl, randomNonce, walletStage } from "../lib/wallet";
 import type { BrowserWallet, PendingTransaction } from "../lib/wallet";
 import { errorMessage } from "../lib/errors";
 
@@ -29,7 +29,7 @@ type GatewayValue = {
   config: PublicConfig | undefined; network: GatewayNetwork | undefined; services: CatalogService[]; account: AccountSummary | undefined;
   address: Address | undefined; signedIn: boolean; reachable: boolean; busy: string | undefined; error: string | undefined; notice: string | undefined; loading: boolean;
   refreshedAt: string | undefined; pending: PendingTransaction | undefined; execution: ExecutionState | undefined;
-  refresh: () => Promise<void>; connect: () => Promise<void>; disconnect: () => void; clearError: () => void;
+  refresh: () => Promise<void>; connect: (provider?: BrowserWallet) => Promise<void>; disconnect: () => void; clearError: () => void;
   deposit: (amount: string) => Promise<void>; withdraw: (amount: string) => Promise<void>;
   createSession: (limits: { budget: string; softLimit: string; maxCharge: string; minutes: number; serviceIds: Hex[] }) => Promise<Hex>;
   manageSession: (id: Hex, action: "closeSession" | "revokeSessionSigner" | "refund") => Promise<void>;
@@ -160,9 +160,13 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
     const provider = wallet.current;
     if (!provider) return;
     const changed = () => { resetIdentity(); setNotice("Wallet changed. Sign in again; tab session keys were cleared."); };
-    provider.on?.("accountsChanged", changed); provider.on?.("chainChanged", changed); provider.on?.("disconnect", changed);
+    const accountsChanged = (accounts: unknown) => {
+      if (Array.isArray(accounts) && typeof accounts[0] === "string" && accounts[0].toLowerCase() === owner.current?.toLowerCase()) return;
+      changed();
+    };
+    provider.on?.("accountsChanged", accountsChanged); provider.on?.("chainChanged", changed); provider.on?.("disconnect", changed);
     return () => {
-      provider.removeListener?.("accountsChanged", changed); provider.removeListener?.("chainChanged", changed); provider.removeListener?.("disconnect", changed);
+      provider.removeListener?.("accountsChanged", accountsChanged); provider.removeListener?.("chainChanged", changed); provider.removeListener?.("disconnect", changed);
     };
   }, [address, resetIdentity]);
 
@@ -195,18 +199,22 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
       }
     };
   }, [ensureEpoch, live]);
-  const connect = useCallback(() => perform("Connecting wallet", async () => {
-    const provider = window.ethereum;
+  const connect = useCallback((selectedProvider?: BrowserWallet) => perform("Connecting wallet", async () => {
+    const provider = selectedProvider ?? injectedWallets(window)[0]?.provider;
     if (!provider) throw new Error("NO_WALLET");
-    const accounts = await provider.request({ method: "eth_requestAccounts" });
+    resetIdentity();
+    const accounts = await walletStage("CONNECTION", () => provider.request({ method: "eth_requestAccounts" }));
     const selected = AddressSchema.parse(accounts[0]);
-    resetIdentity(); const epoch = generation.current;
+    setBusy("Selecting X Layer");
+    const current = await live(); await ensureWalletChain(provider, current.network);
+    await assertWalletAnchor(provider, current.network, selected);
+    const epoch = generation.current;
     wallet.current = provider; owner.current = selected; setAddress(selected);
-    const current = await live(); await assertWalletAnchor(provider, current.network, selected);
     const signer = customerSigner(provider, selected, epoch);
     const authenticated = new EmeterClient({ gatewayUrl: cfg.current!.gatewayUrl, rpcUrl: current.rpcUrl,
       vault: DEPLOYMENT.vault, registry: DEPLOYMENT.registry, customerSigner: signer });
-    await authenticated.authenticate(signer); ensureEpoch(epoch);
+    setBusy("Approve the wallet sign-in message");
+    await walletStage("SIGN_IN", () => authenticated.authenticate(signer)); ensureEpoch(epoch);
     client.current = authenticated; auth.current = true; setSignedIn(true);
     setNotice("Wallet signed in. No spending permission was granted by this login."); await refresh();
   }), [customerSigner, ensureEpoch, live, perform, refresh, resetIdentity]);

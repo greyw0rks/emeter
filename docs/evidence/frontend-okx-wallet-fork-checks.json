@@ -1,0 +1,201 @@
+{
+  "milestone": "frontend",
+  "chainId": 196,
+  "networkMode": "local-fork",
+  "participantClassification": "temporary builder-controlled browser wallets",
+  "walletProvider": "simulated dedicated OKX provider with rejecting MetaMask decoy and EIP-6963 announcement",
+  "workloadClassification": "actual JSON/schema validation and signed offline AI fixture; no new paid AI call",
+  "mainnetBroadcastPerformed": false,
+  "forkBlock": "76360367",
+  "forkBlockHash": "0xb1e4fdcff31f6fe116386ff0f5328953c46e4534c558360096a66bdca8d82721",
+  "checks": [
+    {
+      "name": "Interactive preview grants no wallet permission",
+      "passed": true
+    },
+    {
+      "name": "Explicit OKX selection with decoy MetaMask, deduplicated announcements, connection/sign-in refusal and retry",
+      "passed": true
+    },
+    {
+      "name": "Provider endpoint probes and browser registration transactions",
+      "passed": true
+    },
+    {
+      "name": "Provider credential scope, account refusal, and revocation",
+      "passed": true
+    },
+    {
+      "name": "Wallet login and exact approval/deposit into live credit",
+      "passed": true
+    },
+    {
+      "name": "Repeated selected-account notification retains authenticated identity and tab session key",
+      "passed": true
+    },
+    {
+      "name": "Customer-signed bounded session with tab-only delegated key",
+      "passed": true
+    },
+    {
+      "name": "JSON document/schema execution, signed output, and canonical payment",
+      "passed": true
+    },
+    {
+      "name": "Independent browser receipt, price version, signature, and settlement inspection",
+      "passed": true
+    },
+    {
+      "name": "Circuit visualization driven by verified receipt inputs",
+      "passed": true
+    },
+    {
+      "name": "Explicit cumulative customer override and second canonical payment",
+      "passed": true
+    },
+    {
+      "name": "AI fixture runtime, usage evidence, and canonical settlement",
+      "passed": true
+    },
+    {
+      "name": "Status outage recovery refreshes a revoked key and retains one request, nonce, and signed authorization",
+      "passed": true
+    },
+    {
+      "name": "Session read credential is shown once and revoked from the UI",
+      "passed": true
+    },
+    {
+      "name": "Desktop/mobile layout, page overflow, and reduced-motion fallback",
+      "passed": true
+    },
+    {
+      "name": "Native dialog keyboard focus, escape, and focus restoration",
+      "passed": true
+    },
+    {
+      "name": "Same-chain-ID fork mismatch refuses wallet writes",
+      "passed": true
+    },
+    {
+      "name": "Lost-key close, signer revocation, original refund timing, and refund",
+      "passed": true
+    },
+    {
+      "name": "Pending hash retention, canonical recheck, and no replacement withdrawal",
+      "passed": true
+    },
+    {
+      "name": "No browser runtime errors or persisted signing credentials",
+      "passed": true
+    }
+  ],
+  "requests": [
+    {
+      "requestId": "0xd3fbef110145a383b97118c90b3417536ddafabe0ab6e9ad70b0bd37a3928d59",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 31
+    },
+    {
+      "requestId": "0xbb32055558e15a0928cdb1ed699046d2fd86bc23f5fbb66e5d01bbb6ab5706fe",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 47
+    },
+    {
+      "requestId": "0x7a06417d2117171831abed12531212f2176187a30e4f80321c113f4fd07e4ebc",
+      "serviceId": "0xdbb71923c13eda870a85b0f17b0903bf84fbd37581505c43a259e9a0a6ddf65c",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "50000",
+      "policyInputs": 47
+    },
+    {
+      "requestId": "0x4d822b738302d85183fe44e943146ebd9631dcdbd315fe07110df45eedf09523",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 47
+    }
+  ],
+  "walletTransactions": [
+    {
+      "hash": "0xb9e49116702ff37a4d896e62b1af8e9a313253adc644ced5a8ee1d97d307ba6a",
+      "to": "0xec4839b1bdfac9450feeb211cf59a7cf075110f3",
+      "action": "registerService"
+    },
+    {
+      "hash": "0x827893cd5d1a3edb5f15795b96d887256b918d59248d31b8e46043adbaec8b63",
+      "to": "0xec4839b1bdfac9450feeb211cf59a7cf075110f3",
+      "action": "registerService"
+    },
+    {
+      "hash": "0x1913ff924c1154ec0b59dfcb18df8485373211ad1413870cdc3281d455c80316",
+      "to": "0x66D16469E07217E53618887B492b14eA732b5a11",
+      "action": "approve",
+      "amount": "1000000"
+    },
+    {
+      "hash": "0x997f70aa39294ffa3116efc27a46a089a93435d4d924822e90ad15cafa646275",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "deposit"
+    },
+    {
+      "hash": "0xdf2310391152da55f126eae419bf8c09ab0695f65b01b923adc586da3d26b730",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "createSession"
+    },
+    {
+      "hash": "0x656b48c770492b67c7a3de2e61e515fa45c53fbf7bd82a43af3fe879947e36b8",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "closeSession"
+    },
+    {
+      "hash": "0xe36545a5b572cb737074aa3c9f5487883f1cf870d728c8545f3e7b7195075636",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "revokeSessionSigner"
+    },
+    {
+      "hash": "0xc61c2240a02a7f46148edb1eab6d9638b1c04787ed77d1f501b5b27c7c6088f9",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "refund"
+    },
+    {
+      "hash": "0xdb5de21c30b304810bf57a967ea5613195e91ce524571d86bf9594044c5c0dd7",
+      "to": "0x12412460847a865b29406fd8cd37df91dd881b50",
+      "action": "withdrawAvailable"
+    }
+  ],
+  "messageSignatures": 3,
+  "typedSignatures": 4,
+  "screenshots": [
+    ".impeccable/review/okx-wallet/desktop.png",
+    ".impeccable/review/okx-wallet/dashboard-empty-desktop.png",
+    ".impeccable/review/okx-wallet/wallet-connection-declined-desktop.png",
+    ".impeccable/review/okx-wallet/wallet-sign-in-declined-desktop.png",
+    ".impeccable/review/okx-wallet/provider-desktop.png",
+    ".impeccable/review/okx-wallet/dashboard-session-desktop.png",
+    ".impeccable/review/okx-wallet/playground-desktop.png",
+    ".impeccable/review/okx-wallet/receipt-desktop.png",
+    ".impeccable/review/okx-wallet/policy-receipt-desktop.png",
+    ".impeccable/review/okx-wallet/dashboard-desktop.png",
+    ".impeccable/review/okx-wallet/services-desktop.png",
+    ".impeccable/review/okx-wallet/receipts-desktop.png",
+    ".impeccable/review/okx-wallet/policy-reduced-motion-desktop.png",
+    ".impeccable/review/okx-wallet/policy-mobile.png",
+    ".impeccable/review/okx-wallet/dashboard-mobile.png",
+    ".impeccable/review/okx-wallet/services-mobile.png",
+    ".impeccable/review/okx-wallet/playground-mobile.png",
+    ".impeccable/review/okx-wallet/receipt-mobile.png",
+    ".impeccable/review/okx-wallet/receipts-mobile.png",
+    ".impeccable/review/okx-wallet/mobile.png",
+    ".impeccable/review/okx-wallet/network-mismatch-desktop.png"
+  ],
+  "completedAt": "2026-11-23T07:46:58.878Z"
+}

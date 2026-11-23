@@ -18,6 +18,7 @@ import { short } from "../lib/models";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
 const artifactLabel = process.env.EMETER_BROWSER_ARTIFACT_LABEL;
+const okxWallet = process.env.EMETER_TEST_WALLET_PROVIDER === "okx";
 if (artifactLabel && !/^[a-z0-9-]{1,24}$/.test(artifactLabel)) throw new Error("Invalid browser artifact label");
 const reviewDirectory = join(root, ".impeccable/review", artifactLabel ?? "");
 const evidencePath = join(root, "docs/evidence", artifactLabel ? "frontend-" + artifactLabel + "-fork-checks.json" : "frontend-fork-checks.json");
@@ -40,6 +41,7 @@ async function main() {
   const captures: string[] = [];
   const walletTransactions: { hash: Hex; to: Address; action: string; amount?: string }[] = [];
   let messageSignatures = 0, typedSignatures = 0, wrongWalletHash = false, corruptConfirmation = false;
+  let rejectSignIn = false;
   const customer = privateKeyToAccount(generatePrivateKey());
   let selectedWallet = harness.providerAccount;
   const cfg = harness.ctx.config;
@@ -79,6 +81,7 @@ async function main() {
         return wrongWalletHash && block ? { ...block, hash: "0x" + "f".repeat(64) } : block;
       }
       if (raw.method === "personal_sign") {
+        if (rejectSignIn) { rejectSignIn = false; throw Object.assign(new Error("User rejected the request"), { code: 4001 }); }
         assert(String(params[1]).toLowerCase() === selectedWallet.address.toLowerCase(), "Signing wallet matches");
         const message = hexToString(params[0] as Hex);
         assert(message.startsWith("emeter gateway authentication\nOrigin: " + cfg.gatewayOrigin + "\nChain ID: 196\n"), "Only gateway login messages are signed");
@@ -114,11 +117,19 @@ async function main() {
     });
     await context.addInitScript({ content: `(() => {
       const listeners = new Map();
-      window.ethereum = {
+      const provider = {
         request(args) { return window.__emeterWalletRequest(args); },
         on(event, listener) { if (!listeners.has(event)) listeners.set(event, new Set()); listeners.get(event).add(listener); },
         removeListener(event, listener) { listeners.get(event)?.delete(listener); }
       };
+      if (${okxWallet}) {
+        provider.isOkxWallet = true;
+        window.okxwallet = provider;
+        window.ethereum = { isMetaMask: true, request() { return Promise.reject(Object.assign(new Error("User rejected the request"), { code: 4001 })); } };
+        window.addEventListener("eip6963:requestProvider", () => window.dispatchEvent(new CustomEvent("eip6963:announceProvider", {
+          detail: { info: { name: "OKX Wallet", rdns: "com.okex.wallet", uuid: "okx-test" }, provider }
+        })));
+      } else window.ethereum = provider;
       window.__emeterWalletChanged = function(event, payload) { for (const listener of listeners.get(event) || []) listener(payload); };
     })();` });
     const page = await context.newPage(); debugPage = page; page.setDefaultTimeout(45_000); page.setDefaultNavigationTimeout(60_000);
@@ -140,14 +151,36 @@ async function main() {
       assert(!overflow, "No page overflow: " + name);
     };
     const navigate = async (name: string) => { await page.getByRole("navigation", { name: "Workspace", exact: true }).getByRole("link", { name, exact: true }).click(); };
-    const connect = async () => { await page.getByRole("button", { name: "Connect wallet", exact: true }).first().click(); await ensure(page.locator(".wallet-menu")).toBeVisible(); };
+    const connect = async () => {
+      await page.getByRole("button", { name: /^(Connect wallet|Sign in)$/ }).first().click();
+      if (okxWallet) await page.getByRole("dialog").getByRole("button", { name: "OKX Wallet", exact: true }).click();
+      await ensure(page.locator(".wallet-menu")).toBeVisible();
+    };
     await page.goto(origin, { waitUntil: "domcontentloaded" }); await ensure(page.getByRole("heading", { level: 1 })).toContainText("spending limit");
     await page.getByRole("button", { name: "Soft limit reached", exact: true }).click(); await ensure(page.getByText("Payment denied", { exact: true })).toBeVisible();
     await page.getByRole("button", { name: "Customer override", exact: true }).click(); await ensure(page.getByText("Payment allowed", { exact: true })).toBeVisible();
     assert(typedSignatures === 0 && walletTransactions.length === 0, "Preview grants no permission"); check("Interactive preview grants no wallet permission");
     await page.getByRole("button", { name: "Within limits", exact: true }).click(); await capture(page, "desktop");
     await page.getByRole("link", { name: "Open workspace", exact: true }).click(); await capture(page, "dashboard-empty-desktop");
-    await navigate("Services"); await page.getByRole("button", { name: "Provider & credentials", exact: true }).click(); await connect();
+    await navigate("Services"); await page.getByRole("button", { name: "Provider & credentials", exact: true }).click();
+    if (okxWallet) {
+      await page.getByRole("button", { name: "Connect wallet", exact: true }).first().click();
+      const chooser = page.getByRole("dialog");
+      await ensure(chooser.getByRole("button", { name: "OKX Wallet", exact: true })).toHaveCount(1);
+      await chooser.getByRole("button", { name: "MetaMask", exact: true }).click();
+      await ensure(chooser.getByText(/wallet connection was declined/)).toBeVisible();
+      assert(messageSignatures === 0 && walletTransactions.length === 0, "Decoy refusal grants no signature or spending permission");
+      await capture(page, "wallet-connection-declined-desktop");
+      rejectSignIn = true;
+      await chooser.getByRole("button", { name: "OKX Wallet", exact: true }).click();
+      await ensure(chooser.getByText(/sign-in signature was declined/)).toBeVisible();
+      assert(messageSignatures === 0 && walletTransactions.length === 0, "Declined login grants no signature or spending permission");
+      await capture(page, "wallet-sign-in-declined-desktop");
+      await chooser.getByRole("button", { name: "OKX Wallet", exact: true }).click();
+      await ensure(page.locator(".wallet-menu")).toBeVisible();
+      await ensure(chooser).not.toBeVisible();
+      check("Explicit OKX selection with decoy MetaMask, deduplicated announcements, connection/sign-in refusal and retry");
+    } else await connect();
     for (const manifest of Object.values(harness.manifests)) {
       await page.getByLabel("Service manifest JSON").fill(JSON.stringify(manifest, null, 2));
       await page.getByRole("button", { name: "Verify endpoint and register", exact: true }).click();
@@ -183,6 +216,15 @@ async function main() {
     await ensure(page.getByRole("dialog")).not.toBeVisible(); await ensure(page.locator(".session-row")).toHaveCount(1);
     const indexed = await harness.ctx.db.spendingSession.findFirstOrThrow({ where: { customer: customer.address.toLowerCase() } });
     const sessionId = indexed.id as Hex;
+    if (okxWallet) {
+      const signaturesBeforeNotification = messageSignatures;
+      await page.evaluate(address => (window as unknown as { __emeterWalletChanged: (event: string, payload: unknown) => void }).__emeterWalletChanged("accountsChanged", [address]), customer.address);
+      await pause(300);
+      await ensure(page.locator(".wallet-menu")).toBeVisible();
+      await ensure(page.getByText("2 allowed services · Key in this tab", { exact: true })).toBeVisible();
+      assert(messageSignatures === signaturesBeforeNotification, "Duplicate account event does not require another login");
+      check("Repeated selected-account notification retains authenticated identity and tab session key");
+    }
     const chainSession = () => harness.client.readContract({ address: cfg.vault, abi: emeterVaultAbi, functionName: "getSession", args: [sessionId] });
     assert((await chainSession()).budget === 500_000n, "Bounded session budget is onchain");
     await ensure(page.getByText("2 allowed services · Key in this tab", { exact: true })).toBeVisible(); check("Customer-signed bounded session with tab-only delegated key");
@@ -334,6 +376,7 @@ async function main() {
     const records = await harness.ctx.db.aPIRequest.findMany({ where: { customer: customer.address.toLowerCase() }, orderBy: { createdAt: "asc" } });
     await writeFile(evidencePath, JSON.stringify({ milestone: "frontend", chainId: 196,
       networkMode: "local-fork", participantClassification: "temporary builder-controlled browser wallets",
+      walletProvider: okxWallet ? "simulated dedicated OKX provider with rejecting MetaMask decoy and EIP-6963 announcement" : "simulated legacy injected provider",
       workloadClassification: "actual JSON/schema validation and signed offline AI fixture; no new paid AI call",
       mainnetBroadcastPerformed: false, forkBlock: harness.forkBlock.toString(), forkBlockHash: harness.forkBlockHash, checks,
       requests: records.map(row => ({ requestId: row.id, serviceId: row.serviceId, requestStatus: row.requestStatus,

@@ -1,4 +1,5 @@
 import { EmeterGatewayError } from "@emeter/sdk";
+import { walletErrorCode, walletRejected } from "./wallet";
 
 const messages: Record<string, string> = {
   EXACT_DEMO_REQUIRED: "Enter a DEMO amount with up to six decimal places, such as 0.05.",
@@ -7,6 +8,10 @@ const messages: Record<string, string> = {
   INSUFFICIENT_CREDIT: "Deposit enough credit to cover this session budget.",
   INVALID_SESSION_LIMITS: "Keep the soft limit and per-request maximum within the hard budget. Select at least one service.",
   NO_WALLET: "No browser wallet was found. Open this page in a wallet browser or enable a wallet extension.",
+  WALLET_CONNECTION_DECLINED: "The wallet connection was declined. Open and unlock your wallet, then approve Emeter’s connection request.",
+  WALLET_NETWORK_DECLINED: "The switch to X Layer was declined. Select X Layer in your wallet, then try connecting again.",
+  WALLET_SIGN_IN_DECLINED: "The wallet is connected, but the sign-in signature was declined. Try again and approve the emeter gateway authentication message. Signing in grants no spending permission.",
+  WALLET_REQUEST_PENDING: "Your wallet already has a request waiting. Open the wallet and complete or dismiss that request before trying again.",
   WALLET_CHAIN_MISMATCH: "Your wallet is on another chain. Select X Layer (chain 196), then connect again.",
   WALLET_NETWORK_MISMATCH: "Your wallet and the gateway are on different versions of X Layer. Match the wallet RPC to the gateway network shown here, then connect again.",
   RPC_NETWORK_MISMATCH: "The configured browser RPC and gateway do not share the same block. Update EMETER_PUBLIC_RPC_URL to the gateway’s network.",
@@ -43,8 +48,8 @@ const messages: Record<string, string> = {
 export function errorMessage(error: unknown) {
   const code = error instanceof EmeterGatewayError ? error.code : error instanceof Error ? error.message : "";
   if (messages[code]) return messages[code];
-  if (error && typeof error === "object" && "code" in error && error.code === 4001) return "The wallet request was declined. You can try again when ready.";
-  if (/rejected|denied.*user|user.*denied/i.test(code)) return "The wallet request was declined. You can try again when ready.";
+  if (walletRejected(error)) return "The wallet request was declined. You can try again when ready.";
+  if (walletErrorCode(error) === -32002) return messages.WALLET_REQUEST_PENDING!;
   if (/fetch|network|timeout|Failed to|ECONN|ENOTFOUND/i.test(code)) return messages.GATEWAY_UNAVAILABLE!;
   if (/soft.limit/i.test(code)) return messages.SOFT_LIMIT_OVERRIDE_REQUIRED!;
   if (/RefundLocked/i.test(code)) return "The original settlement window is still open. Wait until the refund time shown for this session.";

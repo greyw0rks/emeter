@@ -1,0 +1,56 @@
+{
+  "kind": "anonymous-public-frontend-smoke",
+  "origin": "https://emeter-peach.vercel.app",
+  "gatewayUrl": "https://first-eel-292.convex.site",
+  "rpcUrl": "https://rpc.xlayer.tech",
+  "networkMode": "mainnet",
+  "walletMessageSignatures": 0,
+  "walletTransactions": 0,
+  "realAiRequests": 0,
+  "walletDiscovery": "simulated dedicated OKX desktop and EIP-6963 mobile providers with MetaMask decoy; no permission requests",
+  "checks": [
+    {
+      "name": "Public production configuration selects the hosted gateway and X Layer RPC",
+      "passed": true
+    },
+    {
+      "name": "Public CORS, readiness, canonical RPC anchor, and account protection at desktop width",
+      "passed": true
+    },
+    {
+      "name": "All five public workspace routes, service terms, and active navigation at desktop width",
+      "passed": true
+    },
+    {
+      "name": "Public OKX discovery, wallet chooser, and keyboard dismissal via dedicated injection at desktop width",
+      "passed": true
+    },
+    {
+      "name": "Public CORS, readiness, canonical RPC anchor, and account protection at mobile width",
+      "passed": true
+    },
+    {
+      "name": "All five public workspace routes, service terms, and active navigation at mobile width",
+      "passed": true
+    },
+    {
+      "name": "Public OKX discovery, wallet chooser, and keyboard dismissal via EIP-6963 only at mobile width",
+      "passed": true
+    },
+    {
+      "name": "No browser runtime errors or paid execution requests",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    ".impeccable/review/okx-wallet-public/landing-desktop.png",
+    ".impeccable/review/okx-wallet-public/dashboard-desktop.png",
+    ".impeccable/review/okx-wallet-public/services-desktop.png",
+    ".impeccable/review/okx-wallet-public/wallet-chooser-desktop.png",
+    ".impeccable/review/okx-wallet-public/landing-mobile.png",
+    ".impeccable/review/okx-wallet-public/dashboard-mobile.png",
+    ".impeccable/review/okx-wallet-public/services-mobile.png",
+    ".impeccable/review/okx-wallet-public/wallet-chooser-mobile.png"
+  ],
+  "checkedAt": "2026-11-23T07:53:08.794Z"
+}

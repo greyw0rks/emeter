@@ -13,6 +13,7 @@ const checks = [], screenshots = [];
 const ensure = expect.configure({ timeout: 45_000 });
 const check = name => { checks.push({ name, passed: true }); process.stdout.write("PASS " + name + "\n"); };
 const artifactLabel = process.env.EMETER_PUBLIC_BROWSER_ARTIFACT_LABEL;
+const okxWallet = process.env.EMETER_TEST_WALLET_PROVIDER === "okx";
 assert(!artifactLabel || /^[a-z0-9-]+$/.test(artifactLabel));
 const directory = join(root, ".impeccable/review", artifactLabel ? artifactLabel + "-public" : "public");
 let browser;
@@ -33,6 +34,14 @@ try {
   const forbidden = [];
   for (const [name, viewport] of [["desktop", { width: 1440, height: 960 }], ["mobile", { width: 390, height: 844 }]]) {
     const context = await browser.newContext({ viewport, reducedMotion: name === "mobile" ? "reduce" : "no-preference" });
+    if (okxWallet) await context.addInitScript(({ dedicated }) => {
+      const provider = { isOkxWallet: true, request() { throw new Error("Public discovery smoke must not request wallet permissions"); } };
+      if (dedicated) window.okxwallet = provider;
+      window.ethereum = { isMetaMask: true, request() { throw new Error("Public discovery smoke must not request wallet permissions"); } };
+      window.addEventListener("eip6963:requestProvider", () => window.dispatchEvent(new CustomEvent("eip6963:announceProvider", {
+        detail: { info: { name: "OKX Wallet", rdns: "com.okex.wallet", uuid: "okx-public-test" }, provider }
+      })));
+    }, { dedicated: name === "desktop" });
     const page = await context.newPage();
     page.on("pageerror", error => errors.push(error.message));
     page.on("request", request => {
@@ -77,6 +86,17 @@ try {
       if (["dashboard", "services"].includes(route)) await capture(route);
     }
     check("All five public workspace routes, service terms, and active navigation at " + name + " width");
+    if (okxWallet) {
+      await page.getByRole("button", { name: "Connect wallet", exact: true }).first().click();
+      const chooser = page.getByRole("dialog");
+      await ensure(chooser.getByRole("heading", { name: "Choose your wallet", exact: true })).toBeVisible();
+      await ensure(chooser.getByRole("button", { name: "OKX Wallet", exact: true })).toHaveCount(1);
+      await ensure(chooser.getByRole("button", { name: "MetaMask", exact: true })).toBeVisible();
+      await capture("wallet-chooser");
+      await page.keyboard.press("Escape"); await ensure(chooser).not.toBeVisible();
+      await ensure(page.getByRole("button", { name: "Connect wallet", exact: true }).first()).toBeFocused();
+      check("Public OKX discovery, wallet chooser, and keyboard dismissal via " + (name === "desktop" ? "dedicated injection" : "EIP-6963 only") + " at " + name + " width");
+    }
     await context.close();
   }
   assert.deepEqual(errors, []);
@@ -84,6 +104,7 @@ try {
   check("No browser runtime errors or paid execution requests");
   const report = { kind: "anonymous-public-frontend-smoke", origin, gatewayUrl, rpcUrl,
     networkMode: "mainnet", walletMessageSignatures: 0, walletTransactions: 0, realAiRequests: 0,
+    walletDiscovery: okxWallet ? "simulated dedicated OKX desktop and EIP-6963 mobile providers with MetaMask decoy; no permission requests" : "anonymous without wallet injection",
     checks, screenshots, checkedAt: new Date().toISOString() };
   await writeFile(join(root, "docs/evidence", artifactLabel ? `frontend-${artifactLabel}-public-checks.json` : "frontend-public-checks.json"), JSON.stringify(report, null, 2) + "\n");
   await writeFile(process.env.EMETER_BROWSER_RESULT_PATH, JSON.stringify({ passed: true, checks: checks.length }) + "\n");

@@ -7,6 +7,8 @@ import { ArrowRight, Check, Copy, LoaderCircle, Wallet, X } from "lucide-react";
 import { useGateway } from "./gateway-provider";
 import { demo, short, time } from "../lib/models";
 import type { Activity } from "../lib/models";
+import { announcedWallet, injectedWallets, mergeWalletChoices } from "../lib/wallet";
+import type { WalletChoice } from "../lib/wallet";
 
 export function Button({ children, variant = "primary", className = "", ...props }:
   ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "secondary" | "quiet" | "danger" }) {
@@ -74,8 +76,30 @@ export function CopyValue({ value, truncate = false, label = "Copy value" }: { v
 }
 export function WalletButton() {
   const gateway = useGateway();
-  if (!gateway.signedIn) return <Button variant="secondary" disabled={Boolean(gateway.busy) || gateway.loading || !gateway.config}
-    onClick={() => { void gateway.connect().catch(() => undefined); }}><Wallet size={16} aria-hidden="true" />{gateway.address ? "Sign in" : "Connect wallet"}</Button>;
+  const [choices, setChoices] = useState<WalletChoice[]>([]), [choosing, setChoosing] = useState(false);
+  useEffect(() => {
+    setChoices(injectedWallets(window));
+    const announced = (event: Event) => {
+      const choice = announcedWallet((event as CustomEvent<unknown>).detail);
+      if (choice) setChoices(current => mergeWalletChoices(current, [choice]));
+    };
+    window.addEventListener("eip6963:announceProvider", announced);
+    window.dispatchEvent(new Event("eip6963:requestProvider"));
+    return () => window.removeEventListener("eip6963:announceProvider", announced);
+  }, []);
+  if (!gateway.signedIn) return <><Button variant="secondary" disabled={Boolean(gateway.busy) || gateway.loading || !gateway.config}
+    onClick={() => {
+      gateway.clearError();
+      const current = mergeWalletChoices(injectedWallets(window), choices); setChoices(current);
+      if (current.length > 1 || current.some(choice => choice.id === "okx")) setChoosing(true);
+      else void gateway.connect(current[0]?.provider).catch(() => undefined);
+    }}><Wallet size={16} aria-hidden="true" />{gateway.address ? "Sign in" : "Connect wallet"}</Button>
+    <Dialog open={choosing} onClose={() => setChoosing(false)} title="Choose your wallet"><div className="form-stack">
+      <p className="form-note">Approve the wallet connection, then sign the emeter gateway authentication message. This login grants no spending permission.</p>
+      {choices.map(choice => <Button key={choice.id} variant="secondary" disabled={Boolean(gateway.busy)} onClick={() => {
+        void gateway.connect(choice.provider).then(() => setChoosing(false)).catch(() => undefined);
+      }}><Wallet size={18} aria-hidden="true" />{choice.name}</Button>)}
+    </div></Dialog></>;
   return <details className="wallet-menu"><summary className="button button-secondary"><Wallet size={16} aria-hidden="true" />{short(gateway.address!)}</summary>
     <div className="wallet-popover"><p>Signed in wallet</p><CopyValue value={gateway.address!} truncate label="Copy wallet address" />
       <Button variant="secondary" disabled={Boolean(gateway.busy)} onClick={gateway.disconnect}>Disconnect</Button></div></details>;
