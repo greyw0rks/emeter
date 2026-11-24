@@ -37,6 +37,12 @@ abstract contract EngineFixture is Test {
     bytes32 internal serviceB;
     bytes32[] internal serviceIds;
 
+    function _deployToken() internal virtual returns (DemoUSD) { return new DemoUSD(address(this)); }
+    function _fundToken() internal virtual {
+        token.mint(customer, 1_000_000);
+        token.mint(customerTwo, 1_000_000);
+    }
+
     function _deployPolicy() internal virtual returns (EmeterPolicyAdapter) {
         MockFactory factory = new MockFactory();
         mockProcessor = new MockProcessor(address(factory));
@@ -63,9 +69,8 @@ abstract contract EngineFixture is Test {
         serviceB = keccak256("engine-word-count");
         serviceIds.push(uint256(serviceA) < uint256(serviceB) ? serviceA : serviceB);
         serviceIds.push(uint256(serviceA) < uint256(serviceB) ? serviceB : serviceA);
-        token = new DemoUSD(address(this));
-        token.mint(customer, 1_000_000);
-        token.mint(customerTwo, 1_000_000);
+        token = _deployToken();
+        _fundToken();
         registry = new EmeterRegistry(administrator);
         vm.prank(administrator);
         registry.setProviderAllowed(provider, true);

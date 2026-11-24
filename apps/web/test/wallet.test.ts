@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
-import { assertDeployment, assertWalletAnchor, DEPLOYMENT, exactDemo } from "../lib/wallet";
+import { assertDeployment, assertWalletAnchor, DEPLOYMENT, exactPayment } from "../lib/wallet";
 import type { BrowserWallet } from "../lib/wallet";
 import type { GatewayNetwork } from "@emeter/sdk";
+import { X_LAYER_USDC } from "@emeter/shared";
 
 const address = "0x0000000000000000000000000000000000000001" as const;
 const hash = "0x" + "1".repeat(64);
@@ -11,10 +12,10 @@ const network: GatewayNetwork = { ...DEPLOYMENT, name: "emeter", phase: "paid-ga
 function wallet(answers: Record<string, unknown>) {
   return { request: vi.fn(async ({ method }: { method: string }) => answers[method]) } as unknown as BrowserWallet;
 }
-describe("exact DEMO boundaries", () => {
-  it.each([["0.000001", 1n], ["1", 1_000_000n], ["0.05", 50_000n], ["9007199254740993.123456", 9007199254740993123456n]] as const)("keeps %s exact", (value, units) => expect(exactDemo(value)).toBe(units));
-  it.each(["0", "-1", "0.0000001", "1e6", "1,000", "01", " 1", ".5", "1.", "Infinity", (2n ** 256n).toString()])("refuses ambiguous or out-of-range %s", value => expect(() => exactDemo(value)).toThrow());
-  it("permits a zero soft limit only when explicitly requested", () => expect(exactDemo("0", true)).toBe(0n));
+describe("exact USDC boundaries", () => {
+  it.each([["0.000001", 1n], ["1", 1_000_000n], ["0.05", 50_000n], ["9007199254740993.123456", 9007199254740993123456n]] as const)("keeps %s exact", (value, units) => expect(exactPayment(value)).toBe(units));
+  it.each(["0", "-1", "0.0000001", "1e6", "1,000", "01", " 1", ".5", "1.", "Infinity", (2n ** 256n).toString()])("refuses ambiguous or out-of-range %s", value => expect(() => exactPayment(value)).toThrow());
+  it("permits a zero soft limit only when explicitly requested", () => expect(exactPayment("0", true)).toBe(0n));
 });
 describe("wallet network identity", () => {
   it("accepts a matching block on the same account and chain", async () => {
@@ -39,5 +40,12 @@ describe("wallet network identity", () => {
   it("requires a gateway anchor", () => {
     const { anchor, ...unanchored } = network;
     expect(() => assertDeployment(unanchored)).toThrow("GATEWAY_ANCHOR_UNAVAILABLE");
+  });
+  it("accepts the explicitly configured USDC deployment and rejects a misleading currency", () => {
+    const deployment = { ...DEPLOYMENT, token: X_LAYER_USDC.address, vault: address };
+    const usdc: GatewayNetwork = { ...network, ...deployment, symbol: "USDC", networkMode: "mainnet" };
+    expect(() => assertDeployment(usdc, deployment)).not.toThrow();
+    expect(() => assertDeployment({ ...usdc, symbol: "DEMO" }, deployment)).toThrow("PAYMENT_TOKEN_MISMATCH");
+    expect(() => assertDeployment({ ...usdc, token: DEPLOYMENT.token }, deployment)).toThrow("DEPLOYMENT_MISMATCH");
   });
 });

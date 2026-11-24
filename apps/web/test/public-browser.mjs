@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { chromium, expect } from "@playwright/test";
-import { createPublicClient, http } from "viem";
+import { createPublicClient, http, parseAbi } from "viem";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
 const origin = process.env.EMETER_PUBLIC_APP_URL ?? "https://emeter-peach.vercel.app";
@@ -21,9 +21,11 @@ try {
   const config = await (await fetch(origin + "/api/config", { signal: AbortSignal.timeout(30_000) })).json();
   assert.equal(config.gatewayUrl, gatewayUrl);
   assert.equal(config.rpcUrl, rpcUrl);
-  const engine = JSON.parse(await readFile(join(root, "deployments/xlayer-196-engine.json"), "utf8"));
+  const engine = JSON.parse(await readFile(join(root, "deployments/xlayer-196-usdc.json"), "utf8"));
+  assert(engine.completed);
   assert.equal(config.deployment.vault.toLowerCase(), engine.contracts.vault.toLowerCase());
   assert.equal(config.deployment.registry.toLowerCase(), engine.contracts.registry.toLowerCase());
+  assert.equal(config.deployment.token.toLowerCase(), engine.token.toLowerCase());
   check("Public production configuration selects the hosted gateway and X Layer RPC");
   browser = await chromium.launch({
     executablePath: process.env.EMETER_BROWSER_BINARY ?? "/home/greyw0rks/.cache/ms-playwright/chromium-1254/chrome-linux64/chrome",
@@ -66,8 +68,12 @@ try {
       return response.json();
     }, gatewayUrl);
     assert(network.paidExecutionReady && network.networkMode === "mainnet" && network.chainId === 196);
+    assert.equal(network.symbol, "USDC"); assert.equal(network.decimals, 6);
+    assert.equal(network.token.toLowerCase(), engine.token.toLowerCase());
+    assert.equal(network.vault.toLowerCase(), engine.contracts.vault.toLowerCase());
     const rpc = createPublicClient({ transport: http(rpcUrl) });
     assert.equal(await rpc.getChainId(), 196);
+    assert.equal((await rpc.readContract({ address: network.vault, abi: parseAbi(["function token() view returns(address)"]), functionName: "token" })).toLowerCase(), engine.token.toLowerCase());
     assert.equal((await rpc.getBlock({ blockNumber: BigInt(network.anchor.blockNumber) })).hash, network.anchor.blockHash);
     assert.equal(await page.evaluate(url => fetch(url + "/api/account").then(response => response.status), gatewayUrl), 401);
     check("Public CORS, readiness, canonical RPC anchor, and account protection at " + name + " width");
@@ -103,7 +109,8 @@ try {
   assert.deepEqual(forbidden, []);
   check("No browser runtime errors or paid execution requests");
   const report = { kind: "anonymous-public-frontend-smoke", origin, gatewayUrl, rpcUrl,
-    networkMode: "mainnet", walletMessageSignatures: 0, walletTransactions: 0, realAiRequests: 0,
+    networkMode: "mainnet", currency: "USDC", token: engine.token, vault: engine.contracts.vault,
+    walletMessageSignatures: 0, walletTransactions: 0, realAiRequests: 0,
     walletDiscovery: okxWallet ? "simulated dedicated OKX desktop and EIP-6963 mobile providers with MetaMask decoy; no permission requests" : "anonymous without wallet injection",
     checks, screenshots, checkedAt: new Date().toISOString() };
   await writeFile(join(root, "docs/evidence", artifactLabel ? `frontend-${artifactLabel}-public-checks.json` : "frontend-public-checks.json"), JSON.stringify(report, null, 2) + "\n");

@@ -1,0 +1,55 @@
+{
+  "kind": "usdc-migration-local-verification",
+  "verifiedAt": "2026-11-23 21:30:30 UTC",
+  "chainId": 196,
+  "token": "0x74b7F16337b8972027F6196A17a631aC6dE26d22",
+  "symbol": "USDC",
+  "activationCompleted": false,
+  "validation": {
+    "workspaceTests": {
+      "circuit": 91,
+      "shared": 57,
+      "sdk": 19,
+      "contracts": 73,
+      "gateway": 12,
+      "web": 38,
+      "convex": 19,
+      "total": 309,
+      "passed": true
+    },
+    "actualUsdcContractForkTests": {
+      "passed": true,
+      "count": 4,
+      "evidence": "docs/evidence/usdc-fork-checks.json"
+    },
+    "actualUsdcBrowserFlow": {
+      "passed": true,
+      "checks": 18,
+      "evidence": "docs/evidence/frontend-usdc-fork-checks.json"
+    },
+    "typecheckPassed": true,
+    "productionBuildPassed": true,
+    "diffCheckPassed": true
+  },
+  "deployment": {
+    "prepared": true,
+    "gasCapWei": "200000000000000",
+    "gasCapOkb": "0.0002",
+    "estimatedMaximumGasOkb": "0.000164054611812124",
+    "tokenTransfers": 0,
+    "newMainnetVaultDeployed": false
+  },
+  "sourceSha256": {
+    "packages/shared/src/asset.ts": "d0218f289c1d42b315c7dcdd6ada666c31fb9cf29c64d34e23439fbcc6eb5e49",
+    "packages/shared/src/deployment.ts": "ca08a3beef9c34c7456fb2322990b1f2ac27ab29b774aecf2b4f30f6eb088d80",
+    "apps/web/components/gateway-provider.tsx": "1276b6a614d87ad550159a33f84d939f7eb348a505a51efdf6622122ff340de2",
+    "apps/gateway/src/payment-scope.ts": "11358eba72aea5aac06f21736f59f3b6c84c2df2ada46442b9dc4956c898406c",
+    "scripts/deploy/usdc-mainnet.ts": "c31285f928dc402aad97d4f241edea530df64329d492536071cc2f267a51b6ce",
+    "convex/runtime.ts": "e4dd1bef2dbc3d0813e566793bf7eab8feafca19ad95186b68806d69c46d510d"
+  },
+  "limits": [
+    "All new payment transactions remained on local forks.",
+    "Browser AI responses used a signed offline fixture; no new paid AI call.",
+    "The published DEMO release is unchanged until deployment and publication."
+  ]
+}

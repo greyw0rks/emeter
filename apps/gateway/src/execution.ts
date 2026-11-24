@@ -1,3 +1,4 @@
+import { belongsToPayment } from "./payment-scope.js";
 import type { Hex } from "viem";
 import type { Prisma } from "@emeter/database";
 import { fromWireCharge, jsonSafe, verifyAiEvidence, verifyTap13Response } from "@emeter/shared";
@@ -9,6 +10,7 @@ export async function executeRequest(ctx: GatewayContext, requestId: string) {
   if ((await ctx.db.indexerCursor.findUnique({ where: { id: ctx.config.vault.toLowerCase() } }))?.state === "reorg_detected")
     throw new Error("CHAIN_REORG_RECONCILIATION_REQUIRED");
   const row = await ctx.db.aPIRequest.findUniqueOrThrow({ where: { id: requestId } });
+  if (!belongsToPayment(ctx, row)) throw new Error("REQUEST_PAYMENT_DEPLOYMENT_MISMATCH");
   if (row.requestStatus === "completed") {
     if (row.paymentStatus !== "settled") await ctx.settlementQueue.add("settle", { requestId }, { jobId: requestId });
     return;

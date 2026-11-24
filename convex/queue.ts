@@ -30,8 +30,8 @@ export const get = internalQuery({
   args: { key: v.string() }, handler: (ctx, args) => ctx.db.query("jobs").withIndex("by_key", q => q.eq("key", args.key)).unique()
 });
 export const counts = internalQuery({
-  args: { queue }, handler: async (ctx, args) => {
-    const rows = await ctx.db.query("jobs").collect();
+  args: { queue, prefix: v.optional(v.string()) }, handler: async (ctx, args) => {
+    const rows = (await ctx.db.query("jobs").collect()).filter(row => !args.prefix || row.key.startsWith(args.prefix + ":"));
     return Object.fromEntries(["waiting", "active", "completed", "failed"].map(state => [state, rows.filter(row => row.queue === args.queue && row.status === state).length]));
   }
 });
@@ -42,7 +42,8 @@ export const claim = internalMutation({
     const job = await ctx.db.query("jobs").withIndex("by_key", q => q.eq("key", args.key)).unique();
     if (!job || job.status !== "waiting") return null;
     const running = await ctx.db.query("jobs").withIndex("by_status", q => q.eq("status", "active")).collect();
-    if (running.filter(row => row.queue === job.queue && (row.leaseUntil ?? 0) > Date.now()).length >= (job.queue === "execution" ? 2 : 1)) return null;
+    const separator = job.key.indexOf(":" + job.queue + ":"), prefix = separator < 0 ? undefined : job.key.slice(0, separator);
+    if (running.filter(row => (!prefix || row.key.startsWith(prefix + ":")) && row.queue === job.queue && (row.leaseUntil ?? 0) > Date.now()).length >= (job.queue === "execution" ? 2 : 1)) return null;
     await ctx.db.patch(job._id, { status: "active", owner: args.owner, leaseUntil: Date.now() + 180_000,
       attemptsMade: job.attemptsMade + 1, updatedAt: Date.now() });
     return { ...job, owner: args.owner };
@@ -81,9 +82,10 @@ export const remove = internalMutation({
   }
 });
 export const repair = internalMutation({
-  args: { dispatch: v.optional(v.boolean()) }, handler: async (ctx, args) => {
+  args: { dispatch: v.optional(v.boolean()), prefix: v.optional(v.string()) }, handler: async (ctx, args) => {
     const active = await ctx.db.query("jobs").withIndex("by_status", q => q.eq("status", "active")).collect();
     for (const job of active) {
+      if (args.prefix && !job.key.startsWith(args.prefix + ":")) continue;
       if ((job.leaseUntil ?? 0) > Date.now()) continue;
       await ctx.db.patch(job._id, { status: "failed", errorCode: "JOB_LEASE_EXPIRED", updatedAt: Date.now() });
       if (job.queue === "execution") await unknownCompletion(ctx, job.requestId, "PROVIDER_COMPLETION_UNKNOWN");
@@ -91,6 +93,7 @@ export const repair = internalMutation({
     if (args.dispatch === false || await paused(ctx)) return;
     const waiting = await ctx.db.query("jobs").withIndex("by_status", q => q.eq("status", "waiting")).collect();
     for (const job of waiting) {
+      if (args.prefix && !job.key.startsWith(args.prefix + ":")) continue;
       const task = job.scheduledId ? await ctx.db.system.get(job.scheduledId) : null;
       if (task && ["pending", "inProgress"].includes(task.state.kind)) continue;
       const scheduledId = await ctx.scheduler.runAfter(0, internal.runtime.runJob, { key: job.key });

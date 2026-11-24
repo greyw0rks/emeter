@@ -1,0 +1,59 @@
+{
+  "kind": "anonymous-public-frontend-smoke",
+  "origin": "https://emeter-peach.vercel.app",
+  "gatewayUrl": "https://first-eel-292.convex.site",
+  "rpcUrl": "https://rpc.xlayer.tech",
+  "networkMode": "mainnet",
+  "currency": "USDC",
+  "token": "0x74b7F16337b8972027F6196A17a631aC6dE26d22",
+  "vault": "0x90A84f7dca90621827876febF2468Ba0591801c9",
+  "walletMessageSignatures": 0,
+  "walletTransactions": 0,
+  "realAiRequests": 0,
+  "walletDiscovery": "simulated dedicated OKX desktop and EIP-6963 mobile providers with MetaMask decoy; no permission requests",
+  "checks": [
+    {
+      "name": "Public production configuration selects the hosted gateway and X Layer RPC",
+      "passed": true
+    },
+    {
+      "name": "Public CORS, readiness, canonical RPC anchor, and account protection at desktop width",
+      "passed": true
+    },
+    {
+      "name": "All five public workspace routes, service terms, and active navigation at desktop width",
+      "passed": true
+    },
+    {
+      "name": "Public OKX discovery, wallet chooser, and keyboard dismissal via dedicated injection at desktop width",
+      "passed": true
+    },
+    {
+      "name": "Public CORS, readiness, canonical RPC anchor, and account protection at mobile width",
+      "passed": true
+    },
+    {
+      "name": "All five public workspace routes, service terms, and active navigation at mobile width",
+      "passed": true
+    },
+    {
+      "name": "Public OKX discovery, wallet chooser, and keyboard dismissal via EIP-6963 only at mobile width",
+      "passed": true
+    },
+    {
+      "name": "No browser runtime errors or paid execution requests",
+      "passed": true
+    }
+  ],
+  "screenshots": [
+    ".impeccable/review/usdc-public/landing-desktop.png",
+    ".impeccable/review/usdc-public/dashboard-desktop.png",
+    ".impeccable/review/usdc-public/services-desktop.png",
+    ".impeccable/review/usdc-public/wallet-chooser-desktop.png",
+    ".impeccable/review/usdc-public/landing-mobile.png",
+    ".impeccable/review/usdc-public/dashboard-mobile.png",
+    ".impeccable/review/usdc-public/services-mobile.png",
+    ".impeccable/review/usdc-public/wallet-chooser-mobile.png"
+  ],
+  "checkedAt": "2026-11-24T08:44:07.197Z"
+}

@@ -1,0 +1,194 @@
+{
+  "milestone": "frontend",
+  "chainId": 196,
+  "paymentToken": "0x74b7F16337b8972027F6196A17a631aC6dE26d22",
+  "paymentCurrency": "USDC",
+  "vault": "0x51344f9787f04f6bd073bfd2ff7e24cc5fe30757",
+  "networkMode": "local-fork",
+  "participantClassification": "temporary builder-controlled browser wallets",
+  "walletProvider": "simulated legacy injected provider",
+  "workloadClassification": "actual JSON/schema validation and signed offline AI fixture; no new paid AI call",
+  "mainnetBroadcastPerformed": false,
+  "forkBlock": "76360367",
+  "forkBlockHash": "0xb1e4fdcff31f6fe116386ff0f5328953c46e4534c558360096a66bdca8d82721",
+  "checks": [
+    {
+      "name": "Interactive preview grants no wallet permission",
+      "passed": true
+    },
+    {
+      "name": "Provider endpoint probes and browser registration transactions",
+      "passed": true
+    },
+    {
+      "name": "Provider credential scope, account refusal, and revocation",
+      "passed": true
+    },
+    {
+      "name": "Wallet login and exact approval/deposit into live credit",
+      "passed": true
+    },
+    {
+      "name": "Customer-signed bounded session with tab-only delegated key",
+      "passed": true
+    },
+    {
+      "name": "JSON document/schema execution, signed output, and canonical payment",
+      "passed": true
+    },
+    {
+      "name": "Independent browser receipt, price version, signature, and settlement inspection",
+      "passed": true
+    },
+    {
+      "name": "Circuit visualization driven by verified receipt inputs",
+      "passed": true
+    },
+    {
+      "name": "Explicit cumulative customer override and second canonical payment",
+      "passed": true
+    },
+    {
+      "name": "AI fixture runtime, usage evidence, and canonical settlement",
+      "passed": true
+    },
+    {
+      "name": "Status outage recovery refreshes a revoked key and retains one request, nonce, and signed authorization",
+      "passed": true
+    },
+    {
+      "name": "Session read credential is shown once and revoked from the UI",
+      "passed": true
+    },
+    {
+      "name": "Desktop/mobile layout, page overflow, and reduced-motion fallback",
+      "passed": true
+    },
+    {
+      "name": "Native dialog keyboard focus, escape, and focus restoration",
+      "passed": true
+    },
+    {
+      "name": "Same-chain-ID fork mismatch refuses wallet writes",
+      "passed": true
+    },
+    {
+      "name": "Lost-key close, signer revocation, original refund timing, and refund",
+      "passed": true
+    },
+    {
+      "name": "Pending hash retention, canonical recheck, and no replacement withdrawal",
+      "passed": true
+    },
+    {
+      "name": "No browser runtime errors or persisted signing credentials",
+      "passed": true
+    }
+  ],
+  "requests": [
+    {
+      "requestId": "0x4aca343dd3265c6eff97944de56f7d040b801a127feaef3a47f7d7683ced127d",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 31
+    },
+    {
+      "requestId": "0xe3b5934d794e729c1fd8146f21d2a8143c10c32a48cf203ec8862a742a80c099",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 47
+    },
+    {
+      "requestId": "0xf10b187ddad7570c9950bd600c9d82ff10cfe32e9887228812be0ce6e90bb792",
+      "serviceId": "0xdbb71923c13eda870a85b0f17b0903bf84fbd37581505c43a259e9a0a6ddf65c",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "50000",
+      "policyInputs": 47
+    },
+    {
+      "requestId": "0xb6e70c6d92f63bc5e8e2d5120fb86bf28c3a581371a5813c5c86eb028ee1e154",
+      "serviceId": "0x90ba32cd9548e4e91a4f1303be44955e78c02f96d742a65193184d98ca2ae32a",
+      "requestStatus": "completed",
+      "paymentStatus": "settled",
+      "priceBaseUnits": "20000",
+      "policyInputs": 47
+    }
+  ],
+  "walletTransactions": [
+    {
+      "hash": "0x7d77b841e1d0667c6ea81450ea661b1b8fb7fa71fff9e19fb464ab4e1e43761f",
+      "to": "0xEC4839B1BDfAC9450feEb211Cf59A7cF075110f3",
+      "action": "registerService"
+    },
+    {
+      "hash": "0x7d77b6df50b1ca7f64378d8a5a3cb041eb571d44368c12499475e0b0637a7a28",
+      "to": "0xEC4839B1BDfAC9450feEb211Cf59A7cF075110f3",
+      "action": "registerService"
+    },
+    {
+      "hash": "0xecec306340ffd55efb5be29dbdf198f1f335432c71abe7fcdc670e04265ecd0f",
+      "to": "0x74b7F16337b8972027F6196A17a631aC6dE26d22",
+      "action": "approve",
+      "amount": "1000000"
+    },
+    {
+      "hash": "0x9b0db2886ac8af3c8a89309eb024392e3384466038a40e0cb3998a438e547edc",
+      "to": "0x51344f9787F04f6BD073Bfd2Ff7E24cc5Fe30757",
+      "action": "deposit"
+    },
+    {
+      "hash": "0xec65ed375fa9d974748b16455c041d748a2afc979e0f4164cb3dc2a0186c1591",
+      "to": "0x51344f9787F04f6BD073Bfd2Ff7E24cc5Fe30757",
+      "action": "createSession"
+    },
+    {
+      "hash": "0x88b2fb776ea979b6ec763dd5245cfcb0449d670137e3bea07add6581208bdab2",
+      "to": "0x51344f9787F04f6BD073Bfd2Ff7E24cc5Fe30757",
+      "action": "closeSession"
+    },
+    {
+      "hash": "0xebf48af9c5f238c6e52c9d1d20e9c2e7d1b961022ce153968b89c0ef2dfd047d",
+      "to": "0x51344f9787F04f6BD073Bfd2Ff7E24cc5Fe30757",
+      "action": "revokeSessionSigner"
+    },
+    {
+      "hash": "0x184560a46efda83061befb114c550109a036f70cb1bbd9b84a4d578bd8b3a9f9",
+      "to": "0x51344f9787F04f6BD073Bfd2Ff7E24cc5Fe30757",
+      "action": "refund"
+    },
+    {
+      "hash": "0xc21c200086f99db9bf44113fff37e40e6afa1b903764362ed6b0f223fe45987e",
+      "to": "0x51344f9787F04f6BD073Bfd2Ff7E24cc5Fe30757",
+      "action": "withdrawAvailable"
+    }
+  ],
+  "messageSignatures": 3,
+  "typedSignatures": 4,
+  "screenshots": [
+    ".impeccable/review/usdc/desktop.png",
+    ".impeccable/review/usdc/dashboard-empty-desktop.png",
+    ".impeccable/review/usdc/provider-desktop.png",
+    ".impeccable/review/usdc/dashboard-session-desktop.png",
+    ".impeccable/review/usdc/playground-desktop.png",
+    ".impeccable/review/usdc/receipt-desktop.png",
+    ".impeccable/review/usdc/policy-receipt-desktop.png",
+    ".impeccable/review/usdc/dashboard-desktop.png",
+    ".impeccable/review/usdc/services-desktop.png",
+    ".impeccable/review/usdc/receipts-desktop.png",
+    ".impeccable/review/usdc/policy-reduced-motion-desktop.png",
+    ".impeccable/review/usdc/policy-mobile.png",
+    ".impeccable/review/usdc/dashboard-mobile.png",
+    ".impeccable/review/usdc/services-mobile.png",
+    ".impeccable/review/usdc/playground-mobile.png",
+    ".impeccable/review/usdc/receipt-mobile.png",
+    ".impeccable/review/usdc/receipts-mobile.png",
+    ".impeccable/review/usdc/mobile.png",
+    ".impeccable/review/usdc/network-mismatch-desktop.png"
+  ],
+  "completedAt": "2026-11-23T21:25:19.569Z"
+}

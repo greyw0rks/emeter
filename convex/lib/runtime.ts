@@ -4,6 +4,7 @@ import { createPublicClient, defineChain, getAddress, http } from "viem";
 import type { Address, Hex } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { EmeterSessionClient } from "@emeter/sdk";
+import { configuredPaymentDeployment, paymentDeploymentBlock } from "@emeter/shared";
 import original from "../../deployments/xlayer-196.json";
 import engine from "../../deployments/xlayer-196-engine.json";
 import hosted from "../../deployments/convex.json";
@@ -30,6 +31,7 @@ export function signer(role: "provider" | "relayer", address: Address) {
   return account;
 }
 export function runtimeConfig(): GatewayConfig {
+  const payment = configuredPaymentDeployment(process.env);
   const rpcUrl = process.env.X_LAYER_RPC_URL ?? "https://rpc.xlayer.tech";
   const rpc = new URL(rpcUrl), networkMode = process.env.EMETER_NETWORK_MODE ?? "mainnet";
   if (!["mainnet", "local-fork"].includes(networkMode) || rpc.username || rpc.password || rpc.search || rpc.hash)
@@ -49,13 +51,12 @@ export function runtimeConfig(): GatewayConfig {
   const executionEnabled = (networkMode === "local-fork" || process.env.EMETER_MAINNET_ENABLED === "true")
     && dispatchSecret.length >= 32 && signingReady && Boolean(process.env.OTARI_API_KEY);
   return {
-    databaseUrl: "convex://records", redisUrl: "convex://scheduler", chainId: 196, rpcUrl, networkMode: networkMode as "mainnet" | "local-fork",
-    vault: getAddress(engine.contracts.vault), registry: getAddress(engine.contracts.registry), token: getAddress(original.contracts.demoToken),
-    adapter: getAddress(original.contracts.adapter), container: getAddress(original.contracts.serviceContainer),
-    deployer, providerSigner, deploymentBlock: BigInt(process.env.EMETER_INDEXER_START_BLOCK ?? engine.steps[0]!.blockNumber),
+    databaseUrl: "convex://records", redisUrl: "convex://scheduler", rpcUrl, networkMode: networkMode as "mainnet" | "local-fork",
+    ...payment, container: getAddress(original.contracts.serviceContainer),
+    deployer, providerSigner, deploymentBlock: paymentDeploymentBlock(process.env, engine.steps[0]!.blockNumber),
     gatewayOrigin, providerOrigin, browserOrigins: (process.env.EMETER_BROWSER_ORIGINS ?? "http://127.0.0.1:3100,http://localhost:3100").split(",").map(value => origin(value.trim())),
     allowedProviderOrigins: (process.env.EMETER_PROVIDER_ORIGINS ?? providerOrigin).split(",").map(value => origin(value.trim())),
-    dispatchSecret, confirmations, queuePrefix: "emeter-convex-" + engine.contracts.vault.toLowerCase(),
+    dispatchSecret, confirmations, queuePrefix: "emeter-convex-" + payment.vault.toLowerCase(),
     settlementGasBudget, executionTimeoutMs: 28_000, executionEnabled, indexerBatchBlocks: 100, indexerMaxBatches: 4,
     cursorFreshnessMs: 75_000, workerFreshnessMs: 75_000
   };

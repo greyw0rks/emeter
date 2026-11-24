@@ -1,6 +1,7 @@
 import { readFile, realpath } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { getAddress } from "viem";
+import { configuredPaymentDeployment, paymentDeploymentBlock } from "@emeter/shared";
 import type { Address } from "viem";
 import { Redis } from "ioredis";
 import type { RedisOptions } from "ioredis";
@@ -61,21 +62,20 @@ export async function loadGatewayConfig(): Promise<GatewayConfig> {
     throw new Error("Local fork mode requires a loopback RPC");
   const settlementGasBudget = BigInt(process.env.EMETER_RELAYER_GAS_BUDGET_WEI ?? "1000000000000000");
   if (settlementGasBudget <= 0n) throw new Error("Invalid relayer gas budget");
+  const payment = configuredPaymentDeployment(process.env);
   return {
     databaseUrl: process.env.DATABASE_URL!, redisUrl: process.env.REDIS_URL!,
-    rpcUrl, chainId: 196, networkMode,
-    vault: getAddress(process.env.EMETER_VAULT_ADDRESS ?? engine.contracts.vault),
-    registry: getAddress(process.env.EMETER_REGISTRY_ADDRESS ?? engine.contracts.registry),
-    token: getAddress(original.contracts.demoToken), adapter: getAddress(original.contracts.adapter),
+    rpcUrl, networkMode,
+    ...payment,
     deployer: getAddress(process.env.EMETER_DEPLOYER_ADDRESS || engine.operator),
     providerSigner: getAddress(process.env.EMETER_PROVIDER_SIGNER_ADDRESS || engine.secondCustomer),
     container: getAddress(original.contracts.serviceContainer),
-    deploymentBlock: BigInt(process.env.EMETER_INDEXER_START_BLOCK ?? engine.steps[0].blockNumber),
+    deploymentBlock: paymentDeploymentBlock(process.env, engine.steps[0].blockNumber),
     gatewayOrigin, providerOrigin,
     browserOrigins: (process.env.EMETER_BROWSER_ORIGINS ?? "http://127.0.0.1:3100,http://localhost:3100").split(",").map(value => origin(value.trim())),
     allowedProviderOrigins: (process.env.EMETER_PROVIDER_ORIGINS ?? providerOrigin).split(",").map(v => origin(v.trim())),
     dispatchSecret, confirmations: integer("EMETER_CONFIRMATIONS", 3, 1, 128),
-    queuePrefix: process.env.EMETER_QUEUE_PREFIX ?? "emeter-" + engine.contracts.vault.toLowerCase().slice(2),
+    queuePrefix: process.env.EMETER_QUEUE_PREFIX ?? "emeter-" + payment.vault.toLowerCase().slice(2),
     settlementGasBudget, executionTimeoutMs: integer("EMETER_EXECUTION_TIMEOUT_MS", 28_000, 1_000, 30_000)
   };
 }

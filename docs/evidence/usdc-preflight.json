@@ -1,0 +1,40 @@
+{
+  "kind": "usdc-mainnet-read-only-preflight",
+  "createdAt": "2026-11-23T21:08:50.419Z",
+  "chainId": 196,
+  "token": "0x74b7F16337b8972027F6196A17a631aC6dE26d22",
+  "blockHash": "0x5ca42882f57d2dc3fa954082f8bf55a928ecbc1196e5d48a7c75424a85427b41",
+  "codeHash": "0xe8de16445c59006a2552e1a6faebcd94e3660a4b2ecbdbc8f0bb206d436b040e",
+  "symbol": "USDC",
+  "name": "USD Coin",
+  "decimals": 6,
+  "operatorBalanceBaseUnits": "0",
+  "blockNumber": "76699086",
+  "independentRpcAgreement": true,
+  "references": [
+    "https://github.com/okx/xlayer-tokenlist/blob/main/xlayer.tokenlist.json",
+    "https://github.com/okx/xlayer-docs/blob/main/developer/bridge/usdc-on-x-layer.mdx"
+  ],
+  "operator": "0xE79bB36b53835f0740BD4a9684F5C84d8fB9b52C",
+  "operatorNativeBalanceWei": "6574746812085113",
+  "historicalDemo": {
+    "vault": "0x12412460847a865b29406fd8cd37df91dd881b50",
+    "totalAvailableBaseUnits": "0",
+    "totalLockedBaseUnits": "0"
+  },
+  "deployment": {
+    "registry": "0xec4839b1bdfac9450feeb211cf59a7cf075110f3",
+    "adapter": "0x87DB7961f425dDb39c54a8582D21f91a57C637B5",
+    "artifactSha256": "33235a7c31bcd4f3ae7f736786d1520ce14c72ce7660c1eb4acdd51578600e4d",
+    "dataHash": "0x56b492b5c90430b6fcf1135a0fab38576a8d22cfa8a3649d7c0550bf67c733c6",
+    "estimatedGas": "3246719",
+    "gasLimit": "3906062",
+    "maxFeePerGas": "42000002",
+    "maxPriorityFeePerGas": "2000000",
+    "maximumGasCostWei": "164054611812124",
+    "maximumGasCostOkb": "0.000164054611812124",
+    "fundedForMaximumGas": true,
+    "stablecoinTransferred": false,
+    "broadcastPerformed": false
+  }
+}

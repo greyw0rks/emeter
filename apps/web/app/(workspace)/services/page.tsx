@@ -8,7 +8,7 @@ import type { z } from "zod";
 import { useGateway } from "../../../components/gateway-provider";
 import { Credentials } from "../../../components/credentials";
 import { Badge, Button, EmptyState, Field, PageHeader, PaymentBadge, RequestBadge, WalletGate } from "../../../components/ui";
-import { demo, short, time, UsageSchema } from "../../../lib/models";
+import { paymentAmount, short, time, UsageSchema } from "../../../lib/models";
 import { errorMessage } from "../../../lib/errors";
 
 export default function Services() {
@@ -32,14 +32,14 @@ export default function Services() {
           <span>Price v{service.priceVersion}</span><span>Signer <code title={service.signer}>{short(service.signer)}</code></span></div>
           <details className="network-details"><summary>Service identity</summary><p>Service ID: <code>{service.id}</code></p><p>Provider: <code>{String(service.provider)}</code></p>
             <p>Endpoint: <code>{service.endpoint}</code></p><p>Signatures bind the response to this request and price version.</p></details></div>
-        <div className="service-price"><p className="mono">{demo(service.priceBaseUnits)} DEMO<small>per request</small></p><Link className="button button-secondary" href={`/playground?service=${service.id}`}>Try service<ArrowRight size={15} aria-hidden="true" /></Link></div>
+        <div className="service-price"><p className="mono">{paymentAmount(service.priceBaseUnits)} {gateway.currency}<small>per request</small></p><Link className="button button-secondary" href={`/playground?service=${service.id}`}>Try service<ArrowRight size={15} aria-hidden="true" /></Link></div>
       </article>)}</div> : <EmptyState title={gateway.loading ? "Loading verified services" : "No verified services available"} action={<Button variant="secondary" onClick={() => { void gateway.refresh(); }}>Refresh catalog</Button>}>
         The catalog includes only active services whose signed endpoint and onchain price terms match. Check the gateway or register a provider endpoint.</EmptyState>}
       <p className="form-note section">JSON validation reports document and schema checks. AI analysis reports its model, runtime, and usage evidence. A signed response does not prove the correctness of AI output.</p>
     </> : <WalletGate>
       {usage && <dl className="summary-strip"><div className="summary-item"><dt>Provider requests</dt><dd className="mono">{usage.totalRequests}</dd><p>Across your registered services</p></div>
         <div className="summary-item"><dt>Confirmed payments</dt><dd className="mono">{usage.settledRequests}</dd><p>Indexed settlements</p></div>
-        <div className="summary-item"><dt>Confirmed amount</dt><dd className="mono">{demo(usage.settledBaseUnits)}<small>DEMO</small></dd><p>DEMO test tokens</p></div>
+        <div className="summary-item"><dt>Confirmed amount</dt><dd className="mono">{paymentAmount(usage.settledBaseUnits)}<small>{gateway.currency}</small></dd><p>Confirmed payments in this currency</p></div>
         <div className="summary-item"><dt>Your services</dt><dd className="mono">{gateway.account?.stats.providerServices ?? 0}</dd><p>Registered provider endpoints</p></div></dl>}
       <section className="section"><div className="section-heading"><div><h2>Register a service</h2><p>The gateway verifies a signed endpoint probe and exact registered terms.</p></div></div>
         <form className="form-stack" onSubmit={event => {
@@ -53,9 +53,9 @@ export default function Services() {
       {localError && <p className="inline-error" role="alert">{localError}</p>}
       <Credentials />
       {usage && <section className="section"><div className="section-heading"><div><h2>Provider activity</h2><p>Recent requests to your services; payment and execution are separate.</p></div></div>
-        {usage.recent.length ? <div className="table-scroll" tabIndex={0} aria-label="Provider activity"><table className="data-table"><thead><tr><th scope="col">Request</th><th scope="col">Execution</th><th scope="col">Payment</th><th scope="col" className="align-right">DEMO</th><th scope="col">Created</th></tr></thead>
+        {usage.recent.length ? <div className="table-scroll" tabIndex={0} aria-label="Provider activity"><table className="data-table"><thead><tr><th scope="col">Request</th><th scope="col">Execution</th><th scope="col">Payment</th><th scope="col" className="align-right">{gateway.currency}</th><th scope="col">Created</th></tr></thead>
           <tbody>{usage.recent.map(request => <tr key={request.requestId}><td><code>{short(request.requestId, 12, 6)}</code></td><td><RequestBadge status={request.requestStatus} /></td><td><PaymentBadge status={request.paymentStatus} /></td>
-            <td className="align-right mono">{demo(request.priceBaseUnits)}</td><td className="nowrap muted">{time(request.createdAt)}</td></tr>)}</tbody></table></div> : <EmptyState title="No provider requests yet">Activity appears after a customer runs one of your registered services.</EmptyState>}
+            <td className="align-right mono">{paymentAmount(request.priceBaseUnits)}</td><td className="nowrap muted">{time(request.createdAt)}</td></tr>)}</tbody></table></div> : <EmptyState title="No provider requests yet">Activity appears after a customer runs one of your registered services.</EmptyState>}
       </section>}
     </WalletGate>}
   </>;

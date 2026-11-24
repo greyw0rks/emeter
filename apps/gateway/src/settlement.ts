@@ -1,3 +1,4 @@
+import { belongsToPayment } from "./payment-scope.js";
 import { randomUUID } from "node:crypto";
 import { BaseError, ContractFunctionRevertedError, encodeFunctionData, keccak256,
   TransactionReceiptNotFoundError, TransactionNotFoundError } from "viem";
@@ -38,6 +39,7 @@ export async function settleRequest(ctx: GatewayContext, requestId: string, acco
   if ((await ctx.db.indexerCursor.findUnique({ where: { id: ctx.config.vault.toLowerCase() } }))?.state === "reorg_detected")
     throw new Error("CHAIN_REORG_RECONCILIATION_REQUIRED");
   const row = await ctx.db.aPIRequest.findUniqueOrThrow({ where: { id: requestId } });
+  if (!belongsToPayment(ctx, row)) throw new Error("REQUEST_PAYMENT_DEPLOYMENT_MISMATCH");
   if (row.paymentStatus === "settled" || row.requestStatus !== "completed") return;
   let attempt = await ctx.db.settlementAttempt.findFirst({
     where: { requestId, status: { in: ["prepared", "submitted", "mined"] } }, orderBy: { createdAt: "desc" }

@@ -6,12 +6,13 @@ import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 import { PostgresPool } from "@emeter/database";
-import { createPublicClient, createTestClient, createWalletClient, encodeFunctionData, http, keccak256, parseAbi, toHex } from "viem";
+import { createPublicClient, createTestClient, createWalletClient, encodeFunctionData, encodeDeployData, encodeAbiParameters, http, keccak256, parseAbi, toHex } from "viem";
 import type { Address, Hex } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import type { PrivateKeyAccount } from "viem/accounts";
 import { EmeterClient } from "@emeter/sdk";
-import { canonicalJson, emeterRegistryAbi, emeterVaultAbi, jsonSafe, serviceSetHash, signTap13, usageAmount } from "@emeter/shared";
+import { canonicalJson, emeterRegistryAbi, emeterVaultAbi, jsonSafe, serviceSetHash, signTap13, usageAmount, X_LAYER_USDC } from "@emeter/shared";
+import { readArtifact } from "../../../scripts/lib/proof.js";
 import type { JsonValue, ServiceManifest } from "@emeter/shared";
 import { buildGateway } from "../src/app.js";
 import { createAnalyzer } from "../src/ai.js";
@@ -32,7 +33,7 @@ async function freePort() {
   return bound.port;
 }
 
-export async function createGatewayHarness(options: { browserOrigins?: string[]; registerServices?: boolean } = {}) {
+export async function createGatewayHarness(options: { browserOrigins?: string[]; registerServices?: boolean; usdc?: boolean } = {}) {
   let stage = "fork source";
   const original = JSON.parse(await readFile(join(root, "deployments/xlayer-196.json"), "utf8"));
   const engine = JSON.parse(await readFile(join(root, "deployments/xlayer-196-engine.json"), "utf8"));
@@ -85,10 +86,23 @@ export async function createGatewayHarness(options: { browserOrigins?: string[];
     } finally { await migrationDb.end(); }
     const relayer = privateKeyToAccount(generatePrivateKey());
     const providerAccount = privateKeyToAccount(generatePrivateKey());
+    let vaultAddress = engine.contracts.vault as Address;
+    if (options.usdc) {
+      stage = "local USDC vault deployment";
+      const test = createTestClient({ mode: "anvil", transport: http(rpc) });
+      await test.setBalance({ address: relayer.address, value: 10_000_000_000_000_000_000n });
+      const artifact = await readArtifact("EmeterVault");
+      const hash = await createWalletClient({ account: relayer, transport: http(rpc) }).sendTransaction({ chain: null,
+        data: encodeDeployData({ abi: artifact.abi, bytecode: artifact.bytecode,
+          args: [X_LAYER_USDC.address, engine.contracts.registry, original.contracts.adapter] }) });
+      const receipt = await createPublicClient({ transport: http(rpc) }).waitForTransactionReceipt({ hash });
+      if (receipt.status !== "success" || !receipt.contractAddress) throw new Error("Local USDC vault deployment failed");
+      vaultAddress = receipt.contractAddress;
+    }
     const cfg: GatewayConfig = {
       databaseUrl: databaseUrl.href, redisUrl: process.env.EMETER_TEST_REDIS_URL ?? "redis://127.0.0.1:56379/0", rpcUrl: rpc,
-      chainId: 196, vault: engine.contracts.vault, registry: engine.contracts.registry,
-      token: original.contracts.demoToken, adapter: original.contracts.adapter,
+      chainId: 196, vault: vaultAddress, registry: engine.contracts.registry,
+      token: options.usdc ? X_LAYER_USDC.address : original.contracts.demoToken, adapter: original.contracts.adapter,
       deployer: relayer.address, providerSigner: providerAccount.address, container: original.contracts.serviceContainer,
       deploymentBlock: forkBlock + 1n, gatewayOrigin: "http://127.0.0.1:" + gatewayPort,
       providerOrigin: "http://127.0.0.1:" + providerPort, allowedProviderOrigins: ["http://127.0.0.1:" + providerPort],
@@ -119,6 +133,32 @@ export async function createGatewayHarness(options: { browserOrigins?: string[];
       const receipt = await client.waitForTransactionReceipt({ hash });
       if (receipt.status !== "success") throw new Error("Test fixture transaction reverted");
       return receipt;
+    };
+    let balanceSlot: bigint | undefined;
+    const fundPaymentToken = async (address: Address, amount: bigint) => {
+      if (!options.usdc) return send(original.customer, cfg.token, encodeFunctionData({
+        abi: parseAbi(["function mint(address,uint256)"]), functionName: "mint", args: [address, amount] }));
+      // Storage funding is restricted to this generated local Anvil endpoint.
+      // Actual USDC code still handles all approvals, transfers and refunds.
+      if (new URL(rpc).hostname !== "127.0.0.1") throw new Error("FIXTURE_FUNDING_REQUIRES_LOCAL_RPC");
+      const abi = parseAbi(["function balanceOf(address) view returns(uint256)"]);
+      const slotFor = (slot: bigint) => keccak256(encodeAbiParameters([{ type: "address" }, { type: "uint256" }], [address, slot]));
+      if (balanceSlot === undefined) {
+        const marker = 1_234_567_891_011n;
+        for (let slot = 0n; slot < 128n; slot++) {
+          const index = slotFor(slot), previous = await client.getStorageAt({ address: cfg.token, slot: index });
+          try {
+            await test.setStorageAt({ address: cfg.token, index, value: toHex(marker, { size: 32 }) });
+            if (await client.readContract({ address: cfg.token, abi, functionName: "balanceOf", args: [address] }) === marker) balanceSlot = slot;
+          } finally { await test.setStorageAt({ address: cfg.token, index, value: previous ?? toHex(0n, { size: 32 }) }); }
+          if (balanceSlot !== undefined) break;
+        }
+      }
+      if (balanceSlot === undefined) throw new Error("USDC_BALANCE_STORAGE_NOT_FOUND");
+      const previous = await client.readContract({ address: cfg.token, abi, functionName: "balanceOf", args: [address] });
+      await test.setStorageAt({ address: cfg.token, index: slotFor(balanceSlot), value: toHex(previous + amount, { size: 32 }) });
+      if (await client.readContract({ address: cfg.token, abi, functionName: "balanceOf", args: [address] }) !== previous + amount)
+        throw new Error("USDC_FIXTURE_FUNDING_FAILED");
     };
     await send(original.customer, cfg.registry, encodeFunctionData({ abi: emeterRegistryAbi,
       functionName: "setProviderAllowed", args: [providerAccount.address, true] }));
@@ -174,7 +214,7 @@ export async function createGatewayHarness(options: { browserOrigins?: string[];
       const customer = privateKeyToAccount(generatePrivateKey()), delegate = privateKeyToAccount(generatePrivateKey());
       const budget = options.budget ?? 1_000_000n;
       const ids = options.serviceIds ?? Object.values(manifests).map(v => v.serviceId).sort();
-      await send(original.customer, cfg.token, encodeFunctionData({ abi: parseAbi(["function mint(address,uint256)"]), functionName: "mint", args: [original.customer, budget] }));
+      await fundPaymentToken(original.customer, budget);
       sessionStage = "approve sponsored credit";
       await send(original.customer, cfg.token, encodeFunctionData({ abi: parseAbi(["function approve(address,uint256) returns(bool)"]), functionName: "approve", args: [cfg.vault, budget] }));
       sessionStage = "deposit customer credit";
@@ -214,7 +254,7 @@ export async function createGatewayHarness(options: { browserOrigins?: string[];
       await provider.listen({ host: "127.0.0.1", port: providerPort });
     };
     return { ctx, client, test, send, relayer, providerAccount, providerClient, manifests, gateway, get provider() { return provider; },
-      makeSession, sessions, counters, useLiveAi, start, stop, close, forkBlock,
+      makeSession, fundPaymentToken, sessions, counters, useLiveAi, start, stop, close, forkBlock,
       restartProvider, forkBlockHash: sourceBlock.hash,
       deposited: () => sessions.reduce((sum, row) => sum + row.budget, 0n) };
   } catch (error) { await close(); throw new Error("Gateway harness failed at " + stage, { cause: error }); }

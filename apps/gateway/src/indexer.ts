@@ -1,3 +1,4 @@
+import { paymentScope } from "./payment-scope.js";
 import { decodeEventLog } from "viem";
 import type { Hex } from "viem";
 import type { Prisma } from "@emeter/database";
@@ -62,7 +63,7 @@ export async function indexChain(ctx: GatewayContext) {
         if (typeof args.sessionId === "string") {
           const session = states.get(args.sessionId + ":" + log.blockNumber);
           if (session) {
-            const data = { customer: session.customer.toLowerCase(), signer: session.signer.toLowerCase(),
+            const data = { ...paymentScope(ctx), customer: session.customer.toLowerCase(), signer: session.signer.toLowerCase(),
               budget: session.budget.toString(), softLimit: session.softLimit.toString(), maxCharge: session.maxCharge.toString(),
               expiresAt: session.expiresAt, refundAfter: session.refundAfter, status: session.status, indexedBlock: log.blockNumber };
             await tx.spendingSession.upsert({ where: { id: args.sessionId }, create: { id: args.sessionId, ...data }, update: data });
@@ -108,13 +109,14 @@ export async function rebuildIndexer(ctx: GatewayContext) {
     await tx.indexerCursor.upsert({ where: { id: ctx.config.vault.toLowerCase() },
       create: { id: ctx.config.vault.toLowerCase(), blockNumber: initial.number, blockHash: initial.hash, state: "rebuilding" },
       update: { blockNumber: initial.number, blockHash: initial.hash, state: "rebuilding" } });
-    await tx.chainEvent.deleteMany({ where: { chainId: 196 } });
-    await tx.spendingSession.deleteMany();
-    await tx.settlement.updateMany({ data: { confirmationStatus: "pending" } });
-    await tx.aPIRequest.updateMany({ where: { paymentStatus: "settled" }, data: { paymentStatus: "pending", reservationActive: true } });
+    await tx.chainEvent.deleteMany({ where: { chainId: 196, contract: ctx.config.vault.toLowerCase() } });
+    await tx.spendingSession.deleteMany({ where: paymentScope(ctx) });
+    const current = await tx.aPIRequest.findMany({ where: paymentScope(ctx), select: { id: true } });
+    await tx.settlement.updateMany({ where: { requestId: { in: current.map(row => row.id) } }, data: { confirmationStatus: "pending" } });
+    await tx.aPIRequest.updateMany({ where: { ...paymentScope(ctx), paymentStatus: "settled" }, data: { paymentStatus: "pending", reservationActive: true } });
   });
   await indexChain(ctx);
-  const pending = await ctx.db.aPIRequest.findMany({ where: { paymentStatus: "pending", requestStatus: "completed" } });
+  const pending = await ctx.db.aPIRequest.findMany({ where: { ...paymentScope(ctx), paymentStatus: "pending", requestStatus: "completed" } });
   for (const row of pending) {
     await ctx.db.settlementAttempt.updateMany({ where: { requestId: row.id, status: "mined" }, data: { status: "prepared" } });
     await ctx.settlementQueue.add("settle", { requestId: row.id }, { jobId: row.id + "-reconcile" });

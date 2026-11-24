@@ -2,7 +2,7 @@
 
 emeter: programmable payments for AI agents and APIs. Meter every request. Control every payment.
 
-The accepted MVP supports one network (X Layer), one zero-value demo token, prepaid per-request billing, one policy, and two functioning services. The initial milestone implements the user's first Codex task: publish the policy and prove circuit-gated settlement before the full UI.
+The accepted MVP supports one network (X Layer), existing USDC, prepaid per-request billing, one policy, and two functioning services. The initial milestone implements the user's first Codex task: publish the policy and prove circuit-gated settlement before the full UI.
 
 | Milestone | Status | Result |
 | --- | --- | --- |

@@ -4,7 +4,7 @@ import { ArrowUpRight, CheckCircle2, Download } from "lucide-react";
 import type { EmeterResult } from "@emeter/sdk";
 import { Button, CopyValue, Badge, PaymentBadge, RequestBadge } from "./ui";
 import { useGateway } from "./gateway-provider";
-import { demo } from "../lib/models";
+import { paymentAmount } from "../lib/models";
 import { z } from "zod";
 
 const reportedUsageSchema = z.object({ receipt: z.object({ result: z.object({ usage: z.object({
@@ -12,7 +12,7 @@ const reportedUsageSchema = z.object({ receipt: z.object({ result: z.object({ us
 }), prices: z.array(z.object({ amount: z.string(), currency: z.string() })).optional() }).passthrough() }).passthrough() }).passthrough();
 
 export function ReceiptDetails({ record, compact = false }: { record: EmeterResult; compact?: boolean }) {
-  const { network } = useGateway();
+  const { network, currency } = useGateway();
   const body = record.data && typeof record.data === "object" ? record.data as Record<string, unknown> : undefined;
   const model = body?.model && typeof body.model === "object" ? body.model as Record<string, unknown> : undefined;
   const usage = record.receipt?.reportedUsage as Record<string, unknown> | null | undefined;
@@ -42,13 +42,13 @@ export function ReceiptDetails({ record, compact = false }: { record: EmeterResu
       <div><dt>Request ID</dt><dd><CopyValue value={record.requestId} label="Copy request ID" /></dd></div>
       <div><dt>Client request ID</dt><dd><CopyValue value={record.clientId} label="Copy client request ID" /></dd></div>
       <div><dt>Session</dt><dd><CopyValue value={record.sessionId} label="Copy receipt session ID" /></dd></div>
-      <div><dt>Service / version</dt><dd>{record.serviceManifest.name} · price v{record.priceVersion} · {demo(record.priceBaseUnits)} DEMO</dd></div>
+      <div><dt>Service / version</dt><dd>{record.serviceManifest.name} · price v{record.priceVersion} · {paymentAmount(record.priceBaseUnits)} {currency}</dd></div>
       <div><dt>Request hash</dt><dd><CopyValue value={record.requestHash} label="Copy request hash" /></dd></div>
       {record.receipt && <><div><dt>Body hash</dt><dd><CopyValue value={record.receipt.bodyHash} label="Copy body hash" /></dd></div>
         <div><dt>Receipt digest</dt><dd><CopyValue value={record.receipt.digest} label="Copy receipt digest" /></dd></div>
         <div><dt>Provider signer</dt><dd><CopyValue value={record.receipt.signer} label="Copy provider signer" /></dd></div>
         <div><dt>Provider signature</dt><dd><CopyValue value={record.receipt.envelope.sig} label="Copy provider signature" /></dd></div></>}
-      <div><dt>Charge maximum</dt><dd className="mono">{demo(record.authorization.maxAmount)} DEMO</dd></div>
+      <div><dt>Charge maximum</dt><dd className="mono">{paymentAmount(record.authorization.maxAmount)} {currency}</dd></div>
       <div><dt>Charge signature</dt><dd><CopyValue value={record.chargeSignature} label="Copy charge signature" /></dd></div>
       <div><dt>Request expires</dt><dd>{new Date(Number(record.authorization.validUntil) * 1000).toLocaleString()}</dd></div>
       <div><dt>Customer acceptance</dt><dd>{record.customerAcceptance === "not_requested" ? "Not requested" : record.customerAcceptance.replaceAll("_", " ")}</dd></div>

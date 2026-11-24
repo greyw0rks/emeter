@@ -13,6 +13,7 @@ import type { TypedDataSigner } from "./session-client.js";
 
 export const GatewayNetworkSchema = ProtocolStatusSchema.extend({
   vault: AddressSchema, registry: AddressSchema, token: AddressSchema, decimals: z.literal(6),
+  symbol: z.enum(["USDC", "DEMO"]).optional(),
   rpcUrl: z.string().url(), confirmations: z.number().int().min(1).max(128),
   networkMode: z.enum(["mainnet", "local-fork"]),
   anchor: z.object({ blockNumber: z.string().regex(/^[0-9]+$/), blockHash: HashSchema, timestamp: z.string().regex(/^[0-9]+$/) }).optional()
@@ -210,7 +211,7 @@ export class EmeterClient {
   async execute<T = unknown>(input: ExecuteInput): Promise<EmeterResult<T>> {
     if (!this.token || !this.config.sessionId) throw new Error("Authenticate and configure a spending session before execution");
     if (!/^(0|[1-9][0-9]*)(\.[0-9]{1,6})?$/.test(input.maxCharge))
-      throw new Error("maxCharge must be an exact DEMO decimal with at most six digits");
+      throw new Error("maxCharge must be an exact payment amount with at most six decimal places");
     const timeout = input.timeoutMs ?? 90_000;
     if (!Number.isSafeInteger(timeout) || timeout < 1 || timeout > 300_000) throw new Error("Invalid execution timeout");
     const network = networkSchema.parse(await this.http("/api/protocol"));

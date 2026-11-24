@@ -18,7 +18,7 @@ const links = [
   { href: "/policy", label: "Policy explorer", icon: CircuitBoard }
 ];
 export function Workspace({ children }: { children: ReactNode }) {
-  const path = usePathname(), { config, network } = useGateway();
+  const path = usePathname(), { config, network, currency } = useGateway();
   return <div className="workspace"><a href="#workspace-content" className="skip-link">Skip to content</a>
     <header className="workspace-header"><div className="workspace-topbar"><Wordmark /><span className="workspace-identity">Your workspace</span><div className="workspace-account"><NetworkBadge /><WalletButton /></div></div></header>
     <aside className="workspace-sidebar" aria-label="Workspace navigation"><p className="sidebar-heading">Workspace</p>
@@ -28,7 +28,7 @@ export function Workspace({ children }: { children: ReactNode }) {
     })}</nav><div className="sidebar-bottom"><ShieldCheck size={20} aria-hidden="true" /><p>Your budget.<br />Your boundaries.</p><span>TapeOut on X Layer</span></div></aside>
     <div className="workspace-main-area">
       <main id="workspace-content" className="workspace-main"><GlobalFeedback />{children}</main>
-      <footer className="workspace-footer"><span>emeter · Bounded API payments</span><span>DEMO is a test token · X Layer · Chain 196</span>
+      <footer className="workspace-footer"><span>emeter · Bounded API payments</span><span>{currency} payments · X Layer · Chain 196</span>
         <Link className="text-link" href="/policy">How settlement works<ArrowUpRight size={14} aria-hidden="true" /></Link>
         <span>{network?.networkMode === "local-fork" ? "Local fork · payments stay on this fork" : "Gateway: " + (config ? new URL(config.gatewayUrl).host : "unavailable")}</span></footer></div>
   </div>;

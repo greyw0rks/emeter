@@ -1,0 +1,50 @@
+{
+  "kind": "usdc-production-release",
+  "releasedAt": "2026-11-24 08:46:51 UTC",
+  "appUrl": "https://emeter-peach.vercel.app",
+  "gatewayUrl": "https://first-eel-292.convex.site",
+  "chainId": 196,
+  "token": "0x74b7F16337b8972027F6196A17a631aC6dE26d22",
+  "symbol": "USDC",
+  "decimals": 6,
+  "vault": "0x90A84f7dca90621827876febF2468Ba0591801c9",
+  "transactionHash": "0x585370c5d6bbcfb607ecb85c9e6100205714de03ef53dd19545dbb28ab5db490",
+  "deploymentBlock": "76700684",
+  "independentRpcAgreement": true,
+  "approvedGasCapWei": "200000000000000",
+  "actualGasCostWei": "70839912000000",
+  "mainnetUsdcTransfersByAgent": 0,
+  "vercel": {
+    "id": "dpl_AhrFxk2aYjFybXAytWtKwnZ2nKnL",
+    "readyState": "READY",
+    "aliases": [
+      "emeter-peach.vercel.app",
+      "emeter-greyw0rks-projects.vercel.app"
+    ]
+  },
+  "gateway": {
+    "executionEnabled": true,
+    "canonicalIndexerReady": true,
+    "workerHeartbeatVerified": true
+  },
+  "validation": {
+    "workspaceTestsPassed": 309,
+    "actualTokenForkTestsPassed": 4,
+    "actualUsdcBrowserChecksPassed": 18,
+    "publicDesktopMobileChecksPassed": 8,
+    "typecheckPassed": true,
+    "productionBuildPassed": true,
+    "credentialPublicationScanPassed": true
+  },
+  "evidence": [
+    "docs/evidence/usdc-preflight.json",
+    "docs/evidence/usdc-fork-checks.json",
+    "docs/evidence/frontend-usdc-fork-checks.json",
+    "docs/evidence/frontend-usdc-public-checks.json"
+  ],
+  "limitations": [
+    "New actual-USDC payment workflow was verified on disposable forks.",
+    "New mainnet broadcast deployed the USDC vault; it did not make a customer USDC payment.",
+    "Independent adoption and real USDC revenue are not established."
+  ]
+}

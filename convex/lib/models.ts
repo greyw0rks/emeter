@@ -1,3 +1,5 @@
+import { LEGACY_DEPLOYMENT } from "@emeter/shared";
+
 /** Storage vocabulary for the existing gateway. Monetary columns remain exact strings. */
 export const models = ["user", "authChallenge", "authSession", "service", "priceVersion", "spendingSession",
   "aPIRequest", "usageReceipt", "providerExecution", "settlementAttempt", "settlement", "chainEvent",
@@ -76,7 +78,8 @@ export function matches(model: Model, row: Row, where: Row = {}): boolean {
     if (field === "AND") return condition.every((part: Row) => matches(model, row, part));
     if (field === "serviceId_version" || field === "chainId_transactionHash_logIndex" || field === "sessionId_nonce")
       return matches(model, row, condition);
-    const actual = row[field];
+    const actual = row[field] ?? (["aPIRequest", "spendingSession"].includes(model) && field === "vault" ? LEGACY_DEPLOYMENT.vault.toLowerCase()
+      : ["aPIRequest", "spendingSession"].includes(model) && field === "token" ? LEGACY_DEPLOYMENT.token.toLowerCase() : row[field]);
     if (condition === null || typeof condition !== "object" || Array.isArray(condition)) return equal(actual, condition);
     if (condition.path) {
       const nested = condition.path.reduce((value: any, key: string) => value?.[key], actual);

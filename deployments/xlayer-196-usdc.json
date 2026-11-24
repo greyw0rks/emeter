@@ -1,0 +1,20 @@
+{
+  "name": "emeter",
+  "chainId": 196,
+  "completed": true,
+  "token": "0x74b7F16337b8972027F6196A17a631aC6dE26d22",
+  "symbol": "USDC",
+  "decimals": 6,
+  "contracts": {
+    "vault": "0x90A84f7dca90621827876febF2468Ba0591801c9",
+    "registry": "0xec4839b1bdfac9450feeb211cf59a7cf075110f3",
+    "adapter": "0x87DB7961f425dDb39c54a8582D21f91a57C637B5"
+  },
+  "deploymentBlock": "76700684",
+  "transactionHash": "0x585370c5d6bbcfb607ecb85c9e6100205714de03ef53dd19545dbb28ab5db490",
+  "blockHash": "0x800bf303e33e4842827435d73f65ed5874cb2b10b090f871f297102c165c339c",
+  "artifactSha256": "33235a7c31bcd4f3ae7f736786d1520ce14c72ce7660c1eb4acdd51578600e4d",
+  "independentRpcAgreement": true,
+  "gasCostWei": "70839912000000",
+  "tokenTransfers": 0
+}

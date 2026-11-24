@@ -1,9 +1,10 @@
+import { paymentScope } from "./payment-scope.js";
 import { fromWireCharge, Tap13EnvelopeSchema } from "@emeter/shared";
 import type { GatewayContext } from "./context.js";
 
 export async function expireReservations(ctx: GatewayContext) {
   const head = await ctx.client.getBlock();
-  const rows = await ctx.db.aPIRequest.findMany({ where: { reservationActive: true,
+  const rows = await ctx.db.aPIRequest.findMany({ where: { ...paymentScope(ctx), reservationActive: true,
     OR: [{ requestStatus: "indeterminate" }, { paymentStatus: "denied" }] } });
   for (const row of rows) {
     const charge = fromWireCharge(row.authorization);

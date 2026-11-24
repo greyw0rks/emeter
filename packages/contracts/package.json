@@ -8,6 +8,7 @@
     "test": "forge test --no-match-path 'test/*Fork.t.sol'",
     "test:fork": "forge test --match-path test/XLayerFork.t.sol -vvv",
     "test:engine:fork": "forge test --match-path test/EngineFork.t.sol -vvv",
+    "test:usdc:fork": "forge test --match-path test/UsdcFork.t.sol -vvv",
     "format": "forge fmt --check"
   },
   "dependencies": { "@openzeppelin/contracts": "5.6.1" }

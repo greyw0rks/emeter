@@ -16,7 +16,7 @@ export default function Home() {
     <main id="main"><GlobalFeedback /><section className="landing-hero"><div><h1>Give your agents a <span>spending limit.</span></h1>
       <p className="hero-description">Programmable payments for AI agents and APIs. Authorize a budget, run a request, and let the circuit govern its payment.</p>
       <div className="actions"><ActionLink href="/dashboard">Open workspace</ActionLink><Link href="/policy" className="text-link">Explore the policy<ArrowUpRight size={16} aria-hidden="true" /></Link></div>
-      <p className="hero-note">X Layer · Signed receipts · DEMO test token</p></div>
+      <p className="hero-note">X Layer · Signed receipts · USDC payments</p></div>
       <div className="hero-circuit"><div className="hero-circuit-head"><strong>The payment policy, in motion</strong><span>Interactive preview</span></div>
         <Circuit mask={mask} /><PolicyOutput mask={mask} />
         <div className="circuit-controls" aria-label="Circuit preview scenarios"><Button variant="secondary" aria-pressed={mask === 31} onClick={() => setMask(31)}>Within limits</Button>
@@ -31,7 +31,7 @@ export default function Home() {
         <Link className="text-link" href="/policy">See every condition<ArrowUpRight size={15} aria-hidden="true" /></Link></div>
         <div className="proof-rows"><div><strong>Deployed on X Layer</strong><p>The circuit and payment engine have recorded mainnet proof.</p>
           <a href={`https://www.oklink.com/xlayer/tx/${DEPLOYMENT.proofTransaction}`} target="_blank" rel="noreferrer" className="text-link">Inspect the proof transaction<ArrowUpRight size={14} aria-hidden="true" /></a></div>
-          <div><strong>Gateway active on X Layer</strong><p>AI analysis and JSON validation return signed results and settle bounded DEMO payments. DEMO is a zero-value test token.</p></div>
+          <div><strong>Pay providers in USDC</strong><p>Fund credit with USDC on X Layer. Set a budget for AI analysis or JSON validation and inspect the signed result and confirmed payment.</p></div>
           <div><strong>Your wallet sets the rules</strong><p>Delegated keys stay in this tab. Close sessions, revoke signers, and recover unused credit with the owning wallet.</p></div></div>
       </section></main>
     <footer className="landing-footer"><span>emeter. Meter every request. Control every payment.</span><div><NetworkBadge /><Link href="/dashboard">Workspace</Link></div></footer>

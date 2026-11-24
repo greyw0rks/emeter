@@ -13,12 +13,12 @@ import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { EmeterClient } from "@emeter/sdk";
 import { emeterRegistryAbi, emeterVaultAbi } from "@emeter/shared";
 import { createGatewayHarness } from "../../gateway/test/harness";
-import { DEPLOYMENT } from "../lib/wallet";
 import { short } from "../lib/models";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
 const artifactLabel = process.env.EMETER_BROWSER_ARTIFACT_LABEL;
 const okxWallet = process.env.EMETER_TEST_WALLET_PROVIDER === "okx";
+const usdc = process.env.EMETER_BROWSER_USE_USDC === "true", currency = usdc ? "USDC" : "DEMO";
 if (artifactLabel && !/^[a-z0-9-]{1,24}$/.test(artifactLabel)) throw new Error("Invalid browser artifact label");
 const reviewDirectory = join(root, ".impeccable/review", artifactLabel ?? "");
 const evidencePath = join(root, "docs/evidence", artifactLabel ? "frontend-" + artifactLabel + "-fork-checks.json" : "frontend-fork-checks.json");
@@ -33,7 +33,7 @@ async function freePort() {
 async function main() {
   process.stdout.write("Preparing disposable gateway, PostgreSQL database, Redis queues, and Anvil fork.\n");
   const port = await freePort(), origin = "http://127.0.0.1:" + port;
-  const harness = await createGatewayHarness({ browserOrigins: [origin], registerServices: false });
+  const harness = await createGatewayHarness({ browserOrigins: [origin], registerServices: false, usdc });
   let browser: Awaited<ReturnType<typeof chromium.launch>> | undefined;
   let web: ReturnType<typeof spawn> | undefined;
   let debugPage: Page | undefined;
@@ -50,12 +50,11 @@ async function main() {
   try {
     await harness.start();
     await harness.test.setBalance({ address: customer.address, value: 10_000_000_000_000_000_000n });
-    const journal = JSON.parse(await readFile(join(root, "deployments/xlayer-196.json"), "utf8")) as { customer: Address };
-    await harness.send(journal.customer, cfg.token, encodeFunctionData({ abi: parseAbi(["function mint(address,uint256)"]), functionName: "mint", args: [customer.address, 5_000_000n] }));
+    await harness.fundPaymentToken(customer.address, 5_000_000n);
     const nextBinary = join(root, "apps/web/node_modules/next/dist/bin/next");
     await access(join(root, "apps/web/.next/BUILD_ID"));
     web = spawn("/home/greyw0rks/ubuntu-to-debian-migration/bin/rtk", ["proxy", process.execPath, nextBinary, "start", "--hostname", "127.0.0.1", "--port", String(port)], {
-      cwd: join(root, "apps/web"), env: { ...process.env, EMETER_PUBLIC_GATEWAY_URL: cfg.gatewayOrigin, EMETER_PUBLIC_RPC_URL: cfg.rpcUrl, NEXT_TELEMETRY_DISABLED: "1" },
+      cwd: join(root, "apps/web"), env: { ...process.env, EMETER_PAYMENT_ASSET: currency, EMETER_VAULT_ADDRESS: cfg.vault, EMETER_NETWORK_MODE: "local-fork", EMETER_PUBLIC_GATEWAY_URL: cfg.gatewayOrigin, EMETER_PUBLIC_RPC_URL: cfg.rpcUrl, NEXT_TELEMETRY_DISABLED: "1" },
       stdio: ["ignore", serverLog, serverLog], detached: true
     });
     let started = false;
@@ -104,7 +103,7 @@ async function main() {
         const decoded = decodeFunctionData({ abi, data: transaction.data });
         assert(["approve", "deposit", "createSession", "closeSession", "revokeSessionSigner", "refund", "withdrawAvailable", "registerService"].includes(decoded.functionName), "Wallet action is within the browser test");
         if (decoded.functionName === "approve") {
-          assert(String(decoded.args![0]).toLowerCase() === cfg.vault.toLowerCase() && BigInt(String(decoded.args![1])) === 1_000_000n, "Token approval is exactly one DEMO");
+          assert(String(decoded.args![0]).toLowerCase() === cfg.vault.toLowerCase() && BigInt(String(decoded.args![1])) === 1_000_000n, "Token approval is exactly one unit of the payment currency");
         }
         process.stdout.write("Wallet action: " + decoded.functionName + "\n");
         const receipt = await harness.send(selectedWallet, transaction.to, transaction.data);
@@ -204,14 +203,14 @@ async function main() {
     await ensure(page.getByRole("button", { name: "Connect wallet", exact: true }).first()).toBeVisible();
     await navigate("Overview"); await connect();
     await page.getByRole("button", { name: "Deposit credit", exact: true }).click();
-    await page.getByRole("dialog").getByLabel("Amount (DEMO)").fill("1");
+    await page.getByRole("dialog").getByLabel(`Amount (${currency})`).fill("1");
     await page.getByRole("dialog").getByRole("button", { name: "Approve and deposit", exact: true }).click();
     await ensure(page.getByRole("dialog")).not.toBeVisible();
     assert(await harness.client.readContract({ address: cfg.vault, abi: emeterVaultAbi, functionName: "availableBalance", args: [customer.address] }) === 1_000_000n, "Deposited credit is real chain state");
     check("Wallet login and exact approval/deposit into live credit");
     const jsonService = harness.manifests["json-validator"]!;
     await page.getByRole("button", { name: "New session", exact: true }).click();
-    await page.getByRole("dialog").getByLabel("Soft limit (DEMO)").fill(formatUnits(BigInt(jsonService.priceBaseUnits), 6));
+    await page.getByRole("dialog").getByLabel(`Soft limit (${currency})`).fill(formatUnits(BigInt(jsonService.priceBaseUnits), 6));
     await page.getByRole("dialog").getByRole("button", { name: "Sign limits and create session", exact: true }).click();
     await ensure(page.getByRole("dialog")).not.toBeVisible(); await ensure(page.locator(".session-row")).toHaveCount(1);
     const indexed = await harness.ctx.db.spendingSession.findFirstOrThrow({ where: { customer: customer.address.toLowerCase() } });
@@ -320,7 +319,7 @@ async function main() {
     await capture(phone, "mobile"); await anonymous.close();
     await page.setViewportSize({ width: 1440, height: 960 }); await navigate("Overview");
     await page.getByRole("button", { name: "New session", exact: true }).click();
-    await ensure(page.getByRole("dialog").getByLabel("Hard budget (DEMO)")).toBeFocused();
+    await ensure(page.getByRole("dialog").getByLabel(`Hard budget (${currency})`)).toBeFocused();
     await page.keyboard.press("Escape"); await ensure(page.getByRole("dialog")).not.toBeVisible();
     await ensure(page.getByRole("button", { name: "New session", exact: true })).toBeFocused(); check("Native dialog keyboard focus, escape, and focus restoration");
     const originalRefundAfter = (await chainSession()).refundAfter;
@@ -353,12 +352,12 @@ async function main() {
       const body = route.request().postDataJSON();
       const response = await route.fetch();
       if (corruptConfirmation && body.method === "eth_getTransactionByHash") {
-        const answer = await response.json(); if (answer.result) answer.result.from = DEPLOYMENT.token;
+        const answer = await response.json(); if (answer.result) answer.result.from = cfg.token;
         await route.fulfill({ response, json: answer });
       } else await route.fulfill({ response });
     });
     corruptConfirmation = true;
-    await page.getByRole("button", { name: "Withdraw available credit", exact: true }).click(); await page.getByRole("dialog").getByLabel("Amount (DEMO)").fill(formatUnits(available, 6));
+    await page.getByRole("button", { name: "Withdraw available credit", exact: true }).click(); await page.getByRole("dialog").getByLabel(`Amount (${currency})`).fill(formatUnits(available, 6));
     const writesBeforeWithdrawal = walletTransactions.length;
     await page.getByRole("dialog").getByRole("button", { name: "Withdraw to wallet", exact: true }).click();
     await ensure(page.getByRole("dialog").getByText(/does not match the retained wallet action/)).toBeVisible();
@@ -374,7 +373,7 @@ async function main() {
     assert(runtimeErrors.length === 0, "No browser runtime errors: " + runtimeErrors.join("; "));
     check("No browser runtime errors or persisted signing credentials");
     const records = await harness.ctx.db.aPIRequest.findMany({ where: { customer: customer.address.toLowerCase() }, orderBy: { createdAt: "asc" } });
-    await writeFile(evidencePath, JSON.stringify({ milestone: "frontend", chainId: 196,
+    await writeFile(evidencePath, JSON.stringify({ milestone: "frontend", chainId: 196, paymentToken: cfg.token, paymentCurrency: currency, vault: cfg.vault,
       networkMode: "local-fork", participantClassification: "temporary builder-controlled browser wallets",
       walletProvider: okxWallet ? "simulated dedicated OKX provider with rejecting MetaMask decoy and EIP-6963 announcement" : "simulated legacy injected provider",
       workloadClassification: "actual JSON/schema validation and signed offline AI fixture; no new paid AI call",

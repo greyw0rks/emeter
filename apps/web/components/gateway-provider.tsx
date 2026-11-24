@@ -9,16 +9,16 @@ import type { PrivateKeyAccount } from "viem/accounts";
 import { z } from "zod";
 import { EmeterClient, EmeterGatewayError, EmeterSessionClient } from "@emeter/sdk";
 import type { EmeterResult, GatewayNetwork, TypedDataSigner } from "@emeter/sdk";
-import { AddressSchema, canonicalJson, HashSchema, ServiceManifestSchema, serviceSetHash, X_LAYER } from "@emeter/shared";
-import type { JsonValue, ServiceManifest } from "@emeter/shared";
+import { AddressSchema, canonicalJson, HashSchema, ServiceManifestSchema, serviceSetHash, X_LAYER, paymentAsset, X_LAYER_USDC } from "@emeter/shared";
+import type { JsonValue, ServiceManifest, PaymentDeployment } from "@emeter/shared";
 import { emeterRegistryAbi, emeterVaultAbi } from "@emeter/shared";
 import { AccountSchema, KeysSchema, UsageSchema } from "../lib/models";
 import type { AccountSummary, ApiCredential, SpendingSession } from "../lib/models";
-import { assertDeployment, assertRpcAnchor, assertWalletAnchor, DEPLOYMENT, ensureWalletChain, exactDemo, injectedWallets, paymentChain, publicUrl, randomNonce, walletStage } from "../lib/wallet";
+import { assertDeployment, assertRpcAnchor, assertWalletAnchor, ensureWalletChain, exactPayment, injectedWallets, paymentChain, publicUrl, randomNonce, walletStage } from "../lib/wallet";
 import type { BrowserWallet, PendingTransaction } from "../lib/wallet";
 import { errorMessage } from "../lib/errors";
 
-type PublicConfig = { gatewayUrl: string; rpcUrl?: string };
+type PublicConfig = { gatewayUrl: string; rpcUrl?: string; deployment: PaymentDeployment };
 export type CatalogService = Awaited<ReturnType<EmeterClient["getServices"]>>[number];
 type Delegate = { signer: PrivateKeyAccount; client?: EmeterClient; keyId?: string };
 type RunInput = { sessionId: Hex; serviceId: Hex; priceVersion: number; input: JsonValue; maxCharge: string; maximumTotalSpend?: bigint };
@@ -26,6 +26,7 @@ type Operation = RunInput & { clientId: string; requestId: Hex; client: EmeterCl
 export type ExecutionState = { requestId: Hex; clientId: string; sessionId: Hex; serviceId: Hex;
   phase: "authorizing" | "running" | "finished" | "unresolved"; record?: EmeterResult; error?: string };
 type GatewayValue = {
+  currency: "USDC" | "DEMO";
   config: PublicConfig | undefined; network: GatewayNetwork | undefined; services: CatalogService[]; account: AccountSummary | undefined;
   address: Address | undefined; signedIn: boolean; reachable: boolean; busy: string | undefined; error: string | undefined; notice: string | undefined; loading: boolean;
   refreshedAt: string | undefined; pending: PendingTransaction | undefined; execution: ExecutionState | undefined;
@@ -98,10 +99,10 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
   const live = useCallback(async () => {
     if (!cfg.current || !client.current) throw new Error("GATEWAY_UNAVAILABLE");
     const next = await client.current.getNetwork();
-    assertDeployment(next);
+    assertDeployment(next, cfg.current.deployment);
     const rpcUrl = cfg.current.rpcUrl ?? (next.networkMode === "mainnet" ? X_LAYER.rpcUrl : undefined);
     if (!rpcUrl) throw new Error("LOCAL_RPC_REQUIRED");
-    await assertRpcAnchor(next, rpcUrl);
+    await assertRpcAnchor(next, rpcUrl, cfg.current.deployment);
     setNetwork(next);
     return { network: next, rpcUrl, rpc: createPublicClient({ chain: paymentChain(rpcUrl), transport: http(rpcUrl) }) };
   }, []);
@@ -111,7 +112,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
     const epoch = generation.current;
     try {
       const current = await client.current.getNetwork();
-      assertDeployment(current); setNetwork(current);
+      assertDeployment(current, cfg.current!.deployment); setNetwork(current);
       const list = await client.current.getServices();
       ensureEpoch(epoch); setServices(list);
       if (auth.current) {
@@ -137,16 +138,21 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
     (async () => {
       try {
         const response = await fetch("/api/config", { cache: "no-store" });
-        if (!response.ok) throw new Error("INVALID_PUBLIC_CONFIGURATION");
-        const parsed = z.object({ gatewayUrl: z.string(), rpcUrl: z.string().optional() }).parse(await response.json());
-        const value = { gatewayUrl: publicUrl(parsed.gatewayUrl), ...(parsed.rpcUrl ? { rpcUrl: publicUrl(parsed.rpcUrl) } : {}) };
+        if (!response.ok) {
+          const failure = await response.json().catch(() => null);
+          throw new Error(failure?.error === "USDC_DEPLOYMENT_PENDING" ? "USDC_DEPLOYMENT_PENDING" : "INVALID_PUBLIC_CONFIGURATION");
+        }
+        const parsed = z.object({ gatewayUrl: z.string(), rpcUrl: z.string().optional(), deployment: z.object({
+          chainId: z.literal(196), vault: AddressSchema, registry: AddressSchema, token: AddressSchema, adapter: AddressSchema
+        }) }).parse(await response.json());
+        const value = { deployment: parsed.deployment, gatewayUrl: publicUrl(parsed.gatewayUrl), ...(parsed.rpcUrl ? { rpcUrl: publicUrl(parsed.rpcUrl) } : {}) };
         if (cancelled) return;
         cfg.current = value; setConfig(value); client.current = new EmeterClient({ gatewayUrl: value.gatewayUrl });
         try {
           const stored = sessionStorage.getItem("emeter-pending-transaction");
           if (stored) {
             const retained = PendingSchema.parse(JSON.parse(stored));
-            if ([DEPLOYMENT.vault, DEPLOYMENT.registry, DEPLOYMENT.token].some(to => to.toLowerCase() === retained.to.toLowerCase()))
+            if ([cfg.current!.deployment.vault, cfg.current!.deployment.registry, cfg.current!.deployment.token].some(to => to.toLowerCase() === retained.to.toLowerCase()))
               setPending(retained);
           }
         } catch { /* Ignore malformed storage; never use it to authorize a transaction. */ }
@@ -183,18 +189,18 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
     const typed: TypedDataSigner = {
       signTypedData: async payload => {
         ensureEpoch(epoch);
-        const current = await live(); await assertWalletAnchor(provider, current.network, accountAddress);
+        const current = await live(); await assertWalletAnchor(provider, current.network, accountAddress, cfg.current!.deployment);
         const domain = z.object({ domain: z.object({ chainId: z.union([z.literal(196), z.literal(196n)]), verifyingContract: AddressSchema }) }).parse(payload).domain;
-        if (domain.verifyingContract.toLowerCase() !== DEPLOYMENT.vault.toLowerCase())
+        if (domain.verifyingContract.toLowerCase() !== cfg.current!.deployment.vault.toLowerCase())
           throw new Error("DEPLOYMENT_MISMATCH");
         const signature = await signing.signTypedData(payload as unknown as Parameters<typeof signing.signTypedData>[0]);
-        ensureEpoch(epoch); await assertWalletAnchor(provider, (await live()).network, accountAddress);
+        ensureEpoch(epoch); await assertWalletAnchor(provider, (await live()).network, accountAddress, cfg.current!.deployment);
         return signature;
       }
     };
     return { address: accountAddress, ...typed,
       signMessage: async (input: { message: string | { raw: Hex | Uint8Array } }) => {
-        ensureEpoch(epoch); await assertWalletAnchor(provider, (await live()).network, accountAddress);
+        ensureEpoch(epoch); await assertWalletAnchor(provider, (await live()).network, accountAddress, cfg.current!.deployment);
         const signature = await signing.signMessage(input); ensureEpoch(epoch); return signature;
       }
     };
@@ -207,12 +213,12 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
     const selected = AddressSchema.parse(accounts[0]);
     setBusy("Selecting X Layer");
     const current = await live(); await ensureWalletChain(provider, current.network);
-    await assertWalletAnchor(provider, current.network, selected);
+    await assertWalletAnchor(provider, current.network, selected, cfg.current!.deployment);
     const epoch = generation.current;
     wallet.current = provider; owner.current = selected; setAddress(selected);
     const signer = customerSigner(provider, selected, epoch);
     const authenticated = new EmeterClient({ gatewayUrl: cfg.current!.gatewayUrl, rpcUrl: current.rpcUrl,
-      vault: DEPLOYMENT.vault, registry: DEPLOYMENT.registry, customerSigner: signer });
+      vault: cfg.current!.deployment.vault, registry: cfg.current!.deployment.registry, customerSigner: signer });
     setBusy("Approve the wallet sign-in message");
     await walletStage("SIGN_IN", () => authenticated.authenticate(signer)); ensureEpoch(epoch);
     client.current = authenticated; auth.current = true; setSignedIn(true);
@@ -239,7 +245,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
   const send = useCallback(async (label: string, to: Address, data: Hex) => {
     if (transaction.current) throw new Error("PENDING_TRANSACTION");
     const identity = requireAuth(); const current = await live();
-    ensureEpoch(identity.epoch); await assertWalletAnchor(identity.wallet, current.network, identity.address);
+    ensureEpoch(identity.epoch); await assertWalletAnchor(identity.wallet, current.network, identity.address, cfg.current!.deployment);
     const retained: PendingTransaction = { hash: null, label, from: identity.address, to,
       dataHash: keccak256(data), rpcUrl: current.rpcUrl, mode: current.network.networkMode };
     setPending(retained);
@@ -248,7 +254,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
       const hash = await signing.sendTransaction({ to, data, value: 0n });
       retained.hash = hash; setPending({ ...retained });
       ensureEpoch(identity.epoch);
-      await assertWalletAnchor(identity.wallet, (await live()).network, identity.address);
+      await assertWalletAnchor(identity.wallet, (await live()).network, identity.address, cfg.current!.deployment);
       await confirmTransaction(retained, hash);
     } catch (failure) {
       if (!retained.hash) {
@@ -259,41 +265,41 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
       throw failure;
     }
   }, [confirmTransaction, ensureEpoch, live, requireAuth, setPending]);
-  const deposit = useCallback((amount: string) => perform("Depositing DEMO", async () => {
-    const units = exactDemo(amount), identity = requireAuth(), current = await live();
+  const deposit = useCallback((amount: string) => perform("Depositing credit", async () => {
+    const units = exactPayment(amount), identity = requireAuth(), current = await live();
     const [balance, allowance] = await Promise.all([
-      current.rpc.readContract({ address: DEPLOYMENT.token, abi: tokenAbi, functionName: "balanceOf", args: [identity.address] }),
-      current.rpc.readContract({ address: DEPLOYMENT.token, abi: tokenAbi, functionName: "allowance", args: [identity.address, DEPLOYMENT.vault] })
+      current.rpc.readContract({ address: cfg.current!.deployment.token, abi: tokenAbi, functionName: "balanceOf", args: [identity.address] }),
+      current.rpc.readContract({ address: cfg.current!.deployment.token, abi: tokenAbi, functionName: "allowance", args: [identity.address, cfg.current!.deployment.vault] })
     ]);
-    if (balance < units) throw new Error("INSUFFICIENT_DEMO");
-    if (allowance < units) await send("Exact DEMO approval", DEPLOYMENT.token,
-      encodeFunctionData({ abi: tokenAbi, functionName: "approve", args: [DEPLOYMENT.vault, units] }));
+    if (balance < units) throw new Error("INSUFFICIENT_PAYMENT_TOKEN");
+    if (allowance < units) await send("Exact token approval", cfg.current!.deployment.token,
+      encodeFunctionData({ abi: tokenAbi, functionName: "approve", args: [cfg.current!.deployment.vault, units] }));
     ensureEpoch(identity.epoch);
-    await send("Credit deposit", DEPLOYMENT.vault, encodeFunctionData({ abi: emeterVaultAbi, functionName: "deposit", args: [units] }));
+    await send("Credit deposit", cfg.current!.deployment.vault, encodeFunctionData({ abi: emeterVaultAbi, functionName: "deposit", args: [units] }));
   }), [ensureEpoch, live, perform, requireAuth, send]);
   const withdraw = useCallback((amount: string) => perform("Withdrawing available credit", async () => {
-    await send("Credit withdrawal", DEPLOYMENT.vault,
-      encodeFunctionData({ abi: emeterVaultAbi, functionName: "withdrawAvailable", args: [exactDemo(amount)] }));
+    await send("Credit withdrawal", cfg.current!.deployment.vault,
+      encodeFunctionData({ abi: emeterVaultAbi, functionName: "withdrawAvailable", args: [exactPayment(amount)] }));
   }), [perform, send]);
   const createSession = useCallback((limits: { budget: string; softLimit: string; maxCharge: string; minutes: number; serviceIds: Hex[] }) =>
     perform("Authorizing session", async () => {
       const identity = requireAuth(); const current = await live();
-      const budget = exactDemo(limits.budget), softLimit = exactDemo(limits.softLimit, true), maxCharge = exactDemo(limits.maxCharge);
+      const budget = exactPayment(limits.budget), softLimit = exactPayment(limits.softLimit, true), maxCharge = exactPayment(limits.maxCharge);
       if (softLimit > budget || maxCharge > budget || limits.serviceIds.length === 0 || limits.serviceIds.length > 16
         || !Number.isInteger(limits.minutes) || limits.minutes < 1 || limits.minutes > 43_200) throw new Error("INVALID_SESSION_LIMITS");
       const signer = privateKeyToAccount(generatePrivateKey());
-      const sessions = new EmeterSessionClient({ rpcUrl: current.rpcUrl, vault: DEPLOYMENT.vault, registry: DEPLOYMENT.registry });
+      const sessions = new EmeterSessionClient({ rpcUrl: current.rpcUrl, vault: cfg.current!.deployment.vault, registry: cfg.current!.deployment.registry });
       const prepared = await sessions.prepareSession({ customer: identity.address, signer: signer.address, budget, softLimit, maxCharge,
         expiresAt: BigInt(current.network.anchor!.timestamp) + BigInt(limits.minutes * 60), settlementWindow: 120n,
         serviceSetHash: serviceSetHash(limits.serviceIds), nonce: randomNonce() }, limits.serviceIds);
       const signed = await sessions.signSession(prepared, customerSigner(identity.wallet, identity.address, identity.epoch));
-      await send("Spending session", DEPLOYMENT.vault, signed.transaction.data); ensureEpoch(identity.epoch);
+      await send("Spending session", cfg.current!.deployment.vault, signed.transaction.data); ensureEpoch(identity.epoch);
       delegates.current.set(signed.sessionId, { signer }); setKeyRevision(value => value + 1);
       await refresh(); return signed.sessionId;
     }), [customerSigner, ensureEpoch, live, perform, refresh, requireAuth, send]);
   const manageSession = useCallback((id: Hex, action: "closeSession" | "revokeSessionSigner" | "refund") =>
     perform(action === "refund" ? "Refunding session" : action === "closeSession" ? "Closing session" : "Revoking signer", async () => {
-      await send(action === "refund" ? "Session refund" : action === "closeSession" ? "Session closure" : "Signer revocation", DEPLOYMENT.vault,
+      await send(action === "refund" ? "Session refund" : action === "closeSession" ? "Session closure" : "Signer revocation", cfg.current!.deployment.vault,
         encodeFunctionData({ abi: emeterVaultAbi, functionName: action, args: [id] }));
       if (action !== "closeSession") { delegates.current.delete(id); setKeyRevision(value => value + 1); }
     }), [perform, send]);
@@ -311,7 +317,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
         fetch: async (input, init) => {
           ensureEpoch(identity.epoch);
           if (init?.method === "POST") {
-            await assertWalletAnchor(identity.wallet, (await live()).network, identity.address); ensureEpoch(identity.epoch);
+            await assertWalletAnchor(identity.wallet, (await live()).network, identity.address, cfg.current!.deployment); ensureEpoch(identity.epoch);
           }
           return fetch(input, init);
         },
@@ -319,7 +325,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
           ensureEpoch(identity.epoch);
           const signature = await delegate.signer.signTypedData(payload); ensureEpoch(identity.epoch); return signature;
         } }, customerSigner: customerSigner(identity.wallet, identity.address, identity.epoch),
-        rpcUrl: current.rpcUrl, vault: DEPLOYMENT.vault, registry: DEPLOYMENT.registry });
+        rpcUrl: current.rpcUrl, vault: cfg.current!.deployment.vault, registry: cfg.current!.deployment.registry });
     }
     return delegate.client!;
   }, [customerSigner, ensureEpoch, live, requireAuth]);
@@ -350,14 +356,14 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
   }, [ensureEpoch, refresh, requireAuth]);
   const execute = useCallback((input: RunInput) => perform("Executing request", async () => {
     if (operation.current) throw new Error("Inspect or recover the current request before starting another.");
-    const identity = requireAuth(), current = await live(); await assertWalletAnchor(identity.wallet, current.network, identity.address);
+    const identity = requireAuth(), current = await live(); await assertWalletAnchor(identity.wallet, current.network, identity.address, cfg.current!.deployment);
     const freshAccount = AccountSchema.parse(await identity.client.getAccount());
     const session = freshAccount.sessions.find(value => value.sessionId === input.sessionId);
     if (!session) throw new Error("NOT_SESSION_CUSTOMER");
-    const sessions = new EmeterSessionClient({ rpcUrl: current.rpcUrl, vault: DEPLOYMENT.vault, registry: DEPLOYMENT.registry });
+    const sessions = new EmeterSessionClient({ rpcUrl: current.rpcUrl, vault: cfg.current!.deployment.vault, registry: cfg.current!.deployment.registry });
     const quote = await sessions.getQuote(input.serviceId, input.priceVersion);
     const total = BigInt(session.spent) + BigInt(String(session.reservedBaseUnits ?? "0")) + quote.price;
-    const maximum = exactDemo(input.maxCharge);
+    const maximum = exactPayment(input.maxCharge);
     if (maximum < quote.price || maximum > BigInt(session.maxCharge) || total > BigInt(session.budget)
       || BigInt(session.reservedBaseUnits) + quote.price > BigInt(session.balance)) throw new Error("REQUEST_BUDGET_EXCEEDED");
     if (!quote.active || !session.serviceIds.includes(input.serviceId) || session.signerRevoked || session.status !== 1
@@ -394,7 +400,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
     const record = await identity.client.getRequest(id);
     const { fromWireCharge } = await import("@emeter/shared");
     const charge = fromWireCharge(record.authorization);
-    const sessions = new EmeterSessionClient({ rpcUrl: current.rpcUrl, vault: DEPLOYMENT.vault, registry: DEPLOYMENT.registry });
+    const sessions = new EmeterSessionClient({ rpcUrl: current.rpcUrl, vault: cfg.current!.deployment.vault, registry: cfg.current!.deployment.registry });
     const state = await sessions.getSession(record.sessionId);
     const exact = state.spent + BigInt(record.priceBaseUnits);
     if (maximumTotalSpend !== exact) throw new Error("OVERRIDE_CAP_MISMATCH");
@@ -423,9 +429,9 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
       const { manifestHash } = await import("@emeter/shared");
       const expected = encodeFunctionData({ abi: emeterRegistryAbi, functionName: "registerService", args: [manifest.serviceId,
         manifest.payout, manifest.signer, manifest.container, BigInt(manifest.priceBaseUnits), manifestHash(manifest)] });
-      if (prepared.transaction?.to.toLowerCase() !== DEPLOYMENT.registry.toLowerCase() || prepared.transaction.data.toLowerCase() !== expected.toLowerCase())
+      if (prepared.transaction?.to.toLowerCase() !== cfg.current!.deployment.registry.toLowerCase() || prepared.transaction.data.toLowerCase() !== expected.toLowerCase())
         throw new Error("DEPLOYMENT_MISMATCH");
-      await send("Service registration", DEPLOYMENT.registry, expected); ensureEpoch(identity.epoch);
+      await send("Service registration", cfg.current!.deployment.registry, expected); ensureEpoch(identity.epoch);
       if (responseSchema.parse(await identity.client.registerService(manifest)).status !== "registered") throw new Error("ENDPOINT_VERIFICATION_FAILED");
     }
     setNotice("Endpoint signature and onchain service terms verified."); await refresh();
@@ -437,7 +443,7 @@ export function GatewayProvider({ children }: { children: ReactNode }) {
     if (!hash) throw new Error("UNKNOWN_BROADCAST");
     setPending({ ...retained, hash }); await confirmTransaction(retained, hash);
   }), [confirmTransaction, perform, setPending]);
-  const value: GatewayValue = useMemo(() => ({ config, network, services, account, address, signedIn, reachable, busy, error, notice,
+  const value: GatewayValue = useMemo(() => ({ currency: paymentAsset(network?.token ?? X_LAYER_USDC.address).symbol, config, network, services, account, address, signedIn, reachable, busy, error, notice,
     loading, refreshedAt, pending, execution, refresh, connect, disconnect, clearError: () => setError(undefined),
     deposit, withdraw, createSession, manageSession, hasSessionKey: id => delegates.current.has(id), execute, recoverExecution, clearExecution,
     verifyRequest, recoverRequest, approveSettlement, getKeys, createKey, revokeKey, getUsage, registerService, checkPending }),

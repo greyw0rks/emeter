@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { buildGateway } from "../src/app.js";
 import type { GatewayContext } from "../src/context.js";
+import { X_LAYER_USDC } from "@emeter/shared";
 
 it("reports protocol phase without claiming paid execution", async () => {
   const app = buildGateway();
@@ -20,13 +21,14 @@ it("refuses execution while the billing product is unimplemented", async () => {
 const browserContext = () => ({ config: {
   gatewayOrigin: "http://127.0.0.1:4100", browserOrigins: ["http://127.0.0.1:3100"],
   vault: "0x0000000000000000000000000000000000000001", registry: "0x0000000000000000000000000000000000000002",
-  token: "0x0000000000000000000000000000000000000003", rpcUrl: "http://127.0.0.1:8545", confirmations: 1, networkMode: "local-fork"
+  token: X_LAYER_USDC.address, rpcUrl: "http://127.0.0.1:8545", confirmations: 1, networkMode: "local-fork"
 }, client: { getBlock: async () => ({ number: 100n, hash: "0x" + "1".repeat(64), timestamp: 123n }) } }) as unknown as GatewayContext;
 
 it("publishes a block anchor and CORS headers for an explicitly configured browser", async () => {
   const app = buildGateway({ context: browserContext() });
   const response = await app.inject({ method: "GET", url: "/api/protocol", headers: { origin: "http://127.0.0.1:3100" } });
   expect(response.statusCode).toBe(200);
+  expect(response.json()).toMatchObject({ token: X_LAYER_USDC.address, symbol: "USDC", decimals: 6 });
   expect(response.headers["access-control-allow-origin"]).toBe("http://127.0.0.1:3100");
   expect(response.json().anchor).toEqual({ blockNumber: "100", blockHash: "0x" + "1".repeat(64), timestamp: "123" });
   await app.close();

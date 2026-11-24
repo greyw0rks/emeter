@@ -18,7 +18,7 @@ export const ActivitySchema = z.object({
 });
 export type Activity = z.infer<typeof ActivitySchema>;
 export const AccountSchema = z.object({
-  wallet: AddressSchema, availableBaseUnits: BaseUnitsSchema, demoBalanceBaseUnits: BaseUnitsSchema,
+  wallet: AddressSchema, availableBaseUnits: BaseUnitsSchema, tokenBalanceBaseUnits: BaseUnitsSchema,
   nativeBalanceWei: BaseUnitsSchema, lockedBaseUnits: BaseUnitsSchema, sessions: z.array(SessionSchema),
   stats: z.object({ totalRequests: z.number().int(), confirmedRequests: z.number().int(),
     confirmedBaseUnits: BaseUnitsSchema, reservedBaseUnits: BaseUnitsSchema, providerServices: z.number().int() }),
@@ -35,7 +35,7 @@ export const UsageSchema = z.object({ totalRequests: z.number().int(), settledRe
     priceBaseUnits: BaseUnitsSchema, requestStatus: RequestStatusSchema, paymentStatus: PaymentStatusSchema, createdAt: z.string() }))
 }).passthrough();
 
-export function demo(units: string | bigint) {
+export function paymentAmount(units: string | bigint) {
   const value = BigInt(units);
   const whole = (value / 1_000_000n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   const fraction = (value % 1_000_000n).toString().padStart(6, "0").replace(/0+$/, "");

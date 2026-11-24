@@ -12,7 +12,7 @@ import { useGateway } from "../../../components/gateway-provider";
 import { SessionDialog } from "../../../components/session-forms";
 import { ReceiptDetails } from "../../../components/receipt-details";
 import { ActionLink, Badge, Button, CopyValue, Dialog, EmptyState, Field, PageHeader, WalletGate } from "../../../components/ui";
-import { canExecute, demo, short } from "../../../lib/models";
+import { canExecute, paymentAmount, short } from "../../../lib/models";
 
 function Playground() {
   const gateway = useGateway(), query = useSearchParams();
@@ -47,11 +47,11 @@ function Playground() {
     disabled={!gateway.signedIn || Boolean(gateway.busy || gateway.pending)} onClick={() => { gateway.clearError(); setSessionOpen(true); }}>New session</Button>} />
     <WalletGate>{!gateway.services.length ? <EmptyState title="A verified service is needed" action={<ActionLink href="/services" secondary>View services</ActionLink>}>The gateway catalog has no active verified endpoint. Start the provider or register a service.</EmptyState> : <>
       <div className="selection-grid"><Field label="Service"><select value={serviceId} disabled={locked} onChange={event => { setServiceId(event.target.value); setSessionId(""); }}>
-        {gateway.services.map(value => <option key={value.id} value={value.id}>{value.name} · {demo(value.priceBaseUnits)} DEMO</option>)}</select></Field>
+        {gateway.services.map(value => <option key={value.id} value={value.id}>{value.name} · {paymentAmount(value.priceBaseUnits)} {gateway.currency}</option>)}</select></Field>
         <Field label="Spending session"><select value={sessionId} disabled={locked} onChange={event => setSessionId(event.target.value)}><option value="">Select an active session</option>
-          {sessions.map(value => <option key={value.sessionId} value={value.sessionId}>{short(value.sessionId, 10, 6)} · {demo(value.balance)} DEMO left{gateway.hasSessionKey(value.sessionId) ? " · key in tab" : " · key unavailable"}</option>)}</select></Field></div>
-      {session ? <div className="budget-context"><span>Hard budget <strong className="mono">{demo(session.budget)} DEMO</strong></span><span>Spent <strong className="mono">{demo(session.spent)} DEMO</strong></span>
-        <span>Soft limit <strong className="mono">{demo(session.softLimit)} DEMO</strong></span><span>Reserved <strong className="mono">{demo(session.reservedBaseUnits)} DEMO</strong></span></div>
+          {sessions.map(value => <option key={value.sessionId} value={value.sessionId}>{short(value.sessionId, 10, 6)} · {paymentAmount(value.balance)} {gateway.currency} left{gateway.hasSessionKey(value.sessionId) ? " · key in tab" : " · key unavailable"}</option>)}</select></Field></div>
+      {session ? <div className="budget-context"><span>Hard budget <strong className="mono">{paymentAmount(session.budget)} {gateway.currency}</strong></span><span>Spent <strong className="mono">{paymentAmount(session.spent)} {gateway.currency}</strong></span>
+        <span>Soft limit <strong className="mono">{paymentAmount(session.softLimit)} {gateway.currency}</strong></span><span>Reserved <strong className="mono">{paymentAmount(session.reservedBaseUnits)} {gateway.currency}</strong></span></div>
         : <p className="form-note budget-context">Create a session that allows this service, then select it here. <Link className="text-link" href="/dashboard">Fund credit in Overview<ArrowRight size={13} aria-hidden="true" /></Link></p>}
       {session && !gateway.hasSessionKey(session.sessionId) && <p className="feedback feedback-notice">This tab does not have the session key. Create a new session here, or close and refund the existing session from Overview.</p>}
       <form onSubmit={event => {
@@ -69,7 +69,7 @@ function Playground() {
           : <div className="editor-panel"><label className="editor-toolbar" htmlFor="service-input"><span>{service?.method === "text_analyze" ? "Text to analyze" : "Service parameters JSON"}</span><code>{service?.method}</code></label>
             <textarea id="service-input" value={service?.method === "text_analyze" ? text : document} maxLength={service?.method === "text_analyze" ? 8000 : 65_536}
               onChange={event => service?.method === "text_analyze" ? setText(event.target.value) : setDocument(event.target.value)} disabled={locked} required spellCheck={false} /></div>}
-        <div className="run-controls"><Field label="Request maximum (DEMO)" hint={session ? `Signed maximum: ${demo(session.maxCharge)} DEMO · price v${service?.priceVersion}` : "Select a signed session first."}>
+        <div className="run-controls"><Field label={`Request maximum (${gateway.currency})`} hint={session ? `Signed maximum: ${paymentAmount(session.maxCharge)} ${gateway.currency} · price v${service?.priceVersion}` : "Select a signed session first."}>
           <input value={maximum} inputMode="decimal" onChange={event => setMaximum(event.target.value)} disabled={locked} required autoComplete="off" /></Field>
           <div className="actions">{needsOverride && <Badge tone="lime">Customer approval required</Badge>}<Button type="submit" disabled={locked || Boolean(gateway.pending)
             || !gateway.network?.paidExecutionReady || !service || !session || !gateway.hasSessionKey(session.sessionId)}><Play size={15} aria-hidden="true" />{needsOverride ? "Review approval and run" : "Run request"}</Button></div></div>
@@ -88,9 +88,9 @@ function Playground() {
     <SessionDialog open={sessionOpen} onClose={() => setSessionOpen(false)} onCreated={id => setSessionId(id)} />
     <Dialog open={overrideOpen} onClose={() => setOverrideOpen(false)} title="Approve crossing the soft limit"><div className="form-stack">
       <p>This request takes the session above its soft limit. Your wallet must sign a separate approval for this exact cumulative cap.</p>
-      <dl className="evidence-list"><div><dt>Request price</dt><dd className="mono">{demo(quote)} DEMO</dd></div><div><dt>Already spent</dt><dd className="mono">{demo(session?.spent ?? "0")} DEMO</dd></div>
-        <div><dt>Reserved requests</dt><dd className="mono">{demo(session?.reservedBaseUnits ?? "0")} DEMO</dd></div><div><dt>Approved total cap</dt><dd className="mono lime">{demo(cumulative)} DEMO</dd></div><div><dt>Hard budget</dt><dd className="mono">{demo(session?.budget ?? "0")} DEMO</dd></div></dl>
-      <label className="checkbox-row"><input type="checkbox" checked={approved} onChange={event => setApproved(event.target.checked)} disabled={Boolean(gateway.busy)} />I approve a cumulative cap of {demo(cumulative)} DEMO for this session.</label>
+      <dl className="evidence-list"><div><dt>Request price</dt><dd className="mono">{paymentAmount(quote)} {gateway.currency}</dd></div><div><dt>Already spent</dt><dd className="mono">{paymentAmount(session?.spent ?? "0")} {gateway.currency}</dd></div>
+        <div><dt>Reserved requests</dt><dd className="mono">{paymentAmount(session?.reservedBaseUnits ?? "0")} {gateway.currency}</dd></div><div><dt>Approved total cap</dt><dd className="mono lime">{paymentAmount(cumulative)} {gateway.currency}</dd></div><div><dt>Hard budget</dt><dd className="mono">{paymentAmount(session?.budget ?? "0")} {gateway.currency}</dd></div></dl>
+      <label className="checkbox-row"><input type="checkbox" checked={approved} onChange={event => setApproved(event.target.checked)} disabled={Boolean(gateway.busy)} />I approve a cumulative cap of {paymentAmount(cumulative)} {gateway.currency} for this session.</label>
       <div className="actions"><Button variant="secondary" disabled={Boolean(gateway.busy)} onClick={() => setOverrideOpen(false)}>Cancel</Button>
         <Button disabled={!approved || Boolean(gateway.busy) || preparedInput === undefined} onClick={() => { if (preparedInput !== undefined) run(preparedInput, cumulative); }}>Sign approval and run</Button></div>
     </div></Dialog>

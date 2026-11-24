@@ -2,11 +2,13 @@
 
 Programmable payments for AI agents and APIs.
 
+emeter uses **existing USDC on X Layer**. Fund credit with USDC withdrawn or bridged onto X Layer; your wallet also needs OKB for gas. The deposit form explains how to obtain the exact supported token. The [USDC migration](docs/usdc.md) records the deployed vault, funding guidance, and verification.
+
 Open the [public workspace](https://emeter-peach.vercel.app), inspect the [gateway status](https://first-eel-292.convex.site/api/protocol), or browse the [source](https://github.com/greyw0rks/emeter). The selected light workspace uses a sidebar on desktop and an accessible icon rail on phones.
 
-emeter is being built for X Layer TapeOut Accelerate. A published TapeOut NAND circuit authorizes or denies DemoUSD settlements on X Layer mainnet. Registered services, immutable price versions, prepaid customer credit, and capped signing sessions govern actual AI analysis and JSON validation. Vercel hosts the interface; Convex hosts the gateway, durable records, and execution/settlement jobs.
+emeter is being built for X Layer TapeOut Accelerate. A published TapeOut NAND circuit authorizes or denies USDC settlements on X Layer mainnet. Registered services, immutable price versions, prepaid customer credit, and capped signing sessions govern actual AI analysis and JSON validation. Vercel hosts the interface; Convex hosts the gateway, durable records, and execution/settlement jobs.
 
-The [original circuit proof](docs/verification.md) and [payment-engine proof](docs/payment-engine.md) include real payments, rejected overrides, and refunds. The [hosted gateway proof](docs/evidence/gateway-mainnet-verification.json) verifies three mainnet requests, **0.09 DEMO paid**, and **0.01 DEMO refunded directly to the customer**, with agreement from two independent RPCs. One actual Otari response reported 88 input / 58 output tokens; its reported cost recomputes to **$0.00001820**. The public AI runtime retains a **$0.01 total estimated/reported cost cap**. DEMO is a zero-value test token; builder-controlled proofs do not establish independent adoption.
+The [USDC vault deployment](deployments/xlayer-196-usdc.json) is independently verified by two RPCs and reused the existing registry and policy adapter. The complete browser flow passed 18 checks using actual USDC on a disposable local fork, including deposits, payments, customer overrides, and refunds. The deployment itself transferred no USDC. The [original circuit proof](docs/verification.md), [payment-engine proof](docs/payment-engine.md), and [hosted gateway proof](docs/evidence/gateway-mainnet-verification.json) remain historical DEMO demonstrations: **0.09 DEMO paid** and **0.01 DEMO refunded** in the hosted proof. DEMO has no monetary value. One actual Otari response reported 88 input / 58 output tokens and **$0.00001820** cost; the public AI runtime retains its **$0.01 total estimated/reported cost cap**. These builder-controlled proofs do not establish independent adoption or real USDC revenue.
 
 The [frontend workspace](docs/frontend.md) connects wallet credit, bounded sessions, provider credentials, execution, independent receipts, and the live policy circuit. Eighteen browser checks exercise the complete customer/provider flow on a disposable historical fork. Earlier fork/AI artifacts remain separately labeled in [gateway.md](docs/gateway.md).
 
@@ -46,7 +48,7 @@ pnpm verify:gateway
 pnpm proof:gateway
 ```
 
-Use `.env.example` for public configuration. Keep private keys out of this repository and out of chat. A dedicated wallet or encrypted Foundry account funded with OKB is needed for a mainnet broadcast; DemoUSD itself has no monetary value.
+Use `.env.example` for public configuration. Keep private keys out of this repository and out of chat. A dedicated wallet or encrypted Foundry account funded with OKB is needed for a mainnet broadcast. USDC payments use the existing supported token; emeter does not mint it.
 
 For the web workspace, configure `apps/web/.env.local` from `.env.web.example`, matching the running gateway and exact fork RPC. Start it with `rtk pnpm dev:web`. [Frontend setup and verification](docs/frontend.md) explains browser origins, wallet block-hash checks, tab-only keys, and transaction/request recovery.
 

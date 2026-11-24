@@ -1,0 +1,13 @@
+{
+  "kind": "actual-usdc-local-fork-checks",
+  "chainId": 196,
+  "token": "0x74b7F16337b8972027F6196A17a631aC6dE26d22",
+  "command": "pnpm test:usdc:fork",
+  "passed": true,
+  "testsPassed": 4,
+  "testsFailed": 0,
+  "vaultBytecodeSha256": "33235a7c31bcd4f3ae7f736786d1520ce14c72ce7660c1eb4acdd51578600e4d",
+  "behaviors": ["actual USDC deposit, exact approval and withdrawal", "actual TapeOut spending-limit rejection and customer override", "signed immutable price version settlement", "session closure, outstanding settlement and direct wallet refund"],
+  "mainnetBroadcastPerformed": false,
+  "mainnetStablecoinTransferred": false
+}

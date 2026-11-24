@@ -1,5 +1,7 @@
 # Architecture
 
+The payment currency is the officially recommended USDC on X Layer. The new vault is deployed and the public app/gateway are active. `docs/usdc.md` documents the token identity, verified deployment and isolation of historical DEMO records. Earlier DEMO proof amounts below remain historical evidence.
+
 The payment engine extends the original circuit proof with a service registry and a multi-customer vault. `EmeterRegistry` records allowlisted providers and immutable price versions. `EmeterVault` holds prepaid credit, locks customer-signed session budgets, verifies delegated request signatures and provider receipts, and enforces the real TapeOut verdict before each token transfer. The original `EmeterProofVault` remains a separate, historical proof deployment.
 
 ```mermaid
@@ -15,11 +17,11 @@ flowchart LR
     Adapter -->|eval circuit ID and bits| Processor[TapeOut processor on X Layer]
     Processor -->|ALLOW or DENY| Adapter
     Adapter -->|Enforced verdict| Vault
-    Vault -->|Allowed payment| Payout[Provider DEMO balance]
+    Vault -->|Allowed payment| Payout[Provider USDC balance]
     Vault -->|Unused balance after window| Customer
 ```
 
-`DemoUSD` is a zero-value, six-decimal ERC-20 with restricted minting and a fixed supply cap. Deployment pays native OKB protocol fees and gas; customer payment tests use DEMO.
+Current payments use existing six-decimal USDC on X Layer; gas uses OKB. The earlier `DemoUSD` deployment is a zero-value demonstration ERC-20 with restricted minting and a fixed supply cap. Its historical proof amounts are not USDC revenue.
 
 ## Policy inputs
 

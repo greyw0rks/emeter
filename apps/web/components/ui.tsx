@@ -5,7 +5,7 @@ import { cloneElement, isValidElement, useEffect, useId, useRef, useState } from
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { ArrowRight, Check, Copy, LoaderCircle, Wallet, X } from "lucide-react";
 import { useGateway } from "./gateway-provider";
-import { demo, short, time } from "../lib/models";
+import { paymentAmount, short, time } from "../lib/models";
 import type { Activity } from "../lib/models";
 import { announcedWallet, injectedWallets, mergeWalletChoices } from "../lib/wallet";
 import type { WalletChoice } from "../lib/wallet";
@@ -136,11 +136,12 @@ export function GlobalFeedback() {
   </div>;
 }
 export function ActivityTable({ requests }: { requests: Activity[] }) {
+  const { currency } = useGateway();
   if (!requests.length) return <EmptyState title="No requests yet" action={<ActionLink href="/playground">Run your first request</ActionLink>}>
     Your requests and their payment confirmations will appear here.</EmptyState>;
   return <div className="table-scroll" tabIndex={0} aria-label="Request activity"><table className="data-table"><thead><tr>
-    <th scope="col">Request / service</th><th scope="col">Execution</th><th scope="col">Payment</th><th scope="col" className="align-right">DEMO</th><th scope="col">Created</th>
+    <th scope="col">Request / service</th><th scope="col">Execution</th><th scope="col">Payment</th><th scope="col" className="align-right">{currency}</th><th scope="col">Created</th>
   </tr></thead><tbody>{requests.map(request => <tr key={request.requestId}><td><Link className="table-link" href={`/receipts/${request.requestId}`}>{request.serviceName}<ArrowRight size={13} aria-hidden="true" /></Link>
     <code className="muted">{short(request.requestId, 10, 6)}</code></td><td><RequestBadge status={request.requestStatus} /></td><td><PaymentBadge status={request.paymentStatus} /></td>
-    <td className="mono align-right">{demo(request.priceBaseUnits)}</td><td className="muted nowrap">{time(request.createdAt)}</td></tr>)}</tbody></table></div>;
+    <td className="mono align-right">{paymentAmount(request.priceBaseUnits)}</td><td className="muted nowrap">{time(request.createdAt)}</td></tr>)}</tbody></table></div>;
 }

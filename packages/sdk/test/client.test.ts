@@ -22,7 +22,7 @@ it.each(["1e-2", "0.0000001", "-1", " 1", "01", "NaN"])("rejects inexact maximum
   const fetcher = vi.fn<typeof fetch>();
   const client = new EmeterClient({ gatewayUrl: "https://api.example.com", fetch: fetcher,
     token: "fixture-token", sessionId: keccak256(toHex("fixture-session")) });
-  await expect(client.execute({ serviceId: "json-validator", input: {}, maxCharge })).rejects.toThrow("exact DEMO decimal");
+  await expect(client.execute({ serviceId: "json-validator", input: {}, maxCharge })).rejects.toThrow("exact payment amount");
   expect(fetcher).not.toHaveBeenCalled();
 });
 

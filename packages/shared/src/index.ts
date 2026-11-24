@@ -7,6 +7,8 @@ export * from "./json.js";
 export * from "./gateway.js";
 export * from "./ai-receipt.js";
 export * from "./lifecycle.js";
+export * from "./asset.js";
+export * from "./deployment.js";
 
 export const X_LAYER = {
   chainId: 196,

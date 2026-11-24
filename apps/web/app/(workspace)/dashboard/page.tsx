@@ -7,7 +7,7 @@ import { ArrowRight, Braces, Brain, Plus, RefreshCw } from "lucide-react";
 import { useGateway } from "../../../components/gateway-provider";
 import { CreditDialog, SessionDialog } from "../../../components/session-forms";
 import { ActionLink, ActivityTable, Badge, Button, CopyValue, Dialog, PageHeader, WalletGate } from "../../../components/ui";
-import { chainTime, demo, sessionState, short } from "../../../lib/models";
+import { chainTime, paymentAmount, sessionState, short } from "../../../lib/models";
 import type { SpendingSession } from "../../../lib/models";
 
 export default function Dashboard() {
@@ -19,19 +19,19 @@ export default function Dashboard() {
   const serviceCatalog = gateway.services.length > 0 && <section className="section overview-services"><div className="section-heading"><div><h2>Ready for your next request</h2><p>Verified services with a price you can inspect before signing.</p></div><Link className="text-link" href="/services">All services<ArrowRight size={15} aria-hidden="true" /></Link></div>
     <div className="quick-services">{gateway.services.map(service => <article key={service.id} className={`quick-service quick-service-${service.method}`}><div className="quick-service-heading">
       <span className="service-icon">{service.method === "json_validate" ? <Braces size={22} aria-hidden="true" /> : <Brain size={22} aria-hidden="true" />}</span><Badge tone="mint">Verified terms</Badge></div>
-      <h3>{service.name}</h3><p>{service.manifest.description}</p><div className="quick-service-bottom"><strong>{demo(service.priceBaseUnits)} <small>DEMO per request</small></strong>
+      <h3>{service.name}</h3><p>{service.manifest.description}</p><div className="quick-service-bottom"><strong>{paymentAmount(service.priceBaseUnits)} <small>{gateway.currency} per request</small></strong>
         <Link className="button button-secondary" href={`/playground?service=${service.id}`}>Try service<ArrowRight size={15} aria-hidden="true" /></Link></div></article>)}</div>
   </section>;
   return <><PageHeader title="Overview" description="Your credit, spending permissions, and the requests they fund." actions={<>
     <Button variant="quiet" aria-label="Refresh account" onClick={() => { void gateway.refresh(); }} disabled={Boolean(gateway.busy)}><RefreshCw size={16} /></Button>
     <Button disabled={!gateway.signedIn || unavailable} onClick={() => { gateway.clearError(); setCreditAction("deposit"); }}><Plus size={16} aria-hidden="true" />Deposit credit</Button></>} />
     <WalletGate>{account ? <>
-      <dl className="summary-strip"><div className="summary-item"><dt>Available credit</dt><dd className="mono">{demo(account.availableBaseUnits)}<small>DEMO</small></dd><p>Ready for a new session</p></div>
-        <div className="summary-item"><dt>Recent session balances</dt><dd className="mono">{demo(account.lockedBaseUnits)}<small>DEMO</small></dd><p>Live balances of shown sessions</p></div>
-        <div className="summary-item"><dt>Confirmed spend</dt><dd className="mono">{demo(account.stats.confirmedBaseUnits)}<small>DEMO</small></dd><p>{account.stats.confirmedRequests} confirmed payments</p></div>
-        <div className="summary-item"><dt>Request reservations</dt><dd className="mono">{demo(account.stats.reservedBaseUnits)}<small>DEMO</small></dd><p>Pending or unresolved payment</p></div></dl>
-      {account.stats.totalRequests === 0 && <div className="setup-flow"><div><h3>Fund your next request</h3><p>Your wallet holds {demo(account.demoBalanceBaseUnits)} DEMO. Deposit credit to create a spending session.</p>
-        <Button variant="secondary" disabled={unavailable} onClick={() => { gateway.clearError(); setCreditAction("deposit"); }}>Deposit DEMO</Button></div>
+      <dl className="summary-strip"><div className="summary-item"><dt>Available credit</dt><dd className="mono">{paymentAmount(account.availableBaseUnits)}<small>{gateway.currency}</small></dd><p>Ready for a new session</p></div>
+        <div className="summary-item"><dt>Recent session balances</dt><dd className="mono">{paymentAmount(account.lockedBaseUnits)}<small>{gateway.currency}</small></dd><p>Live balances of shown sessions</p></div>
+        <div className="summary-item"><dt>Confirmed spend</dt><dd className="mono">{paymentAmount(account.stats.confirmedBaseUnits)}<small>{gateway.currency}</small></dd><p>{account.stats.confirmedRequests} confirmed payments</p></div>
+        <div className="summary-item"><dt>Request reservations</dt><dd className="mono">{paymentAmount(account.stats.reservedBaseUnits)}<small>{gateway.currency}</small></dd><p>Pending or unresolved payment</p></div></dl>
+      {account.stats.totalRequests === 0 && <div className="setup-flow"><div><h3>Fund your next request</h3><p>Your wallet holds {paymentAmount(account.tokenBalanceBaseUnits)} {gateway.currency}. Deposit credit to create a spending session.</p>
+        <Button variant="secondary" disabled={unavailable} onClick={() => { gateway.clearError(); setCreditAction("deposit"); }}>Deposit {gateway.currency}</Button></div>
         <div><h3>Set a bounded session</h3><p>Choose a budget, service scope, and expiry. Approve the limits with your wallet.</p>
           <Button variant="secondary" disabled={unavailable || !gateway.services.length} onClick={() => { gateway.clearError(); setSessionOpen(true); }}>Authorize a session</Button></div>
         <div><h3>Execute and inspect</h3><p>The playground connects your signed session to an actual verified service.</p><ActionLink href="/playground" secondary>Open playground</ActionLink></div></div>}
@@ -42,7 +42,7 @@ export default function Dashboard() {
           const refundable = session.status !== 3 && gateway.network?.anchor && BigInt(gateway.network.anchor.timestamp) > BigInt(session.refundAfter);
           return <div className="session-row" key={session.sessionId}><div><div className="session-title"><CopyValue value={session.sessionId} truncate label="Copy session ID" />
             <Badge tone={state === "Active" ? "mint" : "neutral"}>{state}</Badge></div><p>{session.serviceIds.length} allowed services · {hasKey ? "Key in this tab" : "Key unavailable in this tab"}</p></div>
-            <div><div className="session-budget mono">{demo(session.balance)} <small>DEMO left</small></div><p>{demo(session.spent)} / {demo(session.budget)} spent · soft {demo(session.softLimit)}</p></div>
+            <div><div className="session-budget mono">{paymentAmount(session.balance)} <small>{gateway.currency} left</small></div><p>{paymentAmount(session.spent)} / {paymentAmount(session.budget)} spent · soft {paymentAmount(session.softLimit)}</p></div>
             <div><p>Execution until {chainTime(session.executionDeadline)}</p><p>Refund after {chainTime(session.refundAfter)}</p></div>
             <div className="actions">{session.status === 1 && <Button variant="secondary" disabled={unavailable} onClick={() => { gateway.clearError(); setManage({ session, action: "closeSession" }); }}>Close</Button>}
               {!session.signerRevoked && session.status !== 3 && <Button variant="quiet" disabled={unavailable} onClick={() => { gateway.clearError(); setManage({ session, action: "revokeSessionSigner" }); }}>Revoke signer</Button>}
@@ -52,7 +52,7 @@ export default function Dashboard() {
       </section>{serviceCatalog}</div>
       <section className="section"><div className="section-heading"><div><h2>Recent requests</h2><p>{account.stats.totalRequests ? `Latest ${account.requests.length} of ${account.stats.totalRequests} requests. Execution and payment are tracked separately.` : "Signed results and confirmed payments appear separately."}</p></div>
         <Link className="text-link" href="/receipts">Inspect a receipt<ArrowRight size={15} aria-hidden="true" /></Link></div><ActivityTable requests={account.requests} /></section>
-      <section className="section"><div className="section-heading"><div><h2>Wallet and credit</h2><p>{demo(account.demoBalanceBaseUnits)} DEMO in wallet · gas balance is {formatUnits(BigInt(account.nativeBalanceWei), 18)} OKB</p></div>
+      <section className="section"><div className="section-heading"><div><h2>Wallet and credit</h2><p>{paymentAmount(account.tokenBalanceBaseUnits)} {gateway.currency} in wallet · gas balance is {formatUnits(BigInt(account.nativeBalanceWei), 18)} OKB</p></div>
         <Button variant="secondary" disabled={unavailable || BigInt(account.availableBaseUnits) === 0n} onClick={() => { gateway.clearError(); setCreditAction("withdraw"); }}>Withdraw available credit</Button></div></section>
     </> : <p className="loading-copy">Reading your account from the gateway and chain…</p>}</WalletGate>
     {!gateway.signedIn && serviceCatalog}
@@ -62,7 +62,7 @@ export default function Dashboard() {
     <CreditDialog action={creditAction} onClose={() => setCreditAction(null)} /><SessionDialog open={sessionOpen} onClose={() => setSessionOpen(false)} />
     <Dialog open={Boolean(manage)} onClose={() => setManage(null)} title={manage?.action === "refund" ? "Refund session credit" : manage?.action === "revokeSessionSigner" ? "Revoke the delegated signer" : "Close spending session"}>
       {manage && <div className="form-stack"><p className="form-note">Session <code>{short(manage.session.sessionId, 12, 8)}</code></p>
-        <p>{manage.action === "refund" ? `${demo(manage.session.balance)} DEMO returns to your available credit, using the current chain balance.`
+        <p>{manage.action === "refund" ? `${paymentAmount(manage.session.balance)} ${gateway.currency} returns directly to your wallet, using the current chain balance.`
           : manage.action === "closeSession" ? "Stop new requests. Previously authorized requests can still settle until the original refund window closes."
             : "Disable the session signer and stop its future charges. This tab’s key is cleared. The original refund window remains in force."}</p>
         <div className="actions"><Button variant="secondary" disabled={Boolean(gateway.busy)} onClick={() => setManage(null)}>Cancel</Button>

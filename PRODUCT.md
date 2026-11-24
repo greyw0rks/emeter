@@ -20,7 +20,9 @@ The onchain policy enforces `A ∧ B ∧ C ∧ D ∧ (E ∨ F)`. A separate cust
 
 ## Operating Context
 
-One X Layer network (chain 196), one zero-value six-decimal DemoUSD token, prepaid credit, and two implemented services: JSON Validator and AI Text Analyzer through Otari. Next.js 16 / React 19 runs on Vercel; the hosted gateway uses Convex HTTP/Node actions, durable records, and scheduled jobs while reusing the Fastify protocol handlers. PostgreSQL/Prisma and BullMQ remain the local reference runtime. Browser wallets sign customer grants and transactions; delegated signing keys stay client-side. The selected workspace uses a persistent left sidebar, reduced to an accessible icon rail on phones.
+The user selected existing USDC on X Layer on 23 November 2026 and approved deployment/publication with a 0.0002 OKB gas cap. The new immutable USDC vault is deployed and the gateway/frontend release is live. See `docs/usdc.md`. The earlier DEMO deployments and receipts remain historical proofs, not real stablecoin payments.
+
+One X Layer network (chain 196), the officially recommended six-decimal USDC token, prepaid credit, and two implemented services: JSON Validator and AI Text Analyzer through Otari. Next.js 16 / React 19 runs on Vercel; the hosted gateway uses Convex HTTP/Node actions, durable records, and scheduled jobs while reusing the Fastify protocol handlers. PostgreSQL/Prisma and BullMQ remain the local reference runtime. Browser wallets sign customer grants and transactions; delegated signing keys stay client-side. The selected workspace uses a persistent left sidebar, reduced to an accessible icon rail on phones.
 
 ## Capabilities and Constraints
 

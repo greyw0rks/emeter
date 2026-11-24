@@ -2,9 +2,11 @@ import { EmeterGatewayError } from "@emeter/sdk";
 import { walletErrorCode, walletRejected } from "./wallet";
 
 const messages: Record<string, string> = {
-  EXACT_DEMO_REQUIRED: "Enter a DEMO amount with up to six decimal places, such as 0.05.",
-  INVALID_DEMO_AMOUNT: "Enter a positive amount within the token limit.",
-  INSUFFICIENT_DEMO: "Your wallet needs more DEMO for this deposit. DEMO is a test token; it cannot be bought here.",
+  EXACT_PAYMENT_REQUIRED: "Enter an amount with up to six decimal places, such as 0.05.",
+  INVALID_PAYMENT_AMOUNT: "Enter a positive amount within the token limit.",
+  INSUFFICIENT_PAYMENT_TOKEN: "Your wallet needs more USDC on X Layer. Use the USDC funding guidance in the deposit form.",
+  USDC_DEPLOYMENT_PENDING: "USDC payments are being prepared. Deposits will open after the USDC vault is deployed.",
+  PAYMENT_TOKEN_MISMATCH: "The gateway's currency does not match the verified payment token.",
   INSUFFICIENT_CREDIT: "Deposit enough credit to cover this session budget.",
   INVALID_SESSION_LIMITS: "Keep the soft limit and per-request maximum within the hard budget. Select at least one service.",
   NO_WALLET: "No browser wallet was found. Open this page in a wallet browser or enable a wallet extension.",

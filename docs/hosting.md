@@ -1,8 +1,10 @@
 # Public hosting
 
-The production app is [emeter-peach.vercel.app](https://emeter-peach.vercel.app), with [emeter-greyw0rks-projects.vercel.app](https://emeter-greyw0rks-projects.vercel.app) as its team alias. The production gateway is [first-eel-292.convex.site](https://first-eel-292.convex.site/api/protocol). Both use the existing X Layer chain-196 deployments and zero-value DEMO token.
+The production app is [emeter-peach.vercel.app](https://emeter-peach.vercel.app), with [emeter-greyw0rks-projects.vercel.app](https://emeter-greyw0rks-projects.vercel.app) as its team alias. The production gateway is [first-eel-292.convex.site](https://first-eel-292.convex.site/api/protocol). Both use existing USDC on X Layer chain 196 with the separately deployed USDC vault. The [USDC release](usdc.md) records the exact token, vault and public verification.
 
-The public source is [greyw0rks/emeter](https://github.com/greyw0rks/emeter). The current light sidebar build with explicit OKX wallet selection is deployment `dpl_6y35ExewfKFtwUJn2Lg1Kfnxw6pF`, created on 23 November 2026. Its wallet fix and validation are recorded in `docs/evidence/frontend-okx-wallet-release-checks.json`. The original sidebar release remains in `docs/evidence/frontend-sidebar-release-checks.json` (`dpl_GHyphgAqU1NqKsY9GEPkoJfFkbc4`); the preceding horizontal-navigation launch remains in `docs/evidence/launch-release-checks.json` (`dpl_57uTGSzYrUzHsxmwubf16zpsGMRE`).
+The public source is [greyw0rks/emeter](https://github.com/greyw0rks/emeter). The preceding light sidebar build with explicit OKX wallet selection is deployment `dpl_6y35ExewfKFtwUJn2Lg1Kfnxw6pF`, created on 23 November 2026. Its wallet fix and validation are recorded in `docs/evidence/frontend-okx-wallet-release-checks.json`. The original sidebar release remains in `docs/evidence/frontend-sidebar-release-checks.json` (`dpl_GHyphgAqU1NqKsY9GEPkoJfFkbc4`); the preceding horizontal-navigation launch remains in `docs/evidence/launch-release-checks.json` (`dpl_57uTGSzYrUzHsxmwubf16zpsGMRE`).
+
+The current USDC release is Vercel deployment `dpl_AhrFxk2aYjFybXAytWtKwnZ2nKnL`, Ready with both established production aliases. [Public USDC checks](evidence/frontend-usdc-public-checks.json) verify eight desktop/mobile behaviors without signatures, wallet transactions or paid calls.
 
 ## Convex
 

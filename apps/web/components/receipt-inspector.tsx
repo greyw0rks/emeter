@@ -9,7 +9,7 @@ import { useGateway } from "./gateway-provider";
 import { ReceiptDetails } from "./receipt-details";
 import { Circuit, PolicyOutput } from "./circuit";
 import { Button, Dialog, EmptyState, PageHeader, WalletGate } from "./ui";
-import { demo } from "../lib/models";
+import { paymentAmount } from "../lib/models";
 import { errorMessage } from "../lib/errors";
 
 export function ReceiptInspector({ id }: { id: Hex }) {
@@ -50,10 +50,10 @@ export function ReceiptInspector({ id }: { id: Hex }) {
           {typeof mask === "number" ? <><Circuit mask={mask} source={record.settlementVerified ? "Canonical settlement inputs" : "Gateway-recorded inputs · payment unconfirmed"} /><PolicyOutput mask={mask} /></>
             : <EmptyState title="Policy has not been evaluated">No policy input mask is recorded for this request yet.</EmptyState>}</section>
       </> : <p className="form-note">The receipt will appear after verification.</p>}</WalletGate>
-    <Dialog open={overrideOpen} onClose={() => setOverrideOpen(false)} title="Approve this request’s settlement"><div className="form-stack"><p>Approve a cumulative session cap of <strong className="mono lime">{demo(cumulative)} DEMO</strong> for this retained request.</p>
+    <Dialog open={overrideOpen} onClose={() => setOverrideOpen(false)} title="Approve this request’s settlement"><div className="form-stack"><p>Approve a cumulative session cap of <strong className="mono lime">{paymentAmount(cumulative)} {gateway.currency}</strong> for this retained request.</p>
       <p className="form-note">The service output stays the same. This signs a customer override and requeues its existing settlement; it creates no new request.</p><div className="actions">
         <Button variant="secondary" disabled={Boolean(gateway.busy)} onClick={() => setOverrideOpen(false)}>Cancel</Button><Button disabled={Boolean(gateway.busy) || !session} onClick={() => {
           void gateway.approveSettlement(id, cumulative).then(() => { setOverrideOpen(false); return load(); }).catch(() => undefined);
-        }}>Sign {demo(cumulative)} DEMO cap</Button></div></div></Dialog>
+        }}>Sign {paymentAmount(cumulative)} {gateway.currency} cap</Button></div></div></Dialog>
   </>;
 }

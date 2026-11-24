@@ -122,6 +122,20 @@ describe("Convex gateway transaction boundaries", () => {
 });
 
 describe("Durable scheduled jobs", () => {
+  it("keeps old vault jobs out of current vault counts and lease recovery", async () => {
+    vi.useFakeTimers();
+    const { t, db } = state();
+    for (const id of ["old", "new"]) {
+      await db.aPIRequest.create({ data: request(id) });
+      await t.mutation(internal.queue.enqueue, { key: id + ":execution:" + id, queue: "execution", requestId: id, maximumAttempts: 4 });
+      await t.mutation(internal.queue.claim, { key: id + ":execution:" + id, owner: id });
+    }
+    expect((await t.query(internal.queue.counts, { queue: "execution", prefix: "new" })).active).toBe(1);
+    vi.advanceTimersByTime(181_000);
+    await t.mutation(internal.queue.repair, { dispatch: false, prefix: "new" });
+    expect((await db.aPIRequest.findUnique({ where: { id: "old" } })).requestStatus).toBe("authorized");
+    expect((await db.aPIRequest.findUnique({ where: { id: "new" } })).requestStatus).toBe("indeterminate");
+  });
   it("deduplicates a stable job id and enforces the existing worker concurrency", async () => {
     vi.useFakeTimers();
     const { t } = state();

@@ -57,6 +57,8 @@ model PriceVersion {
 
 model SpendingSession {
   id String @id
+  vault String @default("0x12412460847a865b29406fd8cd37df91dd881b50")
+  token String @default("0x66d16469e07217e53618887b492b14ea732b5a11")
   customer String
   signer String
   budget Decimal @db.Decimal(78, 0)
@@ -66,10 +68,13 @@ model SpendingSession {
   refundAfter BigInt
   status Int
   indexedBlock BigInt
+  @@index([vault, customer])
 }
 
 model APIRequest {
   id String @id
+  vault String @default("0x12412460847a865b29406fd8cd37df91dd881b50")
+  token String @default("0x66d16469e07217e53618887b492b14ea732b5a11")
   clientId String
   sessionId String
   customer String
@@ -95,6 +100,7 @@ model APIRequest {
   @@unique([sessionId, nonce])
   @@index([customer, createdAt])
   @@index([sessionId, reservationActive])
+  @@index([vault, customer, createdAt])
 }
 
 model UsageReceipt {

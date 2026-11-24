@@ -17,6 +17,8 @@ import { errorCode } from "./lib/database";
 import type { GatewayContext } from "../apps/gateway/src/context";
 import proof from "../docs/evidence/mainnet-verification.json";
 
+import { paymentScope } from "../apps/gateway/src/payment-scope";
+
 async function canonical(context: GatewayContext) {
   const cursor = await context.db.indexerCursor.findUnique({ where: { id: context.config.vault.toLowerCase() } });
   if (!cursor || cursor.state !== "ready") throw new Error("CHAIN_INDEXER_NOT_READY");
@@ -73,7 +75,8 @@ export const handle = internalAction({
 export const runJob = internalAction({
   args: { key: v.string() },
   handler: async (ctx, args): Promise<void> => {
-    if (!runtimeConfig().executionEnabled) return;
+    const config = runtimeConfig();
+    if (!config.executionEnabled || !args.key.startsWith(config.queuePrefix + ":")) return;
     const owner = randomUUID(), job = await ctx.runMutation(internal.queue.claim, { key: args.key, owner });
     if (!job) return;
     try {
@@ -94,13 +97,13 @@ export const runJob = internalAction({
 });
 
 async function repairGateway(context: GatewayContext) {
-  const waiting = await context.db.aPIRequest.findMany({ where: { requestStatus: { in: ["authorized", "processing"] } } });
+  const waiting = await context.db.aPIRequest.findMany({ where: { ...paymentScope(context), requestStatus: { in: ["authorized", "processing"] } } });
   for (const row of waiting) {
     const job = await context.executionQueue.getJob(row.id);
     if (!job) await context.executionQueue.add("execute", { requestId: row.id }, { jobId: row.id });
     else if (await job.getState() === "completed") { await job.remove(); await context.executionQueue.add("execute", { requestId: row.id }, { jobId: row.id }); }
   }
-  const pending = await context.db.aPIRequest.findMany({ where: { requestStatus: "completed", paymentStatus: { in: ["unsubmitted", "pending"] } } });
+  const pending = await context.db.aPIRequest.findMany({ where: { ...paymentScope(context), requestStatus: "completed", paymentStatus: { in: ["unsubmitted", "pending"] } } });
   for (const row of pending) {
     const job = await context.settlementQueue.getJob(row.id);
     if (!job) await context.settlementQueue.add("settle", { requestId: row.id }, { jobId: row.id });
@@ -119,10 +122,10 @@ export const maintenance = internalAction({
       if ((await ctx.runQuery(internal.store.control, {})).paused) return;
       await indexChain(context);
       await expireReservations(context);
-      await ctx.runMutation(internal.queue.repair, { dispatch: context.config.executionEnabled ?? false });
+      await ctx.runMutation(internal.queue.repair, { dispatch: context.config.executionEnabled ?? false, prefix: context.config.queuePrefix });
       if (context.config.executionEnabled) await repairGateway(context);
       await context.db.workerHeartbeat.upsert({ where: { id: context.config.queuePrefix }, create: { id: context.config.queuePrefix }, update: { updatedAt: new Date() } });
-      if (context.config.executionEnabled && await context.db.aPIRequest.count({ where: { OR: [
+      if (context.config.executionEnabled && await context.db.aPIRequest.count({ where: { ...paymentScope(context), OR: [
         { requestStatus: { in: ["authorized", "processing"] } }, { requestStatus: "completed", paymentStatus: { in: ["unsubmitted", "pending"] } }
       ] } }) > 0) await ctx.scheduler.runAfter(5000, internal.runtime.maintenance, {});
     } catch { /* A stale cursor or heartbeat keeps paid execution unavailable. */ }

@@ -1,6 +1,6 @@
 import Fastify from "fastify";
 import type { ProtocolStatus } from "@emeter/shared";
-import { parseStrictJson } from "@emeter/shared";
+import { parseStrictJson, paymentAsset } from "@emeter/shared";
 import { z } from "zod";
 import { authRoutes, HttpError } from "./auth.js";
 import type { GatewayContext } from "./context.js";
@@ -33,7 +33,8 @@ export function buildGateway(options: { recordedMainnetProofVerified?: boolean; 
     if (!ctx) return status;
     const [ready, head] = await Promise.all([readiness(ctx), ctx.client.getBlock().catch(() => undefined)]);
     return { ...status, paidExecutionReady: ready, vault: ctx.config.vault, registry: ctx.config.registry, token: ctx.config.token,
-      decimals: 6, rpcUrl: ctx.config.rpcUrl, confirmations: ctx.config.confirmations, networkMode: ctx.config.networkMode,
+      symbol: paymentAsset(ctx.config.token).symbol, decimals: paymentAsset(ctx.config.token).decimals,
+      rpcUrl: ctx.config.rpcUrl, confirmations: ctx.config.confirmations, networkMode: ctx.config.networkMode,
       ...(head ? { anchor: { blockNumber: head.number.toString(), blockHash: head.hash, timestamp: head.timestamp.toString() } } : {}) };
   };
   app.get("/health", async () => ({ ok: true, ...await liveStatus() }));

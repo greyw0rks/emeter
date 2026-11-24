@@ -1,3 +1,4 @@
+import { paymentScope, belongsToPayment } from "./payment-scope.js";
 import type { FastifyInstance } from "fastify";
 import type { Address, Hex } from "viem";
 import { hashTypedData, keccak256, toHex } from "viem";
@@ -36,7 +37,7 @@ export async function reserveRequest(ctx: GatewayContext, wallet: string, servic
   const payloadHash = keccak256(toHex(canonicalJson(input)));
   const existing = await ctx.db.aPIRequest.findUnique({ where: { id: charge.requestId } });
   if (existing) {
-    if (existing.payloadHash !== payloadHash || existing.customer !== wallet) throw new HttpError(409, "IDEMPOTENCY_CONFLICT");
+    if (!belongsToPayment(ctx, existing) || existing.payloadHash !== payloadHash || existing.customer !== wallet) throw new HttpError(409, "IDEMPOTENCY_CONFLICT");
     return existing;
   }
   const [session, quote, head, service, terms, usedNonce, allowedService] = await Promise.all([
@@ -73,7 +74,7 @@ export async function reserveRequest(ctx: GatewayContext, wallet: string, servic
     await tx.$executeRawUnsafe("SELECT pg_advisory_xact_lock(hashtextextended($1, 0))", charge.sessionId);
     const duplicate = await tx.aPIRequest.findUnique({ where: { id: charge.requestId } });
     if (duplicate) {
-      if (duplicate.payloadHash !== payloadHash || duplicate.customer !== wallet) throw new HttpError(409, "IDEMPOTENCY_CONFLICT");
+      if (!belongsToPayment(ctx, duplicate) || duplicate.payloadHash !== payloadHash || duplicate.customer !== wallet) throw new HttpError(409, "IDEMPOTENCY_CONFLICT");
       return duplicate;
     }
     if (await tx.aPIRequest.findUnique({ where: { sessionId_nonce: { sessionId: charge.sessionId, nonce: charge.nonce.toString() } } }))
@@ -100,7 +101,7 @@ export async function reserveRequest(ctx: GatewayContext, wallet: string, servic
       && (overrideCap === undefined || overrideCap < currentSession.spent + reserved + quote.price))
       throw new HttpError(402, "CUSTOMER_SOFT_LIMIT_OVERRIDE_REQUIRED");
     return tx.aPIRequest.create({ data: {
-      id: charge.requestId, clientId: call.id, sessionId: charge.sessionId, customer: wallet,
+      ...paymentScope(ctx), id: charge.requestId, clientId: call.id, sessionId: charge.sessionId, customer: wallet,
       serviceId, priceVersion: charge.priceVersion, nonce: charge.nonce.toString(),
       requestHash: charge.requestHash, payloadHash, wireRequest: jsonSafe(call) as Prisma.InputJsonValue,
       authorization: jsonSafe(input.authorization) as Prisma.InputJsonValue, chargeSignature: input.signature,
@@ -112,7 +113,7 @@ export async function reserveRequest(ctx: GatewayContext, wallet: string, servic
 
 export async function requestRecord(ctx: GatewayContext, id: Hex, wallet: string, scopeServiceId?: string, scopeSessionId?: string) {
   const row = await ctx.db.aPIRequest.findUnique({ where: { id } });
-  if (!row) throw new HttpError(404, "UNKNOWN_REQUEST");
+  if (!row || !belongsToPayment(ctx, row)) throw new HttpError(404, "UNKNOWN_REQUEST");
   const service = await ctx.db.service.findUnique({ where: { id: row.serviceId } });
   if (row.customer !== wallet && !(service?.provider === wallet && (!scopeServiceId || scopeServiceId === row.serviceId)))
     throw new HttpError(404, "UNKNOWN_REQUEST");
@@ -125,7 +126,7 @@ export async function requestRecord(ctx: GatewayContext, id: Hex, wallet: string
     ctx.db.priceVersion.findUnique({ where: { serviceId_version: { serviceId: row.serviceId, version: row.priceVersion } } })
   ]);
   if (!terms) throw new HttpError(503, "REQUEST_SERVICE_TERMS_UNAVAILABLE");
-  return { requestId: row.id, clientId: row.clientId, sessionId: row.sessionId, serviceId: row.serviceId,
+  return { payment: { ...paymentScope(ctx), chainId: 196 }, requestId: row.id, clientId: row.clientId, sessionId: row.sessionId, serviceId: row.serviceId,
     priceVersion: row.priceVersion, requestHash: row.requestHash, call: row.wireRequest,
     serviceManifest: terms.manifest,
     authorization: row.authorization, chargeSignature: row.chargeSignature,
@@ -167,6 +168,7 @@ export function requestRoutes(app: FastifyInstance, ctx: GatewayContext) {
     const auth = await authenticate(ctx, request, "execute");
     const body = z.object({ requestId: HashSchema, customerOverride: WireOverrideSchema.optional() }).strict().parse(request.body);
     const row = await ctx.db.aPIRequest.findUnique({ where: { id: body.requestId } });
+    if (row && !belongsToPayment(ctx, row)) throw new HttpError(404, "UNKNOWN_REQUEST");
     if (!row || row.customer !== auth.wallet || auth.sessionId && auth.sessionId !== row.sessionId)
       throw new HttpError(404, "UNKNOWN_REQUEST");
     if (row.requestStatus !== "completed") throw new HttpError(409, "REQUEST_NOT_COMPLETED");
@@ -192,6 +194,7 @@ export function requestRoutes(app: FastifyInstance, ctx: GatewayContext) {
     const auth = await authenticate(ctx, request, "execute");
     const { id } = z.object({ id: HashSchema }).parse(request.params);
     const row = await ctx.db.aPIRequest.findUnique({ where: { id } });
+    if (row && !belongsToPayment(ctx, row)) throw new HttpError(404, "UNKNOWN_REQUEST");
     if (!row || row.customer !== auth.wallet || auth.sessionId && auth.sessionId !== row.sessionId)
       throw new HttpError(404, "UNKNOWN_REQUEST");
     if (row.requestStatus === "completed" || row.requestStatus === "failed")

@@ -1,3 +1,4 @@
+import { paymentScope } from "./payment-scope.js";
 import { Worker } from "bullmq";
 import type { PrivateKeyAccount } from "viem/accounts";
 import type { GatewayContext } from "./context.js";
@@ -34,7 +35,7 @@ export async function startWorkers(ctx: GatewayContext, account: PrivateKeyAccou
     try {
       await indexChain(ctx);
       await expireReservations(ctx);
-      const waiting = await ctx.db.aPIRequest.findMany({ where: { requestStatus: { in: ["authorized", "processing"] } } });
+      const waiting = await ctx.db.aPIRequest.findMany({ where: { ...paymentScope(ctx), requestStatus: { in: ["authorized", "processing"] } } });
       for (const row of waiting) {
         const job = await ctx.executionQueue.getJob(row.id);
         if (!job) await ctx.executionQueue.add("execute", { requestId: row.id }, { jobId: row.id });
@@ -47,7 +48,7 @@ export async function startWorkers(ctx: GatewayContext, account: PrivateKeyAccou
             } });
         }
       }
-      const pending = await ctx.db.aPIRequest.findMany({ where: { requestStatus: "completed", paymentStatus: { in: ["unsubmitted", "pending"] } } });
+      const pending = await ctx.db.aPIRequest.findMany({ where: { ...paymentScope(ctx), requestStatus: "completed", paymentStatus: { in: ["unsubmitted", "pending"] } } });
       for (const row of pending) {
         const job = await ctx.settlementQueue.getJob(row.id);
         if (!job) await ctx.settlementQueue.add("settle", { requestId: row.id }, { jobId: row.id });

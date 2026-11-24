@@ -1,3 +1,4 @@
+import { paymentScope } from "./payment-scope.js";
 import type { FastifyInstance } from "fastify";
 import { encodeFunctionData } from "viem";
 import type { Hex } from "viem";
@@ -51,9 +52,9 @@ export function sessionRoutes(app: FastifyInstance, ctx: GatewayContext) {
     const auth = await authenticate(ctx, request, "usage:read");
     const services = await ctx.db.service.findMany({ where: { provider: auth.wallet, ...(auth.serviceId ? { id: auth.serviceId } : {}) } });
     const ids = services.map(service => service.id);
-    const rows = await ctx.db.aPIRequest.findMany({ where: { serviceId: { in: ids } }, orderBy: { createdAt: "desc" }, take: 100 });
-    const total = await ctx.db.aPIRequest.count({ where: { serviceId: { in: ids } } });
-    const payments = await ctx.db.aPIRequest.aggregate({ where: { serviceId: { in: ids }, paymentStatus: "settled" }, _sum: { amount: true }, _count: true });
+    const rows = await ctx.db.aPIRequest.findMany({ where: { ...paymentScope(ctx), serviceId: { in: ids } }, orderBy: { createdAt: "desc" }, take: 100 });
+    const total = await ctx.db.aPIRequest.count({ where: { ...paymentScope(ctx), serviceId: { in: ids } } });
+    const payments = await ctx.db.aPIRequest.aggregate({ where: { ...paymentScope(ctx), serviceId: { in: ids }, paymentStatus: "settled" }, _sum: { amount: true }, _count: true });
     return { services, totalRequests: total, settledRequests: payments._count, settledBaseUnits: payments._sum.amount?.toFixed(0) ?? "0",
       recent: rows.map(row => ({ requestId: row.id, serviceId: row.serviceId, priceBaseUnits: row.amount.toFixed(0),
         requestStatus: row.requestStatus, paymentStatus: row.paymentStatus, createdAt: row.createdAt.toISOString() })) };
